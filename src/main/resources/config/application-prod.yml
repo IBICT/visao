@@ -49,10 +49,10 @@ spring:
     liquibase:
         contexts: prod
     mail:
-        host: localhost
+        host: ${VISAO_HOST}
         port: 25
-        username:
-        password:
+        username: ${VISAO_USER}
+        password: ${VISAO_PASS}
     thymeleaf:
         cache: true
 

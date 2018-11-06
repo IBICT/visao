@@ -60,6 +60,12 @@ module.exports = (options) => ({
             }
         }),
         new CopyWebpackPlugin([
+            { from: './src/main/webapp/map/', to: 'map' },
+            { from: './src/main/webapp/map/data-br.json', to: 'data-br.json' },
+            { from: './src/main/webapp/map/estado.json', to: 'estado.json' },
+            { from: './src/main/webapp/map/MesoRegiao.json', to: 'MesoRegiao.json' },
+            { from: './src/main/webapp/manifest.webapp', to: 'manifest.webapp' },
+            
             { from: './node_modules/swagger-ui/dist/css', to: 'swagger-ui/dist/css' },
             { from: './node_modules/swagger-ui/dist/lib', to: 'swagger-ui/dist/lib' },
             { from: './node_modules/swagger-ui/dist/swagger-ui.min.js', to: 'swagger-ui/dist/swagger-ui.min.js' },
