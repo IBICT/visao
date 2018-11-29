@@ -1,14 +1,15 @@
 /* ==========================================================================
 Navbar
 ========================================================================== */
-
-.navbar-version {
-    font-size: 10px;
-    color: #ccc;
+.navbar {
+    background: rgb(20, 102, 120);
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    margin-left: -15px;
 }
 
 .jh-navbar {
-    background-color: #353d47;
+    z-index: 1;
     padding: 0.2em 1em;
     .profile-image {
         margin: -10px 0px;
@@ -19,7 +20,7 @@ Navbar
     .dropdown-item.active,
     .dropdown-item.active:focus,
     .dropdown-item.active:hover {
-        background-color: #353d47;
+        background-color: #414735;
     }
     .dropdown-toggle::after {
         margin-left: 0.15em;
@@ -27,11 +28,12 @@ Navbar
     ul.navbar-nav {
         padding: 0.5em;
         .nav-item {
-            margin-left: 1.5rem;
+            margin-left: 1.1rem;
         }
     }
     a.nav-link {
         font-weight: 400;
+        color: white;
     }
     .jh-navbar-toggler {
         color: #ccc;
@@ -41,6 +43,10 @@ Navbar
             color: #fff;
         }
     }
+}
+#menu {
+    height: 56px;
+    padding: 8px 16px;
 }
 
 @media screen and (min-width: 768px) {
@@ -63,16 +69,17 @@ Navbar
 /* ==========================================================================
 Logo styles
 ========================================================================== */
+
 .navbar-brand {
     &.logo {
-        padding: 5px 15px;
+        padding: 10px 15px;
         .logo-img {
-            height: 45px;
+            height: 30px;
             width: 70px;
             display: inline-block;
             vertical-align: middle;
-            background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
-            background-size: contain;
+            background: url('../../../content/images/logo2.png') no-repeat center center;
+            background-size: 70px;
         }
     }
 }

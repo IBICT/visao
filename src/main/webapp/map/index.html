@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <head>
 
-	  <meta charset="UTF-8">
-
+	<meta charset="UTF-8">
+	<title>Mapa Completo do Sistema de Observatorio</title>
    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
    <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
@@ -185,6 +185,25 @@ h5.mb-0 button.btn.btn-link {
 	font-weight: bold;
 }
 
+.jh-navbar {
+    background: rgba(20, 102, 120,0.9);
+    z-index: 2;
+	padding: 8px 16px;
+}
+
+.jh-navbar-toggler {
+	color: #ccc;
+	font-size: 1.5em;
+	padding: 10px;
+}
+.dropdown-item.active:hover {
+    background-color: #414735;
+}
+
+
+.menu{
+	width: 100%;
+	}
 /* 
   map buttons
 */
@@ -195,28 +214,135 @@ h5.mb-0 button.btn.btn-link {
 .indicadorMapControl div {
 	white-space: nowrap;
 }
+#menuNav {
+	padding: 8px 16px;
+	height: 56px;
+}
+#hoverMouse {
+	position: absolute;
+	top: 52px;
+	left: -50px;
+	width: 20px;
+	
+}
+#hoverMouse li {
+	height: 30px;
+	color: #132D38;
+	text-align: left;
+	background-color: #fff;
+	border-radius: 0.15rem
+}
+#hoverMouse li a {
+	padding: 4px 61%  4px 20px;
+	color: black;
+}
 
+#hoverMouse li a:hover {
+	text-decoration: none;
+	font-weight: bold;
+	background-color: #EEE9E9;
+}
+.fa1 {
+	font-size: 1.2rem;
+}
+.margem{
+	margin-right: -12px;
+}
 
+.color{
+	background-color: white;
+	color: black;
+}
 
-
-
-
+#altura{
+	width: 450px;
+}
+.linkmodal{
+	font-weight: bold;
+	color: #856404;
+}
+.linkmodal:hover{
+    text-decoration-color: #856404;
+	color: inherit;
+}
 </style>
 </head>
 <body>
 	
-				<!-- Image and text -->
-		<nav class="navbar">
-		  <a class="navbar-brand" href="#">
-			<img src="../../content/images/logo2.png"  height="30" class="d-inline-block align-top" alt="">
-		  </a>
-		  <nav class="my-2 my-md-0 mr-md-3">
-			<a class="p-2 " href="#">sobre</a>|
-			<a class="p-2 " href="#"><i class="fa fa-user-o"></i></a>
-		  </nav>
+		<!-- Image and text -->
+		<nav class="navbar navbar-expand-md " id="menuNav"> 
+			<a class="navbar-brand" href="#">
+				<img src="../../content/images/logo2.png"  height="30" class="d-inline-block align-top" alt="">
+			</a>
+			<div class="nav menu justify-content-end">
+				<nav class="my-2 my-md-0 mr-md-3">
+					<ul class="navbar-nav ">
+						<li class="p-2 nav-item"><a class="nav-link" href="./../"><i class="fa fa1 fa-home"></i> Início</a></li>
+						<li class="p-2 nav-item"><a class="nav-link" href="index.html"><i class="fa fa-map"></i> Mapa</a></li>						
+						<li class="p-2 nav-item dropdown">
+							<a class="dropdown-toggle nav-link" href data-toggle="dropdown"><i class="fa fa-flag"></i> Idioma <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" style="color:#132D38">Português</a></li>
+								<li><a href="#" style="color:#132D38">Inglês</a></li>
+							</ul>
+						</li>
+						<li class="p-2 nav-item dropdown">
+							<a class="dropdown-toggle nav-link margem" href data-toggle="dropdown"><span class="fa fa1 fa-user" ></span> Conta <span class="caret"></span></a>
+							<ul class="dropdown-menu" id="hoverMouse">
+								<li id="#property"><a  href  data-toggle="modal" data-target="#siteModal" > Login</a></li>
+								<li id="property1"><a  href="./../#/register" style="padding-right:65px"> Resgistrar</a></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
 		</nav>
+<!-------- ====================================> modal login <================================---------->
+<div class="modal fade" id="siteModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="altura">
+			<div class="modal-header color">
+				<h4 class="modal-title">
+					<span>Autenticação</span>
+				</h4>
+				<button type="button" class="close" data-dismiss="modal">
+					<span class="linkmodal">x</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row justify-content-center">
+					<form>
+						<div class="form-group">
+							<label for="usuario">Usuário</label>
+							<input type="text" class="form-control" id="usuario" aria-describedby="usuario" placeholder="Seu Usuário">
+						</div>
+						<div class="form-group">
+							<label for="senha">Senha</label>
+							<input type="password" class="form-control" id="senha" placeholder="Sua Senha">
+						</div>
+						<div class="form-check">
+							<input type="checkbox" class="form-check-input" id="exampleCheck1">
+							<label class="form-check-label" for="manterlogado">manter-me logado</label>
+						</div>
+						<p>
+							<button type="submit" class="btn btn-primary">Entrar</button>
+						</p>
+						<div class="alert alert-warning" role="alert">
+							<a class="linkmodal" href="">Esqueceu Senha?</a>
+						</div>
+						<div class="alert alert-warning" role="alert">
+							Não tem uma conta ainda? <a class="linkmodal" href="">Crie uma nova conta</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-        <div id="map" style=""></div>
+<!-------- ====================================> modal login <===============================---------->
+
+        <div id="map"></div>
 		
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -359,7 +485,7 @@ function makeMap(error, data_1,gjson_1,paises) {
 		style: style_1,
 		onEachFeature: function (feature, layer) {
 			if (typeof data_1[0][feature.id] !== "undefined") {
-				layer.bindPopup('<p class="title-popup">'+feature.properties.name+'</p><p>PIB per capta</p><p>'+data_1[0][feature.id]+'</p><button onclick="modalDatail(\''+feature.id+'\')" class="button-popup">'+feature.properties.name+'</button>');
+				layer.bindPopup('<p class="title-popup">'+feature.properties.name+'</p><p id="both">PIB per capta</p><p>'+data_1[0][feature.id]+'</p><button onclick="modalDatail(\''+feature.id+'\')" class="button-popup">'+feature.properties.name+'</button>');
 				layer.on('mouseover', function (e) {
 					var x = document.getElementsByClassName("range-bar-mark")[0];
 					x.style.left = getPercent(data_1[0][feature.id])+"%";
@@ -469,7 +595,7 @@ function makeMap(error, data_1,gjson_1,paises) {
 									  
 					L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
 									  
-				return this._div;
+				return this._div;jhiTranslate="global.menu."
 	}
 	menuMapControl.addTo(map);
 	
