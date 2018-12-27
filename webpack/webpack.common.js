@@ -62,6 +62,7 @@ module.exports = (options) => ({
         new CopyWebpackPlugin([
             { from: './src/main/webapp/map/', to: 'map' },
             { from: './src/main/webapp/map/data-br.json', to: 'data-br.json' },
+			{ from: './src/main/webapp/map/estado.json', to: 'municipio.json' },
             { from: './src/main/webapp/map/estado.json', to: 'estado.json' },
             { from: './src/main/webapp/map/MesoRegiao.json', to: 'MesoRegiao.json' },
             { from: './src/main/webapp/manifest.webapp', to: 'manifest.webapp' },
