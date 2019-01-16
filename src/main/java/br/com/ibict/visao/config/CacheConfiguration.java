@@ -40,6 +40,12 @@ public class CacheConfiguration {
             cm.createCache(br.com.ibict.visao.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(br.com.ibict.visao.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(br.com.ibict.visao.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
+            cm.createCache(br.com.ibict.visao.domain.Indicator.class.getName(), jcacheConfiguration);
+            cm.createCache(br.com.ibict.visao.domain.Name.class.getName(), jcacheConfiguration);
+            cm.createCache(br.com.ibict.visao.domain.Category.class.getName(), jcacheConfiguration);
+            cm.createCache(br.com.ibict.visao.domain.Region.class.getName(), jcacheConfiguration);
+            cm.createCache(br.com.ibict.visao.domain.Region.class.getName() + ".relacaos", jcacheConfiguration);
+            cm.createCache(br.com.ibict.visao.domain.Year.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

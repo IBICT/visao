@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-region-heading" jhiTranslate="visaoApp.region.home.createOrEditLabel">Create or edit a Region</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!region.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="region.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.region.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="region.name" required/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.region.uf" for="field_uf">Uf</label>
+                    <input type="text" class="form-control" name="uf" id="field_uf"
+                        [(ngModel)]="region.uf" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.region.geoCode" for="field_geoCode">Geo Code</label>
+                    <input type="number" class="form-control" name="geoCode" id="field_geoCode"
+                        [(ngModel)]="region.geoCode" required/>
+                    <div [hidden]="!(editForm.controls.geoCode?.dirty && editForm.controls.geoCode?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.geoCode?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.geoCode?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.region.typeRegion" for="field_typeRegion">Type Region</label>
+                    <select class="form-control" name="typeRegion" [(ngModel)]="region.typeRegion" id="field_typeRegion"  required>
+                        <option value="ESTADO">{{'visaoApp.TypeRegion.ESTADO' | translate}}</option>
+                        <option value="MESORREGIAO">{{'visaoApp.TypeRegion.MESORREGIAO' | translate}}</option>
+                        <option value="MUNICIPIO">{{'visaoApp.TypeRegion.MUNICIPIO' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.typeRegion?.dirty && editForm.controls.typeRegion?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.typeRegion?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="visaoApp.region.relacao" for="field_relacao">Relacao</label>
+                    <select class="form-control" id="field_relacao" multiple name="relacao" [(ngModel)]="region.relacaos">
+                        <option [ngValue]="getSelected(region.relacaos, regionOption)" *ngFor="let regionOption of regions; trackBy: trackRegionById">{{regionOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+
+{
+    "visaoApp": {
+        "region" : {
+            "home": {
+                "title": "Regions",
+                "createLabel": "Criar novo Region",
+                "createOrEditLabel": "Criar ou editar Region"
+            },
+            "created": "Um novo Region foi criado com o identificador {{ param }}",
+            "updated": "Um Region foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Region foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Region {{ id }}?"
+            },
+            "detail": {
+                "title": "Region"
+            },
+            "name": "Name",
+            "uf": "Uf",
+            "geoCode": "Geo Code",
+            "typeRegion": "Type Region",
+            "relacao": "Relacao"
+        }
+    }
+}
