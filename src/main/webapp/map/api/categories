@@ -1,0 +1,19 @@
+[ {
+  "id" : 1,
+  "name" : "Economia"
+}, {
+  "id" : 2,
+  "name" : "Trabalho e Renda"
+}, {
+  "id" : 3,
+  "name" : "Educação"
+}, {
+  "id" : 4,
+  "name" : "Qualidade de Vida e Desenvolvimento Social"
+}, {
+  "id" : 5,
+  "name" : "RAIS"
+}, {
+  "id" : 6,
+  "name" : "Saúde"
+} ]

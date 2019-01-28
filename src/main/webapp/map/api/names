@@ -1,0 +1,568 @@
+[ {
+  "id" : 1,
+  "value" : "PIB",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 2,
+  "value" : "PIB per Capita",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 3,
+  "value" : "Impostos Recolhidos",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 4,
+  "value" : "PIB Agropecuária",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 5,
+  "value" : "PIB Indústria",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 6,
+  "value" : "PIB Serviços",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 7,
+  "value" : "PIB Governo",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 8,
+  "value" : "Receitas Totais",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 9,
+  "value" : "Receitas Próprias",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 10,
+  "value" : "Receitas de Transferências",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 11,
+  "value" : "Despesas Totais",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 12,
+  "value" : "Despesas Correntes",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 13,
+  "value" : "Despesas de Capital",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 14,
+  "value" : "% da despesa sobre a receita",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 15,
+  "value" : "Exportações",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 16,
+  "value" : "Importações",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 17,
+  "value" : "Balança comercial",
+  "category" : {
+    "id" : 1,
+    "name" : "Economia"
+  }
+}, {
+  "id" : 18,
+  "value" : "Possuem Ocupação",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 19,
+  "value" : "Possuem Ocupação %",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 20,
+  "value" : "Empregados",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 21,
+  "value" : "Com Carteira Assinada",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 22,
+  "value" : "Sem Carteira Assinada",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 23,
+  "value" : "Funcionários Públicos",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 24,
+  "value" : "Outro tipo de renda",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 25,
+  "value" : "Homens com rendimento",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 26,
+  "value" : "Mulheres com rendimento",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 27,
+  "value" : "Média rendimento homens",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 28,
+  "value" : "Média rendimento mulheres",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 29,
+  "value" : "Até 1 salário",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 30,
+  "value" : "De 1 a 2 salários",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 31,
+  "value" : "De 2 a 3 salários",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 32,
+  "value" : "De 3 a 5 salários",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 33,
+  "value" : "De 5 a 10 salários",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 34,
+  "value" : "De 10 a 20 salários",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 35,
+  "value" : "Mais de 20 salários",
+  "category" : {
+    "id" : 2,
+    "name" : "Trabalho e Renda"
+  }
+}, {
+  "id" : 36,
+  "value" : "Fundamental Incompleto",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 37,
+  "value" : "Fundamental Completo",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 38,
+  "value" : "Médio Completo",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 39,
+  "value" : "Superior Completo",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 40,
+  "value" : "Matrículas Educação Básica",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 41,
+  "value" : "Matrículas Ensino Médio",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 42,
+  "value" : "Matrículas Educação Profissional",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 43,
+  "value" : "Concluintes Agricultura e veterinária",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 44,
+  "value" : "Concluintes Ciências sociais, negócios e direito",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 45,
+  "value" : "Concluintes Ciências, matemática e computação",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 46,
+  "value" : "Concluintes Educação",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 47,
+  "value" : "Concluintes Engenharia, produção e construção",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 48,
+  "value" : "Concluintes Humanidades e artes",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 49,
+  "value" : "Concluintes Saúde e bem-estar social",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 50,
+  "value" : "Concluintes Serviços",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 51,
+  "value" : "Número de Doutores",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 52,
+  "value" : "Docentes - Educação Básica  / População",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 53,
+  "value" : "Docentes – Ensino Médio  / População",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 54,
+  "value" : "Docentes - Educação Profissional / População",
+  "category" : {
+    "id" : 3,
+    "name" : "Educação"
+  }
+}, {
+  "id" : 55,
+  "value" : "População total",
+  "category" : {
+    "id" : 4,
+    "name" : "Qualidade de Vida e Desenvolvimento Social"
+  }
+}, {
+  "id" : 56,
+  "value" : "IDH Municipal",
+  "category" : {
+    "id" : 4,
+    "name" : "Qualidade de Vida e Desenvolvimento Social"
+  }
+}, {
+  "id" : 57,
+  "value" : "IDH Municipal – Educação",
+  "category" : {
+    "id" : 4,
+    "name" : "Qualidade de Vida e Desenvolvimento Social"
+  }
+}, {
+  "id" : 58,
+  "value" : "IDH Municipal – Longevidade",
+  "category" : {
+    "id" : 4,
+    "name" : "Qualidade de Vida e Desenvolvimento Social"
+  }
+}, {
+  "id" : 59,
+  "value" : "IDH Municipal – Renda",
+  "category" : {
+    "id" : 4,
+    "name" : "Qualidade de Vida e Desenvolvimento Social"
+  }
+}, {
+  "id" : 60,
+  "value" : "Índice de GINI (distribuição de renda)",
+  "category" : {
+    "id" : 4,
+    "name" : "Qualidade de Vida e Desenvolvimento Social"
+  }
+}, {
+  "id" : 61,
+  "value" : "Extremamente pobres (2010)",
+  "category" : {
+    "id" : 4,
+    "name" : "Qualidade de Vida e Desenvolvimento Social"
+  }
+}, {
+  "id" : 62,
+  "value" : "Pobres (2010)",
+  "category" : {
+    "id" : 4,
+    "name" : "Qualidade de Vida e Desenvolvimento Social"
+  }
+}, {
+  "id" : 63,
+  "value" : "Vulneráveis à pobreza (2010)",
+  "category" : {
+    "id" : 4,
+    "name" : "Qualidade de Vida e Desenvolvimento Social"
+  }
+}, {
+  "id" : 64,
+  "value" : "Empregados: Extrativa mineral",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 65,
+  "value" : "Empregados: Indústria de Transformação",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 66,
+  "value" : "Empregados: Serviços Industriais",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 67,
+  "value" : "Empregados: Construção Civil",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 68,
+  "value" : "Empregados: Comércio",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 69,
+  "value" : "Empregados: Serviços",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 70,
+  "value" : "Empregados: Administração Pública",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 71,
+  "value" : "Empregados: Agropecuárias, extração, caça e pesca",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 72,
+  "value" : "Remuneração média: Extrativa mineral",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 73,
+  "value" : "Remuneração média: Indústria de Transformação",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 74,
+  "value" : "Remuneração média: Serviços Industriais",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 75,
+  "value" : "Remuneração média: Construção Civil",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 76,
+  "value" : "Remuneração média: Comércio",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 77,
+  "value" : "Remuneração média: Serviços",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 78,
+  "value" : "Remuneração média: Administração Pública",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 79,
+  "value" : "Remuneração média: Agropecuárias, extração, caça e pesca",
+  "category" : {
+    "id" : 5,
+    "name" : "RAIS"
+  }
+}, {
+  "id" : 80,
+  "value" : "Quantidade de médicos",
+  "category" : {
+    "id" : 6,
+    "name" : "Saúde"
+  }
+}, {
+  "id" : 81,
+  "value" : "Recursos humanos da área da saúde",
+  "category" : {
+    "id" : 6,
+    "name" : "Saúde"
+  }
+} ]
