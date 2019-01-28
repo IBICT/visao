@@ -394,7 +394,6 @@ function getGeoJson(){
 			$.ajax({
 				url: './municipio.json',
 				success: function(data) {
-					console.log('carregou o estado');
 					municipio = data;
 					$.ajax({
 						url: './api/categories',

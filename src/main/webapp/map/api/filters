@@ -1,0 +1,19 @@
+[ {
+  "id" : 1,
+  "name" : "Aeroespacial"
+}, {
+  "id" : 2,
+  "name" : "Base Mineral"
+}, {
+  "id" : 3,
+  "name" : "Bebidas"
+}, {
+  "id" : 4,
+  "name" : "Bens de capital"
+}, {
+  "id" : 5,
+  "name" : "Cal e Calcário"
+}, {
+  "id" : 6,
+  "name" : "Calçados"
+} ]
