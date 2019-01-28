@@ -426,9 +426,9 @@ function getGeoJson(){
 function genereteListIndicators(){
 	var indicatorCategory = '';
 	categories.forEach(function(item) {
-	
-		
-	
+
+
+
 		indicatorCategory += 	'					<div style="border-bottom: 1px solid #E0E0E0;" class="card">' +
 								'						<div style="border: 0;" class="card-header" id="headingCard'+ item.id +'">' +
 								'							<h5 class="mb-0">' +
@@ -454,9 +454,27 @@ function genereteListIndicators(){
 		indicatorCategory +=	'							</div>' +
 								'						</div>' +
 								'					</div>';
-				//console.log(item.name); 
+				//console.log(item.name);
 	});
 	return indicatorCategory;
+}
+
+function generateListFilters(){
+	var filterCategory =
+        '<div style="border-bottom: 1px solid #E0E0E0;" class="card">' +
+        '   <div id="collapseFilter" class="card-body" aria-labelledby="headingCardFilter" data-parent="#accordionFilter">';
+
+	filterArray.forEach(function (item) {
+        filterCategory +=
+            '   <div class="form-check-input">'+
+            '       <label><input type="checkbox" name="filtro" value="'+item.id+'"> '+item.name+'</label>'+
+            '   </div><br />';
+    });
+
+	filterCategory +=
+        '   </div>'+
+        '</div>';
+	return filterCategory;
 }
 
 	// Choropleth map
@@ -658,7 +676,11 @@ function makeMap() {
 									  '					<option value="1">DF</option>' +
 									  '				</select>' +
 									  '			</div>' +
-									  '			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>' +
+									  '			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">' +
+                                                    '<div id="accordionFilter">'+
+                                                        generateListFilters()+
+                                                    '</div>'+
+                                                '</div>' +
 									  '			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>' +
 									  '		</div>' +
 									  '		<span onclick="menuMapControl()" style="position:relative; left:-31px; top: -438px;; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-times"> </span></span>' +
@@ -683,6 +705,16 @@ function makeMap() {
 	});
 	
 	$('#accordion .card').on('shown.bs.collapse', function () {
+		$(this).find( "i" ).addClass("fa-angle-down");
+		$(this).find( "i" ).removeClass("fa-angle-right");
+	});
+
+	$('#accordionFilter .card').on('hidden.bs.collapse', function () {
+		$(this).find( "i" ).removeClass("fa-angle-down");
+		$(this).find( "i" ).addClass("fa-angle-right");
+	});
+
+	$('#accordionFilter .card').on('shown.bs.collapse', function () {
 		$(this).find( "i" ).addClass("fa-angle-down");
 		$(this).find( "i" ).removeClass("fa-angle-right");
 	});
