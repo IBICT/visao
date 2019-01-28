@@ -262,6 +262,16 @@ h5.mb-0 button.btn.btn-link {
     text-decoration-color: #856404;
 	color: inherit;
 }
+
+#loading{
+    font-size:25px;
+    color:white;
+    position:fixed;
+    top:40%;
+    left:40%;
+    width: 100px;
+    height: 100px;
+}
 </style>
 </head>
 <body>
@@ -340,7 +350,12 @@ h5.mb-0 button.btn.btn-link {
 
 <!-------- ====================================> modal login <===============================---------->
 
-        <div id="map"><span id="loading" style="font-size:25px;color:white;position:fixed;top:40%;left:40%;">CARREGANDO</span></div>
+        <div id="map">
+            <!--<div id="loading">-->
+                <!--<img src="loading.gif">-->
+            <!--</div>-->
+            <span id="loading" style="font-size:25px;color:white;position:fixed;top:40%;left:40%;">CARREGANDO</span>
+        </div>
 		
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -637,9 +652,11 @@ function makeMap() {
 	//Functions to either disable (onmouseover) or enable (onmouseout) the map's dragging
 	function controlEnter(e) {
 		map.dragging.disable();
+        map.scrollWheelZoom.disable();
 	}
 	function controlLeave() {
 		map.dragging.enable();
+		map.scrollWheelZoom.enable();
 	}
 	
 	// Menu Map control
@@ -695,7 +712,7 @@ function makeMap() {
 				return this._div;jhiTranslate="global.menu."
 	}
 	menuMapControl.addTo(map);
-	
+
 	document.getElementsByClassName("menuMapControl")[0].onmouseover = controlEnter;
 	document.getElementsByClassName("menuMapControl")[0].onmouseout = controlLeave;
 	
