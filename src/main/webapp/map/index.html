@@ -376,7 +376,11 @@ h5.mb-0 button.btn.btn-link {
 <script>
 
 // Iniciar mapa objeto sem zoom, latitude, longitude, zoom inicial
-    var map = L.map('map', { zoomControl:false }).setView([-15, -50], 4);
+    var map = L.map('map', {
+            zoomControl:false,
+            minZoom: 4,
+            maxZoom: 10
+        }).setView([-15, -50], 4);
 	
 	var group = new L.FeatureGroup();
 
