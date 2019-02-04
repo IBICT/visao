@@ -1,0 +1,32 @@
+
+{
+    "visaoApp": {
+        "name" : {
+            "home": {
+                "title": "Names",
+                "createLabel": "Criar novo Name",
+                "createOrEditLabel": "Criar ou editar Name"
+            },
+            "created": "Um novo Name foi criado com o identificador {{ param }}",
+            "updated": "Um Name foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Name foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Name {{ id }}?"
+            },
+            "detail": {
+                "title": "Name"
+            },
+            "value": "Value",
+            "active": "Active",
+            "description": "Description",
+            "keyWord": "Key Word",
+            "date": "Date",
+            "producer": "Producer",
+            "source": "Source",
+            "dateChange": "Date Change",
+            "note": "Note",
+            "category": "Category",
+            "user": "User"
+        }
+    }
+}

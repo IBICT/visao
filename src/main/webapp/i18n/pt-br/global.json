@@ -7,6 +7,14 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entidades",
+                "indicator": "Indicator",
+                "name": "Name",
+                "category": "Category",
+                "region": "Region",
+                "year": "Year",
+                "metaDado": "Meta Dado",
+                "filter": "Filter",
+                "layer": "Layer",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -1,0 +1,31 @@
+
+{
+    "visaoApp": {
+        "layer" : {
+            "home": {
+                "title": "Layers",
+                "createLabel": "Create a new Layer",
+                "createOrEditLabel": "Create or edit a Layer"
+            },
+            "created": "A new Layer is created with identifier {{ param }}",
+            "updated": "A Layer is updated with identifier {{ param }}",
+            "deleted": "A Layer is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Layer {{ id }}?"
+            },
+            "detail": {
+                "title": "Layer"
+            },
+            "name": "Name",
+            "geoJson": "Geo Json",
+            "active": "Active",
+            "description": "Description",
+            "keyWord": "Key Word",
+            "date": "Date",
+            "producer": "Producer",
+            "source": "Source",
+            "dateChange": "Date Change",
+            "note": "Note"
+        }
+    }
+}

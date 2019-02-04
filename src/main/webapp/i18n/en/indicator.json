@@ -1,0 +1,25 @@
+
+{
+    "visaoApp": {
+        "indicator" : {
+            "home": {
+                "title": "Indicators",
+                "createLabel": "Create a new Indicator",
+                "createOrEditLabel": "Create or edit a Indicator"
+            },
+            "created": "A new Indicator is created with identifier {{ param }}",
+            "updated": "A Indicator is updated with identifier {{ param }}",
+            "deleted": "A Indicator is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Indicator {{ id }}?"
+            },
+            "detail": {
+                "title": "Indicator"
+            },
+            "value": "Value",
+            "region": "Region",
+            "name": "Name",
+            "ano": "Ano"
+        }
+    }
+}

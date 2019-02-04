@@ -1,0 +1,109 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-layer-heading" jhiTranslate="visaoApp.layer.home.createOrEditLabel">Create or edit a Layer</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!layer.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="layer.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.layer.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="layer.name" required/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.layer.geoJson" for="field_geoJson">Geo Json</label>
+                    <div>
+                        <div *ngIf="layer.geoJson" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(layer.geoJsonContentType, layer.geoJson)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{layer.geoJsonContentType}}, {{byteSize(layer.geoJson)}}</span>
+                            <button type="button" (click)="layer.geoJson=null;layer.geoJsonContentType=null;"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_geoJson" (change)="setFileData($event, layer, 'geoJson', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="geoJson" id="field_geoJson"
+                        [(ngModel)]="layer.geoJson" required/>
+                    <input type="hidden" class="form-control" name="geoJsonContentType" id="field_geoJsonContentType"
+                        [(ngModel)]="layer.geoJsonContentType" />
+                    <div [hidden]="!(editForm.controls.geoJson?.dirty && editForm.controls.geoJson?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.geoJson?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.layer.active" for="field_active">Active</label>
+                    <input type="checkbox" class="form-control" name="active" id="field_active"
+                        [(ngModel)]="layer.active" />
+                    <div [hidden]="!(editForm.controls.active?.dirty && editForm.controls.active?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.active?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.layer.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="layer.description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.layer.keyWord" for="field_keyWord">Key Word</label>
+                    <input type="text" class="form-control" name="keyWord" id="field_keyWord"
+                        [(ngModel)]="layer.keyWord" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.layer.date" for="field_date">Date</label>
+                    <div class="d-flex">
+                        <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="date"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.layer.producer" for="field_producer">Producer</label>
+                    <input type="text" class="form-control" name="producer" id="field_producer"
+                        [(ngModel)]="layer.producer" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.layer.source" for="field_source">Source</label>
+                    <input type="text" class="form-control" name="source" id="field_source"
+                        [(ngModel)]="layer.source" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.layer.dateChange" for="field_dateChange">Date Change</label>
+                    <div class="d-flex">
+                        <input id="field_dateChange" type="datetime-local" class="form-control" name="dateChange" [(ngModel)]="dateChange"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.layer.note" for="field_note">Note</label>
+                    <input type="text" class="form-control" name="note" id="field_note"
+                        [(ngModel)]="layer.note" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

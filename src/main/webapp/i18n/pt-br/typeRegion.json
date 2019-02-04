@@ -1,0 +1,10 @@
+{
+    "visaoApp": {
+        "TypeRegion" : {
+            "null": "",
+            "ESTADO": "ESTADO",
+            "MESORREGIAO": "MESORREGIAO",
+            "MUNICIPIO": "MUNICIPIO"
+        }
+    }
+}

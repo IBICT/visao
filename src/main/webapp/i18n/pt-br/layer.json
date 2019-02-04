@@ -1,0 +1,31 @@
+
+{
+    "visaoApp": {
+        "layer" : {
+            "home": {
+                "title": "Layers",
+                "createLabel": "Criar novo Layer",
+                "createOrEditLabel": "Criar ou editar Layer"
+            },
+            "created": "Um novo Layer foi criado com o identificador {{ param }}",
+            "updated": "Um Layer foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Layer foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Layer {{ id }}?"
+            },
+            "detail": {
+                "title": "Layer"
+            },
+            "name": "Name",
+            "geoJson": "Geo Json",
+            "active": "Active",
+            "description": "Description",
+            "keyWord": "Key Word",
+            "date": "Date",
+            "producer": "Producer",
+            "source": "Source",
+            "dateChange": "Date Change",
+            "note": "Note"
+        }
+    }
+}

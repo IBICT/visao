@@ -1,0 +1,22 @@
+
+{
+    "visaoApp": {
+        "year" : {
+            "home": {
+                "title": "Years",
+                "createLabel": "Create a new Year",
+                "createOrEditLabel": "Create or edit a Year"
+            },
+            "created": "A new Year is created with identifier {{ param }}",
+            "updated": "A Year is updated with identifier {{ param }}",
+            "deleted": "A Year is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Year {{ id }}?"
+            },
+            "detail": {
+                "title": "Year"
+            },
+            "date": "Date"
+        }
+    }
+}

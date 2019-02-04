@@ -1,0 +1,32 @@
+
+{
+    "visaoApp": {
+        "filter" : {
+            "home": {
+                "title": "Filters",
+                "createLabel": "Criar novo Filter",
+                "createOrEditLabel": "Criar ou editar Filter"
+            },
+            "created": "Um novo Filter foi criado com o identificador {{ param }}",
+            "updated": "Um Filter foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Filter foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Filter {{ id }}?"
+            },
+            "detail": {
+                "title": "Filter"
+            },
+            "name": "Name",
+            "active": "Active",
+            "description": "Description",
+            "keyWord": "Key Word",
+            "date": "Date",
+            "producer": "Producer",
+            "source": "Source",
+            "dateChange": "Date Change",
+            "note": "Note",
+            "user": "User",
+            "region": "Region"
+        }
+    }
+}

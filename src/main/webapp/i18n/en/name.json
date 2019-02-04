@@ -1,0 +1,32 @@
+
+{
+    "visaoApp": {
+        "name" : {
+            "home": {
+                "title": "Names",
+                "createLabel": "Create a new Name",
+                "createOrEditLabel": "Create or edit a Name"
+            },
+            "created": "A new Name is created with identifier {{ param }}",
+            "updated": "A Name is updated with identifier {{ param }}",
+            "deleted": "A Name is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Name {{ id }}?"
+            },
+            "detail": {
+                "title": "Name"
+            },
+            "value": "Value",
+            "active": "Active",
+            "description": "Description",
+            "keyWord": "Key Word",
+            "date": "Date",
+            "producer": "Producer",
+            "source": "Source",
+            "dateChange": "Date Change",
+            "note": "Note",
+            "category": "Category",
+            "user": "User"
+        }
+    }
+}
