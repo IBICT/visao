@@ -347,7 +347,10 @@ h5.mb-0 button.btn.btn-link {
 	
 	var group = new L.FeatureGroup();
 
-	var arrayCompleto, municipioArray, estadoArray, indicatorArray, filterArray, estado, mesoRegiao, municipio, maxValue, minValue, midValue, categories, indicatorNames;
+	var arrayCompleto, municipioArray, estadoArray;
+	var indicatorArray, filterArray, years;
+	var estado, mesoRegiao, municipio;
+	var maxValue, minValue, midValue, categories, indicatorNames;
 	var indicadorMapControl, limparMapControl, rangeBarControl, mapControl, botao2, botao3;
 	
 	getGeoJson();
@@ -384,7 +387,14 @@ function getGeoJson(){
                                         dataType: 'json',
                                         success: function (data) {
                                             filterArray = data;
-                                            makeMap();
+                                            $.ajax({
+                                                url: './api/years',
+                                                dataType: 'json',
+                                                success: function (data) {
+                                                    years = data;
+                                                    makeMap();
+                                                }
+                                            });
                                         }
                                     });
 								}
@@ -448,6 +458,33 @@ function generateListFilters(){
         '</div>';
 	return filterCategory;
 }
+
+function generateListOptionsYears(){
+	var yearsSelect =
+        '<select style=" margin: 10px; color: #146678; border: 0; border-bottom: 1px solid #E0E0E0;" class="" id="inlineFormCustomSelectPref">';
+
+	years.forEach(function (item) {
+        yearsSelect += '<option value="'+item.id+'">'+item.jhi_date+'</option>';
+    });
+
+	yearsSelect +=
+        '</select>';
+	return yearsSelect;
+}
+
+// function generateListOptionsEstados(){
+// 	var estadosSelect =
+//         '<select style=" margin: 10px; color: #146678; border: 0; border-bottom: 1px solid #E0E0E0;" class="" id="inlineFormCustomSelectPref">' +
+//             '<option disabled selected>Estados</option>';
+//
+// 	estado.forEach(function (item) {
+//         estadosSelect += '<option value="'+item.uf+'">'+item.uf+'</option>';
+//     });
+//
+// 	estadosSelect +=
+//         '</select>';
+// 	return estadosSelect;
+// }
 
 	// Choropleth map
 	
@@ -627,16 +664,12 @@ function makeMap() {
 									  '				<div id="accordion">' +
 														genereteListIndicators() +
 									  '				</div>' +
-									  '				<select style=" margin: 10px; color: #146678; border: 0; border-bottom: 1px solid #E0E0E0;" class="" id="inlineFormCustomSelectPref">' +
-									  '					<option selected>2018</option>' +
-									  '					<option value="1">2017</option>' +
-									  '					<option value="2">2016</option>' +
-									  '					<option value="3">2015</option>' +
-									  '				</select>' +
-									  '				<select style=" margin: 10px; color: #146678; border: 0; border-bottom: 1px solid #E0E0E0;" class="" id="inlineFormCustomSelectPref">' +
-									  '					<option selected>Estados</option>' +
-									  '					<option value="1">DF</option>' +
-									  '				</select>' +
+                                                    generateListOptionsYears() +
+									  				// generateListOptionsEstados() +
+                                      '             <select style=" margin: 10px; color: #146678; border: 0; border-bottom: 1px solid #E0E0E0;" class="" id="inlineFormCustomSelectPref">' +
+                                      '					<option selected>Estados</option>' +
+                                      '					<option value="1">DF</option>' +
+                                      '				</select>'
 									  '			</div>' +
 									  '			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">' +
                                                     '<div id="accordionFilter">'+
