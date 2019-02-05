@@ -568,7 +568,7 @@ function makeChart(rangeMap2) {
 		style: style_1,
 		onEachFeature: function (feature, layer) {
 			if (typeof indicatorArray[feature.geoCode] !== "undefined") {
-				layer.bindPopup('<p class="title-popup">'+feature.properties.name+'</p><p id="both">'+arrayCompleto[0].name.value+'</p><p>'+indicatorArray[feature.geoCode]+'</p><button onclick="modalDatail(\''+feature.geoCode+'\')" class="button-popup">'+feature.properties.name+'</button>');
+				layer.bindPopup('<p class="title-popup">'+feature.properties.NOME+'</p><p id="both">'+arrayCompleto[0].name.value+'</p><p>'+indicatorArray[feature.geoCode]+'</p><button onclick="modalDatail(\''+feature.geoCode+'\')" class="button-popup">'+feature.properties.NOME+'</button>');
 				layer.on('mouseover', function (e) {
 					var x = document.getElementsByClassName("range-bar-mark")[0];
 					x.style.left = getPercent(indicatorArray[feature.geoCode])+"%";
