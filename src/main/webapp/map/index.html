@@ -459,33 +459,6 @@ function generateListFilters(){
 	return filterCategory;
 }
 
-function generateListOptionsYears(){
-	var yearsSelect =
-        '<select style=" margin: 10px; color: #146678; border: 0; border-bottom: 1px solid #E0E0E0;" class="" id="inlineFormCustomSelectPref">';
-
-	years.forEach(function (item) {
-        yearsSelect += '<option value="'+item.id+'">'+item.jhi_date+'</option>';
-    });
-
-	yearsSelect +=
-        '</select>';
-	return yearsSelect;
-}
-
-// function generateListOptionsEstados(){
-// 	var estadosSelect =
-//         '<select style=" margin: 10px; color: #146678; border: 0; border-bottom: 1px solid #E0E0E0;" class="" id="inlineFormCustomSelectPref">' +
-//             '<option disabled selected>Estados</option>';
-//
-// 	estado.forEach(function (item) {
-//         estadosSelect += '<option value="'+item.uf+'">'+item.uf+'</option>';
-//     });
-//
-// 	estadosSelect +=
-//         '</select>';
-// 	return estadosSelect;
-// }
-
 	// Choropleth map
 	
 	// Retorna o valor da regiao em Float, passando o geoCode e o Array de dados
@@ -664,12 +637,6 @@ function makeMap() {
 									  '				<div id="accordion">' +
 														genereteListIndicators() +
 									  '				</div>' +
-                                                    generateListOptionsYears() +
-									  				// generateListOptionsEstados() +
-                                      '             <select style=" margin: 10px; color: #146678; border: 0; border-bottom: 1px solid #E0E0E0;" class="" id="inlineFormCustomSelectPref">' +
-                                      '					<option selected>Estados</option>' +
-                                      '					<option value="1">DF</option>' +
-                                      '				</select>'
 									  '			</div>' +
 									  '			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">' +
                                                     '<div id="accordionFilter">'+
