@@ -17,11 +17,9 @@
 <style>
 
 html, body { 
-  /*height: 97.1%;*/
   height: 100%;
   
 }
-
 
 #map {
 	width: 100%; 
@@ -60,10 +58,6 @@ html, body {
   display: none;
 }
 
-.leaflet-container {
-    background-color: #132D38;
-}
-
 .navbar {
 	background-color: rgba(20, 102, 120);
 	color: white;
@@ -79,11 +73,6 @@ html, body {
 
 .leaflet-bar button, .leaflet-bar button:hover , .input-leaflet{
 	color: #59C9A8;
-}
-
-.leaflet-popup-content-wrapper {
-    -webkit-border-radius: 7px;
-    border-radius: 7px;
 }
 
 .title-popup {
@@ -120,20 +109,9 @@ html, body {
 	}
 }
 
-
-
-
 /* 
   Menu
 */
-
-.indicadorMapControl, .filtroMapControl, .limparMapControl{
-	  z-index: 1;
-}
-
-.hide {
-    display: none;
-}
 
 .menu--popup {
   background: #fff;
@@ -182,22 +160,6 @@ h5.mb-0 button.btn.btn-link {
 	color: #4F4F4F;
 	font-weight: bold;
 }
-
-.jh-navbar {
-    background: rgba(20, 102, 120,0.9);
-    z-index: 2;
-	padding: 8px 16px;
-}
-
-.jh-navbar-toggler {
-	color: #ccc;
-	font-size: 1.5em;
-	padding: 10px;
-}
-.dropdown-item.active:hover {
-    background-color: #414735;
-}
-
 
 .menu{
 	width: 100%;
@@ -385,9 +347,7 @@ h5.mb-0 button.btn.btn-link {
 	
 	var group = new L.FeatureGroup();
 
-	var rengeMap = 2;
-	
-	var arrayCompleto, rengeMap, municipioArray, estadoArray, indicatorArray, filterArray, estado, mesoRegiao, municipio, maxValue, minValue, midValue, categories, indicatorNames;
+	var arrayCompleto, municipioArray, estadoArray, indicatorArray, filterArray, estado, mesoRegiao, municipio, maxValue, minValue, midValue, categories, indicatorNames;
 	var indicadorMapControl, limparMapControl, rangeBarControl, mapControl, botao2, botao3;
 	
 	getGeoJson();
@@ -440,8 +400,6 @@ function getGeoJson(){
 function genereteListIndicators(){
 	var indicatorCategory = '';
 	categories.forEach(function(item) {
-
-
 
 		indicatorCategory += 	'					<div style="border-bottom: 1px solid #E0E0E0;" class="card">' +
 								'						<div style="border: 0;" class="card-header" id="headingCard'+ item.id +'">' +
@@ -538,21 +496,13 @@ function generateListFilters(){
 	Array.max = function(array) {
 		return Math.max.apply(Math, array);
 	};
-	
-	
+
 	// Funcao para setar os valores das variaveis com base no json
 	function setJsonVars(json) {
 		var values = Object.values(json);
 		minValue = Array.min(values);
 		maxValue = Array.max(values);
-		//maxValue = 628064882;
 		midValue = (maxValue + minValue) / 2;
-		//console.log(minValue);
-		//console.log(maxValue);
-		//console.log(midValue);
-		
-		
-		//console.log("sao pauso = " + json["3550308"]);
 	}
 	
 	// MenuMapControl
@@ -574,7 +524,6 @@ function rangeMap(select){
 		break;
 	}
 }
-
 
 function cleanMap(){
 	map.removeLayer(group);
@@ -611,9 +560,7 @@ function makeChart(rangeMap2) {
 			indicatorArray = estadoArray;
 		break;
 	}
-	
-	//console.log(municipioArray);
-	
+
 	setJsonVars(indicatorArray);
 	
 	var route1Layer = L.geoJson(geoJson, 
@@ -637,7 +584,6 @@ function makeChart(rangeMap2) {
 		
 	$("#loading").hide();
 		
-	//group.addLayer(teste);
 	group.addLayer(route1Layer);
 	map.addLayer(group);
 }
@@ -764,10 +710,7 @@ function makeMap() {
 					emptyMap();
 				}
 				else {
-				
 					arrayCompleto = dataJson;
-				
-					var arrayTeste = new Array();
 					municipioArray = new Array();
 					estadoArray = new Array();
 					
@@ -775,18 +718,14 @@ function makeMap() {
 					
 					dataJson.forEach(function(indicator) {
 					
-						//arrayTeste[ indicator.region.geoCode ] = indicator;
-						if(indicator.region.typeRegion == "MUNICIPIO")
-						{
+						if(indicator.region.typeRegion == "MUNICIPIO") {
 							municipioArray[ indicator.region.geoCode.toString() ] = indicator.value;
 						} else if (indicator.region.typeRegion == "ESTADO"){
 							estadoArray[ indicator.region.geoCode.toString() ] = indicator.value;
 							return;
 						}
 					});
-					
-					
-					
+
 					itensSelect[ 0 ] = '<option value="1">Estado</option>';
 					itensSelect[ 1 ] = '<option value="2">Municipio</option>';
 					
@@ -814,9 +753,7 @@ function makeMap() {
 						selectRangeMapHtml +=	'</select>' +
 												'</div>';
 					// html do SELECT						
-													
-												
-									
+
 					// indicador Map control
 					indicadorMapControl = L.control({position: 'topright'});
 					indicadorMapControl.onAdd = function(map) {
@@ -833,8 +770,7 @@ function makeMap() {
 								return this._div;
 					}
 					indicadorMapControl.addTo(map);
-				
-				
+
 					// filtro Map control
 					limparMapControl = L.control({position: 'topright'});
 					limparMapControl.onAdd = function(map) {
