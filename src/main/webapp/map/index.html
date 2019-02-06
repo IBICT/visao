@@ -231,6 +231,10 @@ h5.mb-0 button.btn.btn-link {
     top:45%;
     left:45%;
 }
+
+.menuMapControl{
+    z-index: 99999;
+}
 </style>
 </head>
 <body>
@@ -773,7 +777,7 @@ function makeMap() {
 					}
 					indicadorMapControl.addTo(map);
 
-					// filtro Map control
+					// limpar Map control
 					limparMapControl = L.control({position: 'topright'});
 					limparMapControl.onAdd = function(map) {
 								this._div = L.DomUtil.create('div', 'limparMapControl');
