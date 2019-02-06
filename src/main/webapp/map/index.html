@@ -355,7 +355,7 @@ h5.mb-0 button.btn.btn-link {
 	var indicatorArray, filterArray, years;
 	var estado, mesoRegiao, municipio;
 	var maxValue, minValue, midValue, categories, indicatorNames;
-	var indicadorMapControl, limparMapControl, rangeBarControl, mapControl, botao2, botao3;
+	var indicadorMapControl, filtroMapControl, limparMapControl, rangeBarControl, mapControl, botao2, botao3;
 	
 	getGeoJson();
 	
@@ -543,6 +543,7 @@ function cleanMap(){
 	map.removeLayer(group);
 	if (typeof(indicadorMapControl) != "undefined") {
 		indicadorMapControl.removeFrom(map);
+        filtroMapControl.removeFrom(map);
 		limparMapControl.removeFrom(map);
 		rangeBarControl.removeFrom(map);
 		mapControl.removeFrom(map);
@@ -777,6 +778,23 @@ function makeMap() {
 					}
 					indicadorMapControl.addTo(map);
 
+                    // filtro Map control
+                    filtroMapControl = L.control({position: 'topright'});
+                    filtroMapControl.onAdd = function(map) {
+                        this._div = L.DomUtil.create('div', 'filtroMapControl');
+                        this._div.innerHTML = '<div style="cursor: pointer;padding:2.5px 10px; color:#00697C; background-color:#FFFFFF;border-radius: 15px;font-size:14px;" onclick="filtroMapControl()" id="filtroMapControl" title="filtro">' +
+                            '<span class="button-state state-get-center get-center-active">Tropical ' +
+                            '<span class="fa fa-check-square-o"></span>' +
+                            '</span></div>';
+
+                        L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
+                        L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
+                        L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);
+
+                        return this._div;
+                    }
+                    filtroMapControl.addTo(map);
+
 					// limpar Map control
 					limparMapControl = L.control({position: 'topright'});
 					limparMapControl.onAdd = function(map) {
@@ -869,27 +887,6 @@ function makeMap() {
 			}
 		});
 	});
-	
-	
-	
-	/*
-	// filtro Map control
-	var filtroMapControl = L.control({position: 'topright'});
-	filtroMapControl.onAdd = function(map) {
-				this._div = L.DomUtil.create('div', 'filtroMapControl');
-				this._div.innerHTML = '<div style="cursor: pointer;padding:2.5px 10px; color:#00697C; background-color:#FFFFFF;border-radius: 15px;font-size:14px;" onclick="filtroMapControl()" id="filtroMapControl" title="filtro">' +
-									  '<span class="button-state state-get-center get-center-active">Tropical ' +
-									  '<span class="fa fa-check-square-o"></span>' +
-									  '</span></div>';
-
-					L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
-					L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
-					L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);	
-									  
-				return this._div;
-	}
-	filtroMapControl.addTo(map);
-	*/
 	
 };
 
