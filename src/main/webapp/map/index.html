@@ -310,7 +310,7 @@ h5.mb-0 button.btn.btn-link {
 <!-------- ====================================> modal login <===============================---------->
 
         <div id="map">
-            <i id ="loading" class="loading"></i>
+            <div id ="loading" class="loader"></div>
         </div>
 		
 		<!-- Modal -->
@@ -642,6 +642,7 @@ function makeMap() {
                                                     '<div id="accordionFilter">'+
                                                         generateListFilters()+
                                                     '</div>'+
+                                      '             <div id="selectedIndicator" style="text-align: center;"><span> Não há indicador selecionado</span></div>' +
                                                 '</div>' +
 									  '			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>' +
 									  '		</div>' +
@@ -684,6 +685,7 @@ function makeMap() {
 	var indicadorAtual;
 	$('input[type=radio][name=indicator]').change(function() {
 		indicadorAtual = this.value;
+        $('#selectedIndicator').html("<span>Indicador <b>"+$(this.nextElementSibling).text().trim()+"</b> selecionado</span>");
 		$('#submitFormIndicator').prop('disabled', false);
 	});
 	
