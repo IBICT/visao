@@ -235,6 +235,17 @@ h5.mb-0 button.btn.btn-link {
 .menuMapControl{
     z-index: 99999;
 }
+
+.iconFilter{
+    cursor: pointer;
+    padding:2.5px 10px;
+    color:#00697C;
+    background-color:#FFFFFF;
+    border-radius: 15px;
+    font-size:14px;
+    margin-left: 5px;
+}
+
 </style>
 </head>
 <body>
@@ -789,10 +800,7 @@ function makeMap() {
                         this._div = L.DomUtil.create('div', 'filtroMapControl');
 
                         if($(filtrosId).length !== 0){
-                            this._div.innerHTML = '<div style="cursor: pointer;padding:2.5px 10px; color:#00697C; background-color:#FFFFFF;border-radius: 15px;font-size:14px;" onclick="filtroMapControl()" id="filtroMapControl" title="filtro">' +
-                                '<span class="button-state state-get-center get-center-active">Tropical ' +
-                                '<span class="fa fa-check-square-o"></span>' +
-                                '</span></div>';
+                            this._div.innerHTML = loadFiltrosSelecionados();
                         }
 
                         L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
@@ -897,6 +905,24 @@ function makeMap() {
 	});
 	
 };
+
+function loadFiltrosSelecionados(){ // TODO pensar em um metodo melhor de iterar para fazer a busca(acho ineficiente o atual)
+    var filtrosSelecionados = '';
+
+    filtrosId.each(function (item) {
+        filterArray.forEach(function (filtroItem) {
+            if(item === filtroItem.id){
+                filtrosSelecionados +=
+                '<div class="iconFilter float-left" onclick="filtroMapControl()" id="filtroMapControl" title="filtro">' +
+                    '<span class="button-state state-get-center get-center-active">'+filtroItem.name +
+                        ' <span class="fa fa-check-square-o"></span>' +
+                    '</span>'+
+                '</div>'
+            }
+        });
+    });
+    return filtrosSelecionados;
+}
 
 $(document).ready(function(){
 
