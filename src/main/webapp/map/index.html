@@ -356,6 +356,7 @@ h5.mb-0 button.btn.btn-link {
 	var estado, mesoRegiao, municipio;
 	var maxValue, minValue, midValue, categories, indicatorNames;
 	var indicadorMapControl, filtroMapControl, limparMapControl, rangeBarControl, mapControl, botao2, botao3;
+    var filtrosId;
 	
 	getGeoJson();
 	
@@ -697,6 +698,10 @@ function makeMap() {
 	$('#submitFormIndicator').click(function() {
 		
 		itensSelect = new Array();
+
+        filtrosId = $('#collapseFilter input:checkbox:checked').map(function(){
+            return $(this).val();
+        });
 		
 		cleanMap();
 		
@@ -769,11 +774,11 @@ function makeMap() {
 													  '<span class="">' +
 													  dataJson[0].name.value +' <span style="background-color: #59C9A8; padding:3.5px 6.5px; color: white; border-radius: 4px; font-size:12px; position:relative; top:-2.5px;" class="fa fa-info"></span>' +
 													  '</span></div>';
-													  
+
 								L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
 								L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
-								L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);					  
-								
+								L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);
+
 								return this._div;
 					}
 					indicadorMapControl.addTo(map);
@@ -782,10 +787,13 @@ function makeMap() {
                     filtroMapControl = L.control({position: 'topright'});
                     filtroMapControl.onAdd = function(map) {
                         this._div = L.DomUtil.create('div', 'filtroMapControl');
-                        this._div.innerHTML = '<div style="cursor: pointer;padding:2.5px 10px; color:#00697C; background-color:#FFFFFF;border-radius: 15px;font-size:14px;" onclick="filtroMapControl()" id="filtroMapControl" title="filtro">' +
-                            '<span class="button-state state-get-center get-center-active">Tropical ' +
-                            '<span class="fa fa-check-square-o"></span>' +
-                            '</span></div>';
+
+                        if($(filtrosId).length !== 0){
+                            this._div.innerHTML = '<div style="cursor: pointer;padding:2.5px 10px; color:#00697C; background-color:#FFFFFF;border-radius: 15px;font-size:14px;" onclick="filtroMapControl()" id="filtroMapControl" title="filtro">' +
+                                '<span class="button-state state-get-center get-center-active">Tropical ' +
+                                '<span class="fa fa-check-square-o"></span>' +
+                                '</span></div>';
+                        }
 
                         L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
                         L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
