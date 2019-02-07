@@ -710,8 +710,9 @@ function makeMap() {
 		
 		itensSelect = new Array();
 
-        filtrosId = $('#collapseFilter input:checkbox:checked').map(function(){
-            return $(this).val();
+		filtrosId = new Set();
+        $('#collapseFilter input:checkbox:checked').map(function(){
+            filtrosId.add(parseInt($(this).val()));
         });
 		
 		cleanMap();
@@ -906,22 +907,19 @@ function makeMap() {
 	
 };
 
-function loadFiltrosSelecionados(){ // TODO pensar em um metodo melhor de iterar para fazer a busca(acho ineficiente o atual)
+function loadFiltrosSelecionados(){
     var filtrosSelecionados = '';
 
-    for(var i=0; i< filtrosId.length; i++){
-        for (var j = 0; j < filterArray.length; j++) {
-            if(parseInt(filtrosId[i]) === filterArray[j].id){
-                filtrosSelecionados +=
-                '<div class="iconFilter float-left" onclick="filtroMapControl()" id="filtroMapControl" title="filtro">' +
-                    '<span class="button-state state-get-center get-center-active">'+filterArray[j].name +
+    filterArray.forEach(function (filterItem) {
+       if(filtrosId.has(filterItem.id)){
+           filtrosSelecionados +=
+               '<div class="iconFilter float-left" onclick="filtroMapControl()" id="filtroMapControl" title="filtro">' +
+                   '<span class="button-state state-get-center get-center-active">'+filterItem.name +
                         ' <span class="fa fa-check-square-o"></span>' +
-                    '</span>'+
-                '</div>'
-                break;
-            }
-        }
-    }
+                   '</span>'+
+               '</div>'
+       }
+    });
     return filtrosSelecionados;
 }
 
