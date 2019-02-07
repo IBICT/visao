@@ -1,121 +1,989 @@
 <!DOCTYPE html>
 <head>
 
-    <meta charset="UTF-8">
-    <title>Mapa Completo do Sistema de Observatorio</title>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="map.css"/>
+	<meta charset="UTF-8">
+	<title>Mapa Completo do Sistema de Observatorio</title>
+   <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+   <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+      
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="loading.css" />
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="http://d3js.org/queue.v1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
+
+<style>
+
+html, body { 
+  /*height: 97.1%;*/
+  height: 100%;
+  
+}
+
+
+#map {
+	width: 100%; 
+	height: 100%;
+	z-index: 1;
+	position: fixed;
+	top: 0;
+	background-color: #132D38;
+}
+
+.rangeBarControl .fa-minus {
+	position: relative;
+	right: 45px;
+	top: 14px;
+	color: white;
+}
+
+.rangeBarControl .fa-plus{
+	position: relative;
+	left: 190px;
+	bottom: 14px;
+	color: white;
+}
+
+.range-bar {
+  position: relative;
+  right: 20px;
+  height: 10px;
+  width: 200px;
+  border-radius: 50px;
+  background-image: linear-gradient(
+    to right,
+    #e5c75a, 
+    #eeb248, 
+    #f69b3f, 
+    #fc833e, 
+    #ff6745
+  );
+}
+
+.range-bar-mark{
+  position: relative;
+  top:-4px;
+  left:0%;
+  border-radius: 50px;
+  background-color:black;
+  padding: 0.8px 6px;
+  display: none;
+}
+
+.key path {
+  display: none;
+}
+
+.leaflet-container {
+    background-color: #132D38;
+}
+
+.navbar {
+	background-color: rgba(20, 102, 120);
+	color: white;
+	opacity: 0.8;
+	z-index: 2;
+	top: 0;
+	/*display: none;*/
+}
+
+.navbar nav a {
+	color: white;
+}
+
+.leaflet-bar button, .leaflet-bar button:hover , .input-leaflet{
+	color: #59C9A8;
+}
+
+.leaflet-popup-content-wrapper {
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+}
+
+.title-popup {
+	color: #3D3D3D;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.button-popup{
+	background-color: #146678;
+	-webkit-border-radius: 29px;
+    border-radius: 29px;
+	color: white;
+	border: 0;
+	padding: 0 10px;
+}
+
+.modal-header {
+	background-color: #E5C75A;
+	color: white;
+}
+
+.modal-header .close {
+	color: white;
+}
+
+.modal-header .close:hover {
+	color: white;
+}
+
+@media (min-width: 576px){
+	.modal-dialog {
+		max-width: 800px;
+	}
+}
+
+
+
+
+/* 
+  Menu
+*/
+
+.indicadorMapControl, .filtroMapControl, .limparMapControl{
+	  z-index: 1;
+}
+
+.hide {
+    display: none;
+}
+
+.menu--popup {
+  background: #fff;
+  box-shadow: 0 0 3px rgba(50, 50, 50, 0.6);
+  position: absolute;
+  right: 0;
+  top: -4px;
+  border-radius: 0 4px 4px 4px;
+  width: 340px;
+  padding: 0.5em;
+  display: none;
+  z-index: 2;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-link {
+	color: #146678;
+}
+
+#accordion {
+	width:98%;
+}
+
+.nav-tabs .nav-link.active {
+	background-color: #F0EDED;
+	font-weight: bold;
+}
+
+.tab-pane {
+	overflow-y: scroll;
+	height:400px;
+}
+
+.card {
+	border: 0;
+}
+
+.card-header {
+	padding: 0;
+}
+
+h5.mb-0 button.btn.btn-link {
+	width:100%;
+	height:100%;
+	padding: 12px 6px;
+	text-align: left;
+	color: #4F4F4F;
+	font-weight: bold;
+}
+
+.jh-navbar {
+    background: rgba(20, 102, 120,0.9);
+    z-index: 2;
+	padding: 8px 16px;
+}
+
+.jh-navbar-toggler {
+	color: #ccc;
+	font-size: 1.5em;
+	padding: 10px;
+}
+.dropdown-item.active:hover {
+    background-color: #414735;
+}
+
+
+.menu{
+	width: 100%;
+	}
+/* 
+  map buttons
+*/
+.leaflet-right .leaflet-control:first-child, .leaflet-left .leaflet-control:first-child {
+    margin-top: 80px;
+} 
+
+.indicadorMapControl div {
+	white-space: nowrap;
+}
+#menuNav {
+	padding: 8px 16px;
+	height: 56px;
+}
+#hoverMouse {
+	position: absolute;
+	top: 52px;
+	left: -50px;
+	width: 20px;
+	
+}
+#hoverMouse li {
+	height: 30px;
+	color: #132D38;
+	text-align: left;
+	background-color: #fff;
+	border-radius: 0.15rem
+}
+#hoverMouse li a {
+	padding: 4px 61%  4px 20px;
+	color: black;
+}
+
+#hoverMouse li a:hover {
+	text-decoration: none;
+	font-weight: bold;
+	background-color: #EEE9E9;
+}
+.fa1 {
+	font-size: 1.2rem;
+}
+.margem{
+	margin-right: -12px;
+}
+
+.color{
+	background-color: white;
+	color: black;
+}
+
+#altura{
+	width: 450px;
+}
+.linkmodal{
+	font-weight: bold;
+	color: #856404;
+}
+.linkmodal:hover{
+    text-decoration-color: #856404;
+	color: inherit;
+}
+
+#loading{
+    position:fixed;
+    top:45%;
+    left:45%;
+}
+</style>
 </head>
 <body>
-
-<!-- Image and text -->
-<nav class="navbar navbar-expand-md " id="menuNav">
-    <a class="navbar-brand" href="#">
-        <img src="../../content/images/logo2.png" height="30" class="d-inline-block align-top" alt="">
-    </a>
-    <div class="nav menu justify-content-end">
-        <nav class="my-2 my-md-0 mr-md-3">
-            <ul class="navbar-nav ">
-                <li class="p-2 nav-item"><a class="nav-link" href="./../"><i class="fa fa1 fa-home"></i> Início</a></li>
-                <li class="p-2 nav-item"><a class="nav-link" href="index.html"><i class="fa fa-map"></i> Mapa</a></li>
-                <li class="p-2 nav-item dropdown">
-                    <a class="dropdown-toggle nav-link" href data-toggle="dropdown"><i class="fa fa-flag"></i> Idioma
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" style="color:#132D38">Português</a></li>
-                        <li><a href="#" style="color:#132D38">Inglês</a></li>
-                    </ul>
-                </li>
-                <li class="p-2 nav-item dropdown">
-                    <a class="dropdown-toggle nav-link margem" href data-toggle="dropdown"><span class="fa fa1 fa-user"></span> Conta <span class="caret"></span></a>
-                    <ul class="dropdown-menu" id="hoverMouse">
-                        <li id="#property"><a href data-toggle="modal" data-target="#siteModal"> Login</a></li>
-                        <li id="property1"><a href="./../#/register" style="padding-right:65px"> Resgistrar</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</nav>
+	
+		<!-- Image and text -->
+		<nav class="navbar navbar-expand-md " id="menuNav"> 
+			<a class="navbar-brand" href="#">
+				<!-- <img src="../../content/images/logo2.png"  height="30" class="d-inline-block align-top" alt=""> -->
+				<img src="logo.png"  height="30" class="d-inline-block align-top" alt="">
+			</a>
+			<div class="nav menu justify-content-end">
+				<nav class="my-2 my-md-0 mr-md-3">
+					<ul class="navbar-nav ">
+						<li class="p-2 nav-item"><a class="nav-link" href="./../"><i class="fa fa1 fa-home"></i> Início</a></li>
+						<li class="p-2 nav-item"><a class="nav-link" href="index.html"><i class="fa fa-map"></i> Mapa</a></li>						
+						<li class="p-2 nav-item dropdown">
+							<a class="dropdown-toggle nav-link" href data-toggle="dropdown"><i class="fa fa-flag"></i> Idioma <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" style="color:#132D38">Português</a></li>
+								<li><a href="#" style="color:#132D38">Inglês</a></li>
+							</ul>
+						</li>
+						<li class="p-2 nav-item dropdown">
+							<a class="dropdown-toggle nav-link margem" href data-toggle="dropdown"><span class="fa fa1 fa-user" ></span> Conta <span class="caret"></span></a>
+							<ul class="dropdown-menu" id="hoverMouse">
+								<li id="#property"><a  href  data-toggle="modal" data-target="#siteModal" > Login</a></li>
+								<li id="property1"><a  href="./../#/register" style="padding-right:65px"> Resgistrar</a></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</nav>
 <!-------- ====================================> modal login <================================---------->
 <div class="modal fade" id="siteModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" id="altura">
-            <div class="modal-header color">
-                <h4 class="modal-title">
-                    <span>Autenticação</span>
-                </h4>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span class="linkmodal">x</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row justify-content-center">
-                    <form>
-                        <div class="form-group">
-                            <label for="usuario">Usuário</label>
-                            <input type="text" class="form-control" id="usuario" aria-describedby="usuario" placeholder="Seu Usuário">
-                        </div>
-                        <div class="form-group">
-                            <label for="senha">Senha</label>
-                            <input type="password" class="form-control" id="senha" placeholder="Sua Senha">
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="manterlogado">manter-me logado</label>
-                        </div>
-                        <p>
-                            <button type="submit" class="btn btn-primary">Entrar</button>
-                        </p>
-                        <div class="alert alert-warning" role="alert">
-                            <a class="linkmodal" href="">Esqueceu Senha?</a>
-                        </div>
-                        <div class="alert alert-warning" role="alert">
-                            Não tem uma conta ainda? <a class="linkmodal" href="">Crie uma nova conta</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="altura">
+			<div class="modal-header color">
+				<h4 class="modal-title">
+					<span>Autenticação</span>
+				</h4>
+				<button type="button" class="close" data-dismiss="modal">
+					<span class="linkmodal">x</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row justify-content-center">
+					<form>
+						<div class="form-group">
+							<label for="usuario">Usuário</label>
+							<input type="text" class="form-control" id="usuario" aria-describedby="usuario" placeholder="Seu Usuário">
+						</div>
+						<div class="form-group">
+							<label for="senha">Senha</label>
+							<input type="password" class="form-control" id="senha" placeholder="Sua Senha">
+						</div>
+						<div class="form-check">
+							<input type="checkbox" class="form-check-input" id="exampleCheck1">
+							<label class="form-check-label" for="manterlogado">manter-me logado</label>
+						</div>
+						<p>
+							<button type="submit" class="btn btn-primary">Entrar</button>
+						</p>
+						<div class="alert alert-warning" role="alert">
+							<a class="linkmodal" href="">Esqueceu Senha?</a>
+						</div>
+						<div class="alert alert-warning" role="alert">
+							Não tem uma conta ainda? <a class="linkmodal" href="">Crie uma nova conta</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <!-------- ====================================> modal login <===============================---------->
 
-<div id="map"></div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">DETALHAMENTO DE DADOS</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="modalEstadoSigla"></div>
-                <span>HABITANTES<br/><span id="modalHabitantesValor"></span></span>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+        <div id="map">
+            <i id ="loading" class="loading"></i>
         </div>
-    </div>
-</div>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">DETALHAMENTO DE DADOS</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body">
+				<div id="modalEstadoSigla"></div>
+				<span>HABITANTES<br /><span id="modalHabitantesValor"></span></span>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
 
-<script src="map.js"></script>
+<script>
+
+// Iniciar mapa objeto sem zoom, latitude, longitude, zoom inicial
+    var map = L.map('map', {
+            zoomControl:false,
+            minZoom: 4,
+            maxZoom: 10
+        }).setView([-15, -50], 4);
+    map.setMaxBounds(map.getBounds());
+	
+	var group = new L.FeatureGroup();
+
+	var rengeMap = 2;
+	
+	var arrayCompleto, rengeMap, municipioArray, estadoArray, indicatorArray, filterArray, estado, mesoRegiao, municipio, maxValue, minValue, midValue, categories, indicatorNames;
+	var indicadorMapControl, limparMapControl, rangeBarControl, mapControl, botao2, botao3;
+	
+	getGeoJson();
+	
+function modalDatail(data){
+	$('#modalEstadoSigla').html(data);
+	$('#modalHabitantesValor').html("3.873.743");
+	$('#exampleModal').modal('show');
+}
+
+function getGeoJson(){
+
+	//usage in request
+	$.ajax({
+		url: 'estado.json',
+		success: function(data) {
+			estado = data;
+			$.ajax({
+				url: './municipio.json',
+				success: function(data) {
+					municipio = data;
+					$.ajax({
+						url: './api/categories',
+						dataType: 'json',
+						success: function(data) {
+							categories = data;
+							$.ajax({
+								url: './api/names',
+								dataType: 'json',
+								success: function(data) {
+									indicatorNames = data;
+                                    $.ajax({
+                                        url: './api/filters',
+                                        dataType: 'json',
+                                        success: function (data) {
+                                            filterArray = data;
+                                            makeMap();
+                                        }
+                                    });
+								}
+							});
+						}
+					});
+				}
+			});
+		}
+	});
+}
+
+function genereteListIndicators(){
+	var indicatorCategory = '';
+	categories.forEach(function(item) {
+
+
+
+		indicatorCategory += 	'					<div style="border-bottom: 1px solid #E0E0E0;" class="card">' +
+								'						<div style="border: 0;" class="card-header" id="headingCard'+ item.id +'">' +
+								'							<h5 class="mb-0">' +
+								'								<button style="background-color: #fff;" class="btn btn-link" data-toggle="collapse" data-target="#collapse'+ item.id  +'" aria-expanded="true" aria-controls="collapseOne">' +
+								'									<div style="display: inline-block; text-overflow: ellipsis; overflow: hidden; width: 200px; height: 18px; white-space: nowrap;" title="'+ item.name +'">'+ item.name +' </div><i class="pull-right fa fa-angle-right" aria-hidden="true"></i>' +
+								'								</button>' +
+								'							</h5>' +
+								'						</div>' +
+								'						<div id="collapse'+ item.id  +'" class="collapse" aria-labelledby="headingCard'+ item.id +'" data-parent="#accordion">' +
+								'							<div class="card-body">';
+
+		indicatorNames.filter(function(indicator) {
+			return indicator.category.name == item.name;
+		}).forEach(function(indicator) {
+			indicatorCategory += 	'								<div class="form-check">' +
+									'									<input class="form-check-input" name="indicator" type="radio" value="'+ indicator.id +'" id="indicador'+ indicator.id +'" />' +
+									'									<label style="" class="form-check-label" for="indicador'+ indicator.id +'">' +
+									'										'+ indicator.value +
+									'									</label>' +
+									'								</div>';
+		});					
+
+		indicatorCategory +=	'							</div>' +
+								'						</div>' +
+								'					</div>';
+				//console.log(item.name);
+	});
+	return indicatorCategory;
+}
+
+function generateListFilters(){
+	var filterCategory =
+        '<div style="border-bottom: 1px solid #E0E0E0;" class="card">' +
+        '   <div id="collapseFilter" class="card-body" aria-labelledby="headingCardFilter" data-parent="#accordionFilter">';
+
+	filterArray.forEach(function (item) {
+        filterCategory +=
+            '   <div class="form-check-input">'+
+            '       <label><input type="checkbox" name="filtro" value="'+item.id+'"> '+item.name+'</label>'+
+            '   </div><br />';
+    });
+
+	filterCategory +=
+        '   </div>'+
+        '</div>';
+	return filterCategory;
+}
+
+	// Choropleth map
+	
+	// Retorna o valor da regiao em Float, passando o geoCode e o Array de dados
+	function matchKey(datapoint, key_variable){
+        return(key_variable[datapoint]);
+    };
+	
+	 // get color depending on population density value
+	function getColor(d) {
+		return 	isNaN(d)                       ? '#CBD8DD' :
+				d == maxValue                  ? '#ff6745' :
+				d >  midValue  & d < maxValue  ? '#fc833e' :
+				d == midValue                  ? '#f69b3f' :
+				d >  minValue  & d < midValue  ? '#eeb248' :
+							                     '#e5c75a' ;
+	}
+	
+	// Retorna a porcetatem para a barra de range de valores
+	function getPercent(d) {
+		return 	d == maxValue                  ? 94 :
+				d >  midValue  & d < maxValue  ? 75 :
+				d == midValue                  ? 50 :
+				d >  minValue  & d < midValue  ? 25 :
+							                     0.2 ;
+	}
+	
+	// pinta a regiao
+    function style_1(feature) {
+		return {
+			fillColor: getColor(matchKey(feature.geoCode, indicatorArray)),
+			weight: 1,
+			opacity: 1,
+			color: '#146678',
+			fillOpacity: 1
+		};
+	}
+	// Choropleth map
+
+	// Funcao para retornar o menor valor de um array
+	Array.min = function(array) {
+		return Math.min.apply(Math, array);
+	};
+
+	// Funcao para retornar o maior valor de um array
+	Array.max = function(array) {
+		return Math.max.apply(Math, array);
+	};
+	
+	
+	// Funcao para setar os valores das variaveis com base no json
+	function setJsonVars(json) {
+		var values = Object.values(json);
+		minValue = Array.min(values);
+		maxValue = Array.max(values);
+		//maxValue = 628064882;
+		midValue = (maxValue + minValue) / 2;
+		//console.log(minValue);
+		//console.log(maxValue);
+		//console.log(midValue);
+		
+		
+		//console.log("sao pauso = " + json["3550308"]);
+	}
+	
+	// MenuMapControl
+	function menuMapControl(){
+		$( ".menu--popup" ).toggle( "slow" );
+	}
+	
+function rangeMap(select){
+	console.log(select.value);
+	switch(select.value) {
+		case "3":
+			
+		break;
+		case "2":
+			
+		break;
+		case "1":
+			
+		break;
+	}
+}
+
+
+function cleanMap(){
+	map.removeLayer(group);
+	if (typeof(limparMapControl) != "undefined") {
+		indicadorMapControl.removeFrom(map);
+		limparMapControl.removeFrom(map);
+		rangeBarControl.removeFrom(map);
+		mapControl.removeFrom(map);
+	}
+}
+
+function emptyMap(){
+	indicatorArray = new Array();
+    var route1Layer = L.geoJson(estado, 
+	{
+		style: style_1
+		
+	});
+	group.addLayer(route1Layer);
+	map.addLayer(group);
+}
+
+// Set no mapa arquivo de regiões, função de popup nas regiões
+function makeChart(rangeMap2) {
+
+	var geoJson;
+	switch(rangeMap2) {
+		case 2:
+			geoJson = municipio;
+			indicatorArray = municipioArray;
+		break;
+		case 1:
+			geoJson = estado;
+			indicatorArray = estadoArray;
+		break;
+	}
+	
+	//console.log(municipioArray);
+	
+	setJsonVars(indicatorArray);
+	
+	var route1Layer = L.geoJson(geoJson, 
+	{
+		style: style_1,
+		onEachFeature: function (feature, layer) {
+			if (typeof indicatorArray[feature.geoCode] !== "undefined") {
+				layer.bindPopup('<p class="title-popup">'+feature.properties.name+'</p><p id="both">'+arrayCompleto[0].name.value+'</p><p>'+indicatorArray[feature.geoCode]+'</p><button onclick="modalDatail(\''+feature.geoCode+'\')" class="button-popup">'+feature.properties.name+'</button>');
+				layer.on('mouseover', function (e) {
+					var x = document.getElementsByClassName("range-bar-mark")[0];
+					x.style.left = getPercent(indicatorArray[feature.geoCode])+"%";
+					x.style.display = "inline";
+				});
+				layer.on('mouseout', function (e) {
+					var x = document.getElementsByClassName("range-bar-mark")[0];
+					x.style.display = "none";
+				});
+			}
+		}
+	});
+		
+	$("#loading").hide();
+		
+	//group.addLayer(teste);
+	group.addLayer(route1Layer);
+	map.addLayer(group);
+}
+
+function makeMap() {
+
+	$("#loading").hide();
+
+	emptyMap();
+	
+	//Functions to either disable (onmouseover) or enable (onmouseout) the map's dragging
+	function controlEnter(e) {
+		map.dragging.disable();
+        map.scrollWheelZoom.disable();
+	}
+	function controlLeave() {
+		map.dragging.enable();
+		map.scrollWheelZoom.enable();
+	}
+	
+	// Menu Map control
+	var menuMapControl = L.control({position: 'topright'});
+	menuMapControl.onAdd = function(map) {
+				this._div = L.DomUtil.create('div', 'leaflet-bar easy-button-container menuMapControl');
+				this._div.innerHTML = '<div>' +
+									  '<span style="padding:6px 8px; border-radius:4px; background-color: #fff; color: #59C9A8;" onclick="menuMapControl()"> <span class="fa fa-bars"> </span></span>' +	
+									  '	<div class="menu--popup">' +
+									  '		<ul class="nav nav-tabs" id="myTab" role="tablist">' +
+									  '			<li class="nav-item">' +
+									  '				<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">INDICADORES</a>' +
+									  '			</li>' +
+									  '			<li class="nav-item">' +
+									  '				<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">FILTROS</a>' +
+									  '			</li>' +
+									  '			<li class="nav-item">' +
+									  '				<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">CAMADAS</a>' +
+									  '			</li>' +
+									  '		</ul>' +
+									  '		<div class="tab-content" id="myTabContent">' +
+									  '			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">' +
+									  '				<div id="accordion">' +
+														genereteListIndicators() +
+									  '				</div>' +
+									  '				<select style=" margin: 10px; color: #146678; border: 0; border-bottom: 1px solid #E0E0E0;" class="" id="inlineFormCustomSelectPref">' +
+									  '					<option selected>2018</option>' +
+									  '					<option value="1">2017</option>' +
+									  '					<option value="2">2016</option>' +
+									  '					<option value="3">2015</option>' +
+									  '				</select>' +
+									  '				<select style=" margin: 10px; color: #146678; border: 0; border-bottom: 1px solid #E0E0E0;" class="" id="inlineFormCustomSelectPref">' +
+									  '					<option selected>Estados</option>' +
+									  '					<option value="1">DF</option>' +
+									  '				</select>' +
+									  '			</div>' +
+									  '			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">' +
+                                                    '<div id="accordionFilter">'+
+                                                        generateListFilters()+
+                                                    '</div>'+
+                                                '</div>' +
+									  '			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>' +
+									  '		</div>' +
+									  '		<span onclick="menuMapControl()" style="position:relative; left:-31px; top: -438px;; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-times"> </span></span>' +
+									  '		<hr style="background-color:#146678; height: 1px;" />' +
+									  '		<button id="submitFormIndicator" disabled style="background-color: #146678; color: #fff;" class="btn pull-right">Aplicar</button>' +
+									  '	</div>' +
+									  '</div>';
+									  
+									  
+					L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
+									  
+				return this._div;jhiTranslate="global.menu."
+	}
+	menuMapControl.addTo(map);
+
+	document.getElementsByClassName("menuMapControl")[0].onmouseover = controlEnter;
+	document.getElementsByClassName("menuMapControl")[0].onmouseout = controlLeave;
+	
+	$('#accordion .card').on('hidden.bs.collapse', function () {
+		$(this).find( "i" ).removeClass("fa-angle-down");
+		$(this).find( "i" ).addClass("fa-angle-right");
+	});
+	
+	$('#accordion .card').on('shown.bs.collapse', function () {
+		$(this).find( "i" ).addClass("fa-angle-down");
+		$(this).find( "i" ).removeClass("fa-angle-right");
+	});
+
+	$('#accordionFilter .card').on('hidden.bs.collapse', function () {
+		$(this).find( "i" ).removeClass("fa-angle-down");
+		$(this).find( "i" ).addClass("fa-angle-right");
+	});
+
+	$('#accordionFilter .card').on('shown.bs.collapse', function () {
+		$(this).find( "i" ).addClass("fa-angle-down");
+		$(this).find( "i" ).removeClass("fa-angle-right");
+	});
+
+	var indicadorAtual;
+	$('input[type=radio][name=indicator]').change(function() {
+		indicadorAtual = this.value;
+		$('#submitFormIndicator').prop('disabled', false);
+	});
+	
+	$('#submitFormIndicator').click(function() {
+		
+		itensSelect = new Array();
+		
+		//cleanMap();
+		
+		//console.log('http://localhost:8080/api/indicators?yearId.equals=15&nameId.equals='+indicadorAtual)
+		
+		group = new L.FeatureGroup();
+		$("#loading").show();
+		$.ajax({
+			url: './api/indicators?yearId.equals=11&nameId.equals='+indicadorAtual,
+			dataType: 'json',
+			success: function(dataJson) {				
+				
+				//dataJson["3550308"]
+				
+				
+				if(dataJson.length < 1) {
+					$("#loading").hide();
+					emptyMap();
+				}
+				else {
+				
+					arrayCompleto = dataJson;
+				
+					var arrayTeste = new Array();
+					municipioArray = new Array();
+					estadoArray = new Array();
+					
+					//console.log(dataJson);
+					
+					dataJson.forEach(function(indicator) {
+					
+						//arrayTeste[ indicator.region.geoCode ] = indicator;
+						if(indicator.region.typeRegion == "MUNICIPIO")
+						{
+							municipioArray[ indicator.region.geoCode.toString() ] = indicator.value;
+						} else if (indicator.region.typeRegion == "ESTADO"){
+							estadoArray[ indicator.region.geoCode.toString() ] = indicator.value;
+							return;
+						}
+					});
+					
+					
+					
+					itensSelect[ 0 ] = '<option value="1">Estado</option>';
+					itensSelect[ 1 ] = '<option value="2">Municipio</option>';
+					
+					if(estadoArray.length > 0){
+						makeChart(1);
+					} else if(municipioArray.length > 0){
+						delete itensSelect[0];
+						makeChart(2);
+					} else {
+						console.log("Empty DATAJSON")
+					}
+					
+					// html do SELECT
+					var selectRangeMapHtml = 	'<div class="input-group input-group-sm mb-3">' +
+												'<div class="input-group-prepend">' +
+												'<span style="margin-right:5px;" class="input-group-text fa fa-map input-leaflet" id="basic-addon1"></span>' +
+												'<span style="color: #59C9A8; border-right:0; background-color: #ffffff" class="input-group-text"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></span>' +
+												'</div>' +
+												'<select onchange="rangeMap(this)" style="border-radius: 0 5px 5px 0; border-left:0;">';
+							
+						itensSelect.forEach(function(iten) {
+							selectRangeMapHtml +=	iten;
+						});						
+												
+						selectRangeMapHtml +=	'</select>' +
+												'</div>';
+					// html do SELECT						
+													
+												
+									
+					// indicador Map control
+					indicadorMapControl = L.control({position: 'topright'});
+					indicadorMapControl.onAdd = function(map) {
+								this._div = L.DomUtil.create('div', 'indicadorMapControl');
+								this._div.innerHTML = '<div style="cursor: pointer;color:#59C9A8; font-size:16px;" onclick="indicadorMapControl()" class="" id="indicadorMapControl" title="Menu">' +
+													  '<span class="">' +
+													  dataJson[0].name.value +' <span style="background-color: #59C9A8; padding:3.5px 6.5px; color: white; border-radius: 4px; font-size:12px; position:relative; top:-2.5px;" class="fa fa-info"></span>' +
+													  '</span></div>';
+													  
+								L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
+								L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
+								L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);					  
+								
+								return this._div;
+					}
+					indicadorMapControl.addTo(map);
+				
+				
+					// filtro Map control
+					limparMapControl = L.control({position: 'topright'});
+					limparMapControl.onAdd = function(map) {
+								this._div = L.DomUtil.create('div', 'limparMapControl');
+								this._div.innerHTML = '<div style="cursor: pointer;color:#FFFFFF; font-size:14px;" onclick="" class="" id="limparMapControl" title="Menu">' +
+													  '<span style="text-decoration: underline;">' +
+													  'limpar <span class="fa fa-trash-o"></span>' +
+													  '</span></div>';
+													  
+									L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
+									L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
+									L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);	
+													  
+								return this._div;
+					}
+					limparMapControl.addTo(map);
+					$('#limparMapControl').click(function() {
+						cleanMap();
+						indicatorArray = new Array();
+						var route1Layer = L.geoJson(estado, 
+						{
+							style: style_1
+							
+						});
+						group.addLayer(route1Layer);
+						map.addLayer(group);
+					});
+					
+					
+					
+					// range bar Map control
+					rangeBarControl = L.control({position: 'bottomright'});
+					rangeBarControl.onAdd = function(map) {
+								this._div = L.DomUtil.create('div', 'rangeBarControl');
+								this._div.innerHTML = '<i class="fa fa-minus" aria-hidden="true"></i><div class="range-bar">' +
+													  '<span class="range-bar-mark"></span>' +
+													  '</div><i class="fa fa-plus" aria-hidden="true"></i>';
+													  
+									L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
+									L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
+									L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);	
+													  
+								return this._div;
+					}
+					rangeBarControl.addTo(map);
+					
+					
+					// select Map control
+					mapControl = L.control({position: 'bottomleft'});
+					mapControl.onAdd = function(map) {
+								this._div = L.DomUtil.create('div', 'mapControl');
+								this._div.innerHTML = selectRangeMapHtml;
+													  
+									L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
+													  
+								return this._div;
+					}
+					mapControl.addTo(map);
+					
+					document.getElementsByClassName("mapControl")[0].onmouseover = controlEnter;
+					document.getElementsByClassName("mapControl")[0].onmouseout = controlLeave;
+					
+					/*
+					// select Map control
+					botao2 =  L.easyButton({
+					  id: 'botao2',  // an id for the generated button
+					  position: 'bottomleft',      // inherited from L.Control -- the corner it goes in
+					  type: 'replace',          // set to animate when you're comfy with css
+					  leafletClasses: true,     // use leaflet classes to style the button?
+					  states:[{                 // specify different icons and responses for your button
+						stateName: 'get-center',
+						onClick: function(button, map){
+							//event.preventDefault();
+							$("#search").addClass("open");
+							$('#search > form > input[type="search"]').focus();
+						},
+						title: 'show me the middle',
+						icon: 'fa-search'
+					  }]
+					});
+					botao2.addTo(map);
+
+
+					botao3 =  L.easyButton({
+					  id: 'botao3',  // an id for the generated button
+					  position: 'bottomleft',      // inherited from L.Control -- the corner it goes in
+					  type: 'replace',          // set to animate when you're comfy with css
+					  leafletClasses: true,     // use leaflet classes to style the button?
+					  states:[{                 // specify different icons and responses for your button
+						stateName: 'get-center',
+						onClick: function(button, map){
+						
+						},
+						title: 'show me the middle',
+						icon: 'fa-list'
+					  }]
+					});
+					botao3.addTo(map);
+					*/
+					
+				}
+			}
+		});
+	});
+	
+	
+	
+	/*
+	// filtro Map control
+	var filtroMapControl = L.control({position: 'topright'});
+	filtroMapControl.onAdd = function(map) {
+				this._div = L.DomUtil.create('div', 'filtroMapControl');
+				this._div.innerHTML = '<div style="cursor: pointer;padding:2.5px 10px; color:#00697C; background-color:#FFFFFF;border-radius: 15px;font-size:14px;" onclick="filtroMapControl()" id="filtroMapControl" title="filtro">' +
+									  '<span class="button-state state-get-center get-center-active">Tropical ' +
+									  '<span class="fa fa-check-square-o"></span>' +
+									  '</span></div>';
+
+					L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
+					L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
+					L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);	
+									  
+				return this._div;
+	}
+	filtroMapControl.addTo(map);
+	*/
+	
+};
+
+$(document).ready(function(){
+
+	
+});
+
+</script>
+
 </body>
