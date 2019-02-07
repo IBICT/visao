@@ -243,7 +243,12 @@ h5.mb-0 button.btn.btn-link {
     background-color:#FFFFFF;
     border-radius: 15px;
     font-size:14px;
-    margin-left: 5px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.filtroMapControl{
+    width: 300px;
 }
 
 </style>
@@ -913,7 +918,7 @@ function loadFiltrosSelecionados(){
     filterArray.forEach(function (filterItem) {
        if(filtrosId.has(filterItem.id)){
            filtrosSelecionados +=
-               '<div class="iconFilter float-left" onclick="filtroMapControl()" id="filtroMapControl" title="filtro">' +
+               '<div class="iconFilter float-right" onclick="filtroMapControl()" id="filtroMapControl" title="filtro">' +
                    '<span class="button-state state-get-center get-center-active">'+filterItem.name +
                         ' <span class="fa fa-check-square-o"></span>' +
                    '</span>'+
