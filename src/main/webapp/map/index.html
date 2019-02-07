@@ -909,18 +909,19 @@ function makeMap() {
 function loadFiltrosSelecionados(){ // TODO pensar em um metodo melhor de iterar para fazer a busca(acho ineficiente o atual)
     var filtrosSelecionados = '';
 
-    filtrosId.each(function (item) {
-        filterArray.forEach(function (filtroItem) {
-            if(item === filtroItem.id){
+    for(var i=0; i< filtrosId.length; i++){
+        for (var j = 0; j < filterArray.length; j++) {
+            if(parseInt(filtrosId[i]) === filterArray[j].id){
                 filtrosSelecionados +=
                 '<div class="iconFilter float-left" onclick="filtroMapControl()" id="filtroMapControl" title="filtro">' +
-                    '<span class="button-state state-get-center get-center-active">'+filtroItem.name +
+                    '<span class="button-state state-get-center get-center-active">'+filterArray[j].name +
                         ' <span class="fa fa-check-square-o"></span>' +
                     '</span>'+
                 '</div>'
+                break;
             }
-        });
-    });
+        }
+    }
     return filtrosSelecionados;
 }
 
