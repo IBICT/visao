@@ -1,19 +1,43 @@
 [ {
   "id" : 1,
-  "name" : "Aeroespacial"
+  "name" : "Aeroespacial",
+  "category" : {
+    "id" : 8,
+    "name" : "APL"
+  }
 }, {
   "id" : 2,
-  "name" : "Base Mineral"
+  "name" : "Base Mineral",
+  "category" : {
+    "id" : 8,
+    "name" : "APL"
+  }
 }, {
   "id" : 3,
-  "name" : "Bebidas"
+  "name" : "Bebidas",
+  "category" : {
+    "id" : 8,
+    "name" : "APL"
+  }
 }, {
   "id" : 4,
-  "name" : "Bens de capital"
+  "name" : "Bens de capital",
+  "category" : {
+    "id" : 8,
+    "name" : "APL"
+  }
 }, {
   "id" : 5,
-  "name" : "Cal e Calcário"
+  "name" : "Cal e Calcário",
+  "category" : {
+    "id" : 8,
+    "name" : "APL"
+  }
 }, {
   "id" : 6,
-  "name" : "Calçados"
+  "name" : "Calçados",
+  "category" : {
+    "id" : 7,
+    "name" : "Economia"
+  }
 } ]

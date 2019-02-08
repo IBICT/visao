@@ -371,7 +371,7 @@ h5.mb-0 button.btn.btn-link {
 	var arrayCompleto, municipioArray, estadoArray;
 	var indicatorArray, filterArray, years;
 	var estado, mesoRegiao, municipio;
-	var maxValue, minValue, midValue, categories, indicatorNames;
+	var maxValue, minValue, midValue, categories, filterCategories, indicatorNames;
 	var indicadorMapControl, filtroMapControl, limparMapControl, rangeBarControl, mapControl, botao2, botao3;
     var filtrosId;
 	
@@ -414,7 +414,14 @@ function getGeoJson(){
                                                 dataType: 'json',
                                                 success: function (data) {
                                                     years = data;
-                                                    makeMap();
+                                                    $.ajax({
+                                                        url: './api/filterCategories',
+                                                        dataType: 'json',
+                                                        success: function (data) {
+                                                            filterCategories = data;
+                                                            makeMap();
+                                                        }
+                                                    });
                                                 }
                                             });
                                         }
@@ -464,23 +471,35 @@ function genereteListIndicators(){
 }
 
 function generateListFilters(){
-	var filterCategory =
-        '<div style="border-bottom: 1px solid #E0E0E0;" class="card">' +
-        '   <div id="collapseFilter" class="card-body" aria-labelledby="headingCardFilter" data-parent="#accordionFilter">';
-
-	filterArray.forEach(function (item) {
+    var filterCategory = '';
+    filterCategories.forEach(function(item) {
         filterCategory +=
-            '   <div class="form-check-input">'+
-            '       <label><input type="checkbox" name="filtro" value="'+item.id+'"> '+item.name+'</label>'+
-            '   </div><br />';
-    });
+            '<div style="border-bottom: 1px solid #E0E0E0;" class="card">' +
+            '   <div style="border: 0;" class="card-header" id="headingCard'+ item.id +'">' +
+            '	    <h5 class="mb-0">' +
+            '		    <button style="background-color: #fff;" class="btn btn-link" data-toggle="collapse" data-target="#collapse'+ item.id  +'" aria-expanded="true" aria-controls="collapseOne">' +
+            '			    <div style="display: inline-block; text-overflow: ellipsis; overflow: hidden; width: 200px; height: 18px; white-space: nowrap;" title="'+ item.name +'">'+ item.name +' </div><i class="pull-right fa fa-angle-right" aria-hidden="true"></i>' +
+            '			</button>' +
+            '		</h5>' +
+            '	</div>' +
+            '   <div id="collapse'+ item.id  +'" class="collapse" aria-labelledby="headingCard'+ item.id +'" data-parent="#accordion">' +
+            '	    <div class="card-body">';
 
-	filterCategory +=
-        '   </div>'+
-        '</div>';
+        filterArray.filter(function(filter) {
+            return filter.category.id == item.id;
+        }).forEach(function(item) {
+            filterCategory +=
+                '       <div class="form-check-input">'+
+                '           <label><input type="checkbox" name="filtro" value="'+item.id+'"> '+item.name+'</label>'+
+                '       </div><br />';
+        });
+        filterCategory +=
+            '       </div>' +
+            '	</div>' +
+            '</div>';
+    });
 	return filterCategory;
 }
-
 	// Choropleth map
 	
 	// Retorna o valor da regiao em Float, passando o geoCode e o Array de dados
@@ -717,7 +736,7 @@ function makeMap() {
 		itensSelect = new Array();
 
 		filtrosId = new Set();
-        $('#collapseFilter input:checkbox:checked').map(function(){
+        $('#accordionFilter input:checkbox:checked').map(function(){
             filtrosId.add(parseInt($(this).val()));
         });
 		
