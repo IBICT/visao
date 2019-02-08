@@ -916,17 +916,42 @@ function makeMap() {
 function loadFiltrosSelecionados(){
     var filtrosSelecionados = '';
 
-    filterArray.forEach(function (filterItem) {
-       if(filtrosId.has(filterItem.id)){
-           filtrosSelecionados +=
-               '<div class="iconFilter float-right" onclick="filtroMapControl()" id="filtroMapControl" title="filtro">' +
-                   '<span class="button-state state-get-center get-center-active">'+filterItem.name +
-                        ' <span class="fa fa-check-square-o"></span>' +
-                   '</span>'+
-               '</div>'
-       }
-    });
+    filtrosSelecionados +=
+        '<div>' +
+        '   <div class="iconFilter float-right" id="filtroMapControl" title="filtro">' +
+        '       <span onclick="mostraFiltroSelected()" class="button-state state-get-center get-center-active"> Filtros selecionados '+
+        '           <span id="filterLateralIcon" class="fa fa-angle-right"></span>' +
+        '       </span>'+
+
+        '	<div class="" style="background-color: white">' +
+        '		<div class="tab-content" id="selectedFilterContent" style="display: none">' +
+        '			<div class="fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">' +
+        '				<div id="accordionSelectedFilter">';
+
+        filterArray.forEach(function (filterItem) {
+           if(filtrosId.has(filterItem.id)){
+               filtrosSelecionados +=
+                '   <div class="form-check">' +
+                '        <label class="form-check-label">'+ filterItem.name + '</label>' +
+                '   </div>';
+           }
+        });
+
+        filtrosSelecionados +=
+        '				</div>' +
+        '			</div>' +
+        '		</div>' +
+        '	</div>' +
+            '   </div>' +
+        '</div>';
+
     return filtrosSelecionados;
+}
+
+// FiltroMapControl
+function mostraFiltroSelected(){
+    $( "#selectedFilterContent" ).toggle( "slow" );
+    $('#filterLateralIcon').toggleClass('fa-angle-down');
 }
 
 $(document).ready(function(){
