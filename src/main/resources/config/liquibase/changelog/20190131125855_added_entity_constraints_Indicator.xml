@@ -20,9 +20,9 @@
                                  referencedColumnNames="id"
                                  referencedTableName="name"/>
 
-        <addForeignKeyConstraint baseColumnNames="ano_id"
+        <addForeignKeyConstraint baseColumnNames="year_id"
                                  baseTableName="indicator"
-                                 constraintName="fk_indicator_ano_id"
+                                 constraintName="fk_indicator_year_id"
                                  referencedColumnNames="id"
                                  referencedTableName="year"/>
 

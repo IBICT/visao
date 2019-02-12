@@ -38,7 +38,7 @@ public class Indicator implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("")
-    private Year ano;
+    private Year year;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -88,17 +88,17 @@ public class Indicator implements Serializable {
         this.name = name;
     }
 
-    public Year getAno() {
-        return ano;
+    public Year getYear() {
+        return year;
     }
 
-    public Indicator ano(Year year) {
-        this.ano = year;
+    public Indicator year(Year year) {
+        this.year = year;
         return this;
     }
 
-    public void setAno(Year year) {
-        this.ano = year;
+    public void setYear(Year year) {
+        this.year = year;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

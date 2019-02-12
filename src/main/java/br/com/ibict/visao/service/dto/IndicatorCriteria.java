@@ -34,7 +34,7 @@ public class IndicatorCriteria implements Serializable {
 
     private LongFilter nameId;
 
-    private LongFilter anoId;
+    private LongFilter yearId;
 
     private LongFilter filtersId;
 
@@ -73,12 +73,12 @@ public class IndicatorCriteria implements Serializable {
         this.nameId = nameId;
     }
 
-    public LongFilter getAnoId() {
-        return anoId;
+    public LongFilter getYearId() {
+        return yearId;
     }
 
-    public void setAnoId(LongFilter anoId) {
-        this.anoId = anoId;
+    public void setYearId(LongFilter anoId) {
+        this.yearId = anoId;
     }
 
     public LongFilter getFiltersId() {
@@ -96,7 +96,7 @@ public class IndicatorCriteria implements Serializable {
                 (value != null ? "value=" + value + ", " : "") +
                 (regionId != null ? "regionId=" + regionId + ", " : "") +
                 (nameId != null ? "nameId=" + nameId + ", " : "") +
-                (anoId != null ? "anoId=" + anoId + ", " : "") +
+                (yearId != null ? "yearId=" + yearId + ", " : "") +
             "}";
     }
 

@@ -360,7 +360,7 @@ h5.mb-0 button.btn.btn-link {
 // Iniciar mapa objeto sem zoom, latitude, longitude, zoom inicial
     var map = L.map('map', {
             zoomControl:false,
-            minZoom: 4,
+            minZoom: 3,
             maxZoom: 10,
             doubleClickZoom: false
         }).setView([-15, -50], 4);
@@ -743,7 +743,7 @@ function makeMap() {
 		cleanMap();
 		
         var urlQuery = '';
-        if(filtrosId.length === 0){
+        if(filtrosId.size === 0){
             urlQuery += './api/indicators?yearId.equals=11&nameId.equals='+indicadorAtual;
         } else {
             var vetor = new Array();
@@ -751,7 +751,8 @@ function makeMap() {
                 vetor.push(filtro);
             });
             var stringResult = vetor.join(',');
-            urlQuery += '/api/indicatorsFilter?&anoId.equals=11&filtersId.in='+stringResult+'&nameId.equals='+indicadorAtual;
+            // urlQuery += '/api/indicatorsFilter?&yearId.equals=11&filtersId.in='+stringResult+'&nameId.equals='+indicadorAtual;
+            urlQuery += '/api/indicatorsFilter?&yearId.equals=11&filtersId.in='+1+'&nameId.equals='+indicadorAtual; // TODO remover esse estatico dps
         }
 
 		group = new L.FeatureGroup();

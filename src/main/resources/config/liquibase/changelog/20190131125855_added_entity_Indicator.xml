@@ -34,7 +34,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="ano_id" type="bigint">
+            <column name="year_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

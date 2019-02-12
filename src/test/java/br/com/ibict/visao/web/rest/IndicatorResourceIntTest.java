@@ -268,12 +268,12 @@ public class IndicatorResourceIntTest {
     @Transactional
     public void getAllIndicatorsByAnoIsEqualToSomething() throws Exception {
         // Initialize the database
-        Year ano = YearResourceIntTest.createEntity(em);
-        em.persist(ano);
+        Year year = YearResourceIntTest.createEntity(em);
+        em.persist(year);
         em.flush();
-        indicator.setAno(ano);
+        indicator.setYear(year);
         indicatorRepository.saveAndFlush(indicator);
-        Long anoId = ano.getId();
+        Long anoId = year.getId();
 
         // Get all the indicatorList where ano equals to anoId
         defaultIndicatorShouldBeFound("anoId.equals=" + anoId);

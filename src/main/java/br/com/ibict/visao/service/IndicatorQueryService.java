@@ -73,7 +73,7 @@ public class IndicatorQueryService extends QueryService<Indicator> {
 
         return indicatorRepository.getIndicadorFilter(
                     criteria.getNameId().getEquals(),
-                    criteria.getAnoId().getEquals(),
+                    criteria.getYearId().getEquals(),
                     criteria.getFiltersId().getIn(),
             page);
     }
@@ -96,8 +96,8 @@ public class IndicatorQueryService extends QueryService<Indicator> {
             if (criteria.getNameId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getNameId(), Indicator_.name, Name_.id));
             }
-            if (criteria.getAnoId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getAnoId(), Indicator_.ano, Year_.id));
+            if (criteria.getYearId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getYearId(), Indicator_.ano, Year_.id));
             }
         }
         return specification;
