@@ -62,6 +62,23 @@ public class IndicatorQueryService extends QueryService<Indicator> {
     }
 
     /**
+     * Return a {@link Page} of {@link Indicator} which matches the criteria from the database
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @param page The page, which should be returned.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<Indicator> findIndicatorWithFilters(IndicatorCriteria criteria, Pageable page) {
+        log.debug("find by criteria : {}, page: {}", criteria, page);
+
+        return indicatorRepository.getIndicadorFilter(
+                    criteria.getNameId().getEquals(),
+                    criteria.getAnoId().getEquals(),
+                    criteria.getFiltersId().getIn(),
+            page);
+    }
+
+    /**
      * Function to convert IndicatorCriteria to a {@link Specification}
      */
     private Specification<Indicator> createSpecification(IndicatorCriteria criteria) {

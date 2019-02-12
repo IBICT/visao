@@ -742,18 +742,25 @@ function makeMap() {
 		
 		cleanMap();
 		
-		//console.log('http://localhost:8080/api/indicators?yearId.equals=15&nameId.equals='+indicadorAtual)
-		
+        var urlQuery = '';
+        if(filtrosId.length === 0){
+            urlQuery += './api/indicators?yearId.equals=11&nameId.equals='+indicadorAtual;
+        } else {
+            var vetor = new Array();
+            filtrosId.forEach(function (filtro) {
+                vetor.push(filtro);
+            });
+            var stringResult = vetor.join(',');
+            urlQuery += '/api/indicatorsFilter?&anoId.equals=11&filtersId.in='+stringResult+'&nameId.equals='+indicadorAtual;
+        }
+
 		group = new L.FeatureGroup();
 		$("#loading").show();
 		$.ajax({
-			url: './api/indicators?yearId.equals=11&nameId.equals='+indicadorAtual,
+			url: urlQuery,
 			dataType: 'json',
 			success: function(dataJson) {				
-				
-				//dataJson["3550308"]
-				
-				
+
 				if(dataJson.length < 1) {
 					$("#loading").hide();
 					emptyMap();
@@ -762,11 +769,11 @@ function makeMap() {
 					arrayCompleto = dataJson;
 					municipioArray = new Array();
 					estadoArray = new Array();
-					
+
 					//console.log(dataJson);
 					
 					dataJson.forEach(function(indicator) {
-					
+
 						if(indicator.region.typeRegion == "MUNICIPIO") {
 							municipioArray[ indicator.region.geoCode.toString() ] = indicator.value;
 						} else if (indicator.region.typeRegion == "ESTADO"){
