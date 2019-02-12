@@ -124,7 +124,6 @@ public class NameResourceIntTest {
             .description(DEFAULT_DESCRIPTION)
             .keyWord(DEFAULT_KEY_WORD)
             .date(DEFAULT_DATE)
-            .producer(DEFAULT_PRODUCER)
             .source(DEFAULT_SOURCE)
             .dateChange(DEFAULT_DATE_CHANGE)
             .note(DEFAULT_NOTE);
@@ -156,7 +155,6 @@ public class NameResourceIntTest {
         assertThat(testName.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testName.getKeyWord()).isEqualTo(DEFAULT_KEY_WORD);
         assertThat(testName.getDate()).isEqualTo(DEFAULT_DATE);
-        assertThat(testName.getProducer()).isEqualTo(DEFAULT_PRODUCER);
         assertThat(testName.getSource()).isEqualTo(DEFAULT_SOURCE);
         assertThat(testName.getDateChange()).isEqualTo(DEFAULT_DATE_CHANGE);
         assertThat(testName.getNote()).isEqualTo(DEFAULT_NOTE);
@@ -706,7 +704,6 @@ public class NameResourceIntTest {
             .description(UPDATED_DESCRIPTION)
             .keyWord(UPDATED_KEY_WORD)
             .date(UPDATED_DATE)
-            .producer(UPDATED_PRODUCER)
             .source(UPDATED_SOURCE)
             .dateChange(UPDATED_DATE_CHANGE)
             .note(UPDATED_NOTE);
@@ -725,7 +722,6 @@ public class NameResourceIntTest {
         assertThat(testName.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testName.getKeyWord()).isEqualTo(UPDATED_KEY_WORD);
         assertThat(testName.getDate()).isEqualTo(UPDATED_DATE);
-        assertThat(testName.getProducer()).isEqualTo(UPDATED_PRODUCER);
         assertThat(testName.getSource()).isEqualTo(UPDATED_SOURCE);
         assertThat(testName.getDateChange()).isEqualTo(UPDATED_DATE_CHANGE);
         assertThat(testName.getNote()).isEqualTo(UPDATED_NOTE);

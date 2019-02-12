@@ -42,9 +42,6 @@ public class Name implements Serializable {
     @Column(name = "jhi_date")
     private Instant date;
 
-    @Column(name = "producer")
-    private String producer;
-
     @Column(name = "source")
     private String source;
 
@@ -134,19 +131,6 @@ public class Name implements Serializable {
 
     public void setDate(Instant date) {
         this.date = date;
-    }
-
-    public String getProducer() {
-        return producer;
-    }
-
-    public Name producer(String producer) {
-        this.producer = producer;
-        return this;
-    }
-
-    public void setProducer(String producer) {
-        this.producer = producer;
     }
 
     public String getSource() {
@@ -244,7 +228,6 @@ public class Name implements Serializable {
             ", description='" + getDescription() + "'" +
             ", keyWord='" + getKeyWord() + "'" +
             ", date='" + getDate() + "'" +
-            ", producer='" + getProducer() + "'" +
             ", source='" + getSource() + "'" +
             ", dateChange='" + getDateChange() + "'" +
             ", note='" + getNote() + "'" +
