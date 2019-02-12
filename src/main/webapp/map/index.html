@@ -134,6 +134,22 @@ html, body {
 	width:98%;
 }
 
+#accordion .card-body{
+    padding: 0rem;
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+#accordionFilter .card-body{
+    padding: 0rem;
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+#accordionFilter .card-body .form-check-input{
+    margin-left: 0rem;
+}
+
 .nav-tabs .nav-link.active {
 	background-color: #F0EDED;
 	font-weight: bold;
@@ -482,7 +498,7 @@ function generateListFilters(){
             '			</button>' +
             '		</h5>' +
             '	</div>' +
-            '   <div id="collapse'+ item.id  +'" class="collapse" aria-labelledby="headingCard'+ item.id +'" data-parent="#accordion">' +
+            '   <div id="collapse'+ item.id  +'" class="collapse" aria-labelledby="headingCard'+ item.id +'" data-parent="#accordionFilter">' +
             '	    <div class="card-body">';
 
         filterArray.filter(function(filter) {
@@ -833,7 +849,7 @@ function makeMap() {
                     filtroMapControl.onAdd = function(map) {
                         this._div = L.DomUtil.create('div', 'filtroMapControl');
 
-                        if($(filtrosId).length !== 0){
+                        if(filtrosId.size !== 0){
                             this._div.innerHTML = loadFiltrosSelecionados();
                         }
 
