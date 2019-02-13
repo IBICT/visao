@@ -1,0 +1,93 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="visaoApp.filter.home.title">Filters</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-filter" [routerLink]="['/filter/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="visaoApp.filter.home.createLabel">
+            Create new Filter
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="filters">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span jhiTranslate="visaoApp.filter.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="active"><span jhiTranslate="visaoApp.filter.active">Active</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="visaoApp.filter.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="keyWord"><span jhiTranslate="visaoApp.filter.keyWord">Key Word</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="date"><span jhiTranslate="visaoApp.filter.date">Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="source"><span jhiTranslate="visaoApp.filter.source">Source</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dateChange"><span jhiTranslate="visaoApp.filter.dateChange">Date Change</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="note"><span jhiTranslate="visaoApp.filter.note">Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cidadePolo.id"><span jhiTranslate="visaoApp.filter.cidadePolo">Cidade Polo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="category.id"><span jhiTranslate="visaoApp.filter.category">Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="user.login"><span jhiTranslate="visaoApp.filter.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let filter of filters ;trackBy: trackId">
+                <td><a [routerLink]="['/filter', filter.id, 'view' ]">{{filter.id}}</a></td>
+                <td>{{filter.name}}</td>
+                <td>{{filter.active}}</td>
+                <td>{{filter.description}}</td>
+                <td>{{filter.keyWord}}</td>
+                <td>{{filter.date | date:'medium'}}</td>
+                <td>{{filter.source}}</td>
+                <td>{{filter.dateChange | date:'medium'}}</td>
+                <td>{{filter.note}}</td>
+                <td>
+                    <div *ngIf="filter.cidadePolo">
+                        <a [routerLink]="['../region', filter.cidadePolo?.id, 'view' ]" >{{filter.cidadePolo?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="filter.category">
+                        <a [routerLink]="['../category', filter.category?.id, 'view' ]" >{{filter.category?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{filter.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/filter', filter.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/filter', filter.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'filter/'+ filter.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pager is not implemented yet, so this is normal pagination instead -->
+    <div *ngIf="filters && filters.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+
+{
+    "visaoApp": {
+        "groupLayer" : {
+            "home": {
+                "title": "Group Layers",
+                "createLabel": "Create a new Group Layer",
+                "createOrEditLabel": "Create or edit a Group Layer"
+            },
+            "created": "A new Group Layer is created with identifier {{ param }}",
+            "updated": "A Group Layer is updated with identifier {{ param }}",
+            "deleted": "A Group Layer is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Group Layer {{ id }}?"
+            },
+            "detail": {
+                "title": "Group Layer"
+            },
+            "name": "Name",
+            "active": "Active",
+            "keyWord": "Key Word",
+            "user": "User"
+        }
+    }
+}

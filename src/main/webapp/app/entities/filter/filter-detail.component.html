@@ -1,0 +1,77 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="filter">
+            <h2><span jhiTranslate="visaoApp.filter.detail.title">Filter</span> {{filter.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="visaoApp.filter.name">Name</span></dt>
+                <dd>
+                    <span>{{filter.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.filter.active">Active</span></dt>
+                <dd>
+                    <span>{{filter.active}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.filter.description">Description</span></dt>
+                <dd>
+                    <span>{{filter.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.filter.keyWord">Key Word</span></dt>
+                <dd>
+                    <span>{{filter.keyWord}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.filter.date">Date</span></dt>
+                <dd>
+                    <span>{{filter.date}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.filter.source">Source</span></dt>
+                <dd>
+                    <span>{{filter.source}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.filter.dateChange">Date Change</span></dt>
+                <dd>
+                    <span>{{filter.dateChange}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.filter.note">Note</span></dt>
+                <dd>
+                    <span>{{filter.note}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.filter.cidadePolo">Cidade Polo</span></dt>
+                <dd>
+                    <div *ngIf="filter.cidadePolo">
+                        <a [routerLink]="['/region', filter.cidadePolo?.id, 'view']">{{filter.cidadePolo?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.filter.category">Category</span></dt>
+                <dd>
+                    <div *ngIf="filter.category">
+                        <a [routerLink]="['/category', filter.category?.id, 'view']">{{filter.category?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.filter.user">User</span></dt>
+                <dd>
+                    {{filter.user?.login}}
+                </dd>
+                <dt><span jhiTranslate="visaoApp.filter.region">Region</span></dt>
+                <dd>
+                    <span *ngFor="let region of filter.regions; let last = last">
+                        <a [routerLink]="['/region', region?.id, 'view' ]">{{region.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/filter', filter.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

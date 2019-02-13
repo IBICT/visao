@@ -1,0 +1,24 @@
+{
+    "name": "Category",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "TypeCategory",
+            "fieldValues": "INDICATOR,FILTER,LAYER"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190213123338",
+    "entityTableName": "category",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

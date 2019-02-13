@@ -1,0 +1,25 @@
+
+{
+    "visaoApp": {
+        "groupLayer" : {
+            "home": {
+                "title": "Group Layers",
+                "createLabel": "Criar novo Group Layer",
+                "createOrEditLabel": "Criar ou editar Group Layer"
+            },
+            "created": "Um novo Group Layer foi criado com o identificador {{ param }}",
+            "updated": "Um Group Layer foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Group Layer foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Group Layer {{ id }}?"
+            },
+            "detail": {
+                "title": "Group Layer"
+            },
+            "name": "Name",
+            "active": "Active",
+            "keyWord": "Key Word",
+            "user": "User"
+        }
+    }
+}

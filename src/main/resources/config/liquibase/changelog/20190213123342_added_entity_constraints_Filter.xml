@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Filter.
+    -->
+    <changeSet id="20190213123342-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="cidade_polo_id"
+                                 baseTableName="filter"
+                                 constraintName="fk_filter_cidade_polo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="region"/>
+
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                 baseTableName="filter"
+                                 constraintName="fk_filter_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="filter"
+                                 constraintName="fk_filter_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="filters_id"
+                                 baseTableName="filter_region"
+                                 constraintName="fk_filter_region_filters_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="filter"/>
+        <addForeignKeyConstraint baseColumnNames="regions_id"
+                                 baseTableName="filter_region"
+                                 constraintName="fk_filter_region_regions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="region"/>
+        
+    </changeSet>
+</databaseChangeLog>

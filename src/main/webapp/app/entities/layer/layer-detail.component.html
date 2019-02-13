@@ -1,0 +1,73 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="layer">
+            <h2><span jhiTranslate="visaoApp.layer.detail.title">Layer</span> {{layer.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="visaoApp.layer.name">Name</span></dt>
+                <dd>
+                    <span>{{layer.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.layer.geoJson">Geo Json</span></dt>
+                <dd>
+                    <span>{{layer.geoJson}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.layer.type">Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'visaoApp.TypeLayer.' + layer.type}}">{{layer.type}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.layer.description">Description</span></dt>
+                <dd>
+                    <span>{{layer.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.layer.date">Date</span></dt>
+                <dd>
+                    <span>{{layer.date}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.layer.source">Source</span></dt>
+                <dd>
+                    <span>{{layer.source}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.layer.dateChange">Date Change</span></dt>
+                <dd>
+                    <span>{{layer.dateChange}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.layer.note">Note</span></dt>
+                <dd>
+                    <span>{{layer.note}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.layer.category">Category</span></dt>
+                <dd>
+                    <div *ngIf="layer.category">
+                        <a [routerLink]="['/category', layer.category?.id, 'view']">{{layer.category?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.layer.icon">Icon</span></dt>
+                <dd>
+                    <div *ngIf="layer.icon">
+                        <a [routerLink]="['/marker-icon', layer.icon?.id, 'view']">{{layer.icon?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.layer.group">Group</span></dt>
+                <dd>
+                    <div *ngIf="layer.group">
+                        <a [routerLink]="['/group-layer', layer.group?.id, 'view']">{{layer.group?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/layer', layer.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

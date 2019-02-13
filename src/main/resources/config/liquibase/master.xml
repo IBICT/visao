@@ -5,6 +5,23 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123336_added_entity_Indicator.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123337_added_entity_Name.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123338_added_entity_Category.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123339_added_entity_Region.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123340_added_entity_Year.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123341_added_entity_MetaDado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123342_added_entity_Filter.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123343_added_entity_Layer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123344_added_entity_MarkerIcon.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123345_added_entity_GroupLayer.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20190213123336_added_entity_constraints_Indicator.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123337_added_entity_constraints_Name.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123339_added_entity_constraints_Region.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123341_added_entity_constraints_MetaDado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123342_added_entity_constraints_Filter.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123343_added_entity_constraints_Layer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190213123345_added_entity_constraints_GroupLayer.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

@@ -1,0 +1,24 @@
+
+{
+    "visaoApp": {
+        "metaDado" : {
+            "home": {
+                "title": "Meta Dados",
+                "createLabel": "Criar novo Meta Dado",
+                "createOrEditLabel": "Criar ou editar Meta Dado"
+            },
+            "created": "Um novo Meta Dado foi criado com o identificador {{ param }}",
+            "updated": "Um Meta Dado foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Meta Dado foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Meta Dado {{ id }}?"
+            },
+            "detail": {
+                "title": "Meta Dado"
+            },
+            "name": "Name",
+            "value": "Value",
+            "nome": "Nome"
+        }
+    }
+}

@@ -1,0 +1,48 @@
+{
+    "name": "MarkerIcon",
+    "fields": [
+        {
+            "fieldName": "icon",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "shadow",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "iconSize",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "shadowSize",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "iconAnchor",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "shadowAnchor",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "popupAnchor",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190213123344",
+    "entityTableName": "marker_icon",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

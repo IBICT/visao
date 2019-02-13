@@ -1,0 +1,28 @@
+
+{
+    "visaoApp": {
+        "markerIcon" : {
+            "home": {
+                "title": "Marker Icons",
+                "createLabel": "Create a new Marker Icon",
+                "createOrEditLabel": "Create or edit a Marker Icon"
+            },
+            "created": "A new Marker Icon is created with identifier {{ param }}",
+            "updated": "A Marker Icon is updated with identifier {{ param }}",
+            "deleted": "A Marker Icon is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Marker Icon {{ id }}?"
+            },
+            "detail": {
+                "title": "Marker Icon"
+            },
+            "icon": "Icon",
+            "shadow": "Shadow",
+            "iconSize": "Icon Size",
+            "shadowSize": "Shadow Size",
+            "iconAnchor": "Icon Anchor",
+            "shadowAnchor": "Shadow Anchor",
+            "popupAnchor": "Popup Anchor"
+        }
+    }
+}

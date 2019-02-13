@@ -1,0 +1,25 @@
+
+{
+    "visaoApp": {
+        "indicator" : {
+            "home": {
+                "title": "Indicators",
+                "createLabel": "Criar novo Indicator",
+                "createOrEditLabel": "Criar ou editar Indicator"
+            },
+            "created": "Um novo Indicator foi criado com o identificador {{ param }}",
+            "updated": "Um Indicator foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Indicator foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Indicator {{ id }}?"
+            },
+            "detail": {
+                "title": "Indicator"
+            },
+            "value": "Value",
+            "region": "Region",
+            "name": "Name",
+            "year": "Year"
+        }
+    }
+}
