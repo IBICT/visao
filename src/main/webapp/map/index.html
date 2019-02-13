@@ -411,7 +411,7 @@ function getGeoJson(){
 				success: function(data) {
 					municipio = data;
 					$.ajax({
-						url: './api/categories',
+						url: '/api/categories',
 						dataType: 'json',
 						success: function(data) {
 							categories = data;
@@ -421,7 +421,7 @@ function getGeoJson(){
 								success: function(data) {
 									indicatorNames = data;
                                     $.ajax({
-                                        url: './api/filters',
+                                        url: '/api/filters',
                                         dataType: 'json',
                                         success: function (data) {
                                             filterArray = data;
@@ -454,7 +454,9 @@ function getGeoJson(){
 
 function genereteListIndicators(){
 	var indicatorCategory = '';
-	categories.forEach(function(item) {
+	categories.filter(function (categoria) {
+        return categoria.type === 'INDICATOR';
+    }).forEach(function(item) {
 
 		indicatorCategory += 	'					<div style="border-bottom: 1px solid #E0E0E0;" class="card">' +
 								'						<div style="border: 0;" class="card-header" id="headingCard'+ item.id +'">' +
@@ -488,7 +490,10 @@ function genereteListIndicators(){
 
 function generateListFilters(){
     var filterCategory = '';
-    filterCategories.forEach(function(item) {
+
+    categories.filter(function (categoria) {
+        return categoria.type === 'FILTER';
+    }).forEach(function(item) {
         filterCategory +=
             '<div style="border-bottom: 1px solid #E0E0E0;" class="card">' +
             '   <div style="border: 0;" class="card-header" id="headingCard'+ item.id +'">' +
