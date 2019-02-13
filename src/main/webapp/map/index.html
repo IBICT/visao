@@ -709,6 +709,7 @@ function makeMap() {
 									  '		<span onclick="menuMapControl()" style="position:relative; left:-31px; top: -438px;; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-times"> </span></span>' +
 									  '		<hr style="background-color:#146678; height: 1px;" />' +
 									  '		<button id="submitFormIndicator" disabled style="background-color: #146678; color: #fff;" class="btn pull-right">Aplicar</button>' +
+									  '		<button id="clearFormIndicator" style="background-color: #fff; color: #146678;" class="btn pull-right">Limpar</button>' +
 									  '	</div>' +
 									  '</div>';
 									  
@@ -745,9 +746,20 @@ function makeMap() {
 	var indicadorAtual;
 	$('input[type=radio][name=indicator]').change(function() {
 		indicadorAtual = this.value;
-        $('#selectedIndicator').html("<span>Indicador <b>"+$(this.nextElementSibling).text().trim()+"</b> selecionado</span>");
+        $('#selectedIndicator').html("<span id='msgIndicadorSelecionado'>Indicador <b>"+$(this.nextElementSibling).text().trim()+"</b> selecionado</span>");
 		$('#submitFormIndicator').prop('disabled', false);
 	});
+
+	// Method to clear the lateral form
+	$('#clearFormIndicator').click(function () {
+        $('.menu--popup').find(':input').each(function () {
+            if(this.type === 'checkbox' || this.type === 'radio'){
+                this.checked = false;
+            }
+        });
+        $('#selectedIndicator').html("<span> Não há indicador selecionado</span>");
+        $('#submitFormIndicator').prop('disabled', true);
+    });
 	
 	$('#submitFormIndicator').click(function() {
 		
