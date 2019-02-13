@@ -21,10 +21,11 @@
             "description": "Description",
             "keyWord": "Key Word",
             "date": "Date",
-            "producer": "Producer",
             "source": "Source",
             "dateChange": "Date Change",
             "note": "Note",
+            "cidadePolo": "Cidade Polo",
+            "category": "Category",
             "user": "User",
             "region": "Region"
         }

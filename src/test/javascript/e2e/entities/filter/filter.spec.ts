@@ -50,14 +50,14 @@ describe('Filter e2e test', () => {
         expect(filterUpdatePage.getKeyWordInput()).toMatch('keyWord');
         filterUpdatePage.setDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM');
         expect(filterUpdatePage.getDateInput()).toContain('2001-01-01T02:30');
-        filterUpdatePage.setProducerInput('producer');
-        expect(filterUpdatePage.getProducerInput()).toMatch('producer');
         filterUpdatePage.setSourceInput('source');
         expect(filterUpdatePage.getSourceInput()).toMatch('source');
         filterUpdatePage.setDateChangeInput('01/01/2001' + protractor.Key.TAB + '02:30AM');
         expect(filterUpdatePage.getDateChangeInput()).toContain('2001-01-01T02:30');
         filterUpdatePage.setNoteInput('note');
         expect(filterUpdatePage.getNoteInput()).toMatch('note');
+        filterUpdatePage.cidadePoloSelectLastOption();
+        filterUpdatePage.categorySelectLastOption();
         filterUpdatePage.userSelectLastOption();
         // filterUpdatePage.regionSelectLastOption();
         filterUpdatePage.save();

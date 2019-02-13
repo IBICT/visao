@@ -33,6 +33,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import br.com.ibict.visao.domain.enumeration.TypeCategory;
 /**
  * Test class for the CategoryResource REST controller.
  *
@@ -44,6 +45,9 @@ public class CategoryResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
+
+    private static final TypeCategory DEFAULT_TYPE = TypeCategory.INDICATOR;
+    private static final TypeCategory UPDATED_TYPE = TypeCategory.FILTER;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -91,7 +95,8 @@ public class CategoryResourceIntTest {
      */
     public static Category createEntity(EntityManager em) {
         Category category = new Category()
-            .name(DEFAULT_NAME);
+            .name(DEFAULT_NAME)
+            .type(DEFAULT_TYPE);
         return category;
     }
 
@@ -116,6 +121,7 @@ public class CategoryResourceIntTest {
         assertThat(categoryList).hasSize(databaseSizeBeforeCreate + 1);
         Category testCategory = categoryList.get(categoryList.size() - 1);
         assertThat(testCategory.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testCategory.getType()).isEqualTo(DEFAULT_TYPE);
     }
 
     @Test
@@ -148,7 +154,8 @@ public class CategoryResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(category.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
     
 
@@ -163,7 +170,8 @@ public class CategoryResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(category.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
     }
 
     @Test
@@ -204,6 +212,45 @@ public class CategoryResourceIntTest {
         // Get all the categoryList where name is null
         defaultCategoryShouldNotBeFound("name.specified=false");
     }
+
+    @Test
+    @Transactional
+    public void getAllCategoriesByTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        categoryRepository.saveAndFlush(category);
+
+        // Get all the categoryList where type equals to DEFAULT_TYPE
+        defaultCategoryShouldBeFound("type.equals=" + DEFAULT_TYPE);
+
+        // Get all the categoryList where type equals to UPDATED_TYPE
+        defaultCategoryShouldNotBeFound("type.equals=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCategoriesByTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        categoryRepository.saveAndFlush(category);
+
+        // Get all the categoryList where type in DEFAULT_TYPE or UPDATED_TYPE
+        defaultCategoryShouldBeFound("type.in=" + DEFAULT_TYPE + "," + UPDATED_TYPE);
+
+        // Get all the categoryList where type equals to UPDATED_TYPE
+        defaultCategoryShouldNotBeFound("type.in=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCategoriesByTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        categoryRepository.saveAndFlush(category);
+
+        // Get all the categoryList where type is not null
+        defaultCategoryShouldBeFound("type.specified=true");
+
+        // Get all the categoryList where type is null
+        defaultCategoryShouldNotBeFound("type.specified=false");
+    }
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -212,7 +259,8 @@ public class CategoryResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(category.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
 
     /**
@@ -247,7 +295,8 @@ public class CategoryResourceIntTest {
         // Disconnect from session so that the updates on updatedCategory are not directly saved in db
         em.detach(updatedCategory);
         updatedCategory
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .type(UPDATED_TYPE);
 
         restCategoryMockMvc.perform(put("/api/categories")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -259,6 +308,7 @@ public class CategoryResourceIntTest {
         assertThat(categoryList).hasSize(databaseSizeBeforeUpdate);
         Category testCategory = categoryList.get(categoryList.size() - 1);
         assertThat(testCategory.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testCategory.getType()).isEqualTo(UPDATED_TYPE);
     }
 
     @Test

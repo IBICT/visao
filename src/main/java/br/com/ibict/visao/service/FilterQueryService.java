@@ -76,17 +76,11 @@ public class FilterQueryService extends QueryService<Filter> {
             if (criteria.getActive() != null) {
                 specification = specification.and(buildSpecification(criteria.getActive(), Filter_.active));
             }
-            if (criteria.getDescription() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getDescription(), Filter_.description));
-            }
             if (criteria.getKeyWord() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getKeyWord(), Filter_.keyWord));
             }
             if (criteria.getDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDate(), Filter_.date));
-            }
-            if (criteria.getProducer() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getProducer(), Filter_.producer));
             }
             if (criteria.getSource() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getSource(), Filter_.source));
@@ -94,8 +88,11 @@ public class FilterQueryService extends QueryService<Filter> {
             if (criteria.getDateChange() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDateChange(), Filter_.dateChange));
             }
-            if (criteria.getNote() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getNote(), Filter_.note));
+            if (criteria.getCidadePoloId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getCidadePoloId(), Filter_.cidadePolo, Region_.id));
+            }
+            if (criteria.getCategoryId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getCategoryId(), Filter_.category, Category_.id));
             }
             if (criteria.getUserId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getUserId(), Filter_.user, User_.id));

@@ -32,6 +32,7 @@ describe('Category e2e test', () => {
         categoryComponentsPage.clickOnCreateButton();
         categoryUpdatePage.setNameInput('name');
         expect(categoryUpdatePage.getNameInput()).toMatch('name');
+        categoryUpdatePage.typeSelectLastOption();
         categoryUpdatePage.save();
         expect(categoryUpdatePage.getSaveButton().isPresent()).toBeFalsy();
     });

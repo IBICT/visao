@@ -1,0 +1,28 @@
+
+{
+    "visaoApp": {
+        "markerIcon" : {
+            "home": {
+                "title": "Marker Icons",
+                "createLabel": "Criar novo Marker Icon",
+                "createOrEditLabel": "Criar ou editar Marker Icon"
+            },
+            "created": "Um novo Marker Icon foi criado com o identificador {{ param }}",
+            "updated": "Um Marker Icon foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Marker Icon foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Marker Icon {{ id }}?"
+            },
+            "detail": {
+                "title": "Marker Icon"
+            },
+            "icon": "Icon",
+            "shadow": "Shadow",
+            "iconSize": "Icon Size",
+            "shadowSize": "Shadow Size",
+            "iconAnchor": "Icon Anchor",
+            "shadowAnchor": "Shadow Anchor",
+            "popupAnchor": "Popup Anchor"
+        }
+    }
+}

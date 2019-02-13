@@ -22,7 +22,6 @@ export class NameUpdatePage {
     descriptionInput = element(by.id('field_description'));
     keyWordInput = element(by.id('field_keyWord'));
     dateInput = element(by.id('field_date'));
-    producerInput = element(by.id('field_producer'));
     sourceInput = element(by.id('field_source'));
     dateChangeInput = element(by.id('field_dateChange'));
     noteInput = element(by.id('field_note'));
@@ -66,14 +65,6 @@ export class NameUpdatePage {
 
     getDateInput() {
         return this.dateInput.getAttribute('value');
-    }
-
-    setProducerInput(producer): promise.Promise<void> {
-        return this.producerInput.sendKeys(producer);
-    }
-
-    getProducerInput() {
-        return this.producerInput.getAttribute('value');
     }
 
     setSourceInput(source): promise.Promise<void> {

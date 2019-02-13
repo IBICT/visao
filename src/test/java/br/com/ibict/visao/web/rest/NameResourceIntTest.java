@@ -24,6 +24,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.time.Instant;
@@ -60,9 +61,6 @@ public class NameResourceIntTest {
 
     private static final Instant DEFAULT_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_PRODUCER = "AAAAAAAAAA";
-    private static final String UPDATED_PRODUCER = "BBBBBBBBBB";
 
     private static final String DEFAULT_SOURCE = "AAAAAAAAAA";
     private static final String UPDATED_SOURCE = "BBBBBBBBBB";
@@ -231,7 +229,6 @@ public class NameResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].keyWord").value(hasItem(DEFAULT_KEY_WORD.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].producer").value(hasItem(DEFAULT_PRODUCER.toString())))
             .andExpect(jsonPath("$.[*].source").value(hasItem(DEFAULT_SOURCE.toString())))
             .andExpect(jsonPath("$.[*].dateChange").value(hasItem(DEFAULT_DATE_CHANGE.toString())))
             .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())));
@@ -254,7 +251,6 @@ public class NameResourceIntTest {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.keyWord").value(DEFAULT_KEY_WORD.toString()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
-            .andExpect(jsonPath("$.producer").value(DEFAULT_PRODUCER.toString()))
             .andExpect(jsonPath("$.source").value(DEFAULT_SOURCE.toString()))
             .andExpect(jsonPath("$.dateChange").value(DEFAULT_DATE_CHANGE.toString()))
             .andExpect(jsonPath("$.note").value(DEFAULT_NOTE.toString()));
@@ -340,45 +336,6 @@ public class NameResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllNamesByDescriptionIsEqualToSomething() throws Exception {
-        // Initialize the database
-        nameRepository.saveAndFlush(name);
-
-        // Get all the nameList where description equals to DEFAULT_DESCRIPTION
-        defaultNameShouldBeFound("description.equals=" + DEFAULT_DESCRIPTION);
-
-        // Get all the nameList where description equals to UPDATED_DESCRIPTION
-        defaultNameShouldNotBeFound("description.equals=" + UPDATED_DESCRIPTION);
-    }
-
-    @Test
-    @Transactional
-    public void getAllNamesByDescriptionIsInShouldWork() throws Exception {
-        // Initialize the database
-        nameRepository.saveAndFlush(name);
-
-        // Get all the nameList where description in DEFAULT_DESCRIPTION or UPDATED_DESCRIPTION
-        defaultNameShouldBeFound("description.in=" + DEFAULT_DESCRIPTION + "," + UPDATED_DESCRIPTION);
-
-        // Get all the nameList where description equals to UPDATED_DESCRIPTION
-        defaultNameShouldNotBeFound("description.in=" + UPDATED_DESCRIPTION);
-    }
-
-    @Test
-    @Transactional
-    public void getAllNamesByDescriptionIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        nameRepository.saveAndFlush(name);
-
-        // Get all the nameList where description is not null
-        defaultNameShouldBeFound("description.specified=true");
-
-        // Get all the nameList where description is null
-        defaultNameShouldNotBeFound("description.specified=false");
-    }
-
-    @Test
-    @Transactional
     public void getAllNamesByKeyWordIsEqualToSomething() throws Exception {
         // Initialize the database
         nameRepository.saveAndFlush(name);
@@ -453,45 +410,6 @@ public class NameResourceIntTest {
 
         // Get all the nameList where date is null
         defaultNameShouldNotBeFound("date.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllNamesByProducerIsEqualToSomething() throws Exception {
-        // Initialize the database
-        nameRepository.saveAndFlush(name);
-
-        // Get all the nameList where producer equals to DEFAULT_PRODUCER
-        defaultNameShouldBeFound("producer.equals=" + DEFAULT_PRODUCER);
-
-        // Get all the nameList where producer equals to UPDATED_PRODUCER
-        defaultNameShouldNotBeFound("producer.equals=" + UPDATED_PRODUCER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllNamesByProducerIsInShouldWork() throws Exception {
-        // Initialize the database
-        nameRepository.saveAndFlush(name);
-
-        // Get all the nameList where producer in DEFAULT_PRODUCER or UPDATED_PRODUCER
-        defaultNameShouldBeFound("producer.in=" + DEFAULT_PRODUCER + "," + UPDATED_PRODUCER);
-
-        // Get all the nameList where producer equals to UPDATED_PRODUCER
-        defaultNameShouldNotBeFound("producer.in=" + UPDATED_PRODUCER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllNamesByProducerIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        nameRepository.saveAndFlush(name);
-
-        // Get all the nameList where producer is not null
-        defaultNameShouldBeFound("producer.specified=true");
-
-        // Get all the nameList where producer is null
-        defaultNameShouldNotBeFound("producer.specified=false");
     }
 
     @Test
@@ -574,45 +492,6 @@ public class NameResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllNamesByNoteIsEqualToSomething() throws Exception {
-        // Initialize the database
-        nameRepository.saveAndFlush(name);
-
-        // Get all the nameList where note equals to DEFAULT_NOTE
-        defaultNameShouldBeFound("note.equals=" + DEFAULT_NOTE);
-
-        // Get all the nameList where note equals to UPDATED_NOTE
-        defaultNameShouldNotBeFound("note.equals=" + UPDATED_NOTE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllNamesByNoteIsInShouldWork() throws Exception {
-        // Initialize the database
-        nameRepository.saveAndFlush(name);
-
-        // Get all the nameList where note in DEFAULT_NOTE or UPDATED_NOTE
-        defaultNameShouldBeFound("note.in=" + DEFAULT_NOTE + "," + UPDATED_NOTE);
-
-        // Get all the nameList where note equals to UPDATED_NOTE
-        defaultNameShouldNotBeFound("note.in=" + UPDATED_NOTE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllNamesByNoteIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        nameRepository.saveAndFlush(name);
-
-        // Get all the nameList where note is not null
-        defaultNameShouldBeFound("note.specified=true");
-
-        // Get all the nameList where note is null
-        defaultNameShouldNotBeFound("note.specified=false");
-    }
-
-    @Test
-    @Transactional
     public void getAllNamesByCategoryIsEqualToSomething() throws Exception {
         // Initialize the database
         Category category = CategoryResourceIntTest.createEntity(em);
@@ -661,7 +540,6 @@ public class NameResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].keyWord").value(hasItem(DEFAULT_KEY_WORD.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].producer").value(hasItem(DEFAULT_PRODUCER.toString())))
             .andExpect(jsonPath("$.[*].source").value(hasItem(DEFAULT_SOURCE.toString())))
             .andExpect(jsonPath("$.[*].dateChange").value(hasItem(DEFAULT_DATE_CHANGE.toString())))
             .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())));

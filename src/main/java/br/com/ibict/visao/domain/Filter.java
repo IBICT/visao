@@ -35,6 +35,7 @@ public class Filter implements Serializable {
     @Column(name = "active", nullable = false)
     private Boolean active;
 
+    @Lob
     @Column(name = "description")
     private String description;
 
@@ -44,23 +45,29 @@ public class Filter implements Serializable {
     @Column(name = "jhi_date")
     private Instant date;
 
-    @Column(name = "producer")
-    private String producer;
-
     @Column(name = "source")
     private String source;
 
     @Column(name = "date_change")
     private Instant dateChange;
 
+    @Lob
     @Column(name = "note")
     private String note;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Region cidadePolo;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Category category;
 
     @ManyToOne
     @JsonIgnoreProperties("")
     private User user;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "filter_region",
                joinColumns = @JoinColumn(name = "filters_id", referencedColumnName = "id"),
@@ -141,19 +148,6 @@ public class Filter implements Serializable {
         this.date = date;
     }
 
-    public String getProducer() {
-        return producer;
-    }
-
-    public Filter producer(String producer) {
-        this.producer = producer;
-        return this;
-    }
-
-    public void setProducer(String producer) {
-        this.producer = producer;
-    }
-
     public String getSource() {
         return source;
     }
@@ -191,6 +185,32 @@ public class Filter implements Serializable {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public Region getCidadePolo() {
+        return cidadePolo;
+    }
+
+    public Filter cidadePolo(Region region) {
+        this.cidadePolo = region;
+        return this;
+    }
+
+    public void setCidadePolo(Region region) {
+        this.cidadePolo = region;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Filter category(Category category) {
+        this.category = category;
+        return this;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public User getUser() {
@@ -259,7 +279,6 @@ public class Filter implements Serializable {
             ", description='" + getDescription() + "'" +
             ", keyWord='" + getKeyWord() + "'" +
             ", date='" + getDate() + "'" +
-            ", producer='" + getProducer() + "'" +
             ", source='" + getSource() + "'" +
             ", dateChange='" + getDateChange() + "'" +
             ", note='" + getNote() + "'" +

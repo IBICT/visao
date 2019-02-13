@@ -38,7 +38,7 @@
             "ownerSide": true
         }
     ],
-    "changelogDate": "20190115175732",
+    "changelogDate": "20190213123339",
     "entityTableName": "region",
     "dto": "no",
     "pagination": "pager",

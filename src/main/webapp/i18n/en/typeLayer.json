@@ -1,0 +1,11 @@
+{
+    "visaoApp": {
+        "TypeLayer" : {
+            "null": "",
+            "MARKER": "MARKER",
+            "CIRCLE": "CIRCLE",
+            "POLYGON": "POLYGON",
+            "ICON": "ICON"
+        }
+    }
+}

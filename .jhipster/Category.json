@@ -4,10 +4,15 @@
         {
             "fieldName": "name",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "TypeCategory",
+            "fieldValues": "INDICATOR,FILTER,LAYER"
         }
     ],
     "relationships": [],
-    "changelogDate": "20190115175731",
+    "changelogDate": "20190213123338",
     "entityTableName": "category",
     "dto": "no",
     "pagination": "pager",

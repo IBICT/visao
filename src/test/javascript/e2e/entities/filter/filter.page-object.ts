@@ -22,10 +22,11 @@ export class FilterUpdatePage {
     descriptionInput = element(by.id('field_description'));
     keyWordInput = element(by.id('field_keyWord'));
     dateInput = element(by.id('field_date'));
-    producerInput = element(by.id('field_producer'));
     sourceInput = element(by.id('field_source'));
     dateChangeInput = element(by.id('field_dateChange'));
     noteInput = element(by.id('field_note'));
+    cidadePoloSelect = element(by.id('field_cidadePolo'));
+    categorySelect = element(by.id('field_category'));
     userSelect = element(by.id('field_user'));
     regionSelect = element(by.id('field_region'));
 
@@ -68,14 +69,6 @@ export class FilterUpdatePage {
         return this.dateInput.getAttribute('value');
     }
 
-    setProducerInput(producer): promise.Promise<void> {
-        return this.producerInput.sendKeys(producer);
-    }
-
-    getProducerInput() {
-        return this.producerInput.getAttribute('value');
-    }
-
     setSourceInput(source): promise.Promise<void> {
         return this.sourceInput.sendKeys(source);
     }
@@ -98,6 +91,44 @@ export class FilterUpdatePage {
 
     getNoteInput() {
         return this.noteInput.getAttribute('value');
+    }
+
+    cidadePoloSelectLastOption(): promise.Promise<void> {
+        return this.cidadePoloSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    cidadePoloSelectOption(option): promise.Promise<void> {
+        return this.cidadePoloSelect.sendKeys(option);
+    }
+
+    getCidadePoloSelect(): ElementFinder {
+        return this.cidadePoloSelect;
+    }
+
+    getCidadePoloSelectedOption() {
+        return this.cidadePoloSelect.element(by.css('option:checked')).getText();
+    }
+
+    categorySelectLastOption(): promise.Promise<void> {
+        return this.categorySelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    categorySelectOption(option): promise.Promise<void> {
+        return this.categorySelect.sendKeys(option);
+    }
+
+    getCategorySelect(): ElementFinder {
+        return this.categorySelect;
+    }
+
+    getCategorySelectedOption() {
+        return this.categorySelect.element(by.css('option:checked')).getText();
     }
 
     userSelectLastOption(): promise.Promise<void> {

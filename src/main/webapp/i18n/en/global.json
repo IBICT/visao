@@ -12,6 +12,11 @@
                 "category": "Category",
                 "region": "Region",
                 "year": "Year",
+                "metaDado": "Meta Dado",
+                "filter": "Filter",
+                "layer": "Layer",
+                "markerIcon": "Marker Icon",
+                "groupLayer": "Group Layer",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

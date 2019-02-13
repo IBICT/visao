@@ -1,0 +1,98 @@
+
+enum TypeRegion {
+    ESTADO, MESORREGIAO, MUNICIPIO
+}
+enum TypeLayer {
+    MARKER, CIRCLE, POLYGON, ICON
+}
+enum TypeCategory {
+    INDICATOR, FILTER, LAYER
+}
+entity Indicator {
+    value Double required
+} 
+entity Name {
+	value String required,
+    active Boolean required,
+    description TextBlob,
+    keyWord String,
+    date Instant,
+    source String,
+    dateChange Instant,
+    note TextBlob
+}
+entity Category {
+	name String,
+    type TypeCategory
+}
+entity Region {
+	name String required,
+    uf String,
+    geoCode Integer required,
+    typeRegion TypeRegion required
+}
+entity Year {
+	date String required
+}
+entity MetaDado {
+	name String required,
+    value String required
+}
+entity Filter {
+    name String required,
+    active Boolean required,
+    description TextBlob,
+    keyWord String,
+    date Instant,
+    source String,
+    dateChange Instant,
+    note TextBlob
+} 
+entity Layer {
+    name String required,
+    geoJson TextBlob required,
+    type TypeLayer required,
+    description TextBlob,
+    date Instant,
+    source String,
+    dateChange Instant,
+    note TextBlob
+} 
+entity MarkerIcon {
+	icon ImageBlob required,
+    shadow ImageBlob,
+    iconSize String,
+    shadowSize String,
+    iconAnchor String,
+    shadowAnchor String,
+    popupAnchor String
+}
+entity GroupLayer {
+	name String required,
+    active Boolean required,
+    keyWord String
+}
+relationship OneToOne {
+	Filter{cidadePolo} to Region
+}
+
+relationship ManyToOne {
+	Name{category} to Category,
+    Filter{category} to Category,
+    Layer{category} to Category,
+    Name{user(login)} to User,
+    Filter{user(login)} to User,
+    GroupLayer{user(login)} to User,
+	Indicator{region} to Region,
+    Indicator{name} to Name,
+    Indicator{year} to Year,
+	Layer{icon} to MarkerIcon,
+    Layer{group} to GroupLayer
+}
+relationship ManyToMany {
+	Filter{region} to Region,
+	Region{relacao} to Region,
+    MetaDado{nome} to Name
+}
+paginate Indicator, Name, Category, Region, Year, MetaDado, Filter, Layer, MarkerIcon, GroupLayer with pager
+filter Indicator, Name, Category, Region, Year, MetaDado, Filter, Layer, MarkerIcon, GroupLayer

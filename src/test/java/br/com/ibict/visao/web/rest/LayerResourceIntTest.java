@@ -3,6 +3,9 @@ package br.com.ibict.visao.web.rest;
 import br.com.ibict.visao.VisaoApp;
 
 import br.com.ibict.visao.domain.Layer;
+import br.com.ibict.visao.domain.Category;
+import br.com.ibict.visao.domain.MarkerIcon;
+import br.com.ibict.visao.domain.GroupLayer;
 import br.com.ibict.visao.repository.LayerRepository;
 import br.com.ibict.visao.service.LayerService;
 import br.com.ibict.visao.web.rest.errors.ExceptionTranslator;
@@ -36,6 +39,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import br.com.ibict.visao.domain.enumeration.TypeLayer;
 /**
  * Test class for the LayerResource REST controller.
  *
@@ -48,25 +52,17 @@ public class LayerResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final byte[] DEFAULT_GEO_JSON = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_GEO_JSON = TestUtil.createByteArray(2, "1");
-    private static final String DEFAULT_GEO_JSON_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_GEO_JSON_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_GEO_JSON = "AAAAAAAAAA";
+    private static final String UPDATED_GEO_JSON = "BBBBBBBBBB";
 
-    private static final Boolean DEFAULT_ACTIVE = false;
-    private static final Boolean UPDATED_ACTIVE = true;
+    private static final TypeLayer DEFAULT_TYPE = TypeLayer.MARKER;
+    private static final TypeLayer UPDATED_TYPE = TypeLayer.CIRCLE;
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_KEY_WORD = "AAAAAAAAAA";
-    private static final String UPDATED_KEY_WORD = "BBBBBBBBBB";
-
     private static final Instant DEFAULT_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_PRODUCER = "AAAAAAAAAA";
-    private static final String UPDATED_PRODUCER = "BBBBBBBBBB";
 
     private static final String DEFAULT_SOURCE = "AAAAAAAAAA";
     private static final String UPDATED_SOURCE = "BBBBBBBBBB";
@@ -125,12 +121,9 @@ public class LayerResourceIntTest {
         Layer layer = new Layer()
             .name(DEFAULT_NAME)
             .geoJson(DEFAULT_GEO_JSON)
-            .geoJsonContentType(DEFAULT_GEO_JSON_CONTENT_TYPE)
-            .active(DEFAULT_ACTIVE)
+            .type(DEFAULT_TYPE)
             .description(DEFAULT_DESCRIPTION)
-            .keyWord(DEFAULT_KEY_WORD)
             .date(DEFAULT_DATE)
-            .producer(DEFAULT_PRODUCER)
             .source(DEFAULT_SOURCE)
             .dateChange(DEFAULT_DATE_CHANGE)
             .note(DEFAULT_NOTE);
@@ -159,12 +152,9 @@ public class LayerResourceIntTest {
         Layer testLayer = layerList.get(layerList.size() - 1);
         assertThat(testLayer.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testLayer.getGeoJson()).isEqualTo(DEFAULT_GEO_JSON);
-        assertThat(testLayer.getGeoJsonContentType()).isEqualTo(DEFAULT_GEO_JSON_CONTENT_TYPE);
-        assertThat(testLayer.isActive()).isEqualTo(DEFAULT_ACTIVE);
+        assertThat(testLayer.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testLayer.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testLayer.getKeyWord()).isEqualTo(DEFAULT_KEY_WORD);
         assertThat(testLayer.getDate()).isEqualTo(DEFAULT_DATE);
-        assertThat(testLayer.getProducer()).isEqualTo(DEFAULT_PRODUCER);
         assertThat(testLayer.getSource()).isEqualTo(DEFAULT_SOURCE);
         assertThat(testLayer.getDateChange()).isEqualTo(DEFAULT_DATE_CHANGE);
         assertThat(testLayer.getNote()).isEqualTo(DEFAULT_NOTE);
@@ -209,10 +199,10 @@ public class LayerResourceIntTest {
 
     @Test
     @Transactional
-    public void checkActiveIsRequired() throws Exception {
+    public void checkTypeIsRequired() throws Exception {
         int databaseSizeBeforeTest = layerRepository.findAll().size();
         // set the field null
-        layer.setActive(null);
+        layer.setType(null);
 
         // Create the Layer, which fails.
 
@@ -237,13 +227,10 @@ public class LayerResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(layer.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].geoJsonContentType").value(hasItem(DEFAULT_GEO_JSON_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].geoJson").value(hasItem(Base64Utils.encodeToString(DEFAULT_GEO_JSON))))
-            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())))
+            .andExpect(jsonPath("$.[*].geoJson").value(hasItem(DEFAULT_GEO_JSON.toString())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
-            .andExpect(jsonPath("$.[*].keyWord").value(hasItem(DEFAULT_KEY_WORD.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].producer").value(hasItem(DEFAULT_PRODUCER.toString())))
             .andExpect(jsonPath("$.[*].source").value(hasItem(DEFAULT_SOURCE.toString())))
             .andExpect(jsonPath("$.[*].dateChange").value(hasItem(DEFAULT_DATE_CHANGE.toString())))
             .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())));
@@ -262,13 +249,10 @@ public class LayerResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(layer.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.geoJsonContentType").value(DEFAULT_GEO_JSON_CONTENT_TYPE))
-            .andExpect(jsonPath("$.geoJson").value(Base64Utils.encodeToString(DEFAULT_GEO_JSON)))
-            .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()))
+            .andExpect(jsonPath("$.geoJson").value(DEFAULT_GEO_JSON.toString()))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
-            .andExpect(jsonPath("$.keyWord").value(DEFAULT_KEY_WORD.toString()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
-            .andExpect(jsonPath("$.producer").value(DEFAULT_PRODUCER.toString()))
             .andExpect(jsonPath("$.source").value(DEFAULT_SOURCE.toString()))
             .andExpect(jsonPath("$.dateChange").value(DEFAULT_DATE_CHANGE.toString()))
             .andExpect(jsonPath("$.note").value(DEFAULT_NOTE.toString()));
@@ -315,41 +299,41 @@ public class LayerResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllLayersByActiveIsEqualToSomething() throws Exception {
+    public void getAllLayersByTypeIsEqualToSomething() throws Exception {
         // Initialize the database
         layerRepository.saveAndFlush(layer);
 
-        // Get all the layerList where active equals to DEFAULT_ACTIVE
-        defaultLayerShouldBeFound("active.equals=" + DEFAULT_ACTIVE);
+        // Get all the layerList where type equals to DEFAULT_TYPE
+        defaultLayerShouldBeFound("type.equals=" + DEFAULT_TYPE);
 
-        // Get all the layerList where active equals to UPDATED_ACTIVE
-        defaultLayerShouldNotBeFound("active.equals=" + UPDATED_ACTIVE);
+        // Get all the layerList where type equals to UPDATED_TYPE
+        defaultLayerShouldNotBeFound("type.equals=" + UPDATED_TYPE);
     }
 
     @Test
     @Transactional
-    public void getAllLayersByActiveIsInShouldWork() throws Exception {
+    public void getAllLayersByTypeIsInShouldWork() throws Exception {
         // Initialize the database
         layerRepository.saveAndFlush(layer);
 
-        // Get all the layerList where active in DEFAULT_ACTIVE or UPDATED_ACTIVE
-        defaultLayerShouldBeFound("active.in=" + DEFAULT_ACTIVE + "," + UPDATED_ACTIVE);
+        // Get all the layerList where type in DEFAULT_TYPE or UPDATED_TYPE
+        defaultLayerShouldBeFound("type.in=" + DEFAULT_TYPE + "," + UPDATED_TYPE);
 
-        // Get all the layerList where active equals to UPDATED_ACTIVE
-        defaultLayerShouldNotBeFound("active.in=" + UPDATED_ACTIVE);
+        // Get all the layerList where type equals to UPDATED_TYPE
+        defaultLayerShouldNotBeFound("type.in=" + UPDATED_TYPE);
     }
 
     @Test
     @Transactional
-    public void getAllLayersByActiveIsNullOrNotNull() throws Exception {
+    public void getAllLayersByTypeIsNullOrNotNull() throws Exception {
         // Initialize the database
         layerRepository.saveAndFlush(layer);
 
-        // Get all the layerList where active is not null
-        defaultLayerShouldBeFound("active.specified=true");
+        // Get all the layerList where type is not null
+        defaultLayerShouldBeFound("type.specified=true");
 
-        // Get all the layerList where active is null
-        defaultLayerShouldNotBeFound("active.specified=false");
+        // Get all the layerList where type is null
+        defaultLayerShouldNotBeFound("type.specified=false");
     }
 
     @Test
@@ -393,45 +377,6 @@ public class LayerResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllLayersByKeyWordIsEqualToSomething() throws Exception {
-        // Initialize the database
-        layerRepository.saveAndFlush(layer);
-
-        // Get all the layerList where keyWord equals to DEFAULT_KEY_WORD
-        defaultLayerShouldBeFound("keyWord.equals=" + DEFAULT_KEY_WORD);
-
-        // Get all the layerList where keyWord equals to UPDATED_KEY_WORD
-        defaultLayerShouldNotBeFound("keyWord.equals=" + UPDATED_KEY_WORD);
-    }
-
-    @Test
-    @Transactional
-    public void getAllLayersByKeyWordIsInShouldWork() throws Exception {
-        // Initialize the database
-        layerRepository.saveAndFlush(layer);
-
-        // Get all the layerList where keyWord in DEFAULT_KEY_WORD or UPDATED_KEY_WORD
-        defaultLayerShouldBeFound("keyWord.in=" + DEFAULT_KEY_WORD + "," + UPDATED_KEY_WORD);
-
-        // Get all the layerList where keyWord equals to UPDATED_KEY_WORD
-        defaultLayerShouldNotBeFound("keyWord.in=" + UPDATED_KEY_WORD);
-    }
-
-    @Test
-    @Transactional
-    public void getAllLayersByKeyWordIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        layerRepository.saveAndFlush(layer);
-
-        // Get all the layerList where keyWord is not null
-        defaultLayerShouldBeFound("keyWord.specified=true");
-
-        // Get all the layerList where keyWord is null
-        defaultLayerShouldNotBeFound("keyWord.specified=false");
-    }
-
-    @Test
-    @Transactional
     public void getAllLayersByDateIsEqualToSomething() throws Exception {
         // Initialize the database
         layerRepository.saveAndFlush(layer);
@@ -467,45 +412,6 @@ public class LayerResourceIntTest {
 
         // Get all the layerList where date is null
         defaultLayerShouldNotBeFound("date.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllLayersByProducerIsEqualToSomething() throws Exception {
-        // Initialize the database
-        layerRepository.saveAndFlush(layer);
-
-        // Get all the layerList where producer equals to DEFAULT_PRODUCER
-        defaultLayerShouldBeFound("producer.equals=" + DEFAULT_PRODUCER);
-
-        // Get all the layerList where producer equals to UPDATED_PRODUCER
-        defaultLayerShouldNotBeFound("producer.equals=" + UPDATED_PRODUCER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllLayersByProducerIsInShouldWork() throws Exception {
-        // Initialize the database
-        layerRepository.saveAndFlush(layer);
-
-        // Get all the layerList where producer in DEFAULT_PRODUCER or UPDATED_PRODUCER
-        defaultLayerShouldBeFound("producer.in=" + DEFAULT_PRODUCER + "," + UPDATED_PRODUCER);
-
-        // Get all the layerList where producer equals to UPDATED_PRODUCER
-        defaultLayerShouldNotBeFound("producer.in=" + UPDATED_PRODUCER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllLayersByProducerIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        layerRepository.saveAndFlush(layer);
-
-        // Get all the layerList where producer is not null
-        defaultLayerShouldBeFound("producer.specified=true");
-
-        // Get all the layerList where producer is null
-        defaultLayerShouldNotBeFound("producer.specified=false");
     }
 
     @Test
@@ -624,6 +530,63 @@ public class LayerResourceIntTest {
         // Get all the layerList where note is null
         defaultLayerShouldNotBeFound("note.specified=false");
     }
+
+    @Test
+    @Transactional
+    public void getAllLayersByCategoryIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Category category = CategoryResourceIntTest.createEntity(em);
+        em.persist(category);
+        em.flush();
+        layer.setCategory(category);
+        layerRepository.saveAndFlush(layer);
+        Long categoryId = category.getId();
+
+        // Get all the layerList where category equals to categoryId
+        defaultLayerShouldBeFound("categoryId.equals=" + categoryId);
+
+        // Get all the layerList where category equals to categoryId + 1
+        defaultLayerShouldNotBeFound("categoryId.equals=" + (categoryId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllLayersByIconIsEqualToSomething() throws Exception {
+        // Initialize the database
+        MarkerIcon icon = MarkerIconResourceIntTest.createEntity(em);
+        em.persist(icon);
+        em.flush();
+        layer.setIcon(icon);
+        layerRepository.saveAndFlush(layer);
+        Long iconId = icon.getId();
+
+        // Get all the layerList where icon equals to iconId
+        defaultLayerShouldBeFound("iconId.equals=" + iconId);
+
+        // Get all the layerList where icon equals to iconId + 1
+        defaultLayerShouldNotBeFound("iconId.equals=" + (iconId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllLayersByGroupIsEqualToSomething() throws Exception {
+        // Initialize the database
+        GroupLayer group = GroupLayerResourceIntTest.createEntity(em);
+        em.persist(group);
+        em.flush();
+        layer.setGroup(group);
+        layerRepository.saveAndFlush(layer);
+        Long groupId = group.getId();
+
+        // Get all the layerList where group equals to groupId
+        defaultLayerShouldBeFound("groupId.equals=" + groupId);
+
+        // Get all the layerList where group equals to groupId + 1
+        defaultLayerShouldNotBeFound("groupId.equals=" + (groupId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -633,13 +596,10 @@ public class LayerResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(layer.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].geoJsonContentType").value(hasItem(DEFAULT_GEO_JSON_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].geoJson").value(hasItem(Base64Utils.encodeToString(DEFAULT_GEO_JSON))))
-            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())))
+            .andExpect(jsonPath("$.[*].geoJson").value(hasItem(DEFAULT_GEO_JSON.toString())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
-            .andExpect(jsonPath("$.[*].keyWord").value(hasItem(DEFAULT_KEY_WORD.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].producer").value(hasItem(DEFAULT_PRODUCER.toString())))
             .andExpect(jsonPath("$.[*].source").value(hasItem(DEFAULT_SOURCE.toString())))
             .andExpect(jsonPath("$.[*].dateChange").value(hasItem(DEFAULT_DATE_CHANGE.toString())))
             .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())));
@@ -679,12 +639,9 @@ public class LayerResourceIntTest {
         updatedLayer
             .name(UPDATED_NAME)
             .geoJson(UPDATED_GEO_JSON)
-            .geoJsonContentType(UPDATED_GEO_JSON_CONTENT_TYPE)
-            .active(UPDATED_ACTIVE)
+            .type(UPDATED_TYPE)
             .description(UPDATED_DESCRIPTION)
-            .keyWord(UPDATED_KEY_WORD)
             .date(UPDATED_DATE)
-            .producer(UPDATED_PRODUCER)
             .source(UPDATED_SOURCE)
             .dateChange(UPDATED_DATE_CHANGE)
             .note(UPDATED_NOTE);
@@ -700,12 +657,9 @@ public class LayerResourceIntTest {
         Layer testLayer = layerList.get(layerList.size() - 1);
         assertThat(testLayer.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testLayer.getGeoJson()).isEqualTo(UPDATED_GEO_JSON);
-        assertThat(testLayer.getGeoJsonContentType()).isEqualTo(UPDATED_GEO_JSON_CONTENT_TYPE);
-        assertThat(testLayer.isActive()).isEqualTo(UPDATED_ACTIVE);
+        assertThat(testLayer.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testLayer.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testLayer.getKeyWord()).isEqualTo(UPDATED_KEY_WORD);
         assertThat(testLayer.getDate()).isEqualTo(UPDATED_DATE);
-        assertThat(testLayer.getProducer()).isEqualTo(UPDATED_PRODUCER);
         assertThat(testLayer.getSource()).isEqualTo(UPDATED_SOURCE);
         assertThat(testLayer.getDateChange()).isEqualTo(UPDATED_DATE_CHANGE);
         assertThat(testLayer.getNote()).isEqualTo(UPDATED_NOTE);

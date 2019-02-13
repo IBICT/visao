@@ -18,6 +18,7 @@ export class CategoryUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
+    typeSelect = element(by.id('field_type'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -31,6 +32,20 @@ export class CategoryUpdatePage {
         return this.nameInput.getAttribute('value');
     }
 
+    setTypeSelect(type): promise.Promise<void> {
+        return this.typeSelect.sendKeys(type);
+    }
+
+    getTypeSelect() {
+        return this.typeSelect.element(by.css('option:checked')).getText();
+    }
+
+    typeSelectLastOption(): promise.Promise<void> {
+        return this.typeSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
     save(): promise.Promise<void> {
         return this.saveButton.click();
     }

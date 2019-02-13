@@ -4,13 +4,15 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { JhiAlertService } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IFilter } from 'app/shared/model/filter.model';
 import { FilterService } from './filter.service';
-import { IUser, UserService } from 'app/core';
 import { IRegion } from 'app/shared/model/region.model';
 import { RegionService } from 'app/entities/region';
+import { ICategory } from 'app/shared/model/category.model';
+import { CategoryService } from 'app/entities/category';
+import { IUser, UserService } from 'app/core';
 
 @Component({
     selector: 'jhi-filter-update',
@@ -20,6 +22,10 @@ export class FilterUpdateComponent implements OnInit {
     private _filter: IFilter;
     isSaving: boolean;
 
+    cidadepolos: IRegion[];
+
+    categories: ICategory[];
+
     users: IUser[];
 
     regions: IRegion[];
@@ -27,10 +33,12 @@ export class FilterUpdateComponent implements OnInit {
     dateChange: string;
 
     constructor(
+        private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private filterService: FilterService,
-        private userService: UserService,
         private regionService: RegionService,
+        private categoryService: CategoryService,
+        private userService: UserService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -39,6 +47,27 @@ export class FilterUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ filter }) => {
             this.filter = filter;
         });
+        this.regionService.query({ filter: 'filter-is-null' }).subscribe(
+            (res: HttpResponse<IRegion[]>) => {
+                if (!this.filter.cidadePolo || !this.filter.cidadePolo.id) {
+                    this.cidadepolos = res.body;
+                } else {
+                    this.regionService.find(this.filter.cidadePolo.id).subscribe(
+                        (subRes: HttpResponse<IRegion>) => {
+                            this.cidadepolos = [subRes.body].concat(res.body);
+                        },
+                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
+                    );
+                }
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.categoryService.query().subscribe(
+            (res: HttpResponse<ICategory[]>) => {
+                this.categories = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         this.userService.query().subscribe(
             (res: HttpResponse<IUser[]>) => {
                 this.users = res.body;
@@ -51,6 +80,18 @@ export class FilterUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.dataUtils.setFileData(event, entity, field, isImage);
     }
 
     previousState() {
@@ -85,11 +126,15 @@ export class FilterUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackUserById(index: number, item: IUser) {
+    trackRegionById(index: number, item: IRegion) {
         return item.id;
     }
 
-    trackRegionById(index: number, item: IRegion) {
+    trackCategoryById(index: number, item: ICategory) {
+        return item.id;
+    }
+
+    trackUserById(index: number, item: IUser) {
         return item.id;
     }
 

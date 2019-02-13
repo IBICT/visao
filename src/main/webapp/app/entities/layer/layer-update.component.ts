@@ -4,10 +4,16 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { JhiDataUtils } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { ILayer } from 'app/shared/model/layer.model';
 import { LayerService } from './layer.service';
+import { ICategory } from 'app/shared/model/category.model';
+import { CategoryService } from 'app/entities/category';
+import { IMarkerIcon } from 'app/shared/model/marker-icon.model';
+import { MarkerIconService } from 'app/entities/marker-icon';
+import { IGroupLayer } from 'app/shared/model/group-layer.model';
+import { GroupLayerService } from 'app/entities/group-layer';
 
 @Component({
     selector: 'jhi-layer-update',
@@ -16,16 +22,48 @@ import { LayerService } from './layer.service';
 export class LayerUpdateComponent implements OnInit {
     private _layer: ILayer;
     isSaving: boolean;
+
+    categories: ICategory[];
+
+    markericons: IMarkerIcon[];
+
+    grouplayers: IGroupLayer[];
     date: string;
     dateChange: string;
 
-    constructor(private dataUtils: JhiDataUtils, private layerService: LayerService, private activatedRoute: ActivatedRoute) {}
+    constructor(
+        private dataUtils: JhiDataUtils,
+        private jhiAlertService: JhiAlertService,
+        private layerService: LayerService,
+        private categoryService: CategoryService,
+        private markerIconService: MarkerIconService,
+        private groupLayerService: GroupLayerService,
+        private activatedRoute: ActivatedRoute
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ layer }) => {
             this.layer = layer;
         });
+        this.categoryService.query().subscribe(
+            (res: HttpResponse<ICategory[]>) => {
+                this.categories = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.markerIconService.query().subscribe(
+            (res: HttpResponse<IMarkerIcon[]>) => {
+                this.markericons = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.groupLayerService.query().subscribe(
+            (res: HttpResponse<IGroupLayer[]>) => {
+                this.grouplayers = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     byteSize(field) {
@@ -66,6 +104,22 @@ export class LayerUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackCategoryById(index: number, item: ICategory) {
+        return item.id;
+    }
+
+    trackMarkerIconById(index: number, item: IMarkerIcon) {
+        return item.id;
+    }
+
+    trackGroupLayerById(index: number, item: IGroupLayer) {
+        return item.id;
     }
     get layer() {
         return this._layer;

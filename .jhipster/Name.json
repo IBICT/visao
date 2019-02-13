@@ -7,6 +7,39 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "active",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "keyWord",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "source",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateChange",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "note",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
         }
     ],
     "relationships": [
@@ -15,9 +48,15 @@
             "relationshipName": "category",
             "otherEntityName": "category",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "login"
         }
     ],
-    "changelogDate": "20190115175730",
+    "changelogDate": "20190213123337",
     "entityTableName": "name",
     "dto": "no",
     "pagination": "pager",

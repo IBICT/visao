@@ -7,9 +7,9 @@ export interface IIndicator {
     value?: number;
     region?: IRegion;
     name?: IName;
-    ano?: IYear;
+    year?: IYear;
 }
 
 export class Indicator implements IIndicator {
-    constructor(public id?: number, public value?: number, public region?: IRegion, public name?: IName, public ano?: IYear) {}
+    constructor(public id?: number, public value?: number, public region?: IRegion, public name?: IName, public year?: IYear) {}
 }

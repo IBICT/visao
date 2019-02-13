@@ -8,6 +8,8 @@ import { VisaoYearModule } from './year/year.module';
 import { VisaoMetaDadoModule } from './meta-dado/meta-dado.module';
 import { VisaoFilterModule } from './filter/filter.module';
 import { VisaoLayerModule } from './layer/layer.module';
+import { VisaoMarkerIconModule } from './marker-icon/marker-icon.module';
+import { VisaoGroupLayerModule } from './group-layer/group-layer.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -21,6 +23,8 @@ import { VisaoLayerModule } from './layer/layer.module';
         VisaoMetaDadoModule,
         VisaoFilterModule,
         VisaoLayerModule,
+        VisaoMarkerIconModule,
+        VisaoGroupLayerModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

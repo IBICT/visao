@@ -29,7 +29,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20190115175729",
+    "changelogDate": "20190213123336",
     "entityTableName": "indicator",
     "dto": "no",
     "pagination": "pager",

@@ -1,6 +1,7 @@
 package br.com.ibict.visao.service.dto;
 
 import java.io.Serializable;
+import br.com.ibict.visao.domain.enumeration.TypeLayer;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -23,6 +24,12 @@ import io.github.jhipster.service.filter.InstantFilter;
  * fix type specific filters.
  */
 public class LayerCriteria implements Serializable {
+    /**
+     * Class for filtering TypeLayer
+     */
+    public static class TypeLayerFilter extends Filter<TypeLayer> {
+    }
+
     private static final long serialVersionUID = 1L;
 
 
@@ -30,21 +37,23 @@ public class LayerCriteria implements Serializable {
 
     private StringFilter name;
 
-    private BooleanFilter active;
+    private TypeLayerFilter type;
 
     private StringFilter description;
 
-    private StringFilter keyWord;
-
     private InstantFilter date;
-
-    private StringFilter producer;
 
     private StringFilter source;
 
     private InstantFilter dateChange;
 
     private StringFilter note;
+
+    private LongFilter categoryId;
+
+    private LongFilter iconId;
+
+    private LongFilter groupId;
 
     public LayerCriteria() {
     }
@@ -65,12 +74,12 @@ public class LayerCriteria implements Serializable {
         this.name = name;
     }
 
-    public BooleanFilter getActive() {
-        return active;
+    public TypeLayerFilter getType() {
+        return type;
     }
 
-    public void setActive(BooleanFilter active) {
-        this.active = active;
+    public void setType(TypeLayerFilter type) {
+        this.type = type;
     }
 
     public StringFilter getDescription() {
@@ -81,28 +90,12 @@ public class LayerCriteria implements Serializable {
         this.description = description;
     }
 
-    public StringFilter getKeyWord() {
-        return keyWord;
-    }
-
-    public void setKeyWord(StringFilter keyWord) {
-        this.keyWord = keyWord;
-    }
-
     public InstantFilter getDate() {
         return date;
     }
 
     public void setDate(InstantFilter date) {
         this.date = date;
-    }
-
-    public StringFilter getProducer() {
-        return producer;
-    }
-
-    public void setProducer(StringFilter producer) {
-        this.producer = producer;
     }
 
     public StringFilter getSource() {
@@ -129,19 +122,44 @@ public class LayerCriteria implements Serializable {
         this.note = note;
     }
 
+    public LongFilter getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(LongFilter categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public LongFilter getIconId() {
+        return iconId;
+    }
+
+    public void setIconId(LongFilter iconId) {
+        this.iconId = iconId;
+    }
+
+    public LongFilter getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(LongFilter groupId) {
+        this.groupId = groupId;
+    }
+
     @Override
     public String toString() {
         return "LayerCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
-                (active != null ? "active=" + active + ", " : "") +
+                (type != null ? "type=" + type + ", " : "") +
                 (description != null ? "description=" + description + ", " : "") +
-                (keyWord != null ? "keyWord=" + keyWord + ", " : "") +
                 (date != null ? "date=" + date + ", " : "") +
-                (producer != null ? "producer=" + producer + ", " : "") +
                 (source != null ? "source=" + source + ", " : "") +
                 (dateChange != null ? "dateChange=" + dateChange + ", " : "") +
                 (note != null ? "note=" + note + ", " : "") +
+                (categoryId != null ? "categoryId=" + categoryId + ", " : "") +
+                (iconId != null ? "iconId=" + iconId + ", " : "") +
+                (groupId != null ? "groupId=" + groupId + ", " : "") +
             "}";
     }
 

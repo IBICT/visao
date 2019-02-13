@@ -36,8 +36,6 @@ public class IndicatorCriteria implements Serializable {
 
     private LongFilter yearId;
 
-    private LongFilter filtersId;
-
     public IndicatorCriteria() {
     }
 
@@ -77,16 +75,8 @@ public class IndicatorCriteria implements Serializable {
         return yearId;
     }
 
-    public void setYearId(LongFilter anoId) {
-        this.yearId = anoId;
-    }
-
-    public LongFilter getFiltersId() {
-        return filtersId;
-    }
-
-    public void setFiltersId(LongFilter filtersId) {
-        this.filtersId = filtersId;
+    public void setYearId(LongFilter yearId) {
+        this.yearId = yearId;
     }
 
     @Override

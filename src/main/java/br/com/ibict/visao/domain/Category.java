@@ -8,6 +8,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+import br.com.ibict.visao.domain.enumeration.TypeCategory;
+
 /**
  * A Category.
  */
@@ -24,6 +26,10 @@ public class Category implements Serializable {
 
     @Column(name = "name")
     private String name;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "jhi_type")
+    private TypeCategory type;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -45,6 +51,19 @@ public class Category implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public TypeCategory getType() {
+        return type;
+    }
+
+    public Category type(TypeCategory type) {
+        this.type = type;
+        return this;
+    }
+
+    public void setType(TypeCategory type) {
+        this.type = type;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -73,6 +92,7 @@ public class Category implements Serializable {
         return "Category{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", type='" + getType() + "'" +
             "}";
     }
 }

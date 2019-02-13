@@ -20,7 +20,7 @@ export class IndicatorUpdatePage {
     valueInput = element(by.id('field_value'));
     regionSelect = element(by.id('field_region'));
     nameSelect = element(by.id('field_name'));
-    anoSelect = element(by.id('field_ano'));
+    yearSelect = element(by.id('field_year'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -72,23 +72,23 @@ export class IndicatorUpdatePage {
         return this.nameSelect.element(by.css('option:checked')).getText();
     }
 
-    anoSelectLastOption(): promise.Promise<void> {
-        return this.anoSelect
+    yearSelectLastOption(): promise.Promise<void> {
+        return this.yearSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    anoSelectOption(option): promise.Promise<void> {
-        return this.anoSelect.sendKeys(option);
+    yearSelectOption(option): promise.Promise<void> {
+        return this.yearSelect.sendKeys(option);
     }
 
-    getAnoSelect(): ElementFinder {
-        return this.anoSelect;
+    getYearSelect(): ElementFinder {
+        return this.yearSelect;
     }
 
-    getAnoSelectedOption() {
-        return this.anoSelect.element(by.css('option:checked')).getText();
+    getYearSelectedOption() {
+        return this.yearSelect.element(by.css('option:checked')).getText();
     }
 
     save(): promise.Promise<void> {

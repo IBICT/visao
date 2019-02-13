@@ -1,18 +1,20 @@
 import { Moment } from 'moment';
-import { IUser } from 'app/core/user/user.model';
 import { IRegion } from 'app/shared/model//region.model';
+import { ICategory } from 'app/shared/model//category.model';
+import { IUser } from 'app/core/user/user.model';
 
 export interface IFilter {
     id?: number;
     name?: string;
     active?: boolean;
-    description?: string;
+    description?: any;
     keyWord?: string;
     date?: Moment;
-    producer?: string;
     source?: string;
     dateChange?: Moment;
-    note?: string;
+    note?: any;
+    cidadePolo?: IRegion;
+    category?: ICategory;
     user?: IUser;
     regions?: IRegion[];
 }
@@ -22,13 +24,14 @@ export class Filter implements IFilter {
         public id?: number,
         public name?: string,
         public active?: boolean,
-        public description?: string,
+        public description?: any,
         public keyWord?: string,
         public date?: Moment,
-        public producer?: string,
         public source?: string,
         public dateChange?: Moment,
-        public note?: string,
+        public note?: any,
+        public cidadePolo?: IRegion,
+        public category?: ICategory,
         public user?: IUser,
         public regions?: IRegion[]
     ) {

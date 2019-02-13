@@ -18,7 +18,7 @@
             <th jhiSortBy="value"><span jhiTranslate="visaoApp.indicator.value">Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="region.id"><span jhiTranslate="visaoApp.indicator.region">Region</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name.id"><span jhiTranslate="visaoApp.indicator.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="ano.id"><span jhiTranslate="visaoApp.indicator.ano">Ano</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="year.id"><span jhiTranslate="visaoApp.indicator.year">Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -37,8 +37,8 @@
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="indicator.ano">
-                        <a [routerLink]="['../year', indicator.ano?.id, 'view' ]" >{{indicator.ano?.id}}</a>
+                    <div *ngIf="indicator.year">
+                        <a [routerLink]="['../year', indicator.year?.id, 'view' ]" >{{indicator.year?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">

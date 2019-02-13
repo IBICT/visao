@@ -18,15 +18,16 @@ export class LayerUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
-    geoJsonInput = element(by.id('file_geoJson'));
-    activeInput = element(by.id('field_active'));
+    geoJsonInput = element(by.id('field_geoJson'));
+    typeSelect = element(by.id('field_type'));
     descriptionInput = element(by.id('field_description'));
-    keyWordInput = element(by.id('field_keyWord'));
     dateInput = element(by.id('field_date'));
-    producerInput = element(by.id('field_producer'));
     sourceInput = element(by.id('field_source'));
     dateChangeInput = element(by.id('field_dateChange'));
     noteInput = element(by.id('field_note'));
+    categorySelect = element(by.id('field_category'));
+    iconSelect = element(by.id('field_icon'));
+    groupSelect = element(by.id('field_group'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -48,8 +49,19 @@ export class LayerUpdatePage {
         return this.geoJsonInput.getAttribute('value');
     }
 
-    getActiveInput() {
-        return this.activeInput;
+    setTypeSelect(type): promise.Promise<void> {
+        return this.typeSelect.sendKeys(type);
+    }
+
+    getTypeSelect() {
+        return this.typeSelect.element(by.css('option:checked')).getText();
+    }
+
+    typeSelectLastOption(): promise.Promise<void> {
+        return this.typeSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
     }
     setDescriptionInput(description): promise.Promise<void> {
         return this.descriptionInput.sendKeys(description);
@@ -59,28 +71,12 @@ export class LayerUpdatePage {
         return this.descriptionInput.getAttribute('value');
     }
 
-    setKeyWordInput(keyWord): promise.Promise<void> {
-        return this.keyWordInput.sendKeys(keyWord);
-    }
-
-    getKeyWordInput() {
-        return this.keyWordInput.getAttribute('value');
-    }
-
     setDateInput(date): promise.Promise<void> {
         return this.dateInput.sendKeys(date);
     }
 
     getDateInput() {
         return this.dateInput.getAttribute('value');
-    }
-
-    setProducerInput(producer): promise.Promise<void> {
-        return this.producerInput.sendKeys(producer);
-    }
-
-    getProducerInput() {
-        return this.producerInput.getAttribute('value');
     }
 
     setSourceInput(source): promise.Promise<void> {
@@ -105,6 +101,63 @@ export class LayerUpdatePage {
 
     getNoteInput() {
         return this.noteInput.getAttribute('value');
+    }
+
+    categorySelectLastOption(): promise.Promise<void> {
+        return this.categorySelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    categorySelectOption(option): promise.Promise<void> {
+        return this.categorySelect.sendKeys(option);
+    }
+
+    getCategorySelect(): ElementFinder {
+        return this.categorySelect;
+    }
+
+    getCategorySelectedOption() {
+        return this.categorySelect.element(by.css('option:checked')).getText();
+    }
+
+    iconSelectLastOption(): promise.Promise<void> {
+        return this.iconSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    iconSelectOption(option): promise.Promise<void> {
+        return this.iconSelect.sendKeys(option);
+    }
+
+    getIconSelect(): ElementFinder {
+        return this.iconSelect;
+    }
+
+    getIconSelectedOption() {
+        return this.iconSelect.element(by.css('option:checked')).getText();
+    }
+
+    groupSelectLastOption(): promise.Promise<void> {
+        return this.groupSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    groupSelectOption(option): promise.Promise<void> {
+        return this.groupSelect.sendKeys(option);
+    }
+
+    getGroupSelect(): ElementFinder {
+        return this.groupSelect;
+    }
+
+    getGroupSelectedOption() {
+        return this.groupSelect.element(by.css('option:checked')).getText();
     }
 
     save(): promise.Promise<void> {

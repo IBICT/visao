@@ -34,7 +34,7 @@ describe('Indicator e2e test', () => {
         expect(indicatorUpdatePage.getValueInput()).toMatch('5');
         indicatorUpdatePage.regionSelectLastOption();
         indicatorUpdatePage.nameSelectLastOption();
-        indicatorUpdatePage.anoSelectLastOption();
+        indicatorUpdatePage.yearSelectLastOption();
         indicatorUpdatePage.save();
         expect(indicatorUpdatePage.getSaveButton().isPresent()).toBeFalsy();
     });

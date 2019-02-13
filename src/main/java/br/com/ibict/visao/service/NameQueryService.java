@@ -76,26 +76,17 @@ public class NameQueryService extends QueryService<Name> {
             if (criteria.getActive() != null) {
                 specification = specification.and(buildSpecification(criteria.getActive(), Name_.active));
             }
-            if (criteria.getDescription() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getDescription(), Name_.description));
-            }
             if (criteria.getKeyWord() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getKeyWord(), Name_.keyWord));
             }
             if (criteria.getDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDate(), Name_.date));
             }
-            if (criteria.getProducer() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getProducer(), Name_.producer));
-            }
             if (criteria.getSource() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getSource(), Name_.source));
             }
             if (criteria.getDateChange() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDateChange(), Name_.dateChange));
-            }
-            if (criteria.getNote() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getNote(), Name_.note));
             }
             if (criteria.getCategoryId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCategoryId(), Name_.category, Category_.id));

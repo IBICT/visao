@@ -32,19 +32,17 @@ public class FilterCriteria implements Serializable {
 
     private BooleanFilter active;
 
-    private StringFilter description;
-
     private StringFilter keyWord;
 
     private InstantFilter date;
-
-    private StringFilter producer;
 
     private StringFilter source;
 
     private InstantFilter dateChange;
 
-    private StringFilter note;
+    private LongFilter cidadePoloId;
+
+    private LongFilter categoryId;
 
     private LongFilter userId;
 
@@ -77,14 +75,6 @@ public class FilterCriteria implements Serializable {
         this.active = active;
     }
 
-    public StringFilter getDescription() {
-        return description;
-    }
-
-    public void setDescription(StringFilter description) {
-        this.description = description;
-    }
-
     public StringFilter getKeyWord() {
         return keyWord;
     }
@@ -99,14 +89,6 @@ public class FilterCriteria implements Serializable {
 
     public void setDate(InstantFilter date) {
         this.date = date;
-    }
-
-    public StringFilter getProducer() {
-        return producer;
-    }
-
-    public void setProducer(StringFilter producer) {
-        this.producer = producer;
     }
 
     public StringFilter getSource() {
@@ -125,12 +107,20 @@ public class FilterCriteria implements Serializable {
         this.dateChange = dateChange;
     }
 
-    public StringFilter getNote() {
-        return note;
+    public LongFilter getCidadePoloId() {
+        return cidadePoloId;
     }
 
-    public void setNote(StringFilter note) {
-        this.note = note;
+    public void setCidadePoloId(LongFilter cidadePoloId) {
+        this.cidadePoloId = cidadePoloId;
+    }
+
+    public LongFilter getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(LongFilter categoryId) {
+        this.categoryId = categoryId;
     }
 
     public LongFilter getUserId() {
@@ -155,13 +145,12 @@ public class FilterCriteria implements Serializable {
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
                 (active != null ? "active=" + active + ", " : "") +
-                (description != null ? "description=" + description + ", " : "") +
                 (keyWord != null ? "keyWord=" + keyWord + ", " : "") +
                 (date != null ? "date=" + date + ", " : "") +
-                (producer != null ? "producer=" + producer + ", " : "") +
                 (source != null ? "source=" + source + ", " : "") +
                 (dateChange != null ? "dateChange=" + dateChange + ", " : "") +
-                (note != null ? "note=" + note + ", " : "") +
+                (cidadePoloId != null ? "cidadePoloId=" + cidadePoloId + ", " : "") +
+                (categoryId != null ? "categoryId=" + categoryId + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
                 (regionId != null ? "regionId=" + regionId + ", " : "") +
             "}";

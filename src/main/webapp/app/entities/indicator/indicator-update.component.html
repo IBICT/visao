@@ -40,10 +40,10 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="visaoApp.indicator.ano" for="field_ano">Ano</label>
-                    <select class="form-control" id="field_ano" name="ano" [(ngModel)]="indicator.ano" >
+                    <label class="form-control-label" jhiTranslate="visaoApp.indicator.year" for="field_year">Year</label>
+                    <select class="form-control" id="field_year" name="year" [(ngModel)]="indicator.year" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="yearOption.id === indicator.ano?.id ? indicator.ano : yearOption" *ngFor="let yearOption of years; trackBy: trackYearById">{{yearOption.id}}</option>
+                        <option [ngValue]="yearOption.id === indicator.year?.id ? indicator.year : yearOption" *ngFor="let yearOption of years; trackBy: trackYearById">{{yearOption.id}}</option>
                     </select>
                 </div>
             </div>

@@ -17,14 +17,15 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span jhiTranslate="visaoApp.layer.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="geoJson"><span jhiTranslate="visaoApp.layer.geoJson">Geo Json</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="active"><span jhiTranslate="visaoApp.layer.active">Active</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="type"><span jhiTranslate="visaoApp.layer.type">Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="description"><span jhiTranslate="visaoApp.layer.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="keyWord"><span jhiTranslate="visaoApp.layer.keyWord">Key Word</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="date"><span jhiTranslate="visaoApp.layer.date">Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="producer"><span jhiTranslate="visaoApp.layer.producer">Producer</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="source"><span jhiTranslate="visaoApp.layer.source">Source</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dateChange"><span jhiTranslate="visaoApp.layer.dateChange">Date Change</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="note"><span jhiTranslate="visaoApp.layer.note">Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="category.id"><span jhiTranslate="visaoApp.layer.category">Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="icon.id"><span jhiTranslate="visaoApp.layer.icon">Icon</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="group.id"><span jhiTranslate="visaoApp.layer.group">Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -32,18 +33,28 @@
             <tr *ngFor="let layer of layers ;trackBy: trackId">
                 <td><a [routerLink]="['/layer', layer.id, 'view' ]">{{layer.id}}</a></td>
                 <td>{{layer.name}}</td>
-                <td>
-                    <a *ngIf="layer.geoJson" (click)="openFile(layer.geoJsonContentType, layer.geoJson)" jhiTranslate="entity.action.open">open</a>
-                    <span *ngIf="layer.geoJson">{{layer.geoJsonContentType}}, {{byteSize(layer.geoJson)}}</span>
-                </td>
-                <td>{{layer.active}}</td>
+                <td>{{layer.geoJson}}</td>
+                <td jhiTranslate="{{'visaoApp.TypeLayer.' + layer.type}}">{{layer.type}}</td>
                 <td>{{layer.description}}</td>
-                <td>{{layer.keyWord}}</td>
                 <td>{{layer.date | date:'medium'}}</td>
-                <td>{{layer.producer}}</td>
                 <td>{{layer.source}}</td>
                 <td>{{layer.dateChange | date:'medium'}}</td>
                 <td>{{layer.note}}</td>
+                <td>
+                    <div *ngIf="layer.category">
+                        <a [routerLink]="['../category', layer.category?.id, 'view' ]" >{{layer.category?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="layer.icon">
+                        <a [routerLink]="['../marker-icon', layer.icon?.id, 'view' ]" >{{layer.icon?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="layer.group">
+                        <a [routerLink]="['../group-layer', layer.group?.id, 'view' ]" >{{layer.group?.id}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

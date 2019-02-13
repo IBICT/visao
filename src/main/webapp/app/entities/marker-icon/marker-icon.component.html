@@ -1,0 +1,85 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="visaoApp.markerIcon.home.title">Marker Icons</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-marker-icon" [routerLink]="['/marker-icon/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="visaoApp.markerIcon.home.createLabel">
+            Create new Marker Icon
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="markerIcons">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="icon"><span jhiTranslate="visaoApp.markerIcon.icon">Icon</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="shadow"><span jhiTranslate="visaoApp.markerIcon.shadow">Shadow</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="iconSize"><span jhiTranslate="visaoApp.markerIcon.iconSize">Icon Size</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="shadowSize"><span jhiTranslate="visaoApp.markerIcon.shadowSize">Shadow Size</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="iconAnchor"><span jhiTranslate="visaoApp.markerIcon.iconAnchor">Icon Anchor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="shadowAnchor"><span jhiTranslate="visaoApp.markerIcon.shadowAnchor">Shadow Anchor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="popupAnchor"><span jhiTranslate="visaoApp.markerIcon.popupAnchor">Popup Anchor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let markerIcon of markerIcons ;trackBy: trackId">
+                <td><a [routerLink]="['/marker-icon', markerIcon.id, 'view' ]">{{markerIcon.id}}</a></td>
+                <td>
+                    <a *ngIf="markerIcon.icon" (click)="openFile(markerIcon.iconContentType, markerIcon.icon)">
+                        <img [src]="'data:' + markerIcon.iconContentType + ';base64,' + markerIcon.icon" style="max-height: 30px;" alt="markerIcon image"/>
+                    </a>
+                    <span *ngIf="markerIcon.icon">{{markerIcon.iconContentType}}, {{byteSize(markerIcon.icon)}}</span>
+                </td>
+                <td>
+                    <a *ngIf="markerIcon.shadow" (click)="openFile(markerIcon.shadowContentType, markerIcon.shadow)">
+                        <img [src]="'data:' + markerIcon.shadowContentType + ';base64,' + markerIcon.shadow" style="max-height: 30px;" alt="markerIcon image"/>
+                    </a>
+                    <span *ngIf="markerIcon.shadow">{{markerIcon.shadowContentType}}, {{byteSize(markerIcon.shadow)}}</span>
+                </td>
+                <td>{{markerIcon.iconSize}}</td>
+                <td>{{markerIcon.shadowSize}}</td>
+                <td>{{markerIcon.iconAnchor}}</td>
+                <td>{{markerIcon.shadowAnchor}}</td>
+                <td>{{markerIcon.popupAnchor}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/marker-icon', markerIcon.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/marker-icon', markerIcon.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'marker-icon/'+ markerIcon.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pager is not implemented yet, so this is normal pagination instead -->
+    <div *ngIf="markerIcons && markerIcons.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

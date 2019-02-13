@@ -50,8 +50,6 @@ describe('Name e2e test', () => {
         expect(nameUpdatePage.getKeyWordInput()).toMatch('keyWord');
         nameUpdatePage.setDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM');
         expect(nameUpdatePage.getDateInput()).toContain('2001-01-01T02:30');
-        nameUpdatePage.setProducerInput('producer');
-        expect(nameUpdatePage.getProducerInput()).toMatch('producer');
         nameUpdatePage.setSourceInput('source');
         expect(nameUpdatePage.getSourceInput()).toMatch('source');
         nameUpdatePage.setDateChangeInput('01/01/2001' + protractor.Key.TAB + '02:30AM');

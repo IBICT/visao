@@ -73,20 +73,14 @@ public class LayerQueryService extends QueryService<Layer> {
             if (criteria.getName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getName(), Layer_.name));
             }
-            if (criteria.getActive() != null) {
-                specification = specification.and(buildSpecification(criteria.getActive(), Layer_.active));
+            if (criteria.getType() != null) {
+                specification = specification.and(buildSpecification(criteria.getType(), Layer_.type));
             }
             if (criteria.getDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDescription(), Layer_.description));
             }
-            if (criteria.getKeyWord() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getKeyWord(), Layer_.keyWord));
-            }
             if (criteria.getDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDate(), Layer_.date));
-            }
-            if (criteria.getProducer() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getProducer(), Layer_.producer));
             }
             if (criteria.getSource() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getSource(), Layer_.source));
@@ -96,6 +90,15 @@ public class LayerQueryService extends QueryService<Layer> {
             }
             if (criteria.getNote() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getNote(), Layer_.note));
+            }
+            if (criteria.getCategoryId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getCategoryId(), Layer_.category, Category_.id));
+            }
+            if (criteria.getIconId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getIconId(), Layer_.icon, MarkerIcon_.id));
+            }
+            if (criteria.getGroupId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getGroupId(), Layer_.group, GroupLayer_.id));
             }
         }
         return specification;

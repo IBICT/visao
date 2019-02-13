@@ -33,6 +33,7 @@ public class Name implements Serializable {
     @Column(name = "active", nullable = false)
     private Boolean active;
 
+    @Lob
     @Column(name = "description")
     private String description;
 
@@ -48,6 +49,7 @@ public class Name implements Serializable {
     @Column(name = "date_change")
     private Instant dateChange;
 
+    @Lob
     @Column(name = "note")
     private String note;
 

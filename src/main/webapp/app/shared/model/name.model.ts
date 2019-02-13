@@ -6,13 +6,12 @@ export interface IName {
     id?: number;
     value?: string;
     active?: boolean;
-    description?: string;
+    description?: any;
     keyWord?: string;
     date?: Moment;
-    producer?: string;
     source?: string;
     dateChange?: Moment;
-    note?: string;
+    note?: any;
     category?: ICategory;
     user?: IUser;
 }
@@ -22,13 +21,12 @@ export class Name implements IName {
         public id?: number,
         public value?: string,
         public active?: boolean,
-        public description?: string,
+        public description?: any,
         public keyWord?: string,
         public date?: Moment,
-        public producer?: string,
         public source?: string,
         public dateChange?: Moment,
-        public note?: string,
+        public note?: any,
         public category?: ICategory,
         public user?: IUser
     ) {

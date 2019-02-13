@@ -104,22 +104,6 @@ public class IndicatorResource {
     }
 
     /**
-     * GET  /indicatorsFilters : get all the indicators with filter.
-     *
-     * @param pageable the pagination information
-     * @param criteria the criterias which the requested entities should match
-     * @return the ResponseEntity with status 200 (OK) and the list of indicators in body
-     */
-    @GetMapping("/indicatorsFilter")
-    @Timed
-    public ResponseEntity<List<Indicator>> getAllIndicatorsWithFilter(IndicatorCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get Indicators by criteria: {}", criteria);
-        Page<Indicator> page = indicatorQueryService.findIndicatorWithFilters(criteria, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/indicatorsFilter");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }
-
-    /**
      * GET  /indicators/:id : get the "id" indicator.
      *
      * @param id the id of the indicator to retrieve

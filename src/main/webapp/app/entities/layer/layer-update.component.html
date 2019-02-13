@@ -22,21 +22,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="visaoApp.layer.geoJson" for="field_geoJson">Geo Json</label>
-                    <div>
-                        <div *ngIf="layer.geoJson" class="form-text text-danger clearfix">
-                            <a class="pull-left" (click)="openFile(layer.geoJsonContentType, layer.geoJson)" jhiTranslate="entity.action.open">open</a><br>
-                            <span class="pull-left">{{layer.geoJsonContentType}}, {{byteSize(layer.geoJson)}}</span>
-                            <button type="button" (click)="layer.geoJson=null;layer.geoJsonContentType=null;"
-                                    class="btn btn-secondary btn-xs pull-right">
-                                <fa-icon [icon]="'times'"></fa-icon>
-                            </button>
-                        </div>
-                        <input type="file" id="file_geoJson" (change)="setFileData($event, layer, 'geoJson', false)" jhiTranslate="entity.action.addblob"/>
-                    </div>
-                    <input type="hidden" class="form-control" name="geoJson" id="field_geoJson"
-                        [(ngModel)]="layer.geoJson" required/>
-                    <input type="hidden" class="form-control" name="geoJsonContentType" id="field_geoJsonContentType"
-                        [(ngModel)]="layer.geoJsonContentType" />
+                    <textarea class="form-control" name="geoJson" id="field_geoJson"
+                        [(ngModel)]="layer.geoJson" required></textarea>
                     <div [hidden]="!(editForm.controls.geoJson?.dirty && editForm.controls.geoJson?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.geoJson?.errors?.required" jhiTranslate="entity.validation.required">
@@ -45,25 +32,24 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="visaoApp.layer.active" for="field_active">Active</label>
-                    <input type="checkbox" class="form-control" name="active" id="field_active"
-                        [(ngModel)]="layer.active" />
-                    <div [hidden]="!(editForm.controls.active?.dirty && editForm.controls.active?.invalid)">
+                    <label class="form-control-label" jhiTranslate="visaoApp.layer.type" for="field_type">Type</label>
+                    <select class="form-control" name="type" [(ngModel)]="layer.type" id="field_type"  required>
+                        <option value="MARKER">{{'visaoApp.TypeLayer.MARKER' | translate}}</option>
+                        <option value="CIRCLE">{{'visaoApp.TypeLayer.CIRCLE' | translate}}</option>
+                        <option value="POLYGON">{{'visaoApp.TypeLayer.POLYGON' | translate}}</option>
+                        <option value="ICON">{{'visaoApp.TypeLayer.ICON' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.active?.errors?.required" jhiTranslate="entity.validation.required">
+                        [hidden]="!editForm.controls.type?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="visaoApp.layer.description" for="field_description">Description</label>
-                    <input type="text" class="form-control" name="description" id="field_description"
-                        [(ngModel)]="layer.description" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="visaoApp.layer.keyWord" for="field_keyWord">Key Word</label>
-                    <input type="text" class="form-control" name="keyWord" id="field_keyWord"
-                        [(ngModel)]="layer.keyWord" />
+                    <label class="form-control-label" jhiTranslate="visaoApp.name.description" for="field_description">Description</label>
+                    <textarea class="form-control" name="description" id="field_description"
+                        [(ngModel)]="layer.description" ></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="visaoApp.layer.date" for="field_date">Date</label>
@@ -71,11 +57,6 @@
                         <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="date"
                         />
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="visaoApp.layer.producer" for="field_producer">Producer</label>
-                    <input type="text" class="form-control" name="producer" id="field_producer"
-                        [(ngModel)]="layer.producer" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="visaoApp.layer.source" for="field_source">Source</label>
@@ -90,11 +71,32 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="visaoApp.layer.note" for="field_note">Note</label>
-                    <input type="text" class="form-control" name="note" id="field_note"
-                        [(ngModel)]="layer.note" />
+                    <label class="form-control-label" jhiTranslate="visaoApp.name.note" for="field_note">Note</label>
+                    <textarea class="form-control" name="note" id="field_note"
+                        [(ngModel)]="layer.note" ></textarea>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.layer.category" for="field_category">Category</label>
+                    <select class="form-control" id="field_category" name="category" [(ngModel)]="layer.category" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="categoryOption.id === layer.category?.id ? layer.category : categoryOption" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.layer.icon" for="field_icon">Icon</label>
+                    <select class="form-control" id="field_icon" name="icon" [(ngModel)]="layer.icon" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="markerIconOption.id === layer.icon?.id ? layer.icon : markerIconOption" *ngFor="let markerIconOption of markericons; trackBy: trackMarkerIconById">{{markerIconOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.layer.group" for="field_group">Group</label>
+                    <select class="form-control" id="field_group" name="group" [(ngModel)]="layer.group" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="groupLayerOption.id === layer.group?.id ? layer.group : groupLayerOption" *ngFor="let groupLayerOption of grouplayers; trackBy: trackGroupLayerById">{{groupLayerOption.id}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

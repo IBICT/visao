@@ -1,6 +1,7 @@
 package br.com.ibict.visao.service.dto;
 
 import java.io.Serializable;
+import br.com.ibict.visao.domain.enumeration.TypeCategory;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -23,12 +24,20 @@ import io.github.jhipster.service.filter.StringFilter;
  * fix type specific filters.
  */
 public class CategoryCriteria implements Serializable {
+    /**
+     * Class for filtering TypeCategory
+     */
+    public static class TypeCategoryFilter extends Filter<TypeCategory> {
+    }
+
     private static final long serialVersionUID = 1L;
 
 
     private LongFilter id;
 
     private StringFilter name;
+
+    private TypeCategoryFilter type;
 
     public CategoryCriteria() {
     }
@@ -49,11 +58,20 @@ public class CategoryCriteria implements Serializable {
         this.name = name;
     }
 
+    public TypeCategoryFilter getType() {
+        return type;
+    }
+
+    public void setType(TypeCategoryFilter type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "CategoryCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
+                (type != null ? "type=" + type + ", " : "") +
             "}";
     }
 

@@ -18,14 +18,15 @@
             },
             "name": "Name",
             "geoJson": "Geo Json",
-            "active": "Active",
+            "type": "Type",
             "description": "Description",
-            "keyWord": "Key Word",
             "date": "Date",
-            "producer": "Producer",
             "source": "Source",
             "dateChange": "Date Change",
-            "note": "Note"
+            "note": "Note",
+            "category": "Category",
+            "icon": "Icon",
+            "group": "Group"
         }
     }
 }

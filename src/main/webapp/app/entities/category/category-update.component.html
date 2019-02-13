@@ -14,6 +14,14 @@
                     <input type="text" class="form-control" name="name" id="field_name"
                         [(ngModel)]="category.name" />
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.category.type" for="field_type">Type</label>
+                    <select class="form-control" name="type" [(ngModel)]="category.type" id="field_type" >
+                        <option value="INDICATOR">{{'visaoApp.TypeCategory.INDICATOR' | translate}}</option>
+                        <option value="FILTER">{{'visaoApp.TypeCategory.FILTER' | translate}}</option>
+                        <option value="LAYER">{{'visaoApp.TypeCategory.LAYER' | translate}}</option>
+                    </select>
+                </div>
 
             </div>
             <div>

@@ -32,19 +32,13 @@ public class NameCriteria implements Serializable {
 
     private BooleanFilter active;
 
-    private StringFilter description;
-
     private StringFilter keyWord;
 
     private InstantFilter date;
 
-    private StringFilter producer;
-
     private StringFilter source;
 
     private InstantFilter dateChange;
-
-    private StringFilter note;
 
     private LongFilter categoryId;
 
@@ -77,14 +71,6 @@ public class NameCriteria implements Serializable {
         this.active = active;
     }
 
-    public StringFilter getDescription() {
-        return description;
-    }
-
-    public void setDescription(StringFilter description) {
-        this.description = description;
-    }
-
     public StringFilter getKeyWord() {
         return keyWord;
     }
@@ -101,14 +87,6 @@ public class NameCriteria implements Serializable {
         this.date = date;
     }
 
-    public StringFilter getProducer() {
-        return producer;
-    }
-
-    public void setProducer(StringFilter producer) {
-        this.producer = producer;
-    }
-
     public StringFilter getSource() {
         return source;
     }
@@ -123,14 +101,6 @@ public class NameCriteria implements Serializable {
 
     public void setDateChange(InstantFilter dateChange) {
         this.dateChange = dateChange;
-    }
-
-    public StringFilter getNote() {
-        return note;
-    }
-
-    public void setNote(StringFilter note) {
-        this.note = note;
     }
 
     public LongFilter getCategoryId() {
@@ -155,13 +125,10 @@ public class NameCriteria implements Serializable {
                 (id != null ? "id=" + id + ", " : "") +
                 (value != null ? "value=" + value + ", " : "") +
                 (active != null ? "active=" + active + ", " : "") +
-                (description != null ? "description=" + description + ", " : "") +
                 (keyWord != null ? "keyWord=" + keyWord + ", " : "") +
                 (date != null ? "date=" + date + ", " : "") +
-                (producer != null ? "producer=" + producer + ", " : "") +
                 (source != null ? "source=" + source + ", " : "") +
                 (dateChange != null ? "dateChange=" + dateChange + ", " : "") +
-                (note != null ? "note=" + note + ", " : "") +
                 (categoryId != null ? "categoryId=" + categoryId + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
             "}";

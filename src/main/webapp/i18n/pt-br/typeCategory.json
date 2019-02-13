@@ -1,0 +1,10 @@
+{
+    "visaoApp": {
+        "TypeCategory" : {
+            "null": "",
+            "INDICATOR": "INDICATOR",
+            "FILTER": "FILTER",
+            "LAYER": "LAYER"
+        }
+    }
+}

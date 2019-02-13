@@ -3,6 +3,8 @@ package br.com.ibict.visao.web.rest;
 import br.com.ibict.visao.VisaoApp;
 
 import br.com.ibict.visao.domain.Filter;
+import br.com.ibict.visao.domain.Region;
+import br.com.ibict.visao.domain.Category;
 import br.com.ibict.visao.domain.User;
 import br.com.ibict.visao.domain.Region;
 import br.com.ibict.visao.repository.FilterRepository;
@@ -27,6 +29,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.time.Instant;
@@ -65,9 +68,6 @@ public class FilterResourceIntTest {
 
     private static final Instant DEFAULT_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_PRODUCER = "AAAAAAAAAA";
-    private static final String UPDATED_PRODUCER = "BBBBBBBBBB";
 
     private static final String DEFAULT_SOURCE = "AAAAAAAAAA";
     private static final String UPDATED_SOURCE = "BBBBBBBBBB";
@@ -132,7 +132,6 @@ public class FilterResourceIntTest {
             .description(DEFAULT_DESCRIPTION)
             .keyWord(DEFAULT_KEY_WORD)
             .date(DEFAULT_DATE)
-            .producer(DEFAULT_PRODUCER)
             .source(DEFAULT_SOURCE)
             .dateChange(DEFAULT_DATE_CHANGE)
             .note(DEFAULT_NOTE);
@@ -164,7 +163,6 @@ public class FilterResourceIntTest {
         assertThat(testFilter.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testFilter.getKeyWord()).isEqualTo(DEFAULT_KEY_WORD);
         assertThat(testFilter.getDate()).isEqualTo(DEFAULT_DATE);
-        assertThat(testFilter.getProducer()).isEqualTo(DEFAULT_PRODUCER);
         assertThat(testFilter.getSource()).isEqualTo(DEFAULT_SOURCE);
         assertThat(testFilter.getDateChange()).isEqualTo(DEFAULT_DATE_CHANGE);
         assertThat(testFilter.getNote()).isEqualTo(DEFAULT_NOTE);
@@ -241,7 +239,6 @@ public class FilterResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].keyWord").value(hasItem(DEFAULT_KEY_WORD.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].producer").value(hasItem(DEFAULT_PRODUCER.toString())))
             .andExpect(jsonPath("$.[*].source").value(hasItem(DEFAULT_SOURCE.toString())))
             .andExpect(jsonPath("$.[*].dateChange").value(hasItem(DEFAULT_DATE_CHANGE.toString())))
             .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())));
@@ -294,7 +291,6 @@ public class FilterResourceIntTest {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.keyWord").value(DEFAULT_KEY_WORD.toString()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
-            .andExpect(jsonPath("$.producer").value(DEFAULT_PRODUCER.toString()))
             .andExpect(jsonPath("$.source").value(DEFAULT_SOURCE.toString()))
             .andExpect(jsonPath("$.dateChange").value(DEFAULT_DATE_CHANGE.toString()))
             .andExpect(jsonPath("$.note").value(DEFAULT_NOTE.toString()));
@@ -380,45 +376,6 @@ public class FilterResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllFiltersByDescriptionIsEqualToSomething() throws Exception {
-        // Initialize the database
-        filterRepository.saveAndFlush(filter);
-
-        // Get all the filterList where description equals to DEFAULT_DESCRIPTION
-        defaultFilterShouldBeFound("description.equals=" + DEFAULT_DESCRIPTION);
-
-        // Get all the filterList where description equals to UPDATED_DESCRIPTION
-        defaultFilterShouldNotBeFound("description.equals=" + UPDATED_DESCRIPTION);
-    }
-
-    @Test
-    @Transactional
-    public void getAllFiltersByDescriptionIsInShouldWork() throws Exception {
-        // Initialize the database
-        filterRepository.saveAndFlush(filter);
-
-        // Get all the filterList where description in DEFAULT_DESCRIPTION or UPDATED_DESCRIPTION
-        defaultFilterShouldBeFound("description.in=" + DEFAULT_DESCRIPTION + "," + UPDATED_DESCRIPTION);
-
-        // Get all the filterList where description equals to UPDATED_DESCRIPTION
-        defaultFilterShouldNotBeFound("description.in=" + UPDATED_DESCRIPTION);
-    }
-
-    @Test
-    @Transactional
-    public void getAllFiltersByDescriptionIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        filterRepository.saveAndFlush(filter);
-
-        // Get all the filterList where description is not null
-        defaultFilterShouldBeFound("description.specified=true");
-
-        // Get all the filterList where description is null
-        defaultFilterShouldNotBeFound("description.specified=false");
-    }
-
-    @Test
-    @Transactional
     public void getAllFiltersByKeyWordIsEqualToSomething() throws Exception {
         // Initialize the database
         filterRepository.saveAndFlush(filter);
@@ -493,45 +450,6 @@ public class FilterResourceIntTest {
 
         // Get all the filterList where date is null
         defaultFilterShouldNotBeFound("date.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllFiltersByProducerIsEqualToSomething() throws Exception {
-        // Initialize the database
-        filterRepository.saveAndFlush(filter);
-
-        // Get all the filterList where producer equals to DEFAULT_PRODUCER
-        defaultFilterShouldBeFound("producer.equals=" + DEFAULT_PRODUCER);
-
-        // Get all the filterList where producer equals to UPDATED_PRODUCER
-        defaultFilterShouldNotBeFound("producer.equals=" + UPDATED_PRODUCER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllFiltersByProducerIsInShouldWork() throws Exception {
-        // Initialize the database
-        filterRepository.saveAndFlush(filter);
-
-        // Get all the filterList where producer in DEFAULT_PRODUCER or UPDATED_PRODUCER
-        defaultFilterShouldBeFound("producer.in=" + DEFAULT_PRODUCER + "," + UPDATED_PRODUCER);
-
-        // Get all the filterList where producer equals to UPDATED_PRODUCER
-        defaultFilterShouldNotBeFound("producer.in=" + UPDATED_PRODUCER);
-    }
-
-    @Test
-    @Transactional
-    public void getAllFiltersByProducerIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        filterRepository.saveAndFlush(filter);
-
-        // Get all the filterList where producer is not null
-        defaultFilterShouldBeFound("producer.specified=true");
-
-        // Get all the filterList where producer is null
-        defaultFilterShouldNotBeFound("producer.specified=false");
     }
 
     @Test
@@ -614,42 +532,41 @@ public class FilterResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllFiltersByNoteIsEqualToSomething() throws Exception {
+    public void getAllFiltersByCidadePoloIsEqualToSomething() throws Exception {
         // Initialize the database
+        Region cidadePolo = RegionResourceIntTest.createEntity(em);
+        em.persist(cidadePolo);
+        em.flush();
+        filter.setCidadePolo(cidadePolo);
         filterRepository.saveAndFlush(filter);
+        Long cidadePoloId = cidadePolo.getId();
 
-        // Get all the filterList where note equals to DEFAULT_NOTE
-        defaultFilterShouldBeFound("note.equals=" + DEFAULT_NOTE);
+        // Get all the filterList where cidadePolo equals to cidadePoloId
+        defaultFilterShouldBeFound("cidadePoloId.equals=" + cidadePoloId);
 
-        // Get all the filterList where note equals to UPDATED_NOTE
-        defaultFilterShouldNotBeFound("note.equals=" + UPDATED_NOTE);
+        // Get all the filterList where cidadePolo equals to cidadePoloId + 1
+        defaultFilterShouldNotBeFound("cidadePoloId.equals=" + (cidadePoloId + 1));
     }
+
 
     @Test
     @Transactional
-    public void getAllFiltersByNoteIsInShouldWork() throws Exception {
+    public void getAllFiltersByCategoryIsEqualToSomething() throws Exception {
         // Initialize the database
+        Category category = CategoryResourceIntTest.createEntity(em);
+        em.persist(category);
+        em.flush();
+        filter.setCategory(category);
         filterRepository.saveAndFlush(filter);
+        Long categoryId = category.getId();
 
-        // Get all the filterList where note in DEFAULT_NOTE or UPDATED_NOTE
-        defaultFilterShouldBeFound("note.in=" + DEFAULT_NOTE + "," + UPDATED_NOTE);
+        // Get all the filterList where category equals to categoryId
+        defaultFilterShouldBeFound("categoryId.equals=" + categoryId);
 
-        // Get all the filterList where note equals to UPDATED_NOTE
-        defaultFilterShouldNotBeFound("note.in=" + UPDATED_NOTE);
+        // Get all the filterList where category equals to categoryId + 1
+        defaultFilterShouldNotBeFound("categoryId.equals=" + (categoryId + 1));
     }
 
-    @Test
-    @Transactional
-    public void getAllFiltersByNoteIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        filterRepository.saveAndFlush(filter);
-
-        // Get all the filterList where note is not null
-        defaultFilterShouldBeFound("note.specified=true");
-
-        // Get all the filterList where note is null
-        defaultFilterShouldNotBeFound("note.specified=false");
-    }
 
     @Test
     @Transactional
@@ -695,12 +612,12 @@ public class FilterResourceIntTest {
         restFilterMockMvc.perform(get("/api/filters?sort=id,desc&" + filter))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(filter.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].keyWord").value(hasItem(DEFAULT_KEY_WORD.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].producer").value(hasItem(DEFAULT_PRODUCER.toString())))
             .andExpect(jsonPath("$.[*].source").value(hasItem(DEFAULT_SOURCE.toString())))
             .andExpect(jsonPath("$.[*].dateChange").value(hasItem(DEFAULT_DATE_CHANGE.toString())))
             .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())));
@@ -743,7 +660,6 @@ public class FilterResourceIntTest {
             .description(UPDATED_DESCRIPTION)
             .keyWord(UPDATED_KEY_WORD)
             .date(UPDATED_DATE)
-            .producer(UPDATED_PRODUCER)
             .source(UPDATED_SOURCE)
             .dateChange(UPDATED_DATE_CHANGE)
             .note(UPDATED_NOTE);
@@ -762,7 +678,6 @@ public class FilterResourceIntTest {
         assertThat(testFilter.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testFilter.getKeyWord()).isEqualTo(UPDATED_KEY_WORD);
         assertThat(testFilter.getDate()).isEqualTo(UPDATED_DATE);
-        assertThat(testFilter.getProducer()).isEqualTo(UPDATED_PRODUCER);
         assertThat(testFilter.getSource()).isEqualTo(UPDATED_SOURCE);
         assertThat(testFilter.getDateChange()).isEqualTo(UPDATED_DATE_CHANGE);
         assertThat(testFilter.getNote()).isEqualTo(UPDATED_NOTE);

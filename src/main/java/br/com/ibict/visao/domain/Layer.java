@@ -1,5 +1,6 @@
 package br.com.ibict.visao.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -9,6 +10,8 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
+
+import br.com.ibict.visao.domain.enumeration.TypeLayer;
 
 /**
  * A Layer.
@@ -31,26 +34,18 @@ public class Layer implements Serializable {
     
     @Lob
     @Column(name = "geo_json", nullable = false)
-    private byte[] geoJson;
-
-    @Column(name = "geo_json_content_type", nullable = false)
-    private String geoJsonContentType;
+    private String geoJson;
 
     @NotNull
-    @Column(name = "active", nullable = false)
-    private Boolean active;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "jhi_type", nullable = false)
+    private TypeLayer type;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "key_word")
-    private String keyWord;
-
     @Column(name = "jhi_date")
     private Instant date;
-
-    @Column(name = "producer")
-    private String producer;
 
     @Column(name = "source")
     private String source;
@@ -60,6 +55,18 @@ public class Layer implements Serializable {
 
     @Column(name = "note")
     private String note;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Category category;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private MarkerIcon icon;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private GroupLayer group;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -83,43 +90,30 @@ public class Layer implements Serializable {
         this.name = name;
     }
 
-    public byte[] getGeoJson() {
+    public String getGeoJson() {
         return geoJson;
     }
 
-    public Layer geoJson(byte[] geoJson) {
+    public Layer geoJson(String geoJson) {
         this.geoJson = geoJson;
         return this;
     }
 
-    public void setGeoJson(byte[] geoJson) {
+    public void setGeoJson(String geoJson) {
         this.geoJson = geoJson;
     }
 
-    public String getGeoJsonContentType() {
-        return geoJsonContentType;
+    public TypeLayer getType() {
+        return type;
     }
 
-    public Layer geoJsonContentType(String geoJsonContentType) {
-        this.geoJsonContentType = geoJsonContentType;
+    public Layer type(TypeLayer type) {
+        this.type = type;
         return this;
     }
 
-    public void setGeoJsonContentType(String geoJsonContentType) {
-        this.geoJsonContentType = geoJsonContentType;
-    }
-
-    public Boolean isActive() {
-        return active;
-    }
-
-    public Layer active(Boolean active) {
-        this.active = active;
-        return this;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void setType(TypeLayer type) {
+        this.type = type;
     }
 
     public String getDescription() {
@@ -135,19 +129,6 @@ public class Layer implements Serializable {
         this.description = description;
     }
 
-    public String getKeyWord() {
-        return keyWord;
-    }
-
-    public Layer keyWord(String keyWord) {
-        this.keyWord = keyWord;
-        return this;
-    }
-
-    public void setKeyWord(String keyWord) {
-        this.keyWord = keyWord;
-    }
-
     public Instant getDate() {
         return date;
     }
@@ -159,19 +140,6 @@ public class Layer implements Serializable {
 
     public void setDate(Instant date) {
         this.date = date;
-    }
-
-    public String getProducer() {
-        return producer;
-    }
-
-    public Layer producer(String producer) {
-        this.producer = producer;
-        return this;
-    }
-
-    public void setProducer(String producer) {
-        this.producer = producer;
     }
 
     public String getSource() {
@@ -212,6 +180,45 @@ public class Layer implements Serializable {
     public void setNote(String note) {
         this.note = note;
     }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Layer category(Category category) {
+        this.category = category;
+        return this;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public MarkerIcon getIcon() {
+        return icon;
+    }
+
+    public Layer icon(MarkerIcon markerIcon) {
+        this.icon = markerIcon;
+        return this;
+    }
+
+    public void setIcon(MarkerIcon markerIcon) {
+        this.icon = markerIcon;
+    }
+
+    public GroupLayer getGroup() {
+        return group;
+    }
+
+    public Layer group(GroupLayer groupLayer) {
+        this.group = groupLayer;
+        return this;
+    }
+
+    public void setGroup(GroupLayer groupLayer) {
+        this.group = groupLayer;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -240,12 +247,9 @@ public class Layer implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", geoJson='" + getGeoJson() + "'" +
-            ", geoJsonContentType='" + getGeoJsonContentType() + "'" +
-            ", active='" + isActive() + "'" +
+            ", type='" + getType() + "'" +
             ", description='" + getDescription() + "'" +
-            ", keyWord='" + getKeyWord() + "'" +
             ", date='" + getDate() + "'" +
-            ", producer='" + getProducer() + "'" +
             ", source='" + getSource() + "'" +
             ", dateChange='" + getDateChange() + "'" +
             ", note='" + getNote() + "'" +
