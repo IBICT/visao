@@ -1,5 +1,6 @@
 package br.com.ibict.visao.web.rest;
 
+import br.com.ibict.visao.dto.RegionFilterProjection;
 import com.codahale.metrics.annotation.Timed;
 import br.com.ibict.visao.domain.Region;
 import br.com.ibict.visao.service.RegionService;
@@ -101,6 +102,22 @@ public class RegionResource {
         Page<Region> page = regionQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/regions");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /regions : get all the regions.
+     *
+     * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
+     * @return the ResponseEntity with status 200 (OK) and the list of regions in body
+     */
+    @GetMapping("/regionsWithFilter")
+    @Timed
+    public ResponseEntity<List<RegionFilterProjection>> getRegionsWithFilter(RegionCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get Regions by criteria: {}", criteria);
+        Page<RegionFilterProjection> page = regionQueryService.findByFilter(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/regionsWithFilter");
+        return new ResponseEntity(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**

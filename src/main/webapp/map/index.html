@@ -88,6 +88,7 @@ html, body {
 	color: white;
 	border: 0;
 	padding: 0 10px;
+    margin-bottom: 2px;
 }
 
 .modal-header {
@@ -387,9 +388,10 @@ h5.mb-0 button.btn.btn-link {
 	var arrayCompleto, municipioArray, estadoArray;
 	var indicatorArray, filterArray, years;
 	var estado, mesoRegiao, municipio;
-	var maxValue, minValue, midValue, categories, filterCategories, indicatorNames;
+	var maxValue, minValue, midValue, categories, indicatorNames;
 	var indicadorMapControl, filtroMapControl, limparMapControl, rangeBarControl, mapControl, botao2, botao3;
     var filtrosId;
+    var filtrosPesquisados = new Map();
 	
 	getGeoJson();
 	
@@ -430,14 +432,7 @@ function getGeoJson(){
                                                 dataType: 'json',
                                                 success: function (data) {
                                                     years = data;
-                                                    $.ajax({
-                                                        url: './api/filterCategories',
-                                                        dataType: 'json',
-                                                        success: function (data) {
-                                                            filterCategories = data;
-                                                            makeMap();
-                                                        }
-                                                    });
+                                                    makeMap();
                                                 }
                                             });
                                         }
@@ -641,7 +636,23 @@ function makeChart(rangeMap2) {
 		style: style_1,
 		onEachFeature: function (feature, layer) {
 			if (typeof indicatorArray[feature.geoCode] !== "undefined") {
-				layer.bindPopup('<p id="box"+feature.geoCode class="title-popup" style="display: none">'+feature.properties.NOME+'</p><p id="both">'+arrayCompleto[0].name.value+'</p><p>'+indicatorArray[feature.geoCode]+'</p><button onclick="modalDatail(\''+feature.geoCode+'\')" class="button-popup">'+feature.properties.NOME+'</button>');
+
+			    var popupValue = '<div onclick="modalDatail(\''+feature.geocode+'\')">' +
+                    '<p id="box"+feature.geoCode class="title-popup" style="display: none">'+feature.properties.NOME+'</p>' +
+                    '<p id="both">'+arrayCompleto[0].name.value+'</p>' +
+                    '<p>'+indicatorArray[feature.geoCode]+'</p>' +
+                    '<div style="text-align: center">';
+
+			    var filtrosAplicados = filtrosPesquisados.get(parseInt(feature.geoCode));
+			    if(filtrosAplicados !== undefined){
+                    filtrosAplicados.forEach(function (filterName) {
+                        popupValue += '<button class="button-popup">'+filterName+'</button></br>';
+                    });
+                }
+			    popupValue += '</div> </div>';
+
+				layer.bindPopup(popupValue);
+
 				layer.on('mouseover', function (e) {
 					var x = document.getElementsByClassName("range-bar-mark")[0];
 					x.style.left = getPercent(indicatorArray[feature.geoCode])+"%";
@@ -786,12 +797,31 @@ function makeMap() {
                 vetor.push(filtro);
             });
             var stringResult = vetor.join(',');
-            // urlQuery += '/api/indicatorsFilter?&yearId.equals=11&filtersId.in='+stringResult+'&nameId.equals='+indicadorAtual;
-            urlQuery += '/api/indicatorsFilter?&yearId.equals=11&filtersId.in='+1+'&nameId.equals='+indicadorAtual; // TODO remover esse estatico dps
+            urlQuery += '/api/indicatorsFilter?&yearId.equals=11&filtersId.in='+stringResult+'&nameId.equals='+indicadorAtual;
+
+            $.ajax({
+                url: '/api/regionsWithFilter?&filtersId.in='+stringResult,
+                dataType: 'json',
+                success: function (dataJson) {
+                    filtrosPesquisados = new Map();
+                    dataJson.forEach(function (dto) {
+                        var contains = filtrosPesquisados.get(dto.geocode);
+                        if(contains === undefined){
+                            filtrosPesquisados.set(dto.geocode, []);
+                            contains = filtrosPesquisados.get(dto.geocode);
+                        }
+
+                        contains.push(dto.filtername);
+                    });
+
+                    console.log(filtrosPesquisados);
+                }
+            });
         }
 
 		group = new L.FeatureGroup();
 		$("#loading").show();
+
 		$.ajax({
 			url: urlQuery,
 			dataType: 'json',

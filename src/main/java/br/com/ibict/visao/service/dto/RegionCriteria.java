@@ -45,6 +45,8 @@ public class RegionCriteria implements Serializable {
 
     private LongFilter relacaoId;
 
+    private LongFilter filtersId;
+
     public RegionCriteria() {
     }
 
@@ -94,6 +96,14 @@ public class RegionCriteria implements Serializable {
 
     public void setRelacaoId(LongFilter relacaoId) {
         this.relacaoId = relacaoId;
+    }
+
+    public LongFilter getFiltersId() {
+        return filtersId;
+    }
+
+    public void setFiltersId(LongFilter filtersId) {
+        this.filtersId = filtersId;
     }
 
     @Override

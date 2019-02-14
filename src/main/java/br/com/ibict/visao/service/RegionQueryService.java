@@ -2,6 +2,7 @@ package br.com.ibict.visao.service;
 
 import java.util.List;
 
+import br.com.ibict.visao.dto.RegionFilterProjection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -59,6 +60,18 @@ public class RegionQueryService extends QueryService<Region> {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specification<Region> specification = createSpecification(criteria);
         return regionRepository.findAll(specification, page);
+    }
+
+    /**
+     * Return a {@link Page} of {@link Region} which matches the criteria from the database
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @param page The page, which should be returned.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<RegionFilterProjection> findByFilter(RegionCriteria criteria, Pageable page) {
+        log.debug("find by criteria : {}, page: {}", criteria, page);
+        return regionRepository.findRegionDTOWithFilter(criteria.getFiltersId().getIn(), page);
     }
 
     /**
