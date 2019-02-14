@@ -365,8 +365,6 @@ h5.mb-0 button.btn.btn-link {
 				<span>HABITANTES<br /><span id="modalHabitantesValor"></span></span>
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
 			  </div>
 			</div>
 		  </div>
@@ -836,7 +834,7 @@ function makeMap() {
                     indicadorMapControl = L.control({position: 'topright'});
                     indicadorMapControl.onAdd = function (map) {
                         this._div = L.DomUtil.create('div', 'indicadorMapControl');
-                        this._div.innerHTML = '<div style="cursor: pointer;color:#59C9A8; font-size:16px;" onclick="indicadorMapControl()" class="" id="indicadorMapControl" title="Menu">' +
+                        this._div.innerHTML = '<div style="cursor: pointer;color:#59C9A8; font-size:16px;" onclick="infoAboutIndicator()" class="" id="indicadorMapControl" title="Menu">' +
                             '<span class="">' +
                             dataJson[0].name.value + ' <span style="background-color: #59C9A8; padding:3.5px 6.5px; color: white; border-radius: 4px; font-size:12px; position:relative; top:-2.5px;" class="fa fa-info"></span>' +
                             '</span></div>';
@@ -969,6 +967,10 @@ function makeMap() {
 	});
 	
 };
+
+function infoAboutIndicator(){
+    $('#exampleModal').modal('show');
+}
 
 function loadFiltrosSelecionados(){
     var filtrosSelecionados = '';
