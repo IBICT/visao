@@ -776,8 +776,151 @@ function makeMap() {
         $('#selectedIndicator').html("<span> Não há indicador selecionado</span>");
         $('#submitFormIndicator').prop('disabled', true);
     });
-	
-	$('#submitFormIndicator').click(function() {
+
+    function loadResultMap(urlQuery) {
+        $.ajax({
+            url: urlQuery,
+            dataType: 'json',
+            success: function (dataJson) {
+
+                if (dataJson.length < 1) {
+                    $("#loading").hide();
+                    emptyMap();
+                }
+                else {
+                    arrayCompleto = dataJson;
+                    municipioArray = new Array();
+                    estadoArray = new Array();
+
+                    //console.log(dataJson);
+
+                    dataJson.forEach(function (indicator) {
+
+                        if (indicator.region.typeRegion == "MUNICIPIO") {
+                            municipioArray[indicator.region.geoCode.toString()] = indicator.value;
+                        } else if (indicator.region.typeRegion == "ESTADO") {
+                            estadoArray[indicator.region.geoCode.toString()] = indicator.value;
+                            return;
+                        }
+                    });
+
+                    itensSelect[0] = '<option value="1">Estado</option>';
+                    itensSelect[1] = '<option value="2">Municipio</option>';
+
+                    if (estadoArray.length > 0) {
+                        makeChart(1);
+                    } else if (municipioArray.length > 0) {
+                        delete itensSelect[0];
+                        makeChart(2);
+                    } else {
+                        console.log("Empty DATAJSON")
+                    }
+
+                    // html do SELECT
+                    var selectRangeMapHtml = '<div class="input-group input-group-sm mb-3">' +
+                        '<div class="input-group-prepend">' +
+                        '<span style="margin-right:5px;" class="input-group-text fa fa-map input-leaflet" id="basic-addon1"></span>' +
+                        '<span style="color: #59C9A8; border-right:0; background-color: #ffffff" class="input-group-text"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></span>' +
+                        '</div>' +
+                        '<select onchange="rangeMap(this)" style="border-radius: 0 5px 5px 0; border-left:0;">';
+
+                    itensSelect.forEach(function (iten) {
+                        selectRangeMapHtml += iten;
+                    });
+
+                    selectRangeMapHtml += '</select>' +
+                        '</div>';
+                    // html do SELECT
+
+                    // indicador Map control
+                    indicadorMapControl = L.control({position: 'topright'});
+                    indicadorMapControl.onAdd = function (map) {
+                        this._div = L.DomUtil.create('div', 'indicadorMapControl');
+                        this._div.innerHTML = '<div style="cursor: pointer;color:#59C9A8; font-size:16px;" onclick="indicadorMapControl()" class="" id="indicadorMapControl" title="Menu">' +
+                            '<span class="">' +
+                            dataJson[0].name.value + ' <span style="background-color: #59C9A8; padding:3.5px 6.5px; color: white; border-radius: 4px; font-size:12px; position:relative; top:-2.5px;" class="fa fa-info"></span>' +
+                            '</span></div>';
+
+                        L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
+                        L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
+                        L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);
+
+                        return this._div;
+                    }
+                    indicadorMapControl.addTo(map);
+
+                    // filtro Map control
+                    filtroMapControl = L.control({position: 'topright'});
+                    filtroMapControl.onAdd = function (map) {
+                        this._div = L.DomUtil.create('div', 'filtroMapControl');
+
+                        if (filtrosId.size !== 0) {
+                            this._div.innerHTML = loadFiltrosSelecionados();
+                        }
+
+                        L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
+                        L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
+                        L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);
+
+                        return this._div;
+                    }
+                    filtroMapControl.addTo(map);
+
+                    // limpar Map control
+                    limparMapControl = L.control({position: 'topright'});
+                    limparMapControl.onAdd = function (map) {
+                        this._div = L.DomUtil.create('div', 'limparMapControl');
+                        this._div.innerHTML = '<div style="cursor: pointer;color:#FFFFFF; font-size:14px;" onclick="limparMapControl()" class="" id="limparMapControl" title="Menu">' +
+                            '<span style="text-decoration: underline;">' +
+                            'limpar <span class="fa fa-trash-o"></span>' +
+                            '</span></div>';
+
+                        L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
+                        L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
+                        L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);
+
+                        return this._div;
+                    }
+                    limparMapControl.addTo(map);
+
+
+                    // range bar Map control
+                    rangeBarControl = L.control({position: 'bottomright'});
+                    rangeBarControl.onAdd = function (map) {
+                        this._div = L.DomUtil.create('div', 'rangeBarControl');
+                        this._div.innerHTML = '<div class="range-bar">' +
+                            '<span class="range-bar-mark"></span>' +
+                            '</div>';
+
+                        L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
+                        L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
+                        L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);
+
+                        return this._div;
+                    }
+                    rangeBarControl.addTo(map);
+
+
+                    // select Map control
+                    mapControl = L.control({position: 'bottomleft'});
+                    mapControl.onAdd = function (map) {
+                        this._div = L.DomUtil.create('div', 'mapControl');
+                        this._div.innerHTML = selectRangeMapHtml;
+
+                        L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
+
+                        return this._div;
+                    }
+                    mapControl.addTo(map);
+
+                    document.getElementsByClassName("mapControl")[0].onmouseover = controlEnter;
+                    document.getElementsByClassName("mapControl")[0].onmouseout = controlLeave;
+                }
+            }
+        });
+    }
+
+    $('#submitFormIndicator').click(function() {
 		
 		itensSelect = new Array();
 
@@ -787,10 +930,15 @@ function makeMap() {
         });
 		
 		cleanMap();
+
+        group = new L.FeatureGroup();
+        $("#loading").show();
 		
         var urlQuery = '';
         if(filtrosId.size === 0){
             urlQuery += './api/indicators?yearId.equals=11&nameId.equals='+indicadorAtual;
+            loadResultMap(urlQuery);
+
         } else {
             var vetor = new Array();
             filtrosId.forEach(function (filtro) {
@@ -814,193 +962,10 @@ function makeMap() {
                         contains.push(dto.filtername);
                     });
 
-                    console.log(filtrosPesquisados);
+                    loadResultMap(urlQuery);
                 }
             });
         }
-
-		group = new L.FeatureGroup();
-		$("#loading").show();
-
-		$.ajax({
-			url: urlQuery,
-			dataType: 'json',
-			success: function(dataJson) {				
-
-				if(dataJson.length < 1) {
-					$("#loading").hide();
-					emptyMap();
-				}
-				else {
-					arrayCompleto = dataJson;
-					municipioArray = new Array();
-					estadoArray = new Array();
-
-					//console.log(dataJson);
-					
-					dataJson.forEach(function(indicator) {
-
-						if(indicator.region.typeRegion == "MUNICIPIO") {
-							municipioArray[ indicator.region.geoCode.toString() ] = indicator.value;
-						} else if (indicator.region.typeRegion == "ESTADO"){
-							estadoArray[ indicator.region.geoCode.toString() ] = indicator.value;
-							return;
-						}
-					});
-
-					itensSelect[ 0 ] = '<option value="1">Estado</option>';
-					itensSelect[ 1 ] = '<option value="2">Municipio</option>';
-					
-					if(estadoArray.length > 0){
-						makeChart(1);
-					} else if(municipioArray.length > 0){
-						delete itensSelect[0];
-						makeChart(2);
-					} else {
-						console.log("Empty DATAJSON")
-					}
-					
-					// html do SELECT
-					var selectRangeMapHtml = 	'<div class="input-group input-group-sm mb-3">' +
-												'<div class="input-group-prepend">' +
-												'<span style="margin-right:5px;" class="input-group-text fa fa-map input-leaflet" id="basic-addon1"></span>' +
-												'<span style="color: #59C9A8; border-right:0; background-color: #ffffff" class="input-group-text"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></span>' +
-												'</div>' +
-												'<select onchange="rangeMap(this)" style="border-radius: 0 5px 5px 0; border-left:0;">';
-							
-						itensSelect.forEach(function(iten) {
-							selectRangeMapHtml +=	iten;
-						});						
-												
-						selectRangeMapHtml +=	'</select>' +
-												'</div>';
-					// html do SELECT						
-
-					// indicador Map control
-					indicadorMapControl = L.control({position: 'topright'});
-					indicadorMapControl.onAdd = function(map) {
-								this._div = L.DomUtil.create('div', 'indicadorMapControl');
-								this._div.innerHTML = '<div style="cursor: pointer;color:#59C9A8; font-size:16px;" onclick="indicadorMapControl()" class="" id="indicadorMapControl" title="Menu">' +
-													  '<span class="">' +
-													  dataJson[0].name.value +' <span style="background-color: #59C9A8; padding:3.5px 6.5px; color: white; border-radius: 4px; font-size:12px; position:relative; top:-2.5px;" class="fa fa-info"></span>' +
-													  '</span></div>';
-
-								L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
-								L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
-								L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);
-
-								return this._div;
-					}
-					indicadorMapControl.addTo(map);
-
-                    // filtro Map control
-                    filtroMapControl = L.control({position: 'topright'});
-                    filtroMapControl.onAdd = function(map) {
-                        this._div = L.DomUtil.create('div', 'filtroMapControl');
-
-                        if(filtrosId.size !== 0){
-                            this._div.innerHTML = loadFiltrosSelecionados();
-                        }
-
-                        L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
-                        L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
-                        L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);
-
-                        return this._div;
-                    }
-                    filtroMapControl.addTo(map);
-
-					// limpar Map control
-					limparMapControl = L.control({position: 'topright'});
-					limparMapControl.onAdd = function(map) {
-								this._div = L.DomUtil.create('div', 'limparMapControl');
-								this._div.innerHTML = '<div style="cursor: pointer;color:#FFFFFF; font-size:14px;" onclick="limparMapControl()" class="" id="limparMapControl" title="Menu">' +
-													  '<span style="text-decoration: underline;">' +
-													  'limpar <span class="fa fa-trash-o"></span>' +
-													  '</span></div>';
-													  
-									L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
-									L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
-									L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);	
-													  
-								return this._div;
-					}
-					limparMapControl.addTo(map);
-					
-					
-					// range bar Map control
-					rangeBarControl = L.control({position: 'bottomright'});
-					rangeBarControl.onAdd = function(map) {
-								this._div = L.DomUtil.create('div', 'rangeBarControl');
-								this._div.innerHTML = '<div class="range-bar">' +
-													  '<span class="range-bar-mark"></span>' +
-													  '</div>';
-													  
-									L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
-									L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
-									L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);	
-													  
-								return this._div;
-					}
-					rangeBarControl.addTo(map);
-					
-					
-					// select Map control
-					mapControl = L.control({position: 'bottomleft'});
-					mapControl.onAdd = function(map) {
-								this._div = L.DomUtil.create('div', 'mapControl');
-								this._div.innerHTML = selectRangeMapHtml;
-													  
-									L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
-													  
-								return this._div;
-					}
-					mapControl.addTo(map);
-					
-					document.getElementsByClassName("mapControl")[0].onmouseover = controlEnter;
-					document.getElementsByClassName("mapControl")[0].onmouseout = controlLeave;
-					
-					/*
-					// select Map control
-					botao2 =  L.easyButton({
-					  id: 'botao2',  // an id for the generated button
-					  position: 'bottomleft',      // inherited from L.Control -- the corner it goes in
-					  type: 'replace',          // set to animate when you're comfy with css
-					  leafletClasses: true,     // use leaflet classes to style the button?
-					  states:[{                 // specify different icons and responses for your button
-						stateName: 'get-center',
-						onClick: function(button, map){
-							//event.preventDefault();
-							$("#search").addClass("open");
-							$('#search > form > input[type="search"]').focus();
-						},
-						title: 'show me the middle',
-						icon: 'fa-search'
-					  }]
-					});
-					botao2.addTo(map);
-
-
-					botao3 =  L.easyButton({
-					  id: 'botao3',  // an id for the generated button
-					  position: 'bottomleft',      // inherited from L.Control -- the corner it goes in
-					  type: 'replace',          // set to animate when you're comfy with css
-					  leafletClasses: true,     // use leaflet classes to style the button?
-					  states:[{                 // specify different icons and responses for your button
-						stateName: 'get-center',
-						onClick: function(button, map){
-						
-						},
-						title: 'show me the middle',
-						icon: 'fa-list'
-					  }]
-					});
-					botao3.addTo(map);
-					*/
-					
-				}
-			}
-		});
 	});
 	
 };
