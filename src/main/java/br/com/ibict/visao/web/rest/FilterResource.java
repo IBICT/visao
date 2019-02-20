@@ -1,5 +1,6 @@
 package br.com.ibict.visao.web.rest;
 
+import br.com.ibict.visao.dto.FilterInfoProjection;
 import com.codahale.metrics.annotation.Timed;
 import br.com.ibict.visao.domain.Filter;
 import br.com.ibict.visao.service.FilterService;
@@ -100,6 +101,22 @@ public class FilterResource {
         log.debug("REST request to get Filters by criteria: {}", criteria);
         Page<Filter> page = filterQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/filters");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /filters : get all the filters.
+     *
+     * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
+     * @return the ResponseEntity with status 200 (OK) and the list of filters in body
+     */
+    @GetMapping("/filtersDTO")
+    @Timed
+    public ResponseEntity<List<FilterInfoProjection>>  findFiltersDTOWithId(FilterCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get Filters by criteria: {}", criteria);
+        Page<FilterInfoProjection> page = filterQueryService.findFiltersDTOWithId(criteria.getId().getIn(), pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/filtersDTO");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

@@ -2,6 +2,7 @@ package br.com.ibict.visao.service;
 
 import java.util.List;
 
+import br.com.ibict.visao.dto.FilterInfoProjection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -59,6 +60,10 @@ public class FilterQueryService extends QueryService<Filter> {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specification<Filter> specification = createSpecification(criteria);
         return filterRepository.findAll(specification, page);
+    }
+
+    public Page<FilterInfoProjection> findFiltersDTOWithId(List<Long> ids, Pageable pageable){
+        return filterRepository.findFiltersDTOWithId(ids, pageable);
     }
 
     /**
