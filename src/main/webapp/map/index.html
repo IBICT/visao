@@ -996,10 +996,11 @@ function infoAboutIndicator() {
             var conteudoModal =
                 '<div>' +
                 '   <div>' +
-                '       <label style="margin-right: 5px">' + dataJson.name.value + ' </label>' +
-                '       <button class="btn btn-outline-info">Ver gráfico</button>' +
-                '   <div style="margin-top: 10px">' + dataJson.name.description + '</div>' +
-                '</div>';
+                '       <div style="margin-bottom: 10px">' +
+                '           <label style="margin-right: 5px">' + dataJson.name.value + ' </label>' +
+                '          <button class="btn btn-outline-info">Ver gráfico</button>' +
+                '       <div style="margin-top: 10px">' + dataJson.name.description + '</div>' +
+                '   </div>';
             if (filtrosId.size !== 0) {
                 conteudoModal +=
                     '<div id="containerDescricaoFiltros">';
@@ -1012,25 +1013,25 @@ function infoAboutIndicator() {
                                 '<div class="card">' +
                                 '   <div id="headingFilterInfo' + filterInfo.id + '" data-toggle="collapse" data-target="#collapseFilterInfo' + filterInfo.id + '" aria-expanded="false" aria-controls="collapseFilterInfo' + filterInfo.id + '">' +
                                 '       <label class="iconInfoFilter">' + filterInfo.name + '</label>' +
-                                '       <span class="fa fa-angle-down"></span>' +
+                                '       <i class="fa fa-angle-down"></i>' +
                                 '   </div>' +
                                 '   <div id="collapseFilterInfo' + filterInfo.id + '" class="collapse" aria-labelledby="headingFilterInfo' + filterInfo.id + '" data-parent="#containerDescricaoFiltros">' +
-                                '       <div class="card-body">' + filterInfo.description + '</div>' +
+                                '       <div class="card-body" style="padding: 0 0 1rem 1rem">' + filterInfo.description + '</div>' +
                                 '   </div>' +
                                 '</div>';
                         });
                         conteudoModal += '</div> ' +
                             '</div>';
                         $('#modalBody').html(conteudoModal);
+                        $('#exampleModal').modal('show');
                     }
                 });
             } else {
-                conteudoModal += '</div> ' +
-                    '</div>';
+                conteudoModal += '</div>';
                 $('#modalBody').html(conteudoModal);
+                $('#exampleModal').modal('show');
             }
 
-            $('#exampleModal').modal('show');
         }
     });
 }
