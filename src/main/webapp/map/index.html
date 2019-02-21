@@ -982,69 +982,57 @@ function makeMap() {
 	
 };
 
-function infoAboutIndicator(){
+function infoAboutIndicator() {
 
     $('#tituloModal').html("INFORMAÇÕES SOBRE INDICADORES");
+    $('#idInfoIndicador').val(indicadorSelecionado);
 
-    if($('#idInfoIndicador').val() !== indicadorSelecionado){
-        console.log("pesquisando novo indicador");
-        $('#idInfoIndicador').val(indicadorSelecionado);
+    $.ajax({
+        url: '/api/indicators/'+indicadorSelecionado,
+        dataType: 'json',
+        success: function (dataJson) {
+            // create DTO with api name and filters
 
-        $.ajax({
-            // url: '/api/indicators/'+indicadorSelecionado,
-            url: '/api/indicators/1',
-            dataType: 'json',
-            success: function (dataJson){
-                // create DTO with api name and filters
-
-                var conteudoModal =
-                    '<div>' +
-                        '<div>' +
-                            '<label style="margin-right: 5px">'+dataJson.name.value+' </label>' +
-                            '<button class="btn btn-outline-info">Ver gráfico</button>' +
-                        '<div style="margin-top: 10px">'+dataJson.name.description+'</div>'+
-                    '</div>';
-                if(filtrosId.size !== 0){
-                    conteudoModal +=
-                        '<div id="containerDescricaoFiltros">';
-                    // TODO carregar os filtros
-                    $.ajax({
-                        // url: '/api/filtersDTO?&id.in='+filtrosId,
-                        url: '/api/filtersDTO?&id.in=1,2,3',
-                        dataType: 'json',
-                        success: function (dataJson) {
-                            dataJson.forEach(function (filterInfo) {
-
-                                conteudoModal +=
-                                    '<div class="card">'+
-                                        '<div id="headingFilterInfo'+filterInfo.id+'" data-toggle="collapse" data-target="#collapseFilterInfo'+filterInfo.id+'" aria-expanded="false" aria-controls="collapseFilterInfo'+filterInfo.id+'">'+
-                                            '<label class="iconInfoFilter">'+
-                                            filterInfo.name +
-                                            '</label>'+
-                                        '<span class="fa fa-angle-down"></span>' +
-                                    '</div>'+
-                                        '<div id="collapseFilterInfo'+filterInfo.id+'" class="collapse" aria-labelledby="headingFilterInfo'+filterInfo.id+'" data-parent="#containerDescricaoFiltros">'+
-                                            '<div class="card-body">'+
-                                            filterInfo.description+
-                                            '</div>'+
-                                        '</div>'+
-                                    '</div>';
-                            });
-                            conteudoModal += '</div> ' +
+            var conteudoModal =
+                '<div>' +
+                '   <div>' +
+                '       <label style="margin-right: 5px">' + dataJson.name.value + ' </label>' +
+                '       <button class="btn btn-outline-info">Ver gráfico</button>' +
+                '   <div style="margin-top: 10px">' + dataJson.name.description + '</div>' +
+                '</div>';
+            if (filtrosId.size !== 0) {
+                conteudoModal +=
+                    '<div id="containerDescricaoFiltros">';
+                $.ajax({
+                    url: '/api/filtersDTO?&id.in='+Array.from(filtrosId).join(','),
+                    dataType: 'json',
+                    success: function (dataJson) {
+                        dataJson.forEach(function (filterInfo) {
+                            conteudoModal +=
+                                '<div class="card">' +
+                                '   <div id="headingFilterInfo' + filterInfo.id + '" data-toggle="collapse" data-target="#collapseFilterInfo' + filterInfo.id + '" aria-expanded="false" aria-controls="collapseFilterInfo' + filterInfo.id + '">' +
+                                '       <label class="iconInfoFilter">' + filterInfo.name + '</label>' +
+                                '       <span class="fa fa-angle-down"></span>' +
+                                '   </div>' +
+                                '   <div id="collapseFilterInfo' + filterInfo.id + '" class="collapse" aria-labelledby="headingFilterInfo' + filterInfo.id + '" data-parent="#containerDescricaoFiltros">' +
+                                '       <div class="card-body">' + filterInfo.description + '</div>' +
+                                '   </div>' +
                                 '</div>';
-                            $('#modalBody').html(conteudoModal);
-                        }
-                    });
-                } else {
-                    conteudoModal += '</div> ' +
-                        '</div>';
-                    $('#modalBody').html(conteudoModal);
-                }
-
-                $('#exampleModal').modal('show');
+                        });
+                        conteudoModal += '</div> ' +
+                            '</div>';
+                        $('#modalBody').html(conteudoModal);
+                    }
+                });
+            } else {
+                conteudoModal += '</div> ' +
+                    '</div>';
+                $('#modalBody').html(conteudoModal);
             }
-        });
-    }
+
+            $('#exampleModal').modal('show');
+        }
+    });
 }
 
 function loadFiltrosSelecionados(){
