@@ -279,6 +279,11 @@ h5.mb-0 button.btn.btn-link {
     width: 300px;
 }
 
+.infoIndicatorSnippet{
+    height:30px;
+    overflow:hidden;
+}
+
 </style>
 </head>
 <body>
@@ -999,7 +1004,8 @@ function infoAboutIndicator() {
                 '       <div style="margin-bottom: 10px">' +
                 '           <label style="margin-right: 5px">' + dataJson.name.value + ' </label>' +
                 // '          <button class="btn btn-outline-info" onclick="loadGraphic(\''+dataJson.name.value+'\')">Ver gráfico</button>' +
-                '       <div style="margin-top: 10px">' + dataJson.name.description + '</div>' +
+                '       <div style="margin-top: 10px" class="infoIndicatorSnippet">' + dataJson.name.description + '</div>' +
+                '       <a href="#" class="mostrarMais"> Ler mais</a>' +
                 '   </div>';
             if (filtrosId.size !== 0) {
                 conteudoModal +=
@@ -1032,6 +1038,18 @@ function infoAboutIndicator() {
                 $('#exampleModal').modal('show');
             }
 
+            $('.mostrarMais').click(function () {
+                if($('.infoIndicatorSnippet').css('height') != '30px'){
+                    $('.infoIndicatorSnippet').stop().animate({height: '30px'}, 200);
+                    $(this).text('Ler mais');
+                } else {
+                    $('.infoIndicatorSnippet').css({height:'100%'});
+                    var xx = $('.infoIndicatorSnippet').height();
+                    $('.infoIndicatorSnippet').css({height:'30px'});
+                    $('.infoIndicatorSnippet').stop().animate({height: xx}, 400);
+                    $(this).text('Ler menos');
+                }
+            });
         }
     });
 }
