@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="loading.css" />
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
+    <script type="text/javascript" src="Chart.min.js"></script>
 
 
 <style>
@@ -998,7 +999,7 @@ function infoAboutIndicator() {
                 '   <div>' +
                 '       <div style="margin-bottom: 10px">' +
                 '           <label style="margin-right: 5px">' + dataJson.name.value + ' </label>' +
-                // '          <button class="btn btn-outline-info" onclick="loadGraphic(\''+dataJson.name.value+'\')">Ver gráfico</button>' +
+                '          <button class="btn btn-outline-info" onclick="loadGraphic(\''+dataJson.name.value+'\')">Ver gráfico</button>' +
                 '       <div style="margin-top: 10px">' + dataJson.name.description + '</div>' +
                 '   </div>';
             if (filtrosId.size !== 0) {
@@ -1036,104 +1037,104 @@ function infoAboutIndicator() {
     });
 }
 
-// function loadGraphic(indicatorName){
-//     $.ajax({
-//         url: '/api/indicators/1', // TODO corrigir url
-//         dataType: 'json',
-//         success: function (dataJson) {
-//             var conteudoModal =
-//                 '<div>' +
-//                 '   <div>' +
-//                 '       <div style="margin-bottom: 10px">' +
-//                 '           <label style="margin-right: 5px"> '+indicatorName+' </label>' +
-//                 '          <button class="btn btn-outline-info" onclick="infoAboutIndicator()">Voltar</button>' +
-//                 '       <div style="margin-top: 10px"> teste blçasjd dlaskj  </div>' +
-//                 '   </div>' +
-//                 '   <div width="400px" height="400px">' +
-//                 '       <canvas id="chartContent" width="400px" height="400px"></canvas>' +
-//                 '   </div>' +
-//                 '</div>';
-//
-//             $('#modalBody').html(conteudoModal);
-//
-//             var ctx = document.getElementById('chartContent').getContext('2d');
-//
-//             var labelArray = new Array();
-//             var dataArray = new Array();
-//             var dataColor = new Array();
-//
-//             // dataJson.forEach(function (item) {
-//             //     labelArray.push(item.regionType);
-//             //     dataArray.push(item.contentValue);
-//             //     dataColor.push(getRandomColor());
-//             // });
-//
-//             new Chart (ctx, {
-//                 type: 'bar',
-//                 data: {
-//                     labels: labelArray,
-//                     datasets: [{
-//                         label: ["rfwgdbs","tesf"],
-//                         data: [123,123],
-//                         backgroundColor: [getRandomColor(), getRandomColor()],
-//                         borderWidth: 1
-//                     }]
-//                 },
-//                 options: {
-//                     maintainAspectRatio: false,
-//                     title: {
-//                         display: false
-//                     },
-//                     scales: {
-//                         yAxes: [{
-//                             ticks: {
-//                                 beginAtZero:true
-//                             },
-//                             scaleLabel:{
-//                                 display: true,
-//                                 labelString: 'PIB'
-//                             }
-//                         }],
-//                         xAxes: [{
-//                             ticks: {
-//                                 beginAtZero:true
-//                             },
-//                             scaleLabel:{
-//                                 display: true,
-//                                 labelString: 'Estados'
-//                             }
-//                         }]
-//                     },
-//                     hover: {
-//                         mode: 'nearest',
-//                         intersect: true
-//                     },
-//                     tooltips: {
-//                         mode: 'index',
-//                         intersect: false,
-//                         callbacks: {
-//                             label: function (item, chart) {
-//                                 // var datasetLabel = chart.datasets[item.datasetIndex].label || 'vazio';
-//                                 // return 'R$: ' + datasetLabel;
-//                                 return 'R$: ' + item.yLabel;
-//                             }
-//                         }
-//                     }
-//                 }
-//             });
-//
-//         }
-//     });
-// }
-//
-// function getRandomColor() {
-//     var letters = '0123456789ABCDEF'.split('');
-//     var color = '#';
-//     for (var i = 0; i < 6; i++ ) {
-//         color += letters[Math.floor(Math.random() * 16)];
-//     }
-//     return color;
-// }
+function loadGraphic(indicatorName){
+    $.ajax({
+        url: '/api/indicators/1', // TODO corrigir url
+        dataType: 'json',
+        success: function (dataJson) {
+            var conteudoModal =
+                '<div>' +
+                '   <div>' +
+                '       <div style="margin-bottom: 10px">' +
+                '           <label style="margin-right: 5px"> '+indicatorName+' </label>' +
+                '          <button class="btn btn-outline-info" onclick="infoAboutIndicator()">Voltar</button>' +
+                '       <div style="margin-top: 10px"> teste blçasjd dlaskj  </div>' +
+                '   </div>' +
+                '   <div width="400px" height="400px">' +
+                '       <canvas id="chartContent" width="400px" height="400px"></canvas>' +
+                '   </div>' +
+                '</div>';
+
+            $('#modalBody').html(conteudoModal);
+
+            var ctx = document.getElementById('chartContent').getContext('2d');
+
+            var labelArray = new Array();
+            var dataArray = new Array();
+            var dataColor = new Array();
+
+            // dataJson.forEach(function (item) {
+            //     labelArray.push(item.regionType);
+            //     dataArray.push(item.contentValue);
+            //     dataColor.push(getRandomColor());
+            // });
+
+            new Chart (ctx, {
+                type: 'bar',
+                data: {
+                    labels: labelArray,
+                    datasets: [{
+                        label: ["rfwgdbs","tesf"],
+                        data: [123,123],
+                        backgroundColor: [getRandomColor(), getRandomColor()],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    title: {
+                        display: false
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            },
+                            scaleLabel:{
+                                display: true,
+                                labelString: 'PIB'
+                            }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            },
+                            scaleLabel:{
+                                display: true,
+                                labelString: 'Estados'
+                            }
+                        }]
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function (item, chart) {
+                                // var datasetLabel = chart.datasets[item.datasetIndex].label || 'vazio';
+                                // return 'R$: ' + datasetLabel;
+                                return 'R$: ' + item.yLabel;
+                            }
+                        }
+                    }
+                }
+            });
+
+        }
+    });
+}
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 
 function loadFiltrosSelecionados(){
     var filtrosSelecionados = '';
