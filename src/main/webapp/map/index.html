@@ -1051,6 +1051,16 @@ function infoAboutIndicator(filterCod) {
                                 $(this).text('Ler menos');
                             }
                         });
+
+                        $('#containerDescricaoFiltros .card').on('hidden.bs.collapse', function () {
+                            $(this).find( "i" ).removeClass("fa-angle-down");
+                            $(this).find( "i" ).addClass("fa-angle-right");
+                        });
+
+                        $('#containerDescricaoFiltros .card').on('shown.bs.collapse', function () {
+                            $(this).find( "i" ).addClass("fa-angle-down");
+                            $(this).find( "i" ).removeClass("fa-angle-right");
+                        });
                     }
                 });
             } else {
