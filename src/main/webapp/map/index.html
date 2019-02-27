@@ -411,7 +411,7 @@ h5.mb-0 button.btn.btn-link {
 
 	getGeoJson();
 
-function modalDatail(data){
+function modalDetail(data){
 	$('#modalEstadoSigla').html(data);
 	$('#modalHabitantesValor').html("3.873.743");
 	$('#exampleModal').modal('show');
@@ -653,7 +653,7 @@ function makeChart(rangeMap2) {
 		onEachFeature: function (feature, layer) {
 			if (typeof indicatorArray[feature.geoCode] !== "undefined") {
 
-			    var popupValue = '<div onclick="modalDatail(\''+feature.geocode+'\')">' +
+			    var popupValue = '<div onclick="modalDetail(\''+feature.geoCode+'\')">' +
                     '<p id="box"+feature.geoCode class="title-popup" style="display: none">'+feature.properties.NOME+'</p>' +
                     '<p id="both">'+arrayCompleto[0].name.value+'</p>' +
                     '<p>'+indicatorArray[feature.geoCode]+'</p>' +
@@ -987,7 +987,7 @@ function makeMap() {
 
 };
 
-function infoAboutIndicator() {
+function infoAboutIndicator(filterCod) {
 
     $('#tituloModal').html("INFORMAÇÕES SOBRE INDICADORES");
     $('#idInfoIndicador').val(indicadorSelecionado);
@@ -1020,8 +1020,16 @@ function infoAboutIndicator() {
                                 '   <div id="headingFilterInfo' + filterInfo.id + '" data-toggle="collapse" data-target="#collapseFilterInfo' + filterInfo.id + '" aria-expanded="false" aria-controls="collapseFilterInfo' + filterInfo.id + '">' +
                                 '       <label class="iconInfoFilter">' + filterInfo.name + '</label>' +
                                 '       <i class="fa fa-angle-down"></i>' +
-                                '   </div>' +
-                                '   <div id="collapseFilterInfo' + filterInfo.id + '" class="collapse" aria-labelledby="headingFilterInfo' + filterInfo.id + '" data-parent="#containerDescricaoFiltros">' +
+                                '   </div>';
+
+                            if(filterInfo.id === filterCod){
+                                conteudoModal +=
+                                '   <div id="collapseFilterInfo' + filterInfo.id + '" class="collapse show" aria-labelledby="headingFilterInfo' + filterInfo.id + '" data-parent="#containerDescricaoFiltros">';
+                            } else {
+                                conteudoModal +=
+                                '   <div id="collapseFilterInfo' + filterInfo.id + '" class="collapse" aria-labelledby="headingFilterInfo' + filterInfo.id + '" data-parent="#containerDescricaoFiltros">';
+                            }
+                            conteudoModal +=
                                 '       <div class="card-body" style="padding: 0 0 1rem 1rem">' + filterInfo.description + '</div>' +
                                 '   </div>' +
                                 '</div>';
@@ -1030,6 +1038,19 @@ function infoAboutIndicator() {
                             '</div>';
                         $('#modalBody').html(conteudoModal);
                         $('#exampleModal').modal('show');
+
+                        $('.mostrarMais').click(function () {
+                            if($('.infoIndicatorSnippet').css('height') != '30px'){
+                                $('.infoIndicatorSnippet').stop().animate({height: '30px'}, 200);
+                                $(this).text('Ler mais');
+                            } else {
+                                $('.infoIndicatorSnippet').css({height:'100%'});
+                                var xx = $('.infoIndicatorSnippet').height();
+                                $('.infoIndicatorSnippet').css({height:'30px'});
+                                $('.infoIndicatorSnippet').stop().animate({height: xx}, 400);
+                                $(this).text('Ler menos');
+                            }
+                        });
                     }
                 });
             } else {
@@ -1159,7 +1180,7 @@ function loadFiltrosSelecionados(){
     filterArray.forEach(function (filterItem) {
         if(filtrosId.has(filterItem.id)){
             filtrosSelecionados +=
-                '<div class="iconFilter float-right" onclick="filtroMapControl()" id="filtroMapControl" title="filtro">' +
+                '<div class="iconFilter float-right" onclick="infoAboutIndicator('+filterItem.id+')" id="filtroMapControl" title="filtro">' +
                     '<span class="button-state state-get-center get-center-active">'+filterItem.name +
                         ' <span class="fa fa-info"></span>' +
                     '</span>'+
