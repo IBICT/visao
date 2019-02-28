@@ -1,19 +1,29 @@
 [ {
   "id" : 1,
-  "name" : "Economia"
+  "name" : "Economia",
+  "type" : "INDICATOR"
 }, {
   "id" : 2,
-  "name" : "Trabalho e Renda"
+  "name" : "Trabalho e Renda",
+  "type" : "INDICATOR"
 }, {
   "id" : 3,
-  "name" : "Educação"
+  "name" : "Educação",
+  "type" : "INDICATOR"
 }, {
   "id" : 4,
-  "name" : "Qualidade de Vida e Desenvolvimento Social"
+  "name" : "Qualidade de Vida e Desenvolvimento Social",
+  "type" : "INDICATOR"
 }, {
   "id" : 5,
-  "name" : "RAIS"
+  "name" : "RAIS",
+  "type" : "INDICATOR"
 }, {
   "id" : 6,
-  "name" : "Saúde"
+  "name" : "Saúde",
+  "type" : "INDICATOR"
+}, {
+  "id" : 7,
+  "name" : "Teste",
+  "type" : "FILTER"
 } ]
