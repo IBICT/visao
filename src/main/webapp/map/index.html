@@ -445,7 +445,7 @@ h5.mb-0 button.btn.btn-link {
     var layercontrol = L.control.layers(baseLayers,{}, {
         position: "topleft"
     }).addTo(map);
-	
+
 	var group = new L.FeatureGroup();
 
 	var arrayCompleto, municipioArray, estadoArray;
@@ -492,7 +492,7 @@ function getGeoJson(){
                                         success: function (data) {
                                             filterArray = data;
                                             $.ajax({
-                                                url: './api/group-layers',
+                                                url: '/api/group-layers',
                                                 dataType: 'json',
                                                 success: function (data) {
                                                     groupLayer = data;
