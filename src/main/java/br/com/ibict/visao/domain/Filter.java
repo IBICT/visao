@@ -56,7 +56,7 @@ public class Filter implements Serializable {
     private String note;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn
     private Region cidadePolo;
 
     @ManyToOne
