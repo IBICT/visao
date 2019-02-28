@@ -419,6 +419,33 @@ h5.mb-0 button.btn.btn-link {
         }).setView([-15, -50], 4);
     map.setMaxBounds(map.getBounds());
 
+	var baseLayers = {
+        "Mapa claro": L.layerGroup([L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+            subdomains: "1234"
+        }), L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+            subdomains: "1234"
+        })]),
+        'Gao De Image': L.layerGroup([L.tileLayer('http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}', {
+            subdomains: "1234"
+        }), L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+            subdomains: "1234"
+        })]),
+        "Mapa tridimensional": L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		    maxZoom: 18,
+		    id: 'mapbox.satellite'
+	    }),
+		'GeoQ': L.tileLayer('http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}'),
+        "Mapa escuro": L.layerGroup([L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png', {
+            subdomains: "1234"
+        }), L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}.png', {
+            subdomains: "1234"
+        })]).addTo(map)
+    };
+
+    var layercontrol = L.control.layers(baseLayers,{}, {
+        position: "topleft"
+    }).addTo(map);
+	
 	var group = new L.FeatureGroup();
 
 	var arrayCompleto, municipioArray, estadoArray;
