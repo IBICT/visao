@@ -1,0 +1,60 @@
+[ {
+  "id" : 1,
+  "name" : "Brasília Shopping",
+  "geoJson" : "[-15.7867436,-47.8890379]",
+  "type" : "MARKER",
+  "description" : "brasiliashopping.com.br",
+  "date" : "2019-02-13T13:07:00Z",
+  "source" : "Google",
+  "dateChange" : null,
+  "note" : null,
+  "category" : null,
+  "icon" : null,
+  "group" : {
+    "id" : 1,
+    "name" : "Brasilia Shoppings",
+    "active" : true,
+    "keyWord" : null,
+    "user" : {
+      "id" : 3,
+      "login" : "admin",
+      "firstName" : "Administrator",
+      "lastName" : "Administrator",
+      "email" : "admin@localhost",
+      "activated" : true,
+      "langKey" : "pt-br",
+      "imageUrl" : "",
+      "resetDate" : null
+    }
+  }
+} ,
+{
+  "id" : 2,
+  "name" : "Park Shopping",
+  "geoJson" : "[-15.7463436,-47.8440379]",
+  "type" : "MARKER",
+  "description" : "parkshopping.com.br",
+  "date" : "2019-02-13T13:07:00Z",
+  "source" : "Google",
+  "dateChange" : null,
+  "note" : null,
+  "category" : null,
+  "icon" : null,
+  "group" : {
+    "id" : 1,
+    "name" : "Brasilia Shoppings",
+    "active" : true,
+    "keyWord" : null,
+    "user" : {
+      "id" : 3,
+      "login" : "admin",
+      "firstName" : "Administrator",
+      "lastName" : "Administrator",
+      "email" : "admin@localhost",
+      "activated" : true,
+      "langKey" : "pt-br",
+      "imageUrl" : "",
+      "resetDate" : null
+    }
+  }
+} ]
