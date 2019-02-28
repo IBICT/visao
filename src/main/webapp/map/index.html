@@ -806,7 +806,7 @@ function makeMap() {
 									  '				<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">FILTROS</a>' +
 									  '			</li>' +
 									  '			<li class="nav-item">' +
-									  '				<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">HISTÓRICO</a>' +
+									  '				<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">CAMADAS</a>' +
 									  '			</li>' +
 									  '		</ul>' +
 									  '		<div class="tab-content" id="myTabContent">' +
@@ -816,12 +816,14 @@ function makeMap() {
 									  '				</div>' +
 									  '			</div>' +
 									  '			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">' +
-                                                    '<div id="accordionFilter">'+
-                                                        generateListFilters()+
-                                                    '</div>'+
+									  '				<div id="accordionFilter">' +
+                                                        generateListFilters() +
+									  '				</div>'+
                                       '             <div id="selectedIndicator" style="text-align: center;"><span> Não há indicador selecionado</span></div>' +
-                                                '</div>' +
-									  '			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>' +
+									  '			</div>' +
+									  '			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">' +
+														genereteListLayer() +
+												'</div>' +
 									  '		</div>' +
 									  '		<span onclick="menuMapControl()" style="position:relative; left:-31px; top: -438px;; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-times"> </span></span>' +
 									  '		<hr style="background-color:#146678; height: 1px;" />' +
