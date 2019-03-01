@@ -61,6 +61,14 @@ public class Name implements Serializable {
     @JsonIgnoreProperties("")
     private User user;
 
+    @Column(name = "type_presentation")
+    /*
+        Valores permitidos:
+        $ - Dinheiro
+        Q - Quantidade
+     */
+    private Character typePresentation;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -198,6 +206,14 @@ public class Name implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Character getTypePresentation() {
+        return typePresentation;
+    }
+
+    public void setTypePresentation(Character typePresentation) {
+        this.typePresentation = typePresentation;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
