@@ -49,8 +49,6 @@ public class LayerCriteria implements Serializable {
 
     private StringFilter note;
 
-    private LongFilter categoryId;
-
     private LongFilter iconId;
 
     private LongFilter groupId;
@@ -122,14 +120,6 @@ public class LayerCriteria implements Serializable {
         this.note = note;
     }
 
-    public LongFilter getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(LongFilter categoryId) {
-        this.categoryId = categoryId;
-    }
-
     public LongFilter getIconId() {
         return iconId;
     }
@@ -157,7 +147,6 @@ public class LayerCriteria implements Serializable {
                 (source != null ? "source=" + source + ", " : "") +
                 (dateChange != null ? "dateChange=" + dateChange + ", " : "") +
                 (note != null ? "note=" + note + ", " : "") +
-                (categoryId != null ? "categoryId=" + categoryId + ", " : "") +
                 (iconId != null ? "iconId=" + iconId + ", " : "") +
                 (groupId != null ? "groupId=" + groupId + ", " : "") +
             "}";
