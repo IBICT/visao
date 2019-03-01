@@ -30,6 +30,8 @@ public class YearCriteria implements Serializable {
 
     private StringFilter date;
 
+    private LongFilter nameId;
+
     public YearCriteria() {
     }
 
@@ -47,6 +49,14 @@ public class YearCriteria implements Serializable {
 
     public void setDate(StringFilter date) {
         this.date = date;
+    }
+
+    public LongFilter getNameId() {
+        return nameId;
+    }
+
+    public void setNameId(LongFilter nameId) {
+        this.nameId = nameId;
     }
 
     @Override

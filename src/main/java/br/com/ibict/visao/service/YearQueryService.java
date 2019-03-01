@@ -62,6 +62,18 @@ public class YearQueryService extends QueryService<Year> {
     }
 
     /**
+     * Return a {@link Page} of {@link Year} which matches the criteria from the database
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @param page The page, which should be returned.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<Year> findAllFromIndicator(YearCriteria criteria, Pageable page) {
+        log.debug("find by criteria : {}, page: {}", criteria, page);
+        return yearRepository.findAllFromIndicator(criteria.getNameId().getEquals(), page);
+    }
+
+    /**
      * Function to convert YearCriteria to a {@link Specification}
      */
     private Specification<Year> createSpecification(YearCriteria criteria) {

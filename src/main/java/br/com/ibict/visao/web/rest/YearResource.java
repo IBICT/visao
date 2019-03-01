@@ -104,6 +104,23 @@ public class YearResource {
     }
 
     /**
+     * GET  /years : get all the years.
+     *
+     * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
+     * @return the ResponseEntity with status 200 (OK) and the list of years in body
+     */
+    @GetMapping("/yearsDistinct")
+    @Timed
+    // Example query: http://localhost:8080/api/yearsDistinct?&nameId.equals=3
+    public ResponseEntity<List<Year>> getAllDistinctYearsFromIndicator(YearCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get Years by criteria: {}", criteria);
+        Page<Year> page = yearQueryService.findAllFromIndicator(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/yearsDistinct");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
      * GET  /years/:id : get the "id" year.
      *
      * @param id the id of the year to retrieve
