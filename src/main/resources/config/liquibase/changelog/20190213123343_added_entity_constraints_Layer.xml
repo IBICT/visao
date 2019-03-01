@@ -7,12 +7,6 @@
         Added the constraints for entity Layer.
     -->
     <changeSet id="20190213123343-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="category_id"
-                                 baseTableName="layer"
-                                 constraintName="fk_layer_category_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="category"/>
 
         <addForeignKeyConstraint baseColumnNames="icon_id"
                                  baseTableName="layer"

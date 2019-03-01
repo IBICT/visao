@@ -91,9 +91,6 @@ public class LayerQueryService extends QueryService<Layer> {
             if (criteria.getNote() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getNote(), Layer_.note));
             }
-            if (criteria.getCategoryId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getCategoryId(), Layer_.category, Category_.id));
-            }
             if (criteria.getIconId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getIconId(), Layer_.icon, MarkerIcon_.id));
             }

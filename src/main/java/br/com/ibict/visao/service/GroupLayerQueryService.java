@@ -79,6 +79,9 @@ public class GroupLayerQueryService extends QueryService<GroupLayer> {
             if (criteria.getKeyWord() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getKeyWord(), GroupLayer_.keyWord));
             }
+			if (criteria.getCategoryId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getCategoryId(), GroupLayer_.category, Category_.id));
+            }
             if (criteria.getUserId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getUserId(), GroupLayer_.user, User_.id));
             }

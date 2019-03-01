@@ -58,10 +58,6 @@ public class Layer implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("")
-    private Category category;
-
-    @ManyToOne
-    @JsonIgnoreProperties("")
     private MarkerIcon icon;
 
     @ManyToOne
@@ -179,19 +175,6 @@ public class Layer implements Serializable {
 
     public void setNote(String note) {
         this.note = note;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public Layer category(Category category) {
-        this.category = category;
-        return this;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public MarkerIcon getIcon() {

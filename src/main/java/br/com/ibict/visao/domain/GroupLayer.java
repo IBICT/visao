@@ -35,6 +35,10 @@ public class GroupLayer implements Serializable {
     @Column(name = "key_word")
     private String keyWord;
 
+	@ManyToOne
+    @JsonIgnoreProperties("")
+    private Category category;
+	
     @ManyToOne
     @JsonIgnoreProperties("")
     private User user;
@@ -87,6 +91,19 @@ public class GroupLayer implements Serializable {
         this.keyWord = keyWord;
     }
 
+	public Category getCategory() {
+        return category;
+    }
+
+    public GroupLayer category(Category category) {
+        this.category = category;
+        return this;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+	
     public User getUser() {
         return user;
     }

@@ -54,10 +54,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="category_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <column name="icon_id" type="bigint">
                 <constraints nullable="true" />
             </column>

@@ -8,6 +8,12 @@
     -->
     <changeSet id="20190213123345-2" author="jhipster">
         
+		<addForeignKeyConstraint baseColumnNames="category_id"
+                                 baseTableName="group_layer"
+                                 constraintName="fk_group_layer_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category"/>
+		
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="group_layer"
                                  constraintName="fk_group_layer_user_id"
