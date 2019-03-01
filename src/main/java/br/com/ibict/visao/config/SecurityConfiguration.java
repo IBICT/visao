@@ -157,6 +157,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers(HttpMethod.GET, "/api/filters").permitAll()
             .antMatchers(HttpMethod.GET, "/api/filters/**").permitAll()
             .antMatchers(HttpMethod.GET, "/api/indicatorsFilter").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/indicatorsMostRecentYear").permitAll()
             .antMatchers(HttpMethod.GET, "/api/regionsWithFilter").permitAll()
             .antMatchers(HttpMethod.GET, "/api/filtersDTO").permitAll()
             .antMatchers(HttpMethod.GET, "/api/group-layers").permitAll()

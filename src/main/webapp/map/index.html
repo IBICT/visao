@@ -1059,7 +1059,7 @@ function makeMap() {
 
         var urlQuery = '';
         if(filtrosId.size === 0){
-            urlQuery += './api/indicators?yearId.equals=11&nameId.equals='+indicadorAtual;
+            urlQuery += '/api/indicators?&nameId.equals='+indicadorAtual;
             loadResultMap(urlQuery);
 
         } else {
@@ -1068,7 +1068,7 @@ function makeMap() {
                 vetor.push(filtro);
             });
             var stringResult = vetor.join(',');
-            urlQuery += '/api/indicatorsFilter?&yearId.equals=11&filtersId.in='+stringResult+'&nameId.equals='+indicadorAtual;
+            urlQuery += '/api/indicatorsFilter?&filtersId.in='+stringResult+'&nameId.equals='+indicadorAtual;
 
             $.ajax({
                 url: '/api/regionsWithFilter?&filtersId.in='+stringResult,

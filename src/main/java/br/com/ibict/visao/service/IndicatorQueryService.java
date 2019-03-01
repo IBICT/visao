@@ -61,6 +61,11 @@ public class IndicatorQueryService extends QueryService<Indicator> {
         return indicatorRepository.findAll(specification, page);
     }
 
+    @Transactional(readOnly = true)
+    public Long findMostRecentYearFromIndicator(Long nameId) {
+        return indicatorRepository.getMostRecentYearFromIndicator(nameId);
+    }
+
 
     /**
      * Return a {@link Page} of {@link Indicator} which matches the criteria from the database

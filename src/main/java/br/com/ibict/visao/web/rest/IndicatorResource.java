@@ -1,13 +1,14 @@
 package br.com.ibict.visao.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import br.com.ibict.visao.domain.Indicator;
+import br.com.ibict.visao.service.IndicatorQueryService;
 import br.com.ibict.visao.service.IndicatorService;
+import br.com.ibict.visao.service.dto.IndicatorCriteria;
 import br.com.ibict.visao.web.rest.errors.BadRequestAlertException;
 import br.com.ibict.visao.web.rest.util.HeaderUtil;
 import br.com.ibict.visao.web.rest.util.PaginationUtil;
-import br.com.ibict.visao.service.dto.IndicatorCriteria;
-import br.com.ibict.visao.service.IndicatorQueryService;
+import com.codahale.metrics.annotation.Timed;
+import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,12 +17,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -98,6 +105,7 @@ public class IndicatorResource {
     @Timed
     public ResponseEntity<List<Indicator>> getAllIndicators(IndicatorCriteria criteria, Pageable pageable) {
         log.debug("REST request to get Indicators by criteria: {}", criteria);
+        findMostRecentYearFromIndicator(criteria);
         Page<Indicator> page = indicatorQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/indicators");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
@@ -114,9 +122,18 @@ public class IndicatorResource {
     @Timed
     public ResponseEntity<List<Indicator>> getAllIndicatorsWithFilter(IndicatorCriteria criteria, Pageable pageable) {
         log.debug("REST request to get Indicators by criteria: {}", criteria);
+        findMostRecentYearFromIndicator(criteria);
         Page<Indicator> page = indicatorQueryService.findIndicatorWithFilters(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/indicatorsFilter");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    private void findMostRecentYearFromIndicator(IndicatorCriteria indicatorCriteria){
+        if (indicatorCriteria.getYearId() == null){
+            LongFilter longFilter = new LongFilter();
+            longFilter.setEquals(indicatorQueryService.findMostRecentYearFromIndicator(indicatorCriteria.getNameId().getEquals()));
+            indicatorCriteria.setYearId(longFilter);
+        }
     }
 
     /**

@@ -28,4 +28,14 @@ public interface IndicatorRepository extends JpaRepository<Indicator, Long>, Jpa
                                        @Param("yearId")Long yearId,
                                        @Param("filtersId") List<Long> filtersId,
                                        Pageable page);
+
+    @Query(value = "SELECT ID FROM YEAR WHERE YEAR.JHI_DATE = " +
+        "       (SELECT MAX(ANO) FROM (" +
+        "           SELECT DISTINCT INDICATOR.YEAR_ID, YEAR.JHI_DATE ANO " +
+        "           FROM INDICATOR INDICATOR" +
+        "           INNER JOIN YEAR YEAR ON YEAR.ID = INDICATOR.YEAR_ID " +
+        "           WHERE INDICATOR.NAME_ID = :nameId " +
+        "       ) AS CONSULTA" +
+        ") ", nativeQuery = true)
+    Long getMostRecentYearFromIndicator(@Param("nameId") Long nameId);
 }
