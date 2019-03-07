@@ -2,12 +2,41 @@
 Main page styles
 ========================================================================== */
 
+.bg-home {
+    background: linear-gradient(0deg, #146678 0%, #59c9a8 127.78%);
+    min-height: 100vh;
+}
+
+.bg-home h1 {
+    font-size: 64px;
+}
+
+.bg-home p {
+    font-size: 24px;
+}
+
+.loko {
+    background: url('../../content/images/loko.png');
+    min-height: 100vh;
+}
+
 .hipster {
     display: inline-block;
     width: 347px;
     height: 497px;
     background: url('../../content/images/hipster.png') no-repeat center top;
     background-size: contain;
+}
+
+.home-yellow {
+    color: #e5c75a;
+}
+
+.btn-explore {
+    background-color: #e5c75a;
+    border-color: #e5c75a;
+    color: #fff;
+    font-weight: bold;
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
