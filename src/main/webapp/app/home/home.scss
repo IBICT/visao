@@ -4,6 +4,20 @@ Main page styles
 
 .bg-home {
     background: linear-gradient(0deg, #146678 0%, #59c9a8 127.78%);
+    min-height: 100vh;
+}
+
+.bg-home h1 {
+    font-size: 64px;
+}
+
+.bg-home p {
+    font-size: 24px;
+}
+
+.loko {
+    background: url('../../content/images/loko.png');
+    min-height: 100vh;
 }
 
 .hipster {
