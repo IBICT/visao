@@ -1154,6 +1154,7 @@ function infoAboutIndicator(filterCod) {
                 '           <label style="margin-right: 5px">' + dataJson.name.value + ' </label>' +
                 // '          <button class="btn btn-outline-info" onclick="loadGraphic(\''+dataJson.name.value+'\')">Ver gráfico</button>' +
                 '       <div style="margin-top: 10px" class="infoIndicatorSnippet">' + dataJson.name.description + '</div>' +
+                '       <a href="/api/indicators?&nameId.equals='+indicadorSelecionado+'" download> Download</a>' +
                 '       <a href="#" class="mostrarMais"> Ler mais</a>' +
                 '   </div>';
             if (filtrosId.size !== 0) {
