@@ -743,7 +743,7 @@ function makeChart(rangeMap2) {
 			    var popupValue = '<div onclick="modalDetail(\''+feature.geoCode+'\')">' +
                     '<p id="box_'+feature.geoCode+'" class="title-popup">'+feature.properties.NOME+'</p>' +
                     '<p id="both" style="margin-bottom: 0">'+arrayCompleto[0].name.value+'</p>' +
-                    '<p style="font-size: 16px; margin-top: 0; font-weight: bold">'+indicatorArray[feature.geoCode]+'</p>' +
+                    '<p style="font-size: 16px; margin-top: 0; font-weight: bold">'+getFormattedPrintValue(arrayCompleto[0].name.typePresentation, indicatorArray[feature.geoCode])+'</p>' +
                     '<div style="text-align: center">';
 
 			    var filtrosAplicados = filtrosPesquisados.get(parseInt(feature.geoCode));
@@ -775,6 +775,14 @@ function makeChart(rangeMap2) {
 
 	group.addLayer(route1Layer);
 	map.addLayer(group);
+
+	function getFormattedPrintValue(typePresentation, valueToShow){
+	    if('$' === typePresentation){
+	        return 'R$ ' + valueToShow.toLocaleString('pt-br', {minimumFractionDigits: 2});
+        }
+
+        return valueToShow;
+    }
 }
 
 function setLayer(json){
