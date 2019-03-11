@@ -8,7 +8,7 @@ import { JhiLanguageHelper } from 'app/core';
     templateUrl: './main.component.html'
 })
 export class JhiMainComponent implements OnInit {
-    constructor(private jhiLanguageHelper: JhiLanguageHelper, private router: Router) {}
+    constructor(private jhiLanguageHelper: JhiLanguageHelper, public router: Router) {}
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
         let title: string = routeSnapshot.data && routeSnapshot.data['pageTitle'] ? routeSnapshot.data['pageTitle'] : 'visaoApp';

@@ -70,6 +70,12 @@ html, body {
   display: none;
 }
 
+.select-year {
+    position: relative;
+    right: 180px;
+    bottom: 14px;
+}
+
 .key path {
   display: none;
 }
@@ -414,7 +420,6 @@ h5.mb-0 button.btn.btn-link {
     var map = L.map('map', {
             zoomControl:false,
             minZoom: 3,
-            maxZoom: 10,
             doubleClickZoom: false
         }).setView([-15, -50], 4);
     map.setMaxBounds(map.getBounds());
@@ -456,6 +461,7 @@ h5.mb-0 button.btn.btn-link {
     var filtrosId, layersId;
     var indicadorSelecionado;
     var filtrosPesquisados = new Map();
+	var indicadorAtual;
 
 	getGeoJson();
 
@@ -741,7 +747,7 @@ function makeChart(rangeMap2) {
 			if (typeof indicatorArray[feature.geoCode] !== "undefined") {
 
 			    var popupValue = '<div onclick="modalDetail(\''+feature.geoCode+'\')">' +
-                    '<p id="box_'+feature.geoCode+'" class="title-popup">'+feature.properties.NOME+'</p>' +
+                    '<p id="box_'+feature.geoCode+'" class="title-popup">'+feature.properties.name+'</p>' +
                     '<p id="both" style="margin-bottom: 0">'+arrayCompleto[0].name.value+'</p>' +
                     '<p style="font-size: 16px; margin-top: 0; font-weight: bold">'+indicatorArray[feature.geoCode]+'</p>' +
                     '<div style="text-align: center">';
@@ -782,7 +788,9 @@ function setLayer(json){
 	json.forEach(function(item) {
 		switch(item.type){
 			case "MARKER":
+				console.log(item.geoJson);
 				var latlong = JSON.parse(item.geoJson);
+				console.log(latlong);
 				L.marker(latlong).addTo(map)
 				.bindPopup("Nome: " + item.name + "<br />" + "Descrição: " +item.description + "<br />" + "Fonte: " +item.source+ "<br />" + "Notas: " +item.note);
 			break;
@@ -816,6 +824,105 @@ function setLayer(json){
 			break;
 		}
 	});
+}
+
+function setYears(nameId) {
+    var yearsOptions = '';
+    $.ajax({
+        url: '/api/yearsDistinct?&nameId.equals='+nameId,
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            data.forEach(function(item) {
+                yearsOptions += '<option value="' + item.id +'">' + item.date + '</option>';
+            });            
+        }
+    });
+    return yearsOptions;
+}
+
+function changeYear(yearOption){
+	map.removeLayer(group);
+    console.log(yearOption.value);
+	
+	var urlQuery = '';
+	if(filtrosId.size === 0){
+		urlQuery += '/api/indicators?yearId.equals='+yearOption.value+'&nameId.equals='+indicadorAtual;
+	} else {
+		var vetor = new Array();
+		filtrosId.forEach(function (filtro) {
+			vetor.push(filtro);
+		});
+		var stringResult = vetor.join(',');
+		urlQuery += '/api/indicatorsFilter?yearId.equals='+yearOption.value+'&filtersId.in='+stringResult+'&nameId.equals='+indicadorAtual;
+
+		$.ajax({
+			url: '/api/regionsWithFilter?yearId.equals='+yearOption.value+'&filtersId.in='+stringResult,
+			dataType: 'json',
+			success: function (dataJson) {
+				filtrosPesquisados = new Map();
+				dataJson.forEach(function (dto) {
+					var contains = filtrosPesquisados.get(dto.geocode);
+					if(contains === undefined){
+						filtrosPesquisados.set(dto.geocode, []);
+						contains = filtrosPesquisados.get(dto.geocode);
+					}
+
+					contains.push(dto.filtername);
+				});
+			}
+		});
+	}
+	
+	$.ajax({
+		url: urlQuery,
+		dataType: 'json',
+		success: function (dataJson) {
+
+			if (dataJson.length < 1) {
+				$("#loading").hide();
+				emptyMap();
+			}
+			else {
+				arrayCompleto = dataJson;
+				municipioArray = new Array();
+				estadoArray = new Array();
+
+				//console.log(dataJson);
+
+				dataJson.forEach(function (indicator) {
+
+					if (indicator.region.typeRegion == "MUNICIPIO") {
+						municipioArray[indicator.region.geoCode.toString()] = indicator.value;
+					} else if (indicator.region.typeRegion == "ESTADO") {
+						estadoArray[indicator.region.geoCode.toString()] = indicator.value;
+						return;
+					}
+				});
+
+				itensSelect[0] = '<option value="1">Estado</option>';
+				itensSelect[1] = '<option value="2">Municipio</option>';
+
+				if (estadoArray.length > 0) {
+					if (municipioArray.length < 1){
+						delete itensSelect[1];
+					}
+					makeChart(1);
+				} else if (municipioArray.length > 0) {
+					delete itensSelect[0];
+					makeChart(2);
+				} else {
+					console.log("Empty DATAJSON")
+				}
+			}
+		}
+	});
+	
+}
+
+function limparMap() {
+	console.log("TESTE");
+	location.reload();
 }
 
 function makeMap() {
@@ -905,7 +1012,6 @@ function makeMap() {
 		$(this).find( "i" ).removeClass("fa-angle-right");
 	});
 
-	var indicadorAtual;
 	$('input[type=radio][name=indicator]').change(function() {
 		indicadorAtual = this.value;
         indicadorSelecionado = indicadorAtual;
@@ -955,8 +1061,11 @@ function makeMap() {
                     itensSelect[1] = '<option value="2">Municipio</option>';
 
                     if (estadoArray.length > 0) {
-                        makeChart(1);
-                    } else if (municipioArray.length > 0) {
+						if (municipioArray.length < 1){
+							delete itensSelect[1];
+						}
+						makeChart(1);
+					} else if (municipioArray.length > 0) {
                         delete itensSelect[0];
                         makeChart(2);
                     } else {
@@ -1017,7 +1126,7 @@ function makeMap() {
                     limparMapControl = L.control({position: 'topright'});
                     limparMapControl.onAdd = function (map) {
                         this._div = L.DomUtil.create('div', 'limparMapControl');
-                        this._div.innerHTML = '<div style="cursor: pointer;color:#FFFFFF; font-size:14px;" onclick="limparMapControl()" class="" id="limparMapControl" title="Menu">' +
+                        this._div.innerHTML = '<div style="cursor: pointer;color:#FFFFFF; font-size:14px;" onclick="limparMap()" class="" id="limparMapControl" title="Menu">' +
                             '<span style="text-decoration: underline;">' +
                             'limpar <span class="fa fa-trash-o"></span>' +
                             '</span></div>';
@@ -1035,17 +1144,20 @@ function makeMap() {
                     rangeBarControl = L.control({position: 'bottomright'});
                     rangeBarControl.onAdd = function (map) {
                         this._div = L.DomUtil.create('div', 'rangeBarControl');
-                        this._div.innerHTML = '<i class="fa fa-minus" aria-hidden="true"></i><div class="range-bar">' +
+                        this._div.innerHTML = '' +
+                            '<i class="fa fa-minus" aria-hidden="true"></i><div class="range-bar">' +
                             '<span class="range-bar-mark"></span>' +
-                            '</div><i class="fa fa-plus" aria-hidden="true"></i>';
+                            '</div><i class="fa fa-plus" aria-hidden="true"></i>' +
+                            '<select onchange="changeYear(this)" class="select-year">' +
+                                setYears(indicadorAtual) +
+                            '</select>';
 
-                        L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
-                        L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
-                        L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);
-
+                       
                         return this._div;
                     }
                     rangeBarControl.addTo(map);
+                    document.getElementsByClassName("rangeBarControl")[0].onmouseover = controlEnter;
+                    document.getElementsByClassName("rangeBarControl")[0].onmouseout = controlLeave;
 
 
                     // select Map control
@@ -1087,7 +1199,7 @@ function makeMap() {
                 strQuery +="groupId.equals="+layerId+"&";
             });
             $.ajax({
-                url: './api/layers'+strQuery,
+                url: '/api/layers'+strQuery,
                 dataType: 'json',
                 success: function (data) {
                     setLayer(data);
