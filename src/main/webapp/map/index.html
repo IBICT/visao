@@ -3,9 +3,10 @@
 
 	<meta charset="UTF-8">
 	<title>Mapa Completo do Sistema de Observatorio</title>
-   <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
-   <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
@@ -446,6 +447,15 @@ h5.mb-0 button.btn.btn-link {
         position: "topleft"
     }).addTo(map);
 
+    oms = new OverlappingMarkerSpiderfier(map);
+
+    var popup = new L.Popup();
+	oms.addListener('click', function(marker) {
+	 	popup.setContent(marker.desc);
+	 	popup.setLatLng(marker.getLatLng());
+	 	map.openPopup(popup);
+	});
+
 	var group = new L.FeatureGroup();
 
 	var arrayCompleto, municipioArray, estadoArray;
@@ -791,8 +801,10 @@ function setLayer(json){
 		switch(item.type){
 			case "MARKER":
 				var latlong = JSON.parse(item.geoJson);
-				L.marker(latlong).addTo(map)
-				.bindPopup("Nome: " + item.name + "<br />" + "Descrição: " +item.description + "<br />" + "Fonte: " +item.source+ "<br />" + "Notas: " +item.note);
+				var marker = new L.Marker(latlong);
+				marker.desc = "Nome: " + item.name + "<br />" + "Descrição: " + item.description + "<br />" + "Fonte: " + item.source + "<br />" + "Notas: " + item.note;
+				map.addLayer(marker);
+  				oms.addMarker(marker);
 			break;
 			case "CIRCLE":
 				var circle = JSON.parse(item.geoJson);
