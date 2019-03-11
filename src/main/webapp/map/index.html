@@ -3,9 +3,10 @@
 
 	<meta charset="UTF-8">
 	<title>Mapa Completo do Sistema de Observatorio</title>
-   <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
-   <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
@@ -451,6 +452,15 @@ h5.mb-0 button.btn.btn-link {
         position: "topleft"
     }).addTo(map);
 
+    oms = new OverlappingMarkerSpiderfier(map);
+
+    var popup = new L.Popup();
+	oms.addListener('click', function(marker) {
+	 	popup.setContent(marker.desc);
+	 	popup.setLatLng(marker.getLatLng());
+	 	map.openPopup(popup);
+	});
+
 	var group = new L.FeatureGroup();
 
 	var arrayCompleto, municipioArray, estadoArray;
@@ -749,7 +759,7 @@ function makeChart(rangeMap2) {
 			    var popupValue = '<div onclick="modalDetail(\''+feature.geoCode+'\')">' +
                     '<p id="box_'+feature.geoCode+'" class="title-popup">'+feature.properties.name+'</p>' +
                     '<p id="both" style="margin-bottom: 0">'+arrayCompleto[0].name.value+'</p>' +
-                    '<p style="font-size: 16px; margin-top: 0; font-weight: bold">'+indicatorArray[feature.geoCode]+'</p>' +
+                    '<p style="font-size: 16px; margin-top: 0; font-weight: bold">'+getFormattedPrintValue(arrayCompleto[0].name.typePresentation, indicatorArray[feature.geoCode])+'</p>' +
                     '<div style="text-align: center">';
 
 			    var filtrosAplicados = filtrosPesquisados.get(parseInt(feature.geoCode));
@@ -781,6 +791,14 @@ function makeChart(rangeMap2) {
 
 	group.addLayer(route1Layer);
 	map.addLayer(group);
+
+	function getFormattedPrintValue(typePresentation, valueToShow){
+	    if('$' === typePresentation){
+	        return 'R$ ' + valueToShow.toLocaleString('pt-br', {minimumFractionDigits: 2});
+        }
+
+        return valueToShow;
+    }
 }
 
 function setLayer(json){
@@ -790,9 +808,23 @@ function setLayer(json){
 			case "MARKER":
 				console.log(item.geoJson);
 				var latlong = JSON.parse(item.geoJson);
-				console.log(latlong);
-				L.marker(latlong).addTo(map)
-				.bindPopup("Nome: " + item.name + "<br />" + "Descrição: " +item.description + "<br />" + "Fonte: " +item.source+ "<br />" + "Notas: " +item.note);
+				var marker = new L.Marker(latlong);
+				marker.desc = '';
+				
+				marker.desc += ((typeof item.name === 'string' || item.name instanceof String) && item.name.length !== 0)
+								? "Nome: " + item.name + "<br />" : '';
+
+				marker.desc += ((typeof item.description === 'string' || item.description instanceof String) && item.description.length !== 0)
+								? "Descrição: " + item.description + "<br />" : '';
+
+				marker.desc += ((typeof item.source === 'string' || item.source instanceof String) && item.source.length !== 0)
+								? "Fonte: " + item.source + "<br />" : '';
+
+				marker.desc += ((typeof item.note === 'string' || item.note instanceof String) && item.note.length !== 0)
+								? "Notas: " + item.note + "<br />" : '';
+
+				map.addLayer(marker);
+  				oms.addMarker(marker);
 			break;
 			case "CIRCLE":
 				var circle = JSON.parse(item.geoJson);
@@ -1266,6 +1298,7 @@ function infoAboutIndicator(filterCod) {
                 '           <label style="margin-right: 5px">' + dataJson.name.value + ' </label>' +
                 // '          <button class="btn btn-outline-info" onclick="loadGraphic(\''+dataJson.name.value+'\')">Ver gráfico</button>' +
                 '       <div style="margin-top: 10px" class="infoIndicatorSnippet">' + dataJson.name.description + '</div>' +
+                '       <a href="/api/indicators?&nameId.equals='+indicadorSelecionado+'" download> Download</a>' +
                 '       <a href="#" class="mostrarMais"> Ler mais</a>' +
                 '   </div>';
             if (filtrosId.size !== 0) {
