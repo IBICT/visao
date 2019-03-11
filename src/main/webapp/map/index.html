@@ -802,7 +802,20 @@ function setLayer(json){
 			case "MARKER":
 				var latlong = JSON.parse(item.geoJson);
 				var marker = new L.Marker(latlong);
-				marker.desc = "Nome: " + item.name + "<br />" + "Descrição: " + item.description + "<br />" + "Fonte: " + item.source + "<br />" + "Notas: " + item.note;
+				marker.desc = '';
+				
+				marker.desc += ((typeof item.name === 'string' || item.name instanceof String) && item.name.length !== 0)
+								? "Nome: " + item.name + "<br />" : '';
+
+				marker.desc += ((typeof item.description === 'string' || item.description instanceof String) && item.description.length !== 0)
+								? "Descrição: " + item.description + "<br />" : '';
+
+				marker.desc += ((typeof item.source === 'string' || item.source instanceof String) && item.source.length !== 0)
+								? "Fonte: " + item.source + "<br />" : '';
+
+				marker.desc += ((typeof item.note === 'string' || item.note instanceof String) && item.note.length !== 0)
+								? "Notas: " + item.note + "<br />" : '';
+
 				map.addLayer(marker);
   				oms.addMarker(marker);
 			break;
