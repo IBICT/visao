@@ -8,6 +8,7 @@ import br.com.ibict.visao.web.rest.util.HeaderUtil;
 import br.com.ibict.visao.web.rest.util.PaginationUtil;
 import br.com.ibict.visao.service.dto.NameCriteria;
 import br.com.ibict.visao.service.NameQueryService;
+import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -101,6 +102,29 @@ public class NameResource {
         Page<Name> page = nameQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/names");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /names : get all the names.
+     *
+     * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
+     * @return the ResponseEntity with status 200 (OK) and the list of names in body
+     */
+    @GetMapping("/namesPublic")
+    @Timed
+    public ResponseEntity<List<Name>> getAllNamesPublic(NameCriteria criteria, Pageable pageable) {
+        criteria.setActive(getBooleanFilterTrue());
+        log.debug("REST request to get Names by criteria: {}", criteria);
+        Page<Name> page = nameQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/names");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    private BooleanFilter getBooleanFilterTrue(){
+        BooleanFilter booleanFilter = new BooleanFilter();
+        booleanFilter.setEquals(Boolean.TRUE);
+        return booleanFilter;
     }
 
     /**

@@ -500,7 +500,7 @@ function getGeoJson(){
 						success: function(data) {
 							categories = data;
 							$.ajax({
-								url: '/api/names',
+								url: '/api/namesPublic',
 								dataType: 'json',
 								success: function(data) {
 									indicatorNames = data;
@@ -795,9 +795,9 @@ function makeChart(rangeMap2) {
 	function getFormattedPrintValue(typePresentation, valueToShow){
 	    if('$' === typePresentation){
 	        return 'R$ ' + valueToShow.toLocaleString('pt-br', {minimumFractionDigits: 2});
+        } else {
+            return valueToShow.toLocaleString('pt-br');
         }
-
-        return valueToShow;
     }
 }
 
@@ -810,7 +810,7 @@ function setLayer(json){
 				var latlong = JSON.parse(item.geoJson);
 				var marker = new L.Marker(latlong);
 				marker.desc = '';
-				
+
 				marker.desc += ((typeof item.name === 'string' || item.name instanceof String) && item.name.length !== 0)
 								? "Nome: " + item.name + "<br />" : '';
 
@@ -867,7 +867,7 @@ function setYears(nameId) {
         success: function (data) {
             data.forEach(function(item) {
                 yearsOptions += '<option value="' + item.id +'">' + item.date + '</option>';
-            });            
+            });
         }
     });
     return yearsOptions;
@@ -876,7 +876,7 @@ function setYears(nameId) {
 function changeYear(yearOption){
 	map.removeLayer(group);
     console.log(yearOption.value);
-	
+
 	var urlQuery = '';
 	if(filtrosId.size === 0){
 		urlQuery += '/api/indicators?yearId.equals='+yearOption.value+'&nameId.equals='+indicadorAtual;
@@ -905,7 +905,7 @@ function changeYear(yearOption){
 			}
 		});
 	}
-	
+
 	$.ajax({
 		url: urlQuery,
 		dataType: 'json',
@@ -949,7 +949,7 @@ function changeYear(yearOption){
 			}
 		}
 	});
-	
+
 }
 
 function limparMap() {
@@ -1184,7 +1184,7 @@ function makeMap() {
                                 setYears(indicadorAtual) +
                             '</select>';
 
-                       
+
                         return this._div;
                     }
                     rangeBarControl.addTo(map);
@@ -1378,105 +1378,6 @@ function infoAboutIndicator(filterCod) {
         }
     });
 }
-
-// function loadGraphic(indicatorName){
-//     $.ajax({
-//         url: '/api/indicators/1', // TODO corrigir url
-//         dataType: 'json',
-//         success: function (dataJson) {
-//             var conteudoModal =
-//                 '<div>' +
-//                 '   <div>' +
-//                 '       <div style="margin-bottom: 10px">' +
-//                 '           <label style="margin-right: 5px"> '+indicatorName+' </label>' +
-//                 '          <button class="btn btn-outline-info" onclick="infoAboutIndicator()">Voltar</button>' +
-//                 '       <div style="margin-top: 10px"> teste blçasjd dlaskj  </div>' +
-//                 '   </div>' +
-//                 '   <div width="400px" height="400px">' +
-//                 '       <canvas id="chartContent" width="400px" height="400px"></canvas>' +
-//                 '   </div>' +
-//                 '</div>';
-//
-//             $('#modalBody').html(conteudoModal);
-//
-//             var ctx = document.getElementById('chartContent').getContext('2d');
-//
-//             var labelArray = new Array();
-//             var dataArray = new Array();
-//             var dataColor = new Array();
-//
-//             // dataJson.forEach(function (item) {
-//             //     labelArray.push(item.regionType);
-//             //     dataArray.push(item.contentValue);
-//             //     dataColor.push(getRandomColor());
-//             // });
-//
-//             new Chart (ctx, {
-//                 type: 'bar',
-//                 data: {
-//                     labels: labelArray,
-//                     datasets: [{
-//                         label: ["rfwgdbs","tesf"],
-//                         data: [123,123],
-//                         backgroundColor: [getRandomColor(), getRandomColor()],
-//                         borderWidth: 1
-//                     }]
-//                 },
-//                 options: {
-//                     maintainAspectRatio: false,
-//                     title: {
-//                         display: false
-//                     },
-//                     scales: {
-//                         yAxes: [{
-//                             ticks: {
-//                                 beginAtZero:true
-//                             },
-//                             scaleLabel:{
-//                                 display: true,
-//                                 labelString: 'PIB'
-//                             }
-//                         }],
-//                         xAxes: [{
-//                             ticks: {
-//                                 beginAtZero:true
-//                             },
-//                             scaleLabel:{
-//                                 display: true,
-//                                 labelString: 'Estados'
-//                             }
-//                         }]
-//                     },
-//                     hover: {
-//                         mode: 'nearest',
-//                         intersect: true
-//                     },
-//                     tooltips: {
-//                         mode: 'index',
-//                         intersect: false,
-//                         callbacks: {
-//                             label: function (item, chart) {
-//                                 // var datasetLabel = chart.datasets[item.datasetIndex].label || 'vazio';
-//                                 // return 'R$: ' + datasetLabel;
-//                                 return 'R$: ' + item.yLabel;
-//                             }
-//                         }
-//                     }
-//                 }
-//             });
-//
-//         }
-//     });
-// }
-//
-// function getRandomColor() {
-//     var letters = '0123456789ABCDEF'.split('');
-//     var color = '#';
-//     for (var i = 0; i < 6; i++ ) {
-//         color += letters[Math.floor(Math.random() * 16)];
-//     }
-//     return color;
-// }
 
 function loadFiltrosSelecionados(){
     var filtrosSelecionados = '';
