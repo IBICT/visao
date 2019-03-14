@@ -506,7 +506,7 @@ function getGeoJson(){
                                         success: function (data) {
                                             filterArray = data;
                                             $.ajax({
-                                                url: './api/group-layers',
+                                                url: '/api/group-layers',
                                                 dataType: 'json',
                                                 success: function (data) {
                                                     groupLayer = data;
@@ -1253,7 +1253,7 @@ function makeMap() {
                 strQuery +="groupId.equals="+layerId+"&";
             });
             $.ajax({
-                url: './api/layers'+strQuery,
+                url: '/api/layers'+strQuery,
                 dataType: 'json',
                 success: function (data) {
                     setLayer(data);
