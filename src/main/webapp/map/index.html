@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <head>
-
 	<meta charset="UTF-8">
 	<title>Mapa Completo do Sistema de Observatorio</title>
-    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
-    <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="loading.css" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
-
-
+	<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 <style>
 
 html, body {
@@ -276,6 +273,12 @@ h5.mb-0 button.btn.btn-link {
     z-index: 99999;
 }
 
+.menuMapControl .nav .nav-item a{
+	width: auto;
+    height: auto;
+    line-height: inherit;
+}
+
 .iconFilter{
     cursor: pointer;
     padding:2.5px 10px;
@@ -452,14 +455,7 @@ h5.mb-0 button.btn.btn-link {
         position: "topleft"
     }).addTo(map);
 
-    oms = new OverlappingMarkerSpiderfier(map);
-
-    var popup = new L.Popup();
-	oms.addListener('click', function(marker) {
-	 	popup.setContent(marker.desc);
-	 	popup.setLatLng(marker.getLatLng());
-	 	map.openPopup(popup);
-	});
+    markers = L.markerClusterGroup({ chunkedLoading: true });
 
 	var group = new L.FeatureGroup();
 
@@ -510,7 +506,7 @@ function getGeoJson(){
                                         success: function (data) {
                                             filterArray = data;
                                             $.ajax({
-                                                url: '/api/group-layers',
+                                                url: './api/group-layers',
                                                 dataType: 'json',
                                                 success: function (data) {
                                                     groupLayer = data;
@@ -560,7 +556,6 @@ function genereteListIndicators(){
 		indicatorCategory +=	'							</div>' +
 								'						</div>' +
 								'					</div>';
-				//console.log(item.name);
 	});
 	return indicatorCategory;
 }
@@ -750,11 +745,11 @@ function rangeMap(select){
 function cleanMap(){
 	map.removeLayer(group);
 	if (typeof(indicadorMapControl) != "undefined") {
-		indicadorMapControl.removeFrom(map);
-        filtroMapControl.removeFrom(map);
-		limparMapControl.removeFrom(map);
-		rangeBarControl.removeFrom(map);
-		mapControl.removeFrom(map);
+		indicadorMapControl.remove(map);
+        filtroMapControl.remove(map);
+		limparMapControl.remove(map);
+		rangeBarControl.remove(map);
+		mapControl.remove(map);
 	}
 }
 
@@ -838,29 +833,22 @@ function makeChart(rangeMap2) {
 }
 
 function setLayer(json){
-	console.log(json);
 	json.forEach(function(item) {
 		switch(item.type){
 			case "MARKER":
-				console.log(item.geoJson);
 				var latlong = JSON.parse(item.geoJson);
 				var marker = new L.Marker(latlong);
-				marker.desc = '';
-
-				marker.desc += ((typeof item.name === 'string' || item.name instanceof String) && item.name.length !== 0)
+				let desc = '';
+				desc += ((typeof item.name === 'string' || item.name instanceof String) && item.name.length !== 0)
 								? "Nome: " + item.name + "<br />" : '';
-
-				marker.desc += ((typeof item.description === 'string' || item.description instanceof String) && item.description.length !== 0)
+				desc += ((typeof item.description === 'string' || item.description instanceof String) && item.description.length !== 0)
 								? "Descrição: " + item.description + "<br />" : '';
-
-				marker.desc += ((typeof item.source === 'string' || item.source instanceof String) && item.source.length !== 0)
+				desc += ((typeof item.source === 'string' || item.source instanceof String) && item.source.length !== 0)
 								? "Fonte: " + item.source + "<br />" : '';
-
-				marker.desc += ((typeof item.note === 'string' || item.note instanceof String) && item.note.length !== 0)
+				desc += ((typeof item.note === 'string' || item.note instanceof String) && item.note.length !== 0)
 								? "Notas: " + item.note + "<br />" : '';
-
-				map.addLayer(marker);
-  				oms.addMarker(marker);
+				marker.bindPopup(desc);
+  				markers.addLayer(marker);
 			break;
 			case "CIRCLE":
 				var circle = JSON.parse(item.geoJson);
@@ -892,6 +880,7 @@ function setLayer(json){
 			break;
 		}
 	});
+	map.addLayer(markers);
 }
 
 function setYears(nameId) {
@@ -956,8 +945,6 @@ function changeYear(yearOption){
 				municipioArray = new Array();
 				estadoArray = new Array();
 
-				//console.log(dataJson);
-
 				dataJson.forEach(function (indicator) {
 
 					if (indicator.region.typeRegion == "MUNICIPIO") {
@@ -980,7 +967,7 @@ function changeYear(yearOption){
 					delete itensSelect[0];
 					makeChart(2);
 				} else {
-					console.log("Empty DATAJSON")
+					console.error("Empty DATAJSON")
 				}
 			}
 		}
@@ -989,7 +976,6 @@ function changeYear(yearOption){
 }
 
 function limparMap() {
-	console.log("TESTE");
 	location.reload();
 }
 
@@ -1267,7 +1253,7 @@ function makeMap() {
                 strQuery +="groupId.equals="+layerId+"&";
             });
             $.ajax({
-                url: '/api/layers'+strQuery,
+                url: './api/layers'+strQuery,
                 dataType: 'json',
                 success: function (data) {
                     setLayer(data);
