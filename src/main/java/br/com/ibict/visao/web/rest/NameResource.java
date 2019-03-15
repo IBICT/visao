@@ -121,6 +121,20 @@ public class NameResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    /**
+     * GET  /names/:id : get the "id" name.
+     *
+     * @param id the id of the name to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the name, or with status 404 (Not Found)
+     */
+    @GetMapping("/namesPublic/{id}")
+    @Timed
+    public ResponseEntity<Name> getNamePubic(@PathVariable Long id) {
+        log.debug("REST request to get Name : {}", id);
+        Optional<Name> name = nameService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(name);
+    }
+
     private BooleanFilter getBooleanFilterTrue(){
         BooleanFilter booleanFilter = new BooleanFilter();
         booleanFilter.setEquals(Boolean.TRUE);

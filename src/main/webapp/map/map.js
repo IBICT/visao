@@ -884,7 +884,7 @@ function infoAboutIndicator(filterCod) {
     $('#idInfoIndicador').val(indicadorSelecionado);
 
     $.ajax({
-        url: '/api/indicators/'+indicadorSelecionado,
+        url: '/api/namesPublic/'+indicadorSelecionado,
         dataType: 'json',
         success: function (dataJson) {
             // create DTO with api name and filters
@@ -893,9 +893,9 @@ function infoAboutIndicator(filterCod) {
                 '<div>' +
                 '   <div>' +
                 '       <div style="margin-bottom: 10px">' +
-                '           <label style="margin-right: 5px">' + dataJson.name.value + ' </label>' +
+                '           <label style="margin-right: 5px">' + dataJson.value + ' </label>' +
                 // '          <button class="btn btn-outline-info" onclick="loadGraphic(\''+dataJson.name.value+'\')">Ver gráfico</button>' +
-                '       <div style="margin-top: 10px" class="infoIndicatorSnippet">' + dataJson.name.description + '</div>' +
+                '       <div style="margin-top: 10px" class="infoIndicatorSnippet">' + dataJson.description + '</div>' +
                 '       <a href="/api/indicators?&nameId.equals='+indicadorSelecionado+'" download> Download</a>' +
                 '       <a href="#" class="mostrarMais"> Ler mais</a>' +
                 '   </div>';
