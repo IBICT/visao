@@ -160,7 +160,7 @@ function generateListFilters(){
         }).forEach(function(item) {
             filterCategory +=
                 '       <div class="form-check-input">'+
-                '           <label><input type="checkbox" name="filtro" value="'+item.id+'"> '+item.name+'</label>'+
+                '           <label><input class="filterCheckbox" type="checkbox" name="filtro" value="'+item.id+'"> '+item.name+'</label>'+
                 '       </div><br />';
         });
         filterCategory +=
@@ -193,7 +193,7 @@ function genereteListLayer(){
             return layer.category.name == item.name;
         }).forEach(function(layer) {
             layerCategory += 	'								<div class="form-check">' +
-                '									<input class="form-check-input" name="layerCheckbox" type="checkbox" value="'+ layer.id +'" id="layer'+ layer.id +'" />' +
+                '									<input class="form-check-input layerCheckbox" name="layerCheckbox" type="checkbox" value="'+ layer.id +'" id="layer'+ layer.id +'" />' +
                 '									<label style="" class="form-check-label" for="layer'+ layer.id +'">' +
                 '										'+ layer.name +
                 '									</label>' +
@@ -649,6 +649,22 @@ function makeMap() {
 		$('#submitFormIndicator').prop('disabled', false);
 	});
 
+	$('input[type=checkbox][name=filtro]').change(function () {
+        if($('.filterCheckbox:checked').val() !== undefined){
+            $('#submitFormIndicator').prop('disabled', false);
+        } else if($('.layerCheckbox:checked').val() === undefined && indicadorSelecionado === undefined){
+            $('#submitFormIndicator').prop('disabled', true);
+        }
+    });
+
+	$('input[type=checkbox][name=filtro]').change(function () {
+        if($('.layerCheckbox:checked').val() !== undefined){
+            $('#submitFormIndicator').prop('disabled', false);
+        } else if($('.filterCheckbox:checked').val() === undefined && indicadorSelecionado === undefined){
+            $('#submitFormIndicator').prop('disabled', true);
+        }
+    });
+
 	// Method to clear the lateral form
 	$('#clearFormIndicator').click(function () {
         $('.menu--popup').find(':input').each(function () {
@@ -656,7 +672,7 @@ function makeMap() {
                 this.checked = false;
             }
         });
-        $('#selectedIndicator').html("<span> Não há indicador selecionado</span>");
+        // $('#selectedIndicator').html("<span> Não há indicador selecionado</span>");
         $('#submitFormIndicator').prop('disabled', true);
     });
 
