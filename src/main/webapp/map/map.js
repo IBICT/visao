@@ -443,7 +443,7 @@ function setLayer(json){
 				L.polygon(polygon).addTo(mymap);
 			break;
 			case "ICON":
-				var latlong = JSON.parse(item.geoJson);
+                var latlong = JSON.parse(item.geoJson);
 				var greenIcon = L.icon({
 					iconUrl: 'leaf-green.png',
 					shadowUrl: 'leaf-shadow.png',
@@ -453,8 +453,9 @@ function setLayer(json){
 					iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
 					shadowAnchor: [4, 62],  // the same for the shadow
 					popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-				});
-				L.marker(latlong, {icon: greenIcon}).addTo(map);
+                });
+                var marker = new L.Marker(latlong, {icon: greenIcon});
+  				markers.addLayer(marker);
 			break;
 		}
 	});
