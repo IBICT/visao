@@ -650,18 +650,8 @@ function makeMap() {
 	});
 
 	$('input[type=checkbox][name=filtro]').change(function () {
-        if($('.filterCheckbox:checked').val() !== undefined){
-            $('#submitFormIndicator').prop('disabled', false);
-        } else if($('.layerCheckbox:checked').val() === undefined && indicadorSelecionado === undefined){
-            $('#submitFormIndicator').prop('disabled', true);
-        }
-    });
-
-	$('input[type=checkbox][name=filtro]').change(function () {
         if($('.layerCheckbox:checked').val() !== undefined){
             $('#submitFormIndicator').prop('disabled', false);
-        } else if($('.filterCheckbox:checked').val() === undefined && indicadorSelecionado === undefined){
-            $('#submitFormIndicator').prop('disabled', true);
         }
     });
 
@@ -672,7 +662,7 @@ function makeMap() {
                 this.checked = false;
             }
         });
-        // $('#selectedIndicator').html("<span> Não há indicador selecionado</span>");
+        $('#selectedIndicator').html("<span> Não há indicador selecionado</span>");
         $('#submitFormIndicator').prop('disabled', true);
     });
 
