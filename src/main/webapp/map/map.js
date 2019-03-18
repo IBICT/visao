@@ -843,43 +843,46 @@ function makeMap() {
             });
         }
 
-		cleanMap();
+        if(indicadorAtual !== undefined){
+            cleanMap();
 
-        group = new L.FeatureGroup();
-        $("#loading").show();
+            group = new L.FeatureGroup();
+            $("#loading").show();
 
-        var urlQuery = '';
-        if(filtrosId.size === 0){
-            urlQuery += '/api/indicators?&nameId.equals='+indicadorAtual;
-            loadResultMap(urlQuery);
+            var urlQuery = '';
+            if(filtrosId.size === 0){
+                urlQuery += '/api/indicators?&nameId.equals='+indicadorAtual;
+                loadResultMap(urlQuery);
 
-        } else {
-            var vetor = new Array();
-            filtrosId.forEach(function (filtro) {
-                vetor.push(filtro);
-            });
-            var stringResult = vetor.join(',');
-            urlQuery += '/api/indicatorsFilter?&filtersId.in='+stringResult+'&nameId.equals='+indicadorAtual;
+            } else {
+                var vetor = new Array();
+                filtrosId.forEach(function (filtro) {
+                    vetor.push(filtro);
+                });
+                var stringResult = vetor.join(',');
+                urlQuery += '/api/indicatorsFilter?&filtersId.in='+stringResult+'&nameId.equals='+indicadorAtual;
 
-            $.ajax({
-                url: '/api/regionsWithFilter?&filtersId.in='+stringResult,
-                dataType: 'json',
-                success: function (dataJson) {
-                    filtrosPesquisados = new Map();
-                    dataJson.forEach(function (dto) {
-                        var contains = filtrosPesquisados.get(dto.geocode);
-                        if(contains === undefined){
-                            filtrosPesquisados.set(dto.geocode, []);
-                            contains = filtrosPesquisados.get(dto.geocode);
-                        }
+                $.ajax({
+                    url: '/api/regionsWithFilter?&filtersId.in='+stringResult,
+                    dataType: 'json',
+                    success: function (dataJson) {
+                        filtrosPesquisados = new Map();
+                        dataJson.forEach(function (dto) {
+                            var contains = filtrosPesquisados.get(dto.geocode);
+                            if(contains === undefined){
+                                filtrosPesquisados.set(dto.geocode, []);
+                                contains = filtrosPesquisados.get(dto.geocode);
+                            }
 
-                        contains.push(dto.filtername);
-                    });
+                            contains.push(dto.filtername);
+                        });
 
-                    loadResultMap(urlQuery);
-                }
-            });
+                        loadResultMap(urlQuery);
+                    }
+                });
+            }
         }
+
 	});
 
 };
