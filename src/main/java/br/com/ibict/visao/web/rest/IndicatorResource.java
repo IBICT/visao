@@ -129,7 +129,7 @@ public class IndicatorResource {
     }
 
     private void findMostRecentYearFromIndicator(IndicatorCriteria indicatorCriteria){
-        if (indicatorCriteria.getYearId() == null){
+        if (indicatorCriteria.getYearId() == null && indicatorCriteria.getNameId() != null){
             LongFilter longFilter = new LongFilter();
             longFilter.setEquals(indicatorQueryService.findMostRecentYearFromIndicator(indicatorCriteria.getNameId().getEquals()));
             indicatorCriteria.setYearId(longFilter);
