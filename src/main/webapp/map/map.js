@@ -160,7 +160,7 @@ function generateListFilters(){
         }).forEach(function(item) {
             filterCategory +=
                 '       <div class="form-check-input">'+
-                '           <label><input type="checkbox" name="filtro" value="'+item.id+'"> '+item.name+'</label>'+
+                '           <label><input class="filterCheckbox" type="checkbox" name="filtro" value="'+item.id+'"> '+item.name+'</label>'+
                 '       </div><br />';
         });
         filterCategory +=
@@ -193,7 +193,7 @@ function genereteListLayer(){
             return layer.category.name == item.name;
         }).forEach(function(layer) {
             layerCategory += 	'								<div class="form-check">' +
-                '									<input class="form-check-input" name="layerCheckbox" type="checkbox" value="'+ layer.id +'" id="layer'+ layer.id +'" />' +
+                '									<input class="form-check-input layerCheckbox" name="layerCheckbox" type="checkbox" value="'+ layer.id +'" id="layer'+ layer.id +'" />' +
                 '									<label style="" class="form-check-label" for="layer'+ layer.id +'">' +
                 '										'+ layer.name +
                 '									</label>' +
@@ -650,6 +650,12 @@ function makeMap() {
 		$('#submitFormIndicator').prop('disabled', false);
 	});
 
+	$('input[type=checkbox][name=filtro]').change(function () {
+        if($('.layerCheckbox:checked').val() !== undefined){
+            $('#submitFormIndicator').prop('disabled', false);
+        }
+    });
+
 	// Method to clear the lateral form
 	$('#clearFormIndicator').click(function () {
         $('.menu--popup').find(':input').each(function () {
@@ -657,6 +663,8 @@ function makeMap() {
                 this.checked = false;
             }
         });
+
+        indicadorAtual = undefined;
         $('#selectedIndicator').html("<span> Não há indicador selecionado</span>");
         $('#submitFormIndicator').prop('disabled', true);
     });
@@ -838,43 +846,46 @@ function makeMap() {
             });
         }
 
-		cleanMap();
+        if(indicadorAtual !== undefined){
+            cleanMap();
 
-        group = new L.FeatureGroup();
-        $("#loading").show();
+            group = new L.FeatureGroup();
+            $("#loading").show();
 
-        var urlQuery = '';
-        if(filtrosId.size === 0){
-            urlQuery += '/api/indicators?&nameId.equals='+indicadorAtual;
-            loadResultMap(urlQuery);
+            var urlQuery = '';
+            if(filtrosId.size === 0){
+                urlQuery += '/api/indicators?&nameId.equals='+indicadorAtual;
+                loadResultMap(urlQuery);
 
-        } else {
-            var vetor = new Array();
-            filtrosId.forEach(function (filtro) {
-                vetor.push(filtro);
-            });
-            var stringResult = vetor.join(',');
-            urlQuery += '/api/indicatorsFilter?&filtersId.in='+stringResult+'&nameId.equals='+indicadorAtual;
+            } else {
+                var vetor = new Array();
+                filtrosId.forEach(function (filtro) {
+                    vetor.push(filtro);
+                });
+                var stringResult = vetor.join(',');
+                urlQuery += '/api/indicatorsFilter?&filtersId.in='+stringResult+'&nameId.equals='+indicadorAtual;
 
-            $.ajax({
-                url: '/api/regionsWithFilter?&filtersId.in='+stringResult,
-                dataType: 'json',
-                success: function (dataJson) {
-                    filtrosPesquisados = new Map();
-                    dataJson.forEach(function (dto) {
-                        var contains = filtrosPesquisados.get(dto.geocode);
-                        if(contains === undefined){
-                            filtrosPesquisados.set(dto.geocode, []);
-                            contains = filtrosPesquisados.get(dto.geocode);
-                        }
+                $.ajax({
+                    url: '/api/regionsWithFilter?&filtersId.in='+stringResult,
+                    dataType: 'json',
+                    success: function (dataJson) {
+                        filtrosPesquisados = new Map();
+                        dataJson.forEach(function (dto) {
+                            var contains = filtrosPesquisados.get(dto.geocode);
+                            if(contains === undefined){
+                                filtrosPesquisados.set(dto.geocode, []);
+                                contains = filtrosPesquisados.get(dto.geocode);
+                            }
 
-                        contains.push(dto.filtername);
-                    });
+                            contains.push(dto.filtername);
+                        });
 
-                    loadResultMap(urlQuery);
-                }
-            });
+                        loadResultMap(urlQuery);
+                    }
+                });
+            }
         }
+
 	});
 
 };
