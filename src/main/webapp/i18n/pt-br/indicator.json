@@ -11,15 +11,15 @@
             "updated": "Um Indicator foi atualizado com o identificador {{ param }}",
             "deleted": "Um Indicator foi deletado com o identificador {{ param }}",
             "delete": {
-                "question": "Tem certeza de que deseja excluir Indicator {{ id }}?"
+                "question": "Tem certeza de que deseja excluir o indicador {{ id }}?"
             },
             "detail": {
                 "title": "Indicator"
             },
-            "value": "Value",
-            "region": "Region",
-            "name": "Name",
-            "year": "Year"
+            "value": "Valor",
+            "region": "Região",
+            "name": "Nome",
+            "year": "Ano"
         }
     }
 }
