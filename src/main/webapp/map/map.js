@@ -662,6 +662,8 @@ function makeMap() {
                 this.checked = false;
             }
         });
+
+        indicadorAtual = undefined;
         $('#selectedIndicator').html("<span> Não há indicador selecionado</span>");
         $('#submitFormIndicator').prop('disabled', true);
     });
