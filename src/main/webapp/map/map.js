@@ -7,11 +7,6 @@ var map = L.map('map', {
 map.setMaxBounds(map.getBounds());
 
 var baseLayers = {
-    "Mapa claro": L.layerGroup([L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-        subdomains: "1234"
-    }), L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
-        subdomains: "1234"
-    })]),
     'Gao De Image': L.layerGroup([L.tileLayer('http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}', {
         subdomains: "1234"
     }), L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
@@ -26,7 +21,13 @@ var baseLayers = {
         subdomains: "1234"
     }), L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}.png', {
         subdomains: "1234"
-    })]).addTo(map)
+    })]),
+	"Mapa claro": L.layerGroup([L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+        subdomains: "1234"
+    }), L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+        subdomains: "1234"
+    })])
+    .addTo(map)
 };
 
 var layercontrol = L.control.layers(baseLayers,{}, {
@@ -274,10 +275,10 @@ function getPercent(d) {
 function style_1(feature) {
 	return {
 		fillColor: getColor(matchKey(feature.geoCode, indicatorArray)),
-		weight: 1,
+		weight: (feature.geoCode.toString().length > 2) ? 0.1 : 1,
 		opacity: 1,
 		color: '#146678',
-		fillOpacity: 1
+		fillOpacity: 0.8
 	};
 }
 // Choropleth map
