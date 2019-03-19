@@ -657,6 +657,13 @@ function makeMap() {
         }
     });
 
+	$('input[type=checkbox][name=layerCheckbox]').change(function () {
+        if($('input[type=checkbox][name=layerCheckbox]:checked').length > 0)
+            $('#submitFormIndicator').prop('disabled', false);
+        else if($('input[type=radio][name=indicator]:checked').val() === undefined)
+            $('#submitFormIndicator').prop('disabled', true);
+    });
+
 	// Method to clear the lateral form
 	$('#clearFormIndicator').click(function () {
         $('.menu--popup').find(':input').each(function () {
