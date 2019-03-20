@@ -53,6 +53,7 @@ public class CacheConfiguration {
             cm.createCache(br.com.ibict.visao.domain.Layer.class.getName(), jcacheConfiguration);
             cm.createCache(br.com.ibict.visao.domain.MarkerIcon.class.getName(), jcacheConfiguration);
             cm.createCache(br.com.ibict.visao.domain.GroupLayer.class.getName(), jcacheConfiguration);
+            cm.createCache(br.com.ibict.visao.domain.TypePresentation.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

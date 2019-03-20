@@ -1,0 +1,24 @@
+
+{
+    "visaoApp": {
+        "typePresentation" : {
+            "home": {
+                "title": "Type Presentations",
+                "createLabel": "Create a new Type Presentation",
+                "createOrEditLabel": "Create or edit a Type Presentation"
+            },
+            "created": "A new Type Presentation is created with identifier {{ param }}",
+            "updated": "A Type Presentation is updated with identifier {{ param }}",
+            "deleted": "A Type Presentation is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Type Presentation {{ id }}?"
+            },
+            "detail": {
+                "title": "Type Presentation"
+            },
+            "name": "Name",
+            "display": "Display",
+            "description": "Description"
+        }
+    }
+}

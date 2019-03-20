@@ -17,6 +17,7 @@
                 "layer": "Layer",
                 "markerIcon": "Marker Icon",
                 "groupLayer": "Group Layer",
+                "typePresentation": "Type Presentation",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

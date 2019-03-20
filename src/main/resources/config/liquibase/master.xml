@@ -15,6 +15,7 @@
     <include file="config/liquibase/changelog/20190213123343_added_entity_Layer.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190213123344_added_entity_MarkerIcon.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190213123345_added_entity_GroupLayer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190320193055_added_entity_TypePresentation.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20190213123336_added_entity_constraints_Indicator.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190213123337_added_entity_constraints_Name.xml" relativeToChangelogFile="false"/>
