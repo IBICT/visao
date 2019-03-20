@@ -42,12 +42,12 @@
                 <td>{{filter.note}}</td>
                 <td>
                     <div *ngIf="filter.cidadePolo">
-                        <a [routerLink]="['../region', filter.cidadePolo?.id, 'view' ]" >{{filter.cidadePolo?.id}}</a>
+                        <a [routerLink]="['../region', filter.cidadePolo?.id, 'view' ]" >{{filter.cidadePolo?.name}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="filter.category">
-                        <a [routerLink]="['../category', filter.category?.id, 'view' ]" >{{filter.category?.id}}</a>
+                        <a [routerLink]="['../category', filter.category?.id, 'view' ]" >{{filter.category?.name}}</a>
                     </div>
                 </td>
                 <td>

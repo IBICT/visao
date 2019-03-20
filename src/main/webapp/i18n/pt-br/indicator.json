@@ -3,18 +3,18 @@
     "visaoApp": {
         "indicator" : {
             "home": {
-                "title": "Indicators",
-                "createLabel": "Criar novo Indicator",
-                "createOrEditLabel": "Criar ou editar Indicator"
+                "title": "Indicadores",
+                "createLabel": "Criar novo Indicador",
+                "createOrEditLabel": "Criar ou editar Indicador"
             },
-            "created": "Um novo Indicator foi criado com o identificador {{ param }}",
-            "updated": "Um Indicator foi atualizado com o identificador {{ param }}",
-            "deleted": "Um Indicator foi deletado com o identificador {{ param }}",
+            "created": "Um novo Indicador foi criado com o identificador {{ param }}",
+            "updated": "Um Indicador foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Indicador foi deletado com o identificador {{ param }}",
             "delete": {
                 "question": "Tem certeza de que deseja excluir o indicador {{ id }}?"
             },
             "detail": {
-                "title": "Indicator"
+                "title": "Indicador"
             },
             "value": "Valor",
             "region": "Região",

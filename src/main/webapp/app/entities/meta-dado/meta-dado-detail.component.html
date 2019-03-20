@@ -16,7 +16,7 @@
                 <dt><span jhiTranslate="visaoApp.metaDado.nome">Nome</span></dt>
                 <dd>
                     <span *ngFor="let nome of metaDado.nomes; let last = last">
-                        <a [routerLink]="['/name', nome?.id, 'view' ]">{{nome.id}}</a>{{last ? '' : ', '}}
+                        <a [routerLink]="['/name', nome?.id, 'view' ]">{{nome.value}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
             </dl>
