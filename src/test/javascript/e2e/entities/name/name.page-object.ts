@@ -26,6 +26,7 @@ export class NameUpdatePage {
     dateChangeInput = element(by.id('field_dateChange'));
     noteInput = element(by.id('field_note'));
     categorySelect = element(by.id('field_category'));
+    typePresentationSelect = element(by.id('field_typePresentation'));
     userSelect = element(by.id('field_user'));
 
     getPageTitle() {
@@ -108,6 +109,25 @@ export class NameUpdatePage {
 
     getCategorySelectedOption() {
         return this.categorySelect.element(by.css('option:checked')).getText();
+    }
+
+    typePresentationSelectLastOption(): promise.Promise<void> {
+        return this.typePresentationSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    typePresentationSelectOption(option): promise.Promise<void> {
+        return this.typePresentationSelect.sendKeys(option);
+    }
+
+    getTypePresentationSelect(): ElementFinder {
+        return this.typePresentationSelect;
+    }
+
+    getTypePresentationSelectedOption() {
+        return this.typePresentationSelect.element(by.css('option:checked')).getText();
     }
 
     userSelectLastOption(): promise.Promise<void> {

@@ -25,6 +25,7 @@
             "dateChange": "Date Change",
             "note": "Note",
             "category": "Category",
+            "typePresentation": "Type Presentation",
             "user": "User"
         }
     }

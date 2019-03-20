@@ -58,13 +58,14 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="type_presentation_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
-			<column name="type_presentation" type="char(1)">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="name" columnName="jhi_date" columnDataType="datetime"/>

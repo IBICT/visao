@@ -91,6 +91,9 @@ public class NameQueryService extends QueryService<Name> {
             if (criteria.getCategoryId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCategoryId(), Name_.category, Category_.id));
             }
+            if (criteria.getTypePresentationId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getTypePresentationId(), Name_.typePresentation, TypePresentation_.id));
+            }
             if (criteria.getUserId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getUserId(), Name_.user, User_.id));
             }

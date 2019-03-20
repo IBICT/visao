@@ -10,6 +10,8 @@ import { IName } from 'app/shared/model/name.model';
 import { NameService } from './name.service';
 import { ICategory } from 'app/shared/model/category.model';
 import { CategoryService } from 'app/entities/category';
+import { ITypePresentation } from 'app/shared/model/type-presentation.model';
+import { TypePresentationService } from 'app/entities/type-presentation';
 import { IUser, UserService } from 'app/core';
 
 @Component({
@@ -22,6 +24,8 @@ export class NameUpdateComponent implements OnInit {
 
     categories: ICategory[];
 
+    typepresentations: ITypePresentation[];
+
     users: IUser[];
     date: string;
     dateChange: string;
@@ -31,6 +35,7 @@ export class NameUpdateComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private nameService: NameService,
         private categoryService: CategoryService,
+        private typePresentationService: TypePresentationService,
         private userService: UserService,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -43,6 +48,12 @@ export class NameUpdateComponent implements OnInit {
         this.categoryService.query().subscribe(
             (res: HttpResponse<ICategory[]>) => {
                 this.categories = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.typePresentationService.query().subscribe(
+            (res: HttpResponse<ITypePresentation[]>) => {
+                this.typepresentations = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -99,6 +110,10 @@ export class NameUpdateComponent implements OnInit {
     }
 
     trackCategoryById(index: number, item: ICategory) {
+        return item.id;
+    }
+
+    trackTypePresentationById(index: number, item: ITypePresentation) {
         return item.id;
     }
 

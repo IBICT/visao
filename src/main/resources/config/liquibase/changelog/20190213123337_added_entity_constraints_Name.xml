@@ -14,6 +14,12 @@
                                  referencedColumnNames="id"
                                  referencedTableName="category"/>
 
+        <addForeignKeyConstraint baseColumnNames="type_presentation_id"
+                                 baseTableName="name"
+                                 constraintName="fk_name_type_presentation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="type_presentation"/>
+
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="name"
                                  constraintName="fk_name_user_id"

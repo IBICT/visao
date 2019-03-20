@@ -59,15 +59,11 @@ public class Name implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("")
-    private User user;
+    private TypePresentation typePresentation;
 
-    @Column(name = "type_presentation")
-    /*
-        Valores permitidos:
-        $ - Dinheiro
-        Q - Quantidade
-     */
-    private Character typePresentation;
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -195,6 +191,19 @@ public class Name implements Serializable {
         this.category = category;
     }
 
+    public TypePresentation getTypePresentation() {
+        return typePresentation;
+    }
+
+    public Name typePresentation(TypePresentation typePresentation) {
+        this.typePresentation = typePresentation;
+        return this;
+    }
+
+    public void setTypePresentation(TypePresentation typePresentation) {
+        this.typePresentation = typePresentation;
+    }
+
     public User getUser() {
         return user;
     }
@@ -206,14 +215,6 @@ public class Name implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Character getTypePresentation() {
-        return typePresentation;
-    }
-
-    public void setTypePresentation(Character typePresentation) {
-        this.typePresentation = typePresentation;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

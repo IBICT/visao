@@ -4,6 +4,7 @@ import br.com.ibict.visao.VisaoApp;
 
 import br.com.ibict.visao.domain.Name;
 import br.com.ibict.visao.domain.Category;
+import br.com.ibict.visao.domain.TypePresentation;
 import br.com.ibict.visao.domain.User;
 import br.com.ibict.visao.repository.NameRepository;
 import br.com.ibict.visao.service.NameService;
@@ -506,6 +507,25 @@ public class NameResourceIntTest {
 
         // Get all the nameList where category equals to categoryId + 1
         defaultNameShouldNotBeFound("categoryId.equals=" + (categoryId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllNamesByTypePresentationIsEqualToSomething() throws Exception {
+        // Initialize the database
+        TypePresentation typePresentation = TypePresentationResourceIntTest.createEntity(em);
+        em.persist(typePresentation);
+        em.flush();
+        name.setTypePresentation(typePresentation);
+        nameRepository.saveAndFlush(name);
+        Long typePresentationId = typePresentation.getId();
+
+        // Get all the nameList where typePresentation equals to typePresentationId
+        defaultNameShouldBeFound("typePresentationId.equals=" + typePresentationId);
+
+        // Get all the nameList where typePresentation equals to typePresentationId + 1
+        defaultNameShouldNotBeFound("typePresentationId.equals=" + (typePresentationId + 1));
     }
 
 

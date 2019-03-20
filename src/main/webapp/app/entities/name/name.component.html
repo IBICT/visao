@@ -24,6 +24,7 @@
             <th jhiSortBy="dateChange"><span jhiTranslate="visaoApp.name.dateChange">Date Change</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="note"><span jhiTranslate="visaoApp.name.note">Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="category.id"><span jhiTranslate="visaoApp.name.category">Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="typePresentation.id"><span jhiTranslate="visaoApp.name.typePresentation">Type Presentation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="user.login"><span jhiTranslate="visaoApp.name.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -42,6 +43,11 @@
                 <td>
                     <div *ngIf="name.category">
                         <a [routerLink]="['../category', name.category?.id, 'view' ]" >{{name.category?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="name.typePresentation">
+                        <a [routerLink]="['../type-presentation', name.typePresentation?.id, 'view' ]" >{{name.typePresentation?.id}}</a>
                     </div>
                 </td>
                 <td>

@@ -57,6 +57,7 @@ describe('Name e2e test', () => {
         nameUpdatePage.setNoteInput('note');
         expect(nameUpdatePage.getNoteInput()).toMatch('note');
         nameUpdatePage.categorySelectLastOption();
+        nameUpdatePage.typePresentationSelectLastOption();
         nameUpdatePage.userSelectLastOption();
         nameUpdatePage.save();
         expect(nameUpdatePage.getSaveButton().isPresent()).toBeFalsy();
