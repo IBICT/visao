@@ -402,8 +402,8 @@ function makeChart(rangeMap2) {
 	map.addLayer(group);
 
 	function getFormattedPrintValue(typePresentation, valueToShow){
-	    if('$' === typePresentation){
-	        return 'R$ ' + valueToShow.toLocaleString('pt-br', {minimumFractionDigits: 2});
+	    if(typePresentation !== null && typePresentation.display.includes("$")){
+	        return typePresentation.display + valueToShow.toLocaleString('pt-br', {minimumFractionDigits: 2});
         } else {
             return valueToShow.toLocaleString('pt-br');
         }
