@@ -4,7 +4,7 @@
         "typePresentation" : {
             "home": {
                 "title": "Type Presentations",
-                "createLabel": "Criar novo Type Presentation",
+                "createLabel": "Criar novo Tipo de Apresentação",
                 "createOrEditLabel": "Criar ou editar Type Presentation"
             },
             "created": "Um novo Type Presentation foi criado com o identificador {{ param }}",
