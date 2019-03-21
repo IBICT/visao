@@ -12,19 +12,19 @@
                 <dt><span jhiTranslate="visaoApp.indicator.region">Region</span></dt>
                 <dd>
                     <div *ngIf="indicator.region">
-                        <a [routerLink]="['/region', indicator.region?.id, 'view']">{{indicator.region?.id}}</a>
+                        <a [routerLink]="['/region', indicator.region?.id, 'view']">{{indicator.region?.name}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="visaoApp.indicator.name">Name</span></dt>
                 <dd>
                     <div *ngIf="indicator.name">
-                        <a [routerLink]="['/name', indicator.name?.id, 'view']">{{indicator.name?.id}}</a>
+                        <a [routerLink]="['/name', indicator.name?.id, 'view']">{{indicator.name?.value}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="visaoApp.indicator.year">Year</span></dt>
                 <dd>
                     <div *ngIf="indicator.year">
-                        <a [routerLink]="['/year', indicator.year?.id, 'view']">{{indicator.year?.id}}</a>
+                        <a [routerLink]="['/year', indicator.year?.id, 'view']">{{indicator.year?.date}}</a>
                     </div>
                 </dd>
             </dl>

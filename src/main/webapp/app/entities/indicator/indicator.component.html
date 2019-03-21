@@ -13,14 +13,14 @@
     <div class="table-responsive" *ngIf="indicators">
         <table class="table table-striped">
             <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="value"><span jhiTranslate="visaoApp.indicator.value">Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="region.id"><span jhiTranslate="visaoApp.indicator.region">Region</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="name.id"><span jhiTranslate="visaoApp.indicator.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="year.id"><span jhiTranslate="visaoApp.indicator.year">Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
-            </tr>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                    <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                    <th jhiSortBy="value"><span jhiTranslate="visaoApp.indicator.value">Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                    <th jhiSortBy="region.id"><span jhiTranslate="visaoApp.indicator.region">Region</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                    <th jhiSortBy="name.id"><span jhiTranslate="visaoApp.indicator.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                    <th jhiSortBy="year.id"><span jhiTranslate="visaoApp.indicator.year">Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
             <tr *ngFor="let indicator of indicators ;trackBy: trackId">
@@ -28,17 +28,17 @@
                 <td>{{indicator.value}}</td>
                 <td>
                     <div *ngIf="indicator.region">
-                        <a [routerLink]="['../region', indicator.region?.id, 'view' ]" >{{indicator.region?.id}}</a>
+                        <a [routerLink]="['../region', indicator.region?.id, 'view' ]" >{{indicator.region?.name}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="indicator.name">
-                        <a [routerLink]="['../name', indicator.name?.id, 'view' ]" >{{indicator.name?.id}}</a>
+                        <a [routerLink]="['../name', indicator.name?.id, 'view' ]" >{{indicator.name?.value}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="indicator.year">
-                        <a [routerLink]="['../year', indicator.year?.id, 'view' ]" >{{indicator.year?.id}}</a>
+                        <a [routerLink]="['../year', indicator.year?.id, 'view' ]" >{{indicator.year?.date}}</a>
                     </div>
                 </td>
                 <td class="text-right">

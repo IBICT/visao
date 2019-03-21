@@ -29,21 +29,21 @@
                     <label class="form-control-label" jhiTranslate="visaoApp.indicator.region" for="field_region">Region</label>
                     <select class="form-control" id="field_region" name="region" [(ngModel)]="indicator.region" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="regionOption.id === indicator.region?.id ? indicator.region : regionOption" *ngFor="let regionOption of regions; trackBy: trackRegionById">{{regionOption.id}}</option>
+                        <option [ngValue]="regionOption.id === indicator.region?.id ? indicator.region : regionOption" *ngFor="let regionOption of regions; trackBy: trackRegionById">{{regionOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="visaoApp.indicator.name" for="field_name">Name</label>
                     <select class="form-control" id="field_name" name="name" [(ngModel)]="indicator.name" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="nameOption.id === indicator.name?.id ? indicator.name : nameOption" *ngFor="let nameOption of names; trackBy: trackNameById">{{nameOption.id}}</option>
+                        <option [ngValue]="nameOption.id === indicator.name?.id ? indicator.name : nameOption" *ngFor="let nameOption of names; trackBy: trackNameById">{{nameOption.value}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="visaoApp.indicator.year" for="field_year">Year</label>
                     <select class="form-control" id="field_year" name="year" [(ngModel)]="indicator.year" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="yearOption.id === indicator.year?.id ? indicator.year : yearOption" *ngFor="let yearOption of years; trackBy: trackYearById">{{yearOption.id}}</option>
+                        <option [ngValue]="yearOption.id === indicator.year?.id ? indicator.year : yearOption" *ngFor="let yearOption of years; trackBy: trackYearById">{{yearOption.date}}</option>
                     </select>
                 </div>
             </div>

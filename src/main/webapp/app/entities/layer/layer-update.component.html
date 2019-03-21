@@ -80,7 +80,7 @@
                     <label class="form-control-label" jhiTranslate="visaoApp.layer.category" for="field_category">Category</label>
                     <select class="form-control" id="field_category" name="category" [(ngModel)]="layer.category" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="categoryOption.id === layer.category?.id ? layer.category : categoryOption" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.id}}</option>
+                        <option [ngValue]="categoryOption.id === layer.category?.id ? layer.category : categoryOption" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -94,7 +94,7 @@
                     <label class="form-control-label" jhiTranslate="visaoApp.layer.group" for="field_group">Group</label>
                     <select class="form-control" id="field_group" name="group" [(ngModel)]="layer.group" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="groupLayerOption.id === layer.group?.id ? layer.group : groupLayerOption" *ngFor="let groupLayerOption of grouplayers; trackBy: trackGroupLayerById">{{groupLayerOption.id}}</option>
+                        <option [ngValue]="groupLayerOption.id === layer.group?.id ? layer.group : groupLayerOption" *ngFor="let groupLayerOption of grouplayers; trackBy: trackGroupLayerById">{{groupLayerOption.name}}</option>
                     </select>
                 </div>
             </div>

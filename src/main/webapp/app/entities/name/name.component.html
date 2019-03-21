@@ -42,7 +42,7 @@
                 <td>{{name.note}}</td>
                 <td>
                     <div *ngIf="name.category">
-                        <a [routerLink]="['../category', name.category?.id, 'view' ]" >{{name.category?.id}}</a>
+                        <a [routerLink]="['../category', name.category?.id, 'view' ]" >{{name.category?.name}}</a>
                     </div>
                 </td>
                 <td>

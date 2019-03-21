@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label jhiTranslate="visaoApp.metaDado.nome" for="field_nome">Nome</label>
                     <select class="form-control" id="field_nome" multiple name="nome" [(ngModel)]="metaDado.nomes">
-                        <option [ngValue]="getSelected(metaDado.nomes, nameOption)" *ngFor="let nameOption of names; trackBy: trackNameById">{{nameOption.id}}</option>
+                        <option [ngValue]="getSelected(metaDado.nomes, nameOption)" *ngFor="let nameOption of names; trackBy: trackNameById">{{nameOption.value}}</option>
                     </select>
                 </div>
             </div>

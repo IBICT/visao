@@ -40,7 +40,7 @@
                 <dt><span jhiTranslate="visaoApp.name.category">Category</span></dt>
                 <dd>
                     <div *ngIf="name.category">
-                        <a [routerLink]="['/category', name.category?.id, 'view']">{{name.category?.id}}</a>
+                        <a [routerLink]="['/category', name.category?.id, 'view']">{{name.category?.name}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="visaoApp.name.typePresentation">Type Presentation</span></dt>
