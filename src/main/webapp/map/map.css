@@ -217,6 +217,7 @@ h5.mb-0 button.btn.btn-link {
     position: fixed;
     top: 45%;
     left: 45%;
+    z-index: 999999;
 }
 .menuMapControl {
     z-index: 99999;
