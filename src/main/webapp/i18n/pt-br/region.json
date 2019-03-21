@@ -3,24 +3,24 @@
     "visaoApp": {
         "region" : {
             "home": {
-                "title": "Regions",
-                "createLabel": "Criar novo Region",
-                "createOrEditLabel": "Criar ou editar Region"
+                "title": "Regiões",
+                "createLabel": "Criar novo Região",
+                "createOrEditLabel": "Criar ou editar Região"
             },
-            "created": "Um novo Region foi criado com o identificador {{ param }}",
-            "updated": "Um Region foi atualizado com o identificador {{ param }}",
-            "deleted": "Um Region foi deletado com o identificador {{ param }}",
+            "created": "Um novo Região foi criado com o identificador {{ param }}",
+            "updated": "Um Região foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Região foi deletado com o identificador {{ param }}",
             "delete": {
-                "question": "Tem certeza de que deseja excluir Region {{ id }}?"
+                "question": "Tem certeza de que deseja excluir Região {{ id }}?"
             },
             "detail": {
-                "title": "Region"
+                "title": "Região"
             },
-            "name": "Name",
-            "uf": "Uf",
+            "name": "Nome",
+            "uf": "UF",
             "geoCode": "Geo Code",
-            "typeRegion": "Type Region",
-            "relacao": "Relacao"
+            "typeRegion": "Tipo de Região",
+            "relacao": "Relação"
         }
     }
 }
