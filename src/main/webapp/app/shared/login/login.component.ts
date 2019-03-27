@@ -65,7 +65,10 @@ export class JhiLoginModalComponent implements AfterViewInit {
                     content: 'Sending Authentication Success'
                 });
 
-                this.cookieService.set('logged', 'true');
+                const expireDate = new Date();
+                expireDate.setMinutes(new Date().getMinutes() + 60);
+
+                this.cookieService.set('logged', 'true', expireDate);
 
                 // // previousState was set in the authExpiredInterceptor before being redirected to login modal.
                 // // since login is succesful, go to stored previousState and clear previousState
