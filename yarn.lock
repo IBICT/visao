@@ -6324,6 +6324,11 @@ ng-jhipster@0.5.4:
     "@ngx-translate/core" "^10.0.1"
     "@ngx-translate/http-loader" "^3.0.1"
 
+ngx-cookie-service@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ngx-cookie-service/-/ngx-cookie-service-2.1.0.tgz#8023f9edfcd8bd4f0b299b1f0c263112dbb0e261"
+  integrity sha512-7g7NEo7dYp6ap0j5qZ4Nf6nrU4WVdx8ycRQbWyLPps6mrR/+5vKU73ie0CMuKzl625bDTBjjJ60AmqTsp4l+AQ==
+
 ngx-cookie@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/ngx-cookie/-/ngx-cookie-2.0.1.tgz#031d8938bf9026954356b3b3ae668e2e1964e584"

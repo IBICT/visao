@@ -7,6 +7,8 @@ import { VERSION } from 'app/app.constants';
 import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from 'app/core';
 import { ProfileService } from '../profiles/profile.service';
 
+import { CookieService } from 'ngx-cookie-service';
+
 @Component({
     selector: 'jhi-navbar',
     templateUrl: './navbar.component.html',
@@ -27,7 +29,8 @@ export class NavbarComponent implements OnInit {
         private principal: Principal,
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
-        private router: Router
+        private router: Router,
+        private cookieService: CookieService
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
@@ -63,6 +66,7 @@ export class NavbarComponent implements OnInit {
     logout() {
         this.collapseNavbar();
         this.loginService.logout();
+        this.cookieService.delete('logged');
         this.router.navigate(['']);
     }
 

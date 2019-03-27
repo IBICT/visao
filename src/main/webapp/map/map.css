@@ -184,7 +184,8 @@ h5.mb-0 button.btn.btn-link {
     border-radius: 0.15rem;
 }
 #hoverMouse li a {
-    padding: 4px 61% 4px 20px;
+    padding-left: 5px;
+    padding-right: 5px;
     color: black;
 }
 #hoverMouse li a:hover {
@@ -257,4 +258,9 @@ h5.mb-0 button.btn.btn-link {
 .infoIndicatorSnippet {
     height: 30px;
     overflow: hidden;
+}
+
+/* Icones do menu */
+.menu-icon {
+    padding: 5px;
 }

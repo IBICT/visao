@@ -6,6 +6,8 @@ import { JhiEventManager } from 'ng-jhipster';
 import { LoginService } from 'app/core/login/login.service';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
 
+import { CookieService } from 'ngx-cookie-service';
+
 @Component({
     selector: 'jhi-login-modal',
     templateUrl: './login.component.html'
@@ -18,6 +20,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
     credentials: any;
 
     constructor(
+        private cookieService: CookieService,
         private eventManager: JhiEventManager,
         private loginService: LoginService,
         private stateStorageService: StateStorageService,
@@ -61,6 +64,8 @@ export class JhiLoginModalComponent implements AfterViewInit {
                     name: 'authenticationSuccess',
                     content: 'Sending Authentication Success'
                 });
+
+                this.cookieService.set('logged', 'true');
 
                 // // previousState was set in the authExpiredInterceptor before being redirected to login modal.
                 // // since login is succesful, go to stored previousState and clear previousState

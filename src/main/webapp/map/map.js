@@ -6,6 +6,20 @@ var map = L.map('map', {
     }).setView([-15, -50], 4);
 map.setMaxBounds(map.getBounds());
 
+var cookies = document.cookie.split(';');
+var existeCookie = false;
+cookies.forEach(function (cookie) {
+    if(cookie === " logged=true"){
+        $('.show-logado').show();
+        $('.show-deslogado').hide();
+        existeCookie = true;
+    }
+});
+if(!existeCookie) {
+    $('.show-logado').hide();
+    $('.show-deslogado').show();
+}
+
 var baseLayers = {
     'Gao De Image': L.layerGroup([L.tileLayer('http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}', {
         subdomains: "1234"

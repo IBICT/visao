@@ -26,18 +26,55 @@
 				<ul class="navbar-nav ">
 					<li class="p-2 nav-item"><a class="nav-link" href="./../"><i class="fa fa1 fa-home"></i> Início</a></li>
 					<li class="p-2 nav-item"><a class="nav-link" href="index.html"><i class="fa fa-map"></i> Mapa</a></li>
+                    <!--SOMENTE QUANDO LOGADO-->
+                    <li class="p-2 nav-item dropdown show-logado" style="display: none;">
+                        <a class="dropdown-toggle nav-link" href data-toggle="dropdown"><i class="fa fa-flag"></i> Entidades <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="menu-icon"><a class="fa fa-asterisk" href="./../#/name" style="color:#132D38">Grupo de Indicadores</a></li>
+                            <li class="menu-icon"><a class="fa fa-asterisk" href="./../#/Indicator" style="color:#132D38">Indicadores</a></li>
+                            <li class="menu-icon"><a class="fa fa-asterisk" href="./../#/year" style="color:#132D38">Ano</a></li>
+                            <li class="menu-icon"><a class="fa fa-asterisk" href="./../#/meta-dado" style="color:#132D38">Meta Dado </a></li>
+                            <li class="menu-icon"><a class="fa fa-asterisk" href="./../#/filter" style="color:#132D38">Filtro</a></li>
+                            <li class="menu-icon"><a class="fa fa-asterisk" href="./../#/group-layer" style="color:#132D38">Grupo de Camadas</a></li>
+                            <li class="menu-icon"><a class="fa fa-asterisk" href="./../#/layer" style="color:#132D38">Camadas</a></li>
+                            <li class="menu-icon"><a class="fa fa-asterisk" href="./../#/marker-icon" style="color:#132D38">Ícones</a></li>
+                            <li class="menu-icon"><a class="fa fa-asterisk" href="./../#/category" style="color:#132D38">Categorias</a></li>
+                            <li class="menu-icon"><a class="fa fa-asterisk" href="./../#/region" style="color:#132D38">Regiões</a></li>
+                            <li class="menu-icon"><a class="fa fa-asterisk" href="./../#/type-presentation" style="color:#132D38">Apresentação dos dados</a></li>
+                        </ul>
+                    </li>
+                    <li class="p-2 nav-item dropdown  show-logado" style="display: none;">
+                        <a class="dropdown-toggle nav-link" href data-toggle="dropdown"><i class="fa fa-user-plus"></i> Administração <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="menu-icon"><a><i class="fa fa-user"></i><span>Gerenciamento de usuário</span></a></li>
+                            <li class="menu-icon"><a><i class="fa fa-tachometer"></i><span>Métricas</span></a></li>
+                            <li class="menu-icon"><a><i class="fa fa-heart"></i><span>Estado do Sistema</span></a></li>
+                            <li class="menu-icon"><a><i class="fa fa-list"></i><span>Configuração</span></a></li>
+                            <li class="menu-icon"><a><i class="fa fa-bell"></i><span>Auditorias</span></a></li>
+                            <li class="menu-icon"><a><i class="fa fa-tasks"></i><span>Logs</span></a></li>
+                            <li class="menu-icon"><a><i class="fa fa-book"></i><span>API</span></a></li>
+                            <li class="menu-icon"><a><i class="fa fa-hdd-o"></i><span>Banco de dados</span></a></li>
+                        </ul>
+                    </li>
 					<li class="p-2 nav-item dropdown">
 						<a class="dropdown-toggle nav-link" href data-toggle="dropdown"><i class="fa fa-flag"></i> Idioma <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#" style="color:#132D38">Português</a></li>
-							<li><a href="#" style="color:#132D38">Inglês</a></li>
+							<li class="menu-icon"><a class="fa fa-asterisk" href="#" style="color:#132D38">Português</a></li>
+							<li class="menu-icon"><a class="fa fa-asterisk" href="#" style="color:#132D38">Inglês</a></li>
 						</ul>
 					</li>
 					<li class="p-2 nav-item dropdown">
 						<a class="dropdown-toggle nav-link margem" href data-toggle="dropdown"><span class="fa fa1 fa-user" ></span> Conta <span class="caret"></span></a>
-						<ul class="dropdown-menu" id="hoverMouse">
-							<li id="#property"><a  href  data-toggle="modal" data-target="#siteModal" > Login</a></li>
-							<li id="property1"><a  href="./../#/register" style="padding-right:65px"> Resgistrar</a></li>
+						<ul style="width: 100px" class="dropdown-menu" id="hoverMouse">
+                            <!--Mostrar quando deslogado-->
+                            <li class="menu-icon show-deslogado"><a href data-toggle="modal" data-target="#siteModal" ><i class="fa fa-sign-in"></i><span>Entrar</span></a></li>
+                            <li class="menu-icon show-deslogado"><a href="./../#/register"><i class="fa fa-user-plus"></i><span>Registrar</span></a></li>
+
+                            <!--Mostrar quando logado-->
+                            <li class="menu-icon show-logado"><a href="./../#/settings"><i class="fa fa-wrench"></i><span>Configuração</span></a></li>
+                            <li class="menu-icon show-logado"><a href="./../#/password"><i class="fa fa-clock-o"></i><span>Senha</span></a></li>
+                            <li class="menu-icon show-logado"><a href="./../#/sessions"><i class="fa fa-cloud"></i><span>Sessões</span></a></li>
+                            <li class="menu-icon show-logado"><a href="./../#/settings"><i class="fa fa-sign-out"></i><span>Sair</span></a></li> <!-- TODO Logout angular-->
 						</ul>
 					</li>
 				</ul>
