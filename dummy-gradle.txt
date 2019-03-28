@@ -1,2 +1,0 @@
-hello leafletmap!
-It's dummy.txt

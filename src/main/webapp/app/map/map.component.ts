@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { latLng, tileLayer } from 'leaflet';
-import { MapService } from 'app/pages/leaflet/map.service';
+import { MapService } from './map.service';
 import { Principal } from 'app/core';
 import { Subscription } from 'rxjs/Rx';
 
