@@ -16,6 +16,7 @@ import { VisaoHomeModule } from './home/home.module';
 import { VisaoAccountModule } from './account/account.module';
 import { VisaoEntityModule } from './entities/entity.module';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
+import { VisaoAppMapModule } from './map/map.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
@@ -28,6 +29,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         VisaoCoreModule,
         VisaoHomeModule,
         VisaoAccountModule,
+        VisaoAppMapModule,
         VisaoEntityModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
