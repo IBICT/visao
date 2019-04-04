@@ -2,7 +2,6 @@ package br.com.ibict.visao.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import br.com.ibict.visao.domain.Layer;
-import br.com.ibict.visao.security.AuthoritiesConstants;
 import br.com.ibict.visao.service.LayerService;
 import br.com.ibict.visao.web.rest.errors.BadRequestAlertException;
 import br.com.ibict.visao.web.rest.util.HeaderUtil;
@@ -17,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -78,7 +76,6 @@ public class LayerResource {
      */
     @PutMapping("/layers")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Layer> updateLayer(@Valid @RequestBody Layer layer) throws URISyntaxException {
         log.debug("REST request to update Layer : {}", layer);
         if (layer.getId() == null) {
@@ -128,7 +125,6 @@ public class LayerResource {
      */
     @DeleteMapping("/layers/{id}")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteLayer(@PathVariable Long id) {
         log.debug("REST request to delete Layer : {}", id);
         layerService.delete(id);

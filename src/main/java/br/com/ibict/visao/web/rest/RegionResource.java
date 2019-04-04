@@ -1,8 +1,6 @@
 package br.com.ibict.visao.web.rest;
 
 import br.com.ibict.visao.dto.RegionFilterProjection;
-import br.com.ibict.visao.security.AuthoritiesConstants;
-
 import com.codahale.metrics.annotation.Timed;
 import br.com.ibict.visao.domain.Region;
 import br.com.ibict.visao.service.RegionService;
@@ -19,7 +17,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -80,7 +77,6 @@ public class RegionResource {
      */
     @PutMapping("/regions")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Region> updateRegion(@Valid @RequestBody Region region) throws URISyntaxException {
         log.debug("REST request to update Region : {}", region);
         if (region.getId() == null) {
@@ -146,7 +142,6 @@ public class RegionResource {
      */
     @DeleteMapping("/regions/{id}")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteRegion(@PathVariable Long id) {
         log.debug("REST request to delete Region : {}", id);
         regionService.delete(id);

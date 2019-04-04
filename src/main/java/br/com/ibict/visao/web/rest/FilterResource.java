@@ -1,8 +1,6 @@
 package br.com.ibict.visao.web.rest;
 
 import br.com.ibict.visao.dto.FilterInfoProjection;
-import br.com.ibict.visao.security.AuthoritiesConstants;
-
 import com.codahale.metrics.annotation.Timed;
 import br.com.ibict.visao.domain.Filter;
 import br.com.ibict.visao.service.FilterService;
@@ -19,7 +17,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -80,7 +77,6 @@ public class FilterResource {
      */
     @PutMapping("/filters")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Filter> updateFilter(@Valid @RequestBody Filter filter) throws URISyntaxException {
         log.debug("REST request to update Filter : {}", filter);
         if (filter.getId() == null) {
@@ -146,7 +142,6 @@ public class FilterResource {
      */
     @DeleteMapping("/filters/{id}")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteFilter(@PathVariable Long id) {
         log.debug("REST request to delete Filter : {}", id);
         filterService.delete(id);
