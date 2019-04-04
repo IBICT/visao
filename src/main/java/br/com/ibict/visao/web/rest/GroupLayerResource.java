@@ -2,6 +2,7 @@ package br.com.ibict.visao.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import br.com.ibict.visao.domain.GroupLayer;
+import br.com.ibict.visao.security.AuthoritiesConstants;
 import br.com.ibict.visao.service.GroupLayerService;
 import br.com.ibict.visao.web.rest.errors.BadRequestAlertException;
 import br.com.ibict.visao.web.rest.util.HeaderUtil;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -76,6 +78,7 @@ public class GroupLayerResource {
      */
     @PutMapping("/group-layers")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<GroupLayer> updateGroupLayer(@Valid @RequestBody GroupLayer groupLayer) throws URISyntaxException {
         log.debug("REST request to update GroupLayer : {}", groupLayer);
         if (groupLayer.getId() == null) {
@@ -125,6 +128,7 @@ public class GroupLayerResource {
      */
     @DeleteMapping("/group-layers/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteGroupLayer(@PathVariable Long id) {
         log.debug("REST request to delete GroupLayer : {}", id);
         groupLayerService.delete(id);
