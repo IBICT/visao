@@ -27,7 +27,7 @@ spring:
             enabled: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mariadb://localhost:3306/testedia12
+        url: jdbc:mariadb://localhost:3306/teste20190304
         username: root
         password: root
         hikari:
