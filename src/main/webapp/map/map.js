@@ -4,7 +4,7 @@ var map = L.map('map', {
         minZoom: 5,
         doubleClickZoom: false
     }).setView([-15, -50], 4);
-map.setMaxBounds(map.getBounds());
+// map.setMaxBounds(map.getBounds());
 
 var cookies = document.cookie.split(';');
 var existeCookie = false;
