@@ -424,6 +424,10 @@ function makeChart(rangeMap2) {
     }
 }
 
+function updateOpacity(value) {
+    group.setStyle({fillOpacity:value});
+} 
+
 function setLayer(json){
 	json.forEach(function(item) {
 		switch(item.type){
@@ -801,12 +805,14 @@ function makeMap() {
                     document.getElementsByClassName("rangeBarControl")[0].onmouseover = controlEnter;
                     document.getElementsByClassName("rangeBarControl")[0].onmouseout = controlLeave;
 
+                    var sliderOpacidade = '<input id="slide" type="range" min="0" max="1" step="0.1" value="0.8" onchange="updateOpacity(this.value)">';
+
 
                     // select Map control
                     mapControl = L.control({position: 'bottomleft'});
                     mapControl.onAdd = function (map) {
                         this._div = L.DomUtil.create('div', 'mapControl');
-                        this._div.innerHTML = selectRangeMapHtml;
+                        this._div.innerHTML = sliderOpacidade + selectRangeMapHtml;
 
                         L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
 
