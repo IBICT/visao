@@ -426,6 +426,7 @@ function makeChart(rangeMap2) {
 }
 
 function setLayer(json){
+	markers.clearLayers();
 	json.forEach(function(item) {
 		switch(item.type){
 			case "MARKER":
