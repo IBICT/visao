@@ -2,10 +2,15 @@
 Navbar
 ========================================================================== */
 .navbar {
-    background: rgb(20, 102, 120);
+    background-color: rgb(20, 102, 120);
     opacity: 0.8;
     filter: alpha(opacity=80);
     margin-left: -15px;
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: normal;
 }
 
 .jh-navbar {
@@ -23,6 +28,7 @@ Navbar
         background-color: #414735;
     }
     .dropdown-toggle::after {
+        display: none;
         margin-left: 0.15em;
     }
     ul.navbar-nav {

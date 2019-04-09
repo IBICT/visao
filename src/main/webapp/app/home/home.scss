@@ -8,11 +8,19 @@ Main page styles
 }
 
 .bg-home h1 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-style: normal;
+    font-weight: bold;
     font-size: 64px;
+    line-height: normal;
 }
 
-.bg-home p {
+.bg-home .text-light {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
     font-size: 24px;
+    line-height: normal;
 }
 
 .loko {
@@ -31,10 +39,33 @@ Main page styles
 .home-yellow {
     color: #e5c75a;
 }
+.btn {
+    position: absolute;
+    width: 220px;
+    height: px;
+    right: 40%;
+    bottom: 23.44%;
 
-.btn-explore {
-    background-color: #e5c75a;
-    border-color: #e5c75a;
+    background: #e5c75a;
+    border-radius: 10px;
+}
+
+.btn-warning {
+    /*font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: normal;
+    text-align: center;
+    color: #FFFFFF;*/
+    color: #ffffff;
+    position: absolute;
+    right: 48%;
+    bottom: -20%;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 24px;
+    padding: 30px;
     color: #fff;
     font-weight: bold;
 }

@@ -52,8 +52,7 @@ body {
     display: none;
 }
 .navbar {
-    background-color: rgba(20, 102, 120);
-
+    background-color: rgba(20, 102, 120, 0.8) !important;
     color: white;
     opacity: 0.8;
     z-index: 2;
@@ -155,6 +154,11 @@ h5.mb-0 button.btn.btn-link {
     font-weight: bold;
 }
 .menu {
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: normal;
     width: 100%;
 }
 /* map buttons */
