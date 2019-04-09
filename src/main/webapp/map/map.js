@@ -912,7 +912,7 @@ function makeMap() {
 
 };
 
-function infoAboutIndicator(filterCod) {
+function infoAboutIndicator() {
 
     $('#tituloModal').html("INFORMAÇÕES SOBRE INDICADORES");
     $('#idInfoIndicador').val(indicadorSelecionado);
@@ -946,15 +946,8 @@ function infoAboutIndicator(filterCod) {
                                 '   <div id="headingFilterInfo' + filterInfo.id + '" data-toggle="collapse" data-target="#collapseFilterInfo' + filterInfo.id + '" aria-expanded="false" aria-controls="collapseFilterInfo' + filterInfo.id + '">' +
                                 '       <label class="iconInfoFilter">' + filterInfo.name + '</label>' +
                                 '       <i class="fa fa-angle-down"></i>' +
-                                '   </div>';
-
-                            if(filterInfo.id === filterCod){
-                                conteudoModal +=
-                                '   <div id="collapseFilterInfo' + filterInfo.id + '" class="collapse show" aria-labelledby="headingFilterInfo' + filterInfo.id + '" data-parent="#containerDescricaoFiltros">';
-                            } else {
-                                conteudoModal +=
+                                '   </div>' +
                                 '   <div id="collapseFilterInfo' + filterInfo.id + '" class="collapse" aria-labelledby="headingFilterInfo' + filterInfo.id + '" data-parent="#containerDescricaoFiltros">';
-                            }
                             conteudoModal +=
                                 '       <div class="card-body" style="padding: 0 0 1rem 1rem">' + filterInfo.description + '</div>' +
                                 '   </div>' +
@@ -1012,18 +1005,12 @@ function infoAboutIndicator(filterCod) {
 }
 
 function loadFiltrosSelecionados(){
-    var filtrosSelecionados = '';
-
-    filterArray.forEach(function (filterItem) {
-        if(filtrosId.has(filterItem.id)){
-            filtrosSelecionados +=
-                '<div class="iconFilter float-right" onclick="infoAboutIndicator('+filterItem.id+')" id="filtroMapControl" title="filtro">' +
-                    '<span class="button-state state-get-center get-center-active robotoFamily">'+filterItem.name +
-                        ' <span class="fa fa-info"></span>' +
-                    '</span>'+
-                '</div>'
-        }
-    });
+    var filtrosSelecionados =
+        '<div class="iconFilter float-right" onclick="infoAboutIndicator()" id="filtroMapControl" title="filtro">' +
+            '<span class="button-state state-get-center get-center-active robotoFamily">'+
+                '<span class="fa fa-info"></span> Filtros selecionados' +
+            '</span>'+
+        '</div>';
 
     return filtrosSelecionados;
 }
