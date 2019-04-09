@@ -42,30 +42,22 @@ Main page styles
 .btn {
     position: absolute;
     width: 220px;
-    height: px;
+    height: 70px;
     right: 40%;
     bottom: 23.44%;
-
-    background: #e5c75a;
+    background-color: #e5c75a;
     border-radius: 10px;
 }
 
 .btn-warning {
-    /*font-family: 'Roboto';
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: normal;
-    text-align: center;
-    color: #FFFFFF;*/
-    color: #ffffff;
     position: absolute;
-    right: 48%;
-    bottom: -20%;
     font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    right: 48%;
+    bottom: -25%;
     text-align: center;
     font-size: 24px;
-    padding: 30px;
+    padding: 18px;
     color: #fff;
     font-weight: bold;
 }
