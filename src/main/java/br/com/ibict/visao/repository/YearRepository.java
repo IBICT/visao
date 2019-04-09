@@ -17,6 +17,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface YearRepository extends JpaRepository<Year, Long>, JpaSpecificationExecutor<Year> {
 
-    @Query(value = "SELECT DISTINCT `indicator`.`year_id` AS `id`, `year`.`jhi_date` AS `jhi_date` FROM `indicator` AS `indicator` INNER JOIN `year` AS `year` ON `year`.`id` = `indicator`.`year_id` WHERE `indicator`.`name_id` = :nameId", nativeQuery = true)
+    @Query(value = "SELECT DISTINCT `indicator`.`year_id` AS `id`, `year`.`jhi_date` AS `jhi_date` FROM `indicator` AS `indicator` INNER JOIN `year` AS `year` ON `year`.`id` = `indicator`.`year_id` WHERE `indicator`.`name_id` = :nameId ORDER BY `year`.`jhi_date` DESC", nativeQuery = true)
     Page<Year> findAllFromIndicator(@Param("nameId") Long nameId, Pageable page);
 }

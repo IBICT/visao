@@ -4,7 +4,7 @@ var map = L.map('map', {
         minZoom: 5,
         doubleClickZoom: false
     }).setView([-15, -50], 4);
-map.setMaxBounds(map.getBounds());
+// map.setMaxBounds(map.getBounds());
 
 var cookies = document.cookie.split(';');
 var existeCookie = false;
@@ -127,7 +127,7 @@ function genereteListIndicators(){
 								'						<div style="border: 0;" class="card-header" id="headingCard'+ item.id +'">' +
 								'							<h5 class="mb-0">' +
 								'								<button style="background-color: #fff;" class="btn btn-link" data-toggle="collapse" data-target="#collapse'+ item.id  +'" aria-expanded="true" aria-controls="collapseOne">' +
-								'									<div style="display: inline-block; text-overflow: ellipsis; overflow: hidden; width: 200px; height: 18px; white-space: nowrap;" title="'+ item.name +'">'+ item.name +' </div><i class="pull-right fa fa-angle-right" aria-hidden="true"></i>' +
+								'									<div class="robotoFamily" style="display: inline-block; text-overflow: ellipsis; overflow: hidden; width: 200px; height: 18px; white-space: nowrap;" title="'+ item.name +'">'+ item.name +' </div><i class="pull-right fa fa-angle-right" aria-hidden="true"></i>' +
 								'								</button>' +
 								'							</h5>' +
 								'						</div>' +
@@ -139,7 +139,7 @@ function genereteListIndicators(){
 		}).forEach(function(indicator) {
 			indicatorCategory += 	'								<div class="form-check">' +
 									'									<input class="form-check-input" name="indicator" type="radio" value="'+ indicator.id +'" id="indicador'+ indicator.id +'" />' +
-									'									<label style="" class="form-check-label" for="indicador'+ indicator.id +'">' +
+									'									<label style="" class="form-check-label robotoFamily" for="indicador'+ indicator.id +'">' +
 									'										'+ indicator.value +
 									'									</label>' +
 									'								</div>';
@@ -163,7 +163,7 @@ function generateListFilters(){
             '   <div style="border: 0;" class="card-header" id="headingCard'+ item.id +'">' +
             '	    <h5 class="mb-0">' +
             '		    <button style="background-color: #fff;" class="btn btn-link" data-toggle="collapse" data-target="#collapse'+ item.id  +'" aria-expanded="true" aria-controls="collapseOne">' +
-            '			    <div style="display: inline-block; text-overflow: ellipsis; overflow: hidden; width: 200px; height: 18px; white-space: nowrap;" title="'+ item.name +'">'+ item.name +' </div><i class="pull-right fa fa-angle-right" aria-hidden="true"></i>' +
+            '			    <div class="robotoFamily" style="display: inline-block; text-overflow: ellipsis; overflow: hidden; width: 200px; height: 18px; white-space: nowrap;" title="'+ item.name +'">'+ item.name +' </div><i class="pull-right fa fa-angle-right" aria-hidden="true"></i>' +
             '			</button>' +
             '		</h5>' +
             '	</div>' +
@@ -175,7 +175,7 @@ function generateListFilters(){
         }).forEach(function(item) {
             filterCategory +=
                 '       <div class="form-check-input">'+
-                '           <label><input class="filterCheckbox" type="checkbox" name="filtro" value="'+item.id+'"> '+item.name+'</label>'+
+                '           <label><input class="filterCheckbox robotoFamily" type="checkbox" name="filtro" value="'+item.id+'"> '+item.name+'</label>'+
                 '       </div><br />';
         });
         filterCategory +=
@@ -197,7 +197,7 @@ function genereteListLayer(){
             '						<div style="border: 0;" class="card-header" id="headingCardLayer'+ item.id +'">' +
             '							<h5 class="mb-0">' +
             '								<button style="background-color: #fff;" class="btn btn-link" data-toggle="collapse" data-target="#collapsLayere'+ item.id  +'" aria-expanded="true" aria-controls="collapseOne">' +
-            '									<div style="display: inline-block; text-overflow: ellipsis; overflow: hidden; width: 200px; height: 18px; white-space: nowrap;" title="'+ item.name +'">'+ item.name +' </div><i class="pull-right fa fa-angle-right" aria-hidden="true"></i>' +
+            '									<div class="robotoFamily" style="display: inline-block; text-overflow: ellipsis; overflow: hidden; width: 200px; height: 18px; white-space: nowrap;" title="'+ item.name +'">'+ item.name +' </div><i class="pull-right fa fa-angle-right" aria-hidden="true"></i>' +
             '								</button>' +
             '							</h5>' +
             '						</div>' +
@@ -209,7 +209,7 @@ function genereteListLayer(){
         }).forEach(function(layer) {
             layerCategory += 	'								<div class="form-check">' +
                 '									<input class="form-check-input layerCheckbox" name="layerCheckbox" type="checkbox" value="'+ layer.id +'" id="layer'+ layer.id +'" />' +
-                '									<label style="" class="form-check-label" for="layer'+ layer.id +'">' +
+                '									<label class="form-check-label robotoFamily" for="layer'+ layer.id +'">' +
                 '										'+ layer.name +
                 '									</label>' +
                 '								</div>';
@@ -340,7 +340,6 @@ function cleanMap(){
 	if (typeof(indicadorMapControl) != "undefined") {
 		indicadorMapControl.remove(map);
         filtroMapControl.remove(map);
-		limparMapControl.remove(map);
 		rangeBarControl.remove(map);
 		mapControl.remove(map);
 	}
@@ -424,6 +423,10 @@ function makeChart(rangeMap2) {
         }
     }
 }
+
+function updateOpacity(value) {
+    group.setStyle({fillOpacity:value});
+} 
 
 function setLayer(json){
 	json.forEach(function(item) {
@@ -596,13 +599,13 @@ function makeMap() {
 									  '	<div class="menu--popup">' +
 									  '		<ul class="nav nav-tabs" id="myTab" role="tablist">' +
 									  '			<li class="nav-item">' +
-									  '				<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">INDICADORES</a>' +
+									  '				<a class="nav-link active robotoFamily" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">INDICADORES</a>' +
 									  '			</li>' +
 									  '			<li class="nav-item">' +
-									  '				<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">FILTROS</a>' +
+									  '				<a class="nav-link robotoFamily" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">FILTROS</a>' +
 									  '			</li>' +
 									  '			<li class="nav-item">' +
-									  '				<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">CAMADAS</a>' +
+									  '				<a class="nav-link robotoFamily" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">CAMADAS</a>' +
 									  '			</li>' +
 									  '		</ul>' +
 									  '		<div class="tab-content" id="myTabContent">' +
@@ -621,10 +624,10 @@ function makeMap() {
 														genereteListLayer() +
 												'</div>' +
 									  '		</div>' +
-									  '		<span onclick="menuMapControl()" style="position:relative; left:-31px; top: -438px;; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-times"> </span></span>' +
+									  '		<span onclick="menuMapControl()" style="position:relative; left:-31px; top: -438px;; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-chevron-right"> </span></span>' +
 									  '		<hr style="background-color:#146678; height: 1px;" />' +
-									  '		<button id="submitFormIndicator" disabled style="background-color: #146678; color: #fff;" class="btn pull-right">Aplicar</button>' +
-									  '		<button id="clearFormIndicator" style="background-color: #fff; color: #146678;" class="btn pull-right">Limpar</button>' +
+									  '		<button id="submitFormIndicator" disabled style="background-color: #146678; color: #fff;" class="btn pull-right robotoFamily">Aplicar</button>' +
+									  '		<button id="clearFormIndicator" style="background-color: #fff; color: #146678;" class="btn pull-right robotoFamily">Limpar</button>' +
 									  '	</div>' +
 									  '</div>';
 
@@ -754,7 +757,7 @@ function makeMap() {
                     indicadorMapControl.onAdd = function (map) {
                         this._div = L.DomUtil.create('div', 'indicadorMapControl');
                         this._div.innerHTML = '<div style="cursor: pointer;color:#59C9A8; font-size:16px;" onclick="infoAboutIndicator()" class="" id="indicadorMapControl" title="Menu">' +
-                            '<span class="">' +
+                            '<span class="robotoFamily">' +
                             dataJson[0].name.value + ' <span style="background-color: #59C9A8; padding:3.5px 6.5px; color: white; border-radius: 4px; font-size:12px; position:relative; top:-2.5px;" class="fa fa-info"></span>' +
                             '</span></div>';
 
@@ -783,24 +786,6 @@ function makeMap() {
                     }
                     filtroMapControl.addTo(map);
 
-                    // limpar Map control
-                    limparMapControl = L.control({position: 'topright'});
-                    limparMapControl.onAdd = function (map) {
-                        this._div = L.DomUtil.create('div', 'limparMapControl');
-                        this._div.innerHTML = '<div style="cursor: pointer;color:#FFFFFF; font-size:14px;" onclick="limparMap()" class="" id="limparMapControl" title="Menu">' +
-                            '<span style="text-decoration: underline;">' +
-                            'limpar <span class="fa fa-trash-o"></span>' +
-                            '</span></div>';
-
-                        L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
-                        L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
-                        L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);
-
-                        return this._div;
-                    }
-                    limparMapControl.addTo(map);
-
-
                     // range bar Map control
                     rangeBarControl = L.control({position: 'bottomright'});
                     rangeBarControl.onAdd = function (map) {
@@ -820,12 +805,14 @@ function makeMap() {
                     document.getElementsByClassName("rangeBarControl")[0].onmouseover = controlEnter;
                     document.getElementsByClassName("rangeBarControl")[0].onmouseout = controlLeave;
 
+                    var sliderOpacidade = '<input id="slide" type="range" min="0" max="1" step="0.1" value="0.8" onchange="updateOpacity(this.value)">';
+
 
                     // select Map control
                     mapControl = L.control({position: 'bottomleft'});
                     mapControl.onAdd = function (map) {
                         this._div = L.DomUtil.create('div', 'mapControl');
-                        this._div.innerHTML = selectRangeMapHtml;
+                        this._div.innerHTML = sliderOpacidade + selectRangeMapHtml;
 
                         L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
 
@@ -854,17 +841,17 @@ function makeMap() {
             layersId.add(parseInt($(this).val()));
         });
 
+		markers.clearLayers();
         if(layersId.size != 0){
-            var strQuery ="?";
             layersId.forEach(function (layerId) {
-                strQuery +="groupId.equals="+layerId+"&";
-            });
-            $.ajax({
-                url: '/api/layers'+strQuery,
-                dataType: 'json',
-                success: function (data) {
-                    setLayer(data);
-                }
+                var strQuery ="?groupId.equals="+layerId+"&";
+				$.ajax({
+					url: '/api/layers'+strQuery,
+					dataType: 'json',
+					success: function (data) {
+						setLayer(data);
+					}
+				});
             });
         }
 
@@ -908,11 +895,34 @@ function makeMap() {
             }
         }
 
+		$(document).ajaxComplete(function() {
+			// limpar Map control
+			if (typeof(limparMapControl) != "undefined") {
+				limparMapControl.remove(map);
+			}
+			limparMapControl = L.control({position: 'topright'});
+			limparMapControl.onAdd = function (map) {
+				this._div = L.DomUtil.create('div', 'limparMapControl');
+				this._div.innerHTML = '<div style="cursor: pointer;color:#FFFFFF; font-size:14px;" onclick="limparMap()" class="" id="limparMapControl" title="Menu">' +
+					'<span style="text-decoration: underline;">' +
+					'limpar <span class="fa fa-trash-o"></span>' +
+					'</span></div>';
+
+				L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
+				L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
+				L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);
+
+				return this._div;
+			}
+			limparMapControl.addTo(map);
+		});
+		
+		
 	});
 
 };
 
-function infoAboutIndicator(filterCod) {
+function infoAboutIndicator() {
 
     $('#tituloModal').html("INFORMAÇÕES SOBRE INDICADORES");
     $('#idInfoIndicador').val(indicadorSelecionado);
@@ -946,15 +956,8 @@ function infoAboutIndicator(filterCod) {
                                 '   <div id="headingFilterInfo' + filterInfo.id + '" data-toggle="collapse" data-target="#collapseFilterInfo' + filterInfo.id + '" aria-expanded="false" aria-controls="collapseFilterInfo' + filterInfo.id + '">' +
                                 '       <label class="iconInfoFilter">' + filterInfo.name + '</label>' +
                                 '       <i class="fa fa-angle-down"></i>' +
-                                '   </div>';
-
-                            if(filterInfo.id === filterCod){
-                                conteudoModal +=
-                                '   <div id="collapseFilterInfo' + filterInfo.id + '" class="collapse show" aria-labelledby="headingFilterInfo' + filterInfo.id + '" data-parent="#containerDescricaoFiltros">';
-                            } else {
-                                conteudoModal +=
+                                '   </div>' +
                                 '   <div id="collapseFilterInfo' + filterInfo.id + '" class="collapse" aria-labelledby="headingFilterInfo' + filterInfo.id + '" data-parent="#containerDescricaoFiltros">';
-                            }
                             conteudoModal +=
                                 '       <div class="card-body" style="padding: 0 0 1rem 1rem">' + filterInfo.description + '</div>' +
                                 '   </div>' +
@@ -1012,18 +1015,12 @@ function infoAboutIndicator(filterCod) {
 }
 
 function loadFiltrosSelecionados(){
-    var filtrosSelecionados = '';
-
-    filterArray.forEach(function (filterItem) {
-        if(filtrosId.has(filterItem.id)){
-            filtrosSelecionados +=
-                '<div class="iconFilter float-right" onclick="infoAboutIndicator('+filterItem.id+')" id="filtroMapControl" title="filtro">' +
-                    '<span class="button-state state-get-center get-center-active">'+filterItem.name +
-                        ' <span class="fa fa-info"></span>' +
-                    '</span>'+
-                '</div>'
-        }
-    });
+    var filtrosSelecionados =
+        '<div class="iconFilter float-right" onclick="infoAboutIndicator()" id="filtroMapControl" title="filtro">' +
+            '<span class="button-state state-get-center get-center-active robotoFamily">'+
+                '<span class="fa fa-info"></span> Filtros selecionados' +
+            '</span>'+
+        '</div>';
 
     return filtrosSelecionados;
 }
