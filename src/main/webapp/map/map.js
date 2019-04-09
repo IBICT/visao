@@ -340,7 +340,6 @@ function cleanMap(){
 	if (typeof(indicadorMapControl) != "undefined") {
 		indicadorMapControl.remove(map);
         filtroMapControl.remove(map);
-		limparMapControl.remove(map);
 		rangeBarControl.remove(map);
 		mapControl.remove(map);
 	}
@@ -426,7 +425,6 @@ function makeChart(rangeMap2) {
 }
 
 function setLayer(json){
-	markers.clearLayers();
 	json.forEach(function(item) {
 		switch(item.type){
 			case "MARKER":
@@ -784,24 +782,6 @@ function makeMap() {
                     }
                     filtroMapControl.addTo(map);
 
-                    // limpar Map control
-                    limparMapControl = L.control({position: 'topright'});
-                    limparMapControl.onAdd = function (map) {
-                        this._div = L.DomUtil.create('div', 'limparMapControl');
-                        this._div.innerHTML = '<div style="cursor: pointer;color:#FFFFFF; font-size:14px;" onclick="limparMap()" class="" id="limparMapControl" title="Menu">' +
-                            '<span style="text-decoration: underline;">' +
-                            'limpar <span class="fa fa-trash-o"></span>' +
-                            '</span></div>';
-
-                        L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
-                        L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
-                        L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);
-
-                        return this._div;
-                    }
-                    limparMapControl.addTo(map);
-
-
                     // range bar Map control
                     rangeBarControl = L.control({position: 'bottomright'});
                     rangeBarControl.onAdd = function (map) {
@@ -855,17 +835,17 @@ function makeMap() {
             layersId.add(parseInt($(this).val()));
         });
 
+		markers.clearLayers();
         if(layersId.size != 0){
-            var strQuery ="?";
             layersId.forEach(function (layerId) {
-                strQuery +="groupId.equals="+layerId+"&";
-            });
-            $.ajax({
-                url: '/api/layers'+strQuery,
-                dataType: 'json',
-                success: function (data) {
-                    setLayer(data);
-                }
+                var strQuery ="?groupId.equals="+layerId+"&";
+				$.ajax({
+					url: '/api/layers'+strQuery,
+					dataType: 'json',
+					success: function (data) {
+						setLayer(data);
+					}
+				});
             });
         }
 
@@ -909,6 +889,29 @@ function makeMap() {
             }
         }
 
+		$(document).ajaxComplete(function() {
+			// limpar Map control
+			if (typeof(limparMapControl) != "undefined") {
+				limparMapControl.remove(map);
+			}
+			limparMapControl = L.control({position: 'topright'});
+			limparMapControl.onAdd = function (map) {
+				this._div = L.DomUtil.create('div', 'limparMapControl');
+				this._div.innerHTML = '<div style="cursor: pointer;color:#FFFFFF; font-size:14px;" onclick="limparMap()" class="" id="limparMapControl" title="Menu">' +
+					'<span style="text-decoration: underline;">' +
+					'limpar <span class="fa fa-trash-o"></span>' +
+					'</span></div>';
+
+				L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
+				L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
+				L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);
+
+				return this._div;
+			}
+			limparMapControl.addTo(map);
+		});
+		
+		
 	});
 
 };
