@@ -109,7 +109,6 @@ body {
     border-radius: 0 4px 4px 4px;
     width: 340px;
     padding: 0.5em;
-    display: none;
     z-index: 2;
 }
 .nav-tabs .nav-link.active,
@@ -133,9 +132,15 @@ body {
     margin-left: 0rem;
 }
 .nav-tabs .nav-link.active {
-    background-color: #f0eded;
+    background-color: #ffffff;
     font-weight: bold;
 }
+.nav-tabs .nav-link {
+    background-color: #f0eded;
+    color: #4f4f4f;
+    font-weight: bold;
+}
+
 .tab-pane {
     overflow-y: scroll;
     height: 400px;
@@ -267,4 +272,11 @@ h5.mb-0 button.btn.btn-link {
 
 .i-icon {
     margin-right: 5px;
+}
+
+.robotoFamily {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
