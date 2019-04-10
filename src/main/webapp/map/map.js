@@ -426,7 +426,7 @@ function makeChart(rangeMap2) {
 
 function updateOpacity(value) {
     group.setStyle({fillOpacity:value});
-} 
+}
 
 function setLayer(json){
 	json.forEach(function(item) {
@@ -738,9 +738,13 @@ function makeMap() {
 
                     // html do SELECT
                     var selectRangeMapHtml = '<div class="input-group input-group-sm mb-3">' +
+                        '<div class="input-group input-group-sm" style="margin-bottom: 5px">' +
+                            '<div class="input-group-prepend">' +
+                                '<span style="margin-right:5px;" class="input-group-text fa fa-search input-leaflet" id="basic-addon2"></span>' +
+                            '</div>'+
+                        '</div>'+
                         '<div class="input-group-prepend">' +
                         '<span style="margin-right:5px;" class="input-group-text fa fa-map input-leaflet" id="basic-addon1"></span>' +
-                        '<span style="color: #59C9A8; border-right:0; background-color: #ffffff" class="input-group-text"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></span>' +
                         '</div>' +
                         '<select onchange="rangeMap(this)" style="border-radius: 0 5px 5px 0; border-left:0;">';
 
@@ -916,8 +920,8 @@ function makeMap() {
 			}
 			limparMapControl.addTo(map);
 		});
-		
-		
+
+
 	});
 
 };
