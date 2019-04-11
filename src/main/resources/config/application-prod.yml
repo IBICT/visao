@@ -27,9 +27,10 @@ spring:
             enabled: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mariadb://localhost:3306/visao
-        username: root
-        password: root
+        #url: jdbc:mariadb://localhost:3306/visao
+        url: ${database}
+        username: ${username}
+        password: ${password}
         hikari:
             data-source-properties:
                 cachePrepStmts: true
