@@ -3,10 +3,14 @@ Main page styles
 ========================================================================== */
 
 .bg-home {
-    background: linear-gradient(0deg, #146678 0%, #59c9a8 127.78%);
+    background: linear-gradient(0deg, #146678, #1d737f, #59c9a8 127.78%);
     min-height: 100vh;
 }
-
+.layout {
+    position: relative;
+    bottom: -35%;
+    right: -9%;
+}
 .bg-home h1 {
     font-family: 'Roboto Condensed', sans-serif;
     font-style: normal;
@@ -16,15 +20,18 @@ Main page styles
 }
 
 .bg-home .text-light {
+    width: 760px;
+    height: 220px;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: normal;
-    font-size: 24px;
+    font-size: 16px;
     line-height: normal;
 }
 
-.loko {
-    background: url('../../content/images/loko.png');
+.logoBackground {
+    background: url('../../content/images/logoBack.png') no-repeat center bottom;
+    background-size: contain;
     min-height: 100vh;
 }
 
@@ -33,11 +40,11 @@ Main page styles
     width: 347px;
     height: 497px;
     background: url('../../content/images/hipster.png') no-repeat center top;
-    background-size: contain;
+    background-size: cover;
 }
 
 .home-yellow {
-    color: #e5c75a;
+    color: #eecd56;
 }
 .btn {
     position: absolute;
@@ -45,7 +52,7 @@ Main page styles
     height: 70px;
     right: 40%;
     bottom: 23.44%;
-    background-color: #e5c75a;
+    background-color: #d9b42e;
     border-radius: 10px;
 }
 
@@ -54,7 +61,7 @@ Main page styles
     font-family: 'Roboto', sans-serif;
     color: #ffffff;
     right: 48%;
-    bottom: -25%;
+    bottom: -55%;
     text-align: center;
     font-size: 24px;
     padding: 18px;
