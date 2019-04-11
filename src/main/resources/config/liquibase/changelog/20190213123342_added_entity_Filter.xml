@@ -54,7 +54,7 @@
                 <constraints nullable="true" />
             </column>
             <column name="cidade_polo_id" type="bigint">
-                <constraints unique="true" nullable="true" />
+                <constraints nullable="true" />
             </column>
             <column name="category_id" type="bigint">
                 <constraints nullable="true" />
