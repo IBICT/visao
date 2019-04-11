@@ -174,7 +174,7 @@ function generateListFilters(){
             return filter.category.id == item.id;
         }).forEach(function(item) {
             filterCategory +=
-                '       <div class="form-check-input">'+
+                '       <div class="form-check-input" style="display: contents">'+
                 '           <label><input class="filterCheckbox robotoFamily" type="checkbox" name="filtro" value="'+item.id+'"> '+item.name+'</label>'+
                 '       </div><br />';
         });
