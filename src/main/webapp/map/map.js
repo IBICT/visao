@@ -738,11 +738,6 @@ function makeMap() {
 
                     // html do SELECT
                     var selectRangeMapHtml = '<div class="input-group input-group-sm mb-3">' +
-                        '<div class="input-group input-group-sm" style="margin-bottom: 5px">' +
-                            '<div class="input-group-prepend">' +
-                                '<span style="margin-right:5px;" class="input-group-text fa fa-search input-leaflet" id="basic-addon2"></span>' +
-                            '</div>'+
-                        '</div>'+
                         '<div class="input-group-prepend">' +
                         '<span style="margin-right:5px;" class="input-group-text fa fa-map input-leaflet" id="basic-addon1"></span>' +
                         '</div>' +
