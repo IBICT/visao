@@ -406,7 +406,15 @@ function makeChart(rangeMap2) {
 					x.style.display = "none";
                     $("#box"+feature.geoCode).toggle();
 				});
-			}
+			} else {
+                var popupValue = '<div>' +
+                    '<p id="box_'+feature.geoCode+'" class="title-popup">'+feature.properties.name+'</p>' +
+                    '<p id="both" style="margin-bottom: 0">'+arrayCompleto[0].name.value+'</p>' +
+                    '<p style="font-size: 16px; margin-top: 0; font-weight: bold">Não há dados sobre a região selecionada nesse período.</p>' +
+                    '<div style="text-align: center">' +
+                    '</div> </div>';
+				layer.bindPopup(popupValue);
+            }
 		}
 	});
 
