@@ -812,7 +812,7 @@ function makeMap() {
                     document.getElementsByClassName("rangeBarControl")[0].onmouseover = controlEnter;
                     document.getElementsByClassName("rangeBarControl")[0].onmouseout = controlLeave;
 
-                    var sliderOpacidade = '<input id="slide" type="range" min="0" max="1" step="0.1" value="0.8" onchange="updateOpacity(this.value)">';
+                    var sliderOpacidade = '<input id="sliderOpacidade" type="range" min="0" max="1" step="0.1" value="0.8" onchange="updateOpacity(this.value)">';
 
 
                     // select Map control
