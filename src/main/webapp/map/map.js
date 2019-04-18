@@ -317,7 +317,8 @@ function setJsonVars(json) {
 
 // MenuMapControl
 function menuMapControl(){
-	$( ".menu--popup" ).toggle( "slow" );
+    let pos = ($(".menu--popup").css('right') == '0px') ? '-340px' : '0';
+    $(".menu--popup").animate({right: pos}, 800);
 }
 
 function rangeMap(select){
@@ -603,7 +604,7 @@ function makeMap() {
 	menuMapControl.onAdd = function(map) {
 				this._div = L.DomUtil.create('div', 'leaflet-bar easy-button-container menuMapControl');
 				this._div.innerHTML = '<div>' +
-									  '<span style="padding:6px 8px; border-radius:4px; background-color: #fff; color: #59C9A8;" onclick="menuMapControl()"> <span class="fa fa-bars"> </span></span>' +
+									//   '<span style="padding:6px 8px; border-radius:4px; background-color: #fff; color: #59C9A8;" onclick="menuMapControl()"> <span class="fa fa-bars"> </span></span>' +
 									  '	<div class="menu--popup">' +
 									  '		<ul class="nav nav-tabs" id="myTab" role="tablist">' +
 									  '			<li class="nav-item">' +
@@ -632,10 +633,11 @@ function makeMap() {
 														genereteListLayer() +
 												'</div>' +
 									  '		</div>' +
-									  '		<span onclick="menuMapControl()" style="position:relative; left:-31px; top: -438px;; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-chevron-right"> </span></span>' +
-									  '		<hr style="background-color:#146678; height: 1px;" />' +
-									  '		<button id="submitFormIndicator" disabled style="background-color: #146678; color: #fff;" class="btn pull-right robotoFamily">Aplicar</button>' +
-									  '		<button id="clearFormIndicator" style="background-color: #fff; color: #146678;" class="btn pull-right robotoFamily">Limpar</button>' +
+									  '		<span onclick="menuMapControl()" style="position:relative; left:-31px; top: -730px;; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-chevron-right"> </span></span>' +
+                                      '		<div style="position: absolute;bottom: 0px;right: 0px;height: 160px;width: 100%;background-color: #F5F6F6;box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.2);border-top: 2px solid #59C9A8;">' +
+									  '		    <button id="submitFormIndicator" disabled style="background-color: #146678; color: #fff;" class="btn pull-right robotoFamily">Aplicar</button>' +
+                                      '   		<button id="clearFormIndicator" style="background-color: #fff; color: #146678;" class="btn pull-right robotoFamily">Limpar</button>' +
+                                      '		</div>' +
 									  '	</div>' +
 									  '</div>';
 

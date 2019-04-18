@@ -105,19 +105,35 @@ body {
 /* Menu */
 .menu--popup {
     background: #fff;
-    box-shadow: 0 0 3px rgba(50, 50, 50, 0.6);
-    position: absolute;
-    right: 0;
-    top: -4px;
-    border-radius: 0 4px 4px 4px;
+    position: fixed;
+    right: 0px;
+    top: 0px;
     width: 340px;
-    padding: 0.5em;
-    display: none;
-    z-index: 2;
+    height: 100%;
+    padding: 60px 0.5em 0.5em;
+    z-index: 99;
 }
-.nav-tabs .nav-link.active,
+.tab-content {
+    height: calc(100% - 200px);
+}
+.nav-tabs {
+    border-bottom: 1px solid #59c9a8;
+}
+.nav-tabs .nav-item {
+    margin-bottom: 0;
+}
 .nav-tabs .nav-link {
+    margin-bottom: 0;
     color: #146678;
+    background-color: #f0eded;
+    border: none;
+}
+.nav-tabs .nav-link.active {
+    background-color: #fff;
+    font-weight: bold;
+    color: #59c9a8;
+    border-bottom: 1px solid white;
+    margin-bottom: -1px;
 }
 #accordion {
     width: 98%;
@@ -135,13 +151,9 @@ body {
 #accordionFilter .card-body .form-check-input {
     margin-left: 0rem;
 }
-.nav-tabs .nav-link.active {
-    background-color: #f0eded;
-    font-weight: bold;
-}
 .tab-pane {
     overflow-y: scroll;
-    height: 400px;
+    height: 100%;
 }
 .card {
     border: 0;
