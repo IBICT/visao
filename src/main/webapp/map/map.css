@@ -103,6 +103,9 @@ body {
     }
 }
 /* Menu */
+.leaflet-top.leaflet-right {
+    z-index: 1001 !important;
+}
 .menu--popup {
     background: #fff;
     position: fixed;

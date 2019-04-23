@@ -635,8 +635,8 @@ function makeMap() {
 									  '		</div>' +
 									  '		<span onclick="menuMapControl()" style="position:relative; left:-31px; top: -730px;; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-chevron-right"> </span></span>' +
                                       '		<div style="position: absolute;bottom: 0px;right: 0px;height: 160px;width: 100%;background-color: #F5F6F6;box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.2);border-top: 2px solid #59C9A8;">' +
-									  '		    <button id="submitFormIndicator" disabled style="background-color: #146678; color: #fff;" class="btn pull-right robotoFamily">Aplicar</button>' +
-                                      '   		<button id="clearFormIndicator" style="background-color: #fff; color: #146678;" class="btn pull-right robotoFamily">Limpar</button>' +
+									  '		    <button id="submitFormIndicator" disabled style="margin: 10px 5px; background-color: #146678; color: #fff;" class="btn pull-right robotoFamily">Aplicar</button>' +
+                                      '   		<button id="clearFormIndicator" style="margin: 10px 5px; background-color: #fff; color: #146678;" class="btn pull-right robotoFamily">Limpar</button>' +
                                       '		</div>' +
 									  '	</div>' +
 									  '</div>';
