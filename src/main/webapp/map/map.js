@@ -1,3 +1,55 @@
+var stocksData = [
+    {
+        "company_name": "Facebook",
+        "code": "fb",
+    },
+    {
+        "company_name": "Google",
+        "code": "goog",
+    },
+    {
+        "company_name": "Yahoo",
+        "code": "yhoo",
+    },
+    {
+        "company_name": "Apple",
+        "code": "aapl",
+    },
+    {
+        "company_name": "Royal Mail",
+        "code": "rmg.l",
+    },
+];
+// var states = [
+//     'Acre',
+//     'Alagoas',
+//     'Amapá',
+//     'Amazonas',
+//     'Bahia',
+//     'Ceará',
+//     'Distrito Federal',
+//     'Espírito Santo',
+//     'Goías',
+//     'Maranhão',
+//     'Mato Grosso',
+//     'Mato Grosso do Sul',
+//     'Minas Gerais',
+//     'Pará',
+//     'Paraíba',
+//     'Paraná',
+//     'Pernambuco',
+//     'Piauí',
+//     'Rio de Janeiro',
+//     'Rio Grande do Norte',
+//     'Rio Grande do Sul',
+//     'Rondônia',
+//     'Roraíma',
+//     'Santa Catarina',
+//     'São Paulo',
+//     'Sergipe',
+//     'Tocantins'
+// ];
+
 // Iniciar mapa objeto sem zoom, latitude, longitude, zoom inicial
 var map = L.map('map', {
         zoomControl:false,
@@ -744,21 +796,6 @@ function makeMap() {
                         console.log("Empty DATAJSON")
                     }
 
-                    // html do SELECT
-                    var selectRangeMapHtml = '<div class="input-group input-group-sm mb-3">' +
-                        '<div class="input-group-prepend">' +
-                        '<span style="margin-right:5px;" class="input-group-text fa fa-map input-leaflet" id="basic-addon1"></span>' +
-                        '</div>' +
-                        '<select onchange="rangeMap(this)" style="border-radius: 0 5px 5px 0; border-left:0;">';
-
-                    itensSelect.forEach(function (iten) {
-                        selectRangeMapHtml += iten;
-                    });
-
-                    selectRangeMapHtml += '</select>' +
-                        '</div>';
-                    // html do SELECT
-
                     // indicador Map control
                     indicadorMapControl = L.control({position: 'topright'});
                     indicadorMapControl.onAdd = function (map) {
@@ -814,6 +851,28 @@ function makeMap() {
 
                     var sliderOpacidade = '<input id="sliderOpacidade" type="range" min="0" max="1" step="0.1" value="0.8" onchange="updateOpacity(this.value)">';
 
+                    // html do SELECT
+                    var selectRangeMapHtml = '<div class="input-group input-group-sm mb-3">' +
+                        '<div class="input-group input-group-sm" style="margin-bottom: 5px">' +
+                        '   <div class="input-group-prepend" style="cursor: pointer" id="searchIcon">' +
+                        '       <span style="margin-right:5px; background-color: #ffffff" class="input-group-text fa fa-search input-leaflet" id="basic-addon2"></span>' +
+                        '   </div>'+
+                        '   <div id="containerTypeahead" style="display: none">' +
+                        '       <input type="text" class="form-control typeahead" style="height: calc(1.9rem + 2px)" placeholder="Busque um estado" id="searchInputText">' +
+                        '   </div>'+
+                        '</div>'+
+                        '<div class="input-group-prepend">' +
+                        '   <span style="margin-right:5px;" class="input-group-text fa fa-map input-leaflet" id="basic-addon1"></span>' +
+                        '</div>' +
+                        '<select onchange="rangeMap(this)" style="border-radius: 0 5px 5px 0; border-left:0;" id="tipoMapaBusca">';
+
+                    itensSelect.forEach(function (iten) {
+                        selectRangeMapHtml += iten;
+                    });
+
+                    selectRangeMapHtml += '</select>' +
+                        '</div>';
+                    // html do SELECT
 
                     // select Map control
                     mapControl = L.control({position: 'bottomleft'});
@@ -829,6 +888,43 @@ function makeMap() {
 
                     document.getElementsByClassName("mapControl")[0].onmouseover = controlEnter;
                     document.getElementsByClassName("mapControl")[0].onmouseout = controlLeave;
+
+                    $('#searchIcon').click(function () {
+                        $('#containerTypeahead').toggle();
+
+                        if($('#searchInputText').is(":visible")){
+                            // var val = Arr
+
+                            var stocks = new Bloodhound({
+                                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('company_name'),
+                                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                                local: stocksData
+                            });
+
+                            stocks.initialize();
+
+                            $('.typeahead').typeahead(
+                                null, {
+                                    name: 'stocks',
+                                    displayKey: 'company_name',
+                                    source: stocks.ttAdapter()
+                                }).on('typeahead:selected', function(event, data){
+                                $('.typeahead').val(data.code);
+                                console.log($('.typeahead').val());
+                            });
+
+
+                            //TODO colocar pra dividir as opções se o estado ou municipio está selecionado
+                            // if($('#tipoMapaBusca').val() === 1){ // ESTADO
+                            //     $('#searchInputText').val("amazonas");
+                            //     estado.features.forEach(function (feature) {
+                            //         console.log(feature.properties.UF + ' - '+feature.properties.name);
+                            //     });
+                            // } else { // MUNICIPIO
+                            //     $('#searchInputText').val("teste");
+                            // }
+                        }
+                    });
                 }
             }
         });

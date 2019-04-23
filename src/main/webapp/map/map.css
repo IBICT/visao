@@ -464,3 +464,8 @@ input[type='range']:focus::-ms-fill-upper {
 #sliderOpacidade:focus::-ms-fill-upper {
     background: rgba(89, 201, 168, 0.8);
 }
+
+.tt-menu {
+    top: auto;
+    bottom: 100%;
+}
