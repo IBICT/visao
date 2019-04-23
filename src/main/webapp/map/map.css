@@ -479,3 +479,14 @@ input[type='range']:focus::-ms-fill-upper {
 #sliderOpacidade:focus::-ms-fill-upper {
     background: rgba(89, 201, 168, 0.8);
 }
+
+#footer-sidebar-filtros {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    height: 160px;
+    width: 100%;
+    background-color: #f5f6f6;
+    box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.2);
+    border-top: 2px solid #59c9a8;
+}
