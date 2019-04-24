@@ -635,10 +635,14 @@ function makeMap() {
 									  '		</div>' +
 									  '		<span onclick="menuMapControl()" style="position:relative; left:-31px; top: -730px;; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-chevron-right"> </span></span>' +
                                       '		<div id="footer-sidebar-filtros">' +
-                                      ' 		<div class="indicador"></div>' +
-                                      ' 		<div class="filtro"></div>' +
-									  '		    <button id="submitFormIndicator" disabled style="margin: 10px 5px; background-color: #146678; color: #fff;" class="btn pull-right robotoFamily">Aplicar</button>' +
-                                      '   		<button id="clearFormIndicator" style="margin: 10px 5px; background-color: #fff; color: #146678;" class="btn pull-right robotoFamily">Limpar</button>' +
+                                      '		    <div class="pull-left" style="width:50%;min-height:1px;margin-top:20px">' +
+                                      ' 		    <div class="indicador" style="text-align:center"></div>' +
+                                      '     		<div class="filtro"></div>' +
+                                      '		    </div>' +
+                                      '		    <div class="pull-left" style="width:50%;padding-right:20px">' +
+									  '    		    <button id="submitFormIndicator" disabled style="margin: 10px 5px; background-color: #146678; color: #fff;" class="btn pull-right robotoFamily">Aplicar</button><br>' +
+                                      '       		<button id="clearFormIndicator" style="margin: 10px 5px; background-color: #f5f6f6; color: #146678;" class="btn pull-right robotoFamily">Limpar&nbsp;<span class="fa fa-trash-o"></span></button>' +
+                                      '		    </div>' +
                                       '		</div>' +
 									  '	</div>' +
 									  '</div>';
