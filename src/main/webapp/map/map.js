@@ -317,7 +317,8 @@ function setJsonVars(json) {
 
 // MenuMapControl
 function menuMapControl(){
-	$( ".menu--popup" ).toggle( "slow" );
+    let pos = ($(".menu--popup").css('right') == '0px') ? '-340px' : '0';
+    $(".menu--popup").animate({right: pos}, 800);
 }
 
 function rangeMap(select){
@@ -603,7 +604,7 @@ function makeMap() {
 	menuMapControl.onAdd = function(map) {
 				this._div = L.DomUtil.create('div', 'leaflet-bar easy-button-container menuMapControl');
 				this._div.innerHTML = '<div>' +
-									  '<span style="padding:6px 8px; border-radius:4px; background-color: #fff; color: #59C9A8;" onclick="menuMapControl()"> <span class="fa fa-bars"> </span></span>' +
+									//   '<span style="padding:6px 8px; border-radius:4px; background-color: #fff; color: #59C9A8;" onclick="menuMapControl()"> <span class="fa fa-bars"> </span></span>' +
 									  '	<div class="menu--popup">' +
 									  '		<ul class="nav nav-tabs" id="myTab" role="tablist">' +
 									  '			<li class="nav-item">' +
@@ -632,10 +633,17 @@ function makeMap() {
 														genereteListLayer() +
 												'</div>' +
 									  '		</div>' +
-									  '		<span onclick="menuMapControl()" style="position:relative; left:-31px; top: -438px;; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-chevron-right"> </span></span>' +
-									  '		<hr style="background-color:#146678; height: 1px;" />' +
-									  '		<button id="submitFormIndicator" disabled style="background-color: #146678; color: #fff;" class="btn pull-right robotoFamily">Aplicar</button>' +
-									  '		<button id="clearFormIndicator" style="background-color: #fff; color: #146678;" class="btn pull-right robotoFamily">Limpar</button>' +
+									  '		<span onclick="menuMapControl()" style="position:relative; left:-31px; top: -730px;; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-chevron-right"> </span></span>' +
+                                      '		<div id="footer-sidebar-filtros">' +
+                                      '		    <div class="pull-left" style="width:50%;min-height:1px;margin-top:20px">' +
+                                      ' 		    <div class="indicador" style="text-align:center"></div>' +
+                                      '     		<div class="filtro"></div>' +
+                                      '		    </div>' +
+                                      '		    <div class="pull-left" style="width:50%;padding-right:20px">' +
+									  '    		    <button id="submitFormIndicator" disabled style="margin: 10px 5px; background-color: #146678; color: #fff;" class="btn pull-right robotoFamily">Aplicar</button><br>' +
+                                      '       		<button id="clearFormIndicator" style="margin: 10px 5px; background-color: #f5f6f6; color: #146678;" class="btn pull-right robotoFamily">Limpar&nbsp;<span class="fa fa-trash-o"></span></button>' +
+                                      '		    </div>' +
+                                      '		</div>' +
 									  '	</div>' +
 									  '</div>';
 
@@ -767,6 +775,8 @@ function makeMap() {
                             '<span class="robotoFamily">' +
                             dataJson[0].name.value + ' <span style="background-color: #59C9A8; padding:3.5px 6.5px; color: white; border-radius: 4px; font-size:12px; position:relative; top:-2.5px;" class="fa fa-info"></span>' +
                             '</span></div>';
+
+                        $("#footer-sidebar-filtros .indicador").html(this._div.innerHTML);
 
                         L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
                         L.DomEvent.addListener(this._div, 'mousedown', L.DomEvent.stop);
@@ -1028,6 +1038,8 @@ function loadFiltrosSelecionados(){
                 '<span class="fa fa-info"></span> Filtros selecionados' +
             '</span>'+
         '</div>';
+
+    $("#footer-sidebar-filtros .filtro").html(filtrosSelecionados);
 
     return filtrosSelecionados;
 }
