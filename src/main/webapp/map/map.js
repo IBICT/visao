@@ -137,11 +137,11 @@ function genereteListIndicators(){
 		indicatorNames.filter(function(indicator) {
 			return indicator.category.name == item.name;
 		}).forEach(function(indicator) {
-			indicatorCategory += 	'								<div class="form-check">' +
-									'									<input class="form-check-input" name="indicator" type="radio" value="'+ indicator.id +'" id="indicador'+ indicator.id +'" />' +
-									'									<label style="" class="form-check-label robotoFamily" for="indicador'+ indicator.id +'">' +
-									'										'+ indicator.value +
-									'									</label>' +
+            indicatorCategory += 	'								<div class="form-check">' +
+                                    '                                   <div class="custom-control custom-radio">' +
+                                    '                                       <input type="radio" id="indicador'+ indicator.id +'" name="indicator" class="custom-control-input form-check-input" value="'+indicator.id+'">' +
+                                    '                                       <label class="custom-control-label form-check-label robotoFamily" for="indicador'+ indicator.id +'">'+ indicator.value +'</label>' +
+                                    '                                   </div>' +
 									'								</div>';
 		});
 
@@ -175,7 +175,10 @@ function generateListFilters(){
         }).forEach(function(item) {
             filterCategory +=
                 '       <div class="form-check-input" style="display: contents">'+
-                '           <label><input class="filterCheckbox robotoFamily" type="checkbox" name="filtro" value="'+item.id+'"> '+item.name+'</label>'+
+                '           <div class="custom-control custom-checkbox">'+
+                '               <input type="checkbox" value="'+item.id+'" name="filtro"  class="filterCheckbox robotoFamily custom-control-input" id="checkbox-'+item.id+'">'+
+                '               <label class="custom-control-label" for="checkbox-'+item.id+'">'+item.name+'</label>'+
+                '           </div>'+
                 '       </div><br />';
         });
         filterCategory +=
