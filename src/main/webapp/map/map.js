@@ -137,11 +137,11 @@ function genereteListIndicators(){
 		indicatorNames.filter(function(indicator) {
 			return indicator.category.name == item.name;
 		}).forEach(function(indicator) {
-			indicatorCategory += 	'								<div class="form-check">' +
-									'									<input class="form-check-input" name="indicator" type="radio" value="'+ indicator.id +'" id="indicador'+ indicator.id +'" />' +
-									'									<label style="" class="form-check-label robotoFamily" for="indicador'+ indicator.id +'">' +
-									'										'+ indicator.value +
-									'									</label>' +
+            indicatorCategory += 	'								<div class="form-check">' +
+                                    '                                   <div class="custom-control custom-radio">' +
+                                    '                                       <input type="radio" id="indicador'+ indicator.id +'" name="indicator" class="custom-control-input form-check-input" value="'+indicator.id+'">' +
+                                    '                                       <label class="custom-control-label form-check-label robotoFamily" for="indicador'+ indicator.id +'">'+ indicator.value +'</label>' +
+                                    '                                   </div>' +
 									'								</div>';
 		});
 
@@ -175,7 +175,10 @@ function generateListFilters(){
         }).forEach(function(item) {
             filterCategory +=
                 '       <div class="form-check-input" style="display: contents">'+
-                '           <label><input class="filterCheckbox robotoFamily" type="checkbox" name="filtro" value="'+item.id+'"> '+item.name+'</label>'+
+                '           <div class="custom-control custom-checkbox">'+
+                '               <input type="checkbox" value="'+item.id+'" name="filtro"  class="filterCheckbox robotoFamily custom-control-input" id="checkbox-'+item.id+'">'+
+                '               <label class="custom-control-label" for="checkbox-'+item.id+'">'+item.name+'</label>'+
+                '           </div>'+
                 '       </div><br />';
         });
         filterCategory +=
@@ -633,15 +636,15 @@ function makeMap() {
 														genereteListLayer() +
 												'</div>' +
 									  '		</div>' +
-									  '		<span onclick="menuMapControl()" style="position:relative; left:-31px; top: -730px;; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-chevron-right"> </span></span>' +
+									  '		<span onclick="menuMapControl()" style="position:absolute; left:-25px; top: 90px; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-chevron-right"> </span></span>' +
                                       '		<div id="footer-sidebar-filtros">' +
-                                      '		    <div class="pull-left" style="width:50%;min-height:1px;margin-top:20px">' +
+                                      '		    <div class="pull-left" style="width:60%;min-height:1px;margin-top:20px">' +
                                       ' 		    <div class="indicador" style="text-align:center"></div>' +
-                                      '     		<div class="filtro"></div>' +
+                                      '     		<div class="filtro" style="margin: 10px 45px 0 0;"></div>' +
                                       '		    </div>' +
-                                      '		    <div class="pull-left" style="width:50%;padding-right:20px">' +
-									  '    		    <button id="submitFormIndicator" disabled style="margin: 10px 5px; background-color: #146678; color: #fff;" class="btn pull-right robotoFamily">Aplicar</button><br>' +
-                                      '       		<button id="clearFormIndicator" style="margin: 10px 5px; background-color: #f5f6f6; color: #146678;" class="btn pull-right robotoFamily">Limpar&nbsp;<span class="fa fa-trash-o"></span></button>' +
+                                      '		    <div class="pull-left" style="width:40%;padding-right:20px">' +
+									  '    		    <button id="submitFormIndicator" disabled style="margin: 15px 15px 0; background-color: #146678; color: #fff;" class="btn pull-right robotoFamily">Aplicar</button><br>' +
+                                      '       		<button id="clearFormIndicator" style="margin: 0 5px; background-color: #f5f6f6; color: #146678;" class="btn pull-right robotoFamily">Limpar&nbsp;<span class="fa fa-trash-o"></span></button>' +
                                       '		    </div>' +
                                       '		</div>' +
 									  '	</div>' +

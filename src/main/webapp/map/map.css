@@ -490,3 +490,19 @@ input[type='range']:focus::-ms-fill-upper {
     box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.2);
     border-top: 2px solid #59c9a8;
 }
+
+.custom-radio .custom-control-input:checked~.custom-control-label::before {
+    background-color: #146678;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    background-color: #146678;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+    background-color: #146678;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    background-color: #146678;
+}
