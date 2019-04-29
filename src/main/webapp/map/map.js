@@ -636,7 +636,7 @@ function makeMap() {
 														genereteListLayer() +
 												'</div>' +
 									  '		</div>' +
-									  '		<span onclick="menuMapControl()" style="position:relative; left:-31px; top: -730px;; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-chevron-right"> </span></span>' +
+									  '		<span onclick="menuMapControl()" style="position:absolute; left:-25px; top: 90px; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-chevron-right"> </span></span>' +
                                       '		<div id="footer-sidebar-filtros">' +
                                       '		    <div class="pull-left" style="width:50%;min-height:1px;margin-top:20px">' +
                                       ' 		    <div class="indicador" style="text-align:center"></div>' +
