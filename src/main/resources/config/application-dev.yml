@@ -57,7 +57,7 @@ spring:
             host: mail.ibict.br
             port: 587
             username: visao@ibict.br
-            password: passar o parametro pela VM: -Dspring.mail.password=
+            password: "passar o parametro pela VM: -Dspring.mail.password="
             protocol: smtp
             properties.mail.smtp:
                 tls: true
