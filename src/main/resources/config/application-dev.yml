@@ -54,10 +54,16 @@ spring:
     liquibase:
         contexts: dev
     mail:
-        host: localhost
-        port: 25
-        username:
-        password:
+            host: mail.ibict.br
+            port: 587
+            username: visao@ibict.br
+            password: passar o parametro pela VM: -Dspring.mail.password=
+            protocol: smtp
+            properties.mail.smtp:
+                tls: true
+                auth: true
+                starttls.enable: true
+                ssl.trust: mail.ibict.br
     messages:
         cache-duration: PT1S # 1 second, see the ISO 8601 standard
     thymeleaf:
