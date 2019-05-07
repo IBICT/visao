@@ -177,7 +177,7 @@ function generateListFilters(){
                 '       <div class="form-check-input" style="display: contents">'+
                 '           <div class="custom-control custom-checkbox">'+
                 '               <input type="checkbox" value="'+item.id+'" name="filtro"  class="filterCheckbox robotoFamily custom-control-input" id="checkbox-'+item.id+'">'+
-                '               <label class="custom-control-label" for="checkbox-'+item.id+'">'+item.name+'</label>'+
+                '               <label class="custom-control-label" style="line-height:24px" for="checkbox-'+item.id+'">'+item.name+'</label>'+
                 '           </div>'+
                 '       </div><br />';
         });
@@ -636,7 +636,7 @@ function makeMap() {
 														genereteListLayer() +
 												'</div>' +
 									  '		</div>' +
-									  '		<span onclick="menuMapControl()" style="position:absolute; left:-25px; top: 90px; color:white; background-color: #59C9A8; padding: 6px 8px;border-radius:4px 0 0 4px;"><span class="fa fa-chevron-right"> </span></span>' +
+									  '		<span onclick="menuMapControl()" style="position:absolute;left: -40px;top: 0;color:white;background-color: #59C9A8;padding: 4px 12px;border-radius:4px 0 0 4px;font-size: 22px;"><span class="fa fa-chevron-right"> </span></span>' +
                                       '		<div id="footer-sidebar-filtros">' +
                                       '		    <div class="pull-left" style="width:60%;min-height:1px;margin-top:20px">' +
                                       ' 		    <div class="indicador" style="text-align:center"></div>' +
@@ -806,6 +806,8 @@ function makeMap() {
                     }
                     filtroMapControl.addTo(map);
 
+                    var sliderOpacidade = '<input id="sliderOpacidade" type="range" min="0" max="1" step="0.1" value="0.8" onchange="updateOpacity(this.value)">';
+
                     // range bar Map control
                     rangeBarControl = L.control({position: 'bottomright'});
                     rangeBarControl.onAdd = function (map) {
@@ -816,7 +818,7 @@ function makeMap() {
                             '</div><i class="fa fa-plus" aria-hidden="true"></i>' +
                             '<select onchange="changeYear(this)" class="select-year">' +
                                 setYears(indicadorAtual) +
-                            '</select>';
+                            '</select>' + sliderOpacidade;
 
 
                         return this._div;
@@ -825,14 +827,11 @@ function makeMap() {
                     document.getElementsByClassName("rangeBarControl")[0].onmouseover = controlEnter;
                     document.getElementsByClassName("rangeBarControl")[0].onmouseout = controlLeave;
 
-                    var sliderOpacidade = '<input id="sliderOpacidade" type="range" min="0" max="1" step="0.1" value="0.8" onchange="updateOpacity(this.value)">';
-
-
                     // select Map control
                     mapControl = L.control({position: 'bottomleft'});
                     mapControl.onAdd = function (map) {
                         this._div = L.DomUtil.create('div', 'mapControl');
-                        this._div.innerHTML = sliderOpacidade + selectRangeMapHtml;
+                        this._div.innerHTML = selectRangeMapHtml;
 
                         L.DomEvent.addListener(this._div, 'dblclick', L.DomEvent.stop);
 
