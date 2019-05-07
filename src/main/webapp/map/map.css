@@ -395,20 +395,30 @@ h5.mb-0 button.btn.btn-link {
     border-top: 2px solid #59c9a8;
 }
 
+.custom-control-label::before {
+    background-color: #fff;
+    border: 1px solid #4f4f4f;
+    outline-width: 0;
+}
+
 .custom-radio .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: #146678;
+    background-color: #fff;
+    border: 1px solid #59c9a8;
 }
 
 .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: #146678;
+    background-color: #fff;
+    border: 1px solid #59c9a8;
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: #146678;
+    background-color: #fff;
+    border: 1px solid #59c9a8;
 }
 
 .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: #146678;
+    background-color: #fff;
+    border: 1px solid #59c9a8;
 }
 
 .leaflet-container {
@@ -417,4 +427,12 @@ h5.mb-0 button.btn.btn-link {
 
 .robotoFamily {
     font-family: 'Roboto' !important;
+}
+
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%2359C9A8'/%3E%3C/svg%3E");
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%2359C9A8' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
 }
