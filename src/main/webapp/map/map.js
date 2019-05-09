@@ -806,7 +806,10 @@ function makeMap() {
                     }
                     filtroMapControl.addTo(map);
 
-                    var sliderOpacidade = '<input id="sliderOpacidade" type="range" min="0" max="1" step="0.1" value="0.8" onchange="updateOpacity(this.value)">';
+                    var sliderOpacidade = '<div style="background-color: white;border-radius: 10px;padding: 2px 6px; color: #bdbdbd; width: 156px;">' +
+                                          '<i class="fa fa-adjust"></i>&nbsp;' +
+                                          '0 <input id="sliderOpacidade" type="range" min="0" max="1" step="0.1" value="0.8" onchange="updateOpacity(this.value)"> 100' +
+                                          '</div>';
 
                     // range bar Map control
                     rangeBarControl = L.control({position: 'bottomright'});
