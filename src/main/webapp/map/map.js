@@ -401,7 +401,7 @@ function makeChart(rangeMap2) {
 
 				layer.on('mouseover', function (e) {
 					var x = document.getElementsByClassName("range-bar-mark")[0];
-					x.style.left = getPercent(indicatorArray[feature.geoCode])+"%";
+                    x.style.left = getPercent(indicatorArray[feature.geoCode])*0.92+"%";
 					x.style.display = "inline";
 					$("#box"+feature.geoCode).toggle();
 				});
