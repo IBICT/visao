@@ -211,11 +211,13 @@ function genereteListLayer(){
         groupLayer.filter(function(layer) {
             return layer.category.name == item.name;
         }).forEach(function(layer) {
-            layerCategory += 	'								<div class="form-check">' +
-                '									<input class="form-check-input layerCheckbox" name="layerCheckbox" type="checkbox" value="'+ layer.id +'" id="layer'+ layer.id +'" />' +
-                '									<label class="form-check-label robotoFamily" for="layer'+ layer.id +'">' +
-                '										'+ layer.name +
-                '									</label>' +
+            layerCategory += 	'				<div class="form-check">' +
+                '                                   <div class="custom-control custom-checkbox">' +
+                '									    <input class="custom-control-input form-check-input layerCheckbox" name="layerCheckbox" type="checkbox" value="'+ layer.id +'" id="layer'+ layer.id +'" />' +
+                '    									<label class="custom-control-label form-check-label robotoFamily" for="layer'+ layer.id +'">' +
+                '										    '+ layer.name +
+                '									    </label>' +
+                '                                   </div>' +
                 '								</div>';
         });
 
