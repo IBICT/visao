@@ -110,14 +110,14 @@ body {
     background: #fff;
     position: fixed;
     right: 0px;
-    top: 100px;
+    top: 80px;
     width: 340px;
-    height: calc(100% - 100px);
+    height: calc(100% - 80px);
     padding: 10px 0.5em 0.5em;
     z-index: 99;
 }
 .tab-content {
-    height: calc(100% - 200px);
+    height: calc(100% - 170px);
 }
 .nav-tabs {
     border-bottom: 1px solid #59c9a8;
@@ -390,7 +390,7 @@ h5.mb-0 button.btn.btn-link {
     position: absolute;
     bottom: 0px;
     right: 0px;
-    height: 160px;
+    height: 140px;
     width: 100%;
     background-color: #f5f6f6;
     box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.2);
@@ -437,4 +437,9 @@ h5.mb-0 button.btn.btn-link {
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%2359C9A8' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+}
+
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+    border: none !important;
 }

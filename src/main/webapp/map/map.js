@@ -327,6 +327,7 @@ function menuMapControl(){
     $(".menu--popup").animate({right: pos}, 800);
     let pos2 = ($(".leaflet-right.leaflet-bottom").css('right') == '0px') ? '340px' : '0';
     $(".leaflet-right.leaflet-bottom").animate({right: pos2}, 800);
+    $('#seta-sidebar').toggle();
 }
 
 function rangeMap(select){
@@ -612,7 +613,7 @@ function makeMap() {
 	menuMapControl.onAdd = function(map) {
 				this._div = L.DomUtil.create('div', 'leaflet-bar easy-button-container menuMapControl');
 				this._div.innerHTML = '<div>' +
-									//   '<span style="padding:6px 8px; border-radius:4px; background-color: #fff; color: #59C9A8;" onclick="menuMapControl()"> <span class="fa fa-bars"> </span></span>' +
+									  '<div style="border-radius:4px; background-color: rgba(255,255,255,0.9); color: #59C9A8; font-size: 28px; padding: 1px 10px;" onclick="menuMapControl()"><i class="fa fa-sliders"></i></div>' +
 									  '	<div class="menu--popup">' +
 									  '		<ul class="nav nav-tabs" id="myTab" role="tablist">' +
 									  '			<li class="nav-item">' +
@@ -641,7 +642,7 @@ function makeMap() {
 														genereteListLayer() +
 												'</div>' +
 									  '		</div>' +
-									  '		<span onclick="menuMapControl()" style="position:absolute;left: -40px;top: 0;color:white;background-color: #59C9A8;padding: 4px 12px;border-radius:4px 0 0 4px;font-size: 22px;"><span class="fa fa-chevron-right"> </span></span>' +
+									  '		<span id="seta-sidebar" onclick="menuMapControl()" style="position:absolute;left: -40px;top: 0;color:white;background-color: #59C9A8;padding: 4px 12px;border-radius:4px 0 0 4px;font-size: 22px;"><span class="fa fa-chevron-right"> </span></span>' +
                                       '		<div id="footer-sidebar-filtros">' +
                                       '		    <div class="pull-left" style="width:60%;min-height:1px;margin-top:20px">' +
                                       ' 		    <div class="indicador" style="text-align:center"></div>' +
@@ -940,7 +941,8 @@ function makeMap() {
 				L.DomEvent.addListener(this._div, 'mouseup', L.DomEvent.stop);
 
 				return this._div;
-			}
+            }
+            
 			limparMapControl.addTo(map);
 		});
 
