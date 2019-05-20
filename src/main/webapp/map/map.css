@@ -180,6 +180,19 @@ h5.mb-0 button.btn.btn-link {
     line-height: normal;
     width: 100%;
 }
+.dropdown-menu.show {
+    top: 70px;
+    left: -115px
+}
+.nav-link::after {
+    display: none
+}
+.botao-tam:focus {
+    color: red;
+    font-size: 20px;
+    line-height: 23px;
+}
+    
 /* map buttons */
 
 .leaflet-right .leaflet-control:first-child,
@@ -193,12 +206,7 @@ h5.mb-0 button.btn.btn-link {
     padding: 8px 16px;
     height: 56px;
 }
-#hoverMouse {
-    position: absolute;
-    top: 52px;
-    left: -50px;
-    width: 20px;
-}
+
 #hoverMouse li {
     height: 30px;
     color: #132d38;

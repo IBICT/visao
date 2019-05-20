@@ -54,6 +54,15 @@ Navbar
     height: 56px;
     padding: 8px 16px;
 }
+.dropdown-menu.show {
+    font-family: 'Roboto';
+    font-size: 16px;
+    line-height: 19px;
+    position: absolute;
+    top: 60px !important;
+    left: -120px !important
+        
+}
 
 @media screen and (min-width: 768px) {
     .jh-navbar-toggler {
