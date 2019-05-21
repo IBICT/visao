@@ -79,9 +79,6 @@ public class GroupCategoryQueryService extends QueryService<GroupCategory> {
             if (criteria.getAbout() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getAbout(), GroupCategory_.about));
             }
-            if (criteria.getPermission() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getPermission(), GroupCategory_.permission));
-            }
             if (criteria.getOwnerId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getOwnerId(), GroupCategory_.owner, User_.id));
             }

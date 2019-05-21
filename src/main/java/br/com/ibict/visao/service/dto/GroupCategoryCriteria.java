@@ -34,8 +34,6 @@ public class GroupCategoryCriteria implements Serializable {
 
     private StringFilter about;
 
-    private StringFilter permission;
-
     private LongFilter ownerId;
 
     private LongFilter categoriesId;
@@ -77,14 +75,6 @@ public class GroupCategoryCriteria implements Serializable {
         this.about = about;
     }
 
-    public StringFilter getPermission() {
-        return permission;
-    }
-
-    public void setPermission(StringFilter permission) {
-        this.permission = permission;
-    }
-
     public LongFilter getOwnerId() {
         return ownerId;
     }
@@ -116,7 +106,6 @@ public class GroupCategoryCriteria implements Serializable {
                 (iconPresentation != null ? "iconPresentation=" + iconPresentation + ", " : "") +
                 (iconContentType != null ? "iconContentType=" + iconContentType + ", " : "") +
                 (about != null ? "about=" + about + ", " : "") +
-                (permission != null ? "permission=" + permission + ", " : "") +
                 (ownerId != null ? "ownerId=" + ownerId + ", " : "") +
                 (categoriesId != null ? "categoriesId=" + categoriesId + ", " : "") +
                 (sharedsId != null ? "sharedsId=" + sharedsId + ", " : "") +

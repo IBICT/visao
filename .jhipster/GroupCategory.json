@@ -39,10 +39,6 @@
         {
             "fieldName": "about",
             "fieldType": "String"
-        },
-        {
-            "fieldName": "permission",
-            "fieldType": "String"
         }
     ],
     "changelogDate": "20190521115323",

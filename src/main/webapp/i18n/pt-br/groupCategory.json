@@ -3,26 +3,25 @@
     "visaoApp": {
         "groupCategory" : {
             "home": {
-                "title": "Grupo de Categorias",
-                "createLabel": "Criar um novo Grupo de Categorias",
-                "createOrEditLabel": "Criar ou editar um novo Grupo de Categorias"
+                "title": "Group Categories",
+                "createLabel": "Criar novo Group Category",
+                "createOrEditLabel": "Criar ou editar Group Category"
             },
-            "created": "Um novo Grupo de Categoria foi criado com o id {{ param }}",
-            "updated": "O Grupo de Categoria com o id {{ param }} foi atualizado",
-            "deleted": "O Grupo de Categoria com o id {{ param }} foi excluido",
+            "created": "Um novo Group Category foi criado com o identificador {{ param }}",
+            "updated": "Um Group Category foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Group Category foi deletado com o identificador {{ param }}",
             "delete": {
-                "question": "Tem certeza que deseja deletar o Grupo de Categoria {{ id }}?"
+                "question": "Tem certeza de que deseja excluir Group Category {{ id }}?"
             },
             "detail": {
-                "title": "Grupo de Categorias"
+                "title": "Group Category"
             },
-            "iconPresentation": "Logo",
-            "iconContentType": "Logo Content Type",
-            "about": "Sobre",
-            "permission": "Permissão",
-            "owner": "Dono",
-            "categories": "Categorias",
-            "shareds": "Compartilhado com"
+            "iconPresentation": "Icon Presentation",
+            "iconContentType": "Icon Content Type",
+            "about": "About",
+            "owner": "Owner",
+            "categories": "Categories",
+            "shareds": "Shareds"
         }
     }
 }

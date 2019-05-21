@@ -59,9 +59,6 @@ public class GroupCategoryResourceIntTest {
     private static final String DEFAULT_ABOUT = "AAAAAAAAAA";
     private static final String UPDATED_ABOUT = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PERMISSION = "AAAAAAAAAA";
-    private static final String UPDATED_PERMISSION = "BBBBBBBBBB";
-
     @Autowired
     private GroupCategoryRepository groupCategoryRepository;
     @Mock
@@ -113,8 +110,7 @@ public class GroupCategoryResourceIntTest {
         GroupCategory groupCategory = new GroupCategory()
             .iconPresentation(DEFAULT_ICON_PRESENTATION)
             .iconContentType(DEFAULT_ICON_CONTENT_TYPE)
-            .about(DEFAULT_ABOUT)
-            .permission(DEFAULT_PERMISSION);
+            .about(DEFAULT_ABOUT);
         return groupCategory;
     }
 
@@ -141,7 +137,6 @@ public class GroupCategoryResourceIntTest {
         assertThat(testGroupCategory.getIconPresentation()).isEqualTo(DEFAULT_ICON_PRESENTATION);
         assertThat(testGroupCategory.getIconContentType()).isEqualTo(DEFAULT_ICON_CONTENT_TYPE);
         assertThat(testGroupCategory.getAbout()).isEqualTo(DEFAULT_ABOUT);
-        assertThat(testGroupCategory.getPermission()).isEqualTo(DEFAULT_PERMISSION);
     }
 
     @Test
@@ -176,8 +171,7 @@ public class GroupCategoryResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(groupCategory.getId().intValue())))
             .andExpect(jsonPath("$.[*].iconPresentation").value(hasItem(DEFAULT_ICON_PRESENTATION.toString())))
             .andExpect(jsonPath("$.[*].iconContentType").value(hasItem(DEFAULT_ICON_CONTENT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].about").value(hasItem(DEFAULT_ABOUT.toString())))
-            .andExpect(jsonPath("$.[*].permission").value(hasItem(DEFAULT_PERMISSION.toString())));
+            .andExpect(jsonPath("$.[*].about").value(hasItem(DEFAULT_ABOUT.toString())));
     }
     
     public void getAllGroupCategoriesWithEagerRelationshipsIsEnabled() throws Exception {
@@ -224,8 +218,7 @@ public class GroupCategoryResourceIntTest {
             .andExpect(jsonPath("$.id").value(groupCategory.getId().intValue()))
             .andExpect(jsonPath("$.iconPresentation").value(DEFAULT_ICON_PRESENTATION.toString()))
             .andExpect(jsonPath("$.iconContentType").value(DEFAULT_ICON_CONTENT_TYPE.toString()))
-            .andExpect(jsonPath("$.about").value(DEFAULT_ABOUT.toString()))
-            .andExpect(jsonPath("$.permission").value(DEFAULT_PERMISSION.toString()));
+            .andExpect(jsonPath("$.about").value(DEFAULT_ABOUT.toString()));
     }
 
     @Test
@@ -347,45 +340,6 @@ public class GroupCategoryResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllGroupCategoriesByPermissionIsEqualToSomething() throws Exception {
-        // Initialize the database
-        groupCategoryRepository.saveAndFlush(groupCategory);
-
-        // Get all the groupCategoryList where permission equals to DEFAULT_PERMISSION
-        defaultGroupCategoryShouldBeFound("permission.equals=" + DEFAULT_PERMISSION);
-
-        // Get all the groupCategoryList where permission equals to UPDATED_PERMISSION
-        defaultGroupCategoryShouldNotBeFound("permission.equals=" + UPDATED_PERMISSION);
-    }
-
-    @Test
-    @Transactional
-    public void getAllGroupCategoriesByPermissionIsInShouldWork() throws Exception {
-        // Initialize the database
-        groupCategoryRepository.saveAndFlush(groupCategory);
-
-        // Get all the groupCategoryList where permission in DEFAULT_PERMISSION or UPDATED_PERMISSION
-        defaultGroupCategoryShouldBeFound("permission.in=" + DEFAULT_PERMISSION + "," + UPDATED_PERMISSION);
-
-        // Get all the groupCategoryList where permission equals to UPDATED_PERMISSION
-        defaultGroupCategoryShouldNotBeFound("permission.in=" + UPDATED_PERMISSION);
-    }
-
-    @Test
-    @Transactional
-    public void getAllGroupCategoriesByPermissionIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        groupCategoryRepository.saveAndFlush(groupCategory);
-
-        // Get all the groupCategoryList where permission is not null
-        defaultGroupCategoryShouldBeFound("permission.specified=true");
-
-        // Get all the groupCategoryList where permission is null
-        defaultGroupCategoryShouldNotBeFound("permission.specified=false");
-    }
-
-    @Test
-    @Transactional
     public void getAllGroupCategoriesByOwnerIsEqualToSomething() throws Exception {
         // Initialize the database
         User owner = UserResourceIntTest.createEntity(em);
@@ -450,8 +404,7 @@ public class GroupCategoryResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(groupCategory.getId().intValue())))
             .andExpect(jsonPath("$.[*].iconPresentation").value(hasItem(DEFAULT_ICON_PRESENTATION.toString())))
             .andExpect(jsonPath("$.[*].iconContentType").value(hasItem(DEFAULT_ICON_CONTENT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].about").value(hasItem(DEFAULT_ABOUT.toString())))
-            .andExpect(jsonPath("$.[*].permission").value(hasItem(DEFAULT_PERMISSION.toString())));
+            .andExpect(jsonPath("$.[*].about").value(hasItem(DEFAULT_ABOUT.toString())));
     }
 
     /**
@@ -488,8 +441,7 @@ public class GroupCategoryResourceIntTest {
         updatedGroupCategory
             .iconPresentation(UPDATED_ICON_PRESENTATION)
             .iconContentType(UPDATED_ICON_CONTENT_TYPE)
-            .about(UPDATED_ABOUT)
-            .permission(UPDATED_PERMISSION);
+            .about(UPDATED_ABOUT);
 
         restGroupCategoryMockMvc.perform(put("/api/group-categories")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -503,7 +455,6 @@ public class GroupCategoryResourceIntTest {
         assertThat(testGroupCategory.getIconPresentation()).isEqualTo(UPDATED_ICON_PRESENTATION);
         assertThat(testGroupCategory.getIconContentType()).isEqualTo(UPDATED_ICON_CONTENT_TYPE);
         assertThat(testGroupCategory.getAbout()).isEqualTo(UPDATED_ABOUT);
-        assertThat(testGroupCategory.getPermission()).isEqualTo(UPDATED_PERMISSION);
     }
 
     @Test

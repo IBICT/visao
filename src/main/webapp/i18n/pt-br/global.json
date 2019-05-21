@@ -19,6 +19,7 @@
                 "groupLayer": "Grupo de Camadas",
                 "typePresentation": "Apresentação dos dados",
                 "groupCategory": "Grupo de Categorias",
+                "groupCategory": "Group Category",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

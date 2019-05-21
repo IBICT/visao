@@ -34,9 +34,6 @@ public class GroupCategory implements Serializable {
     @Column(name = "about")
     private String about;
 
-    @Column(name = "permission")
-    private String permission;
-
     @ManyToOne
     @JsonIgnoreProperties("")
     private User owner;
@@ -101,19 +98,6 @@ public class GroupCategory implements Serializable {
 
     public void setAbout(String about) {
         this.about = about;
-    }
-
-    public String getPermission() {
-        return permission;
-    }
-
-    public GroupCategory permission(String permission) {
-        this.permission = permission;
-        return this;
-    }
-
-    public void setPermission(String permission) {
-        this.permission = permission;
     }
 
     public User getOwner() {
@@ -207,7 +191,6 @@ public class GroupCategory implements Serializable {
             ", iconPresentation='" + getIconPresentation() + "'" +
             ", iconContentType='" + getIconContentType() + "'" +
             ", about='" + getAbout() + "'" +
-            ", permission='" + getPermission() + "'" +
             "}";
     }
 }
