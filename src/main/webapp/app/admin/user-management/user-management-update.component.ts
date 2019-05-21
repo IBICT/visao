@@ -12,6 +12,7 @@ export class UserMgmtUpdateComponent implements OnInit {
     languages: any[];
     authorities: any[];
     isSaving: boolean;
+    showPassword: boolean;
 
     constructor(
         private languageHelper: JhiLanguageHelper,

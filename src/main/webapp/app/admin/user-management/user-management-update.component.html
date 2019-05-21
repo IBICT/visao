@@ -110,6 +110,20 @@
                     </select>
                 </div>
             </div>
+
+            <div ng-hide="user.id === null">
+                <div class="form-check" >
+                    <label class="form-check-label" for="activated">
+                        <span>Alterar senha?</span>
+                        <input type="radio" name="mudarSenha" ng-model="showPassword" ng-value="true"> Sim
+                        <input type="radio" name="mudarSenha" ng-model="showPassword" ng-value="false"> Não
+                    </label>
+                </div>
+                <div ng-show="showPassword">
+                    <label>Mostrou algo de teste</label>
+                </div>
+            </div>
+
             <div>
                 <button type="button" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span
