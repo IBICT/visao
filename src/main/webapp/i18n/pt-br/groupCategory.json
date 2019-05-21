@@ -3,26 +3,26 @@
     "visaoApp": {
         "groupCategory" : {
             "home": {
-                "title": "Group Categories",
-                "createLabel": "Criar novo Group Category",
-                "createOrEditLabel": "Criar ou editar Group Category"
+                "title": "Grupo Categoria",
+                "createLabel": "Criar novo Grupo de Categoria",
+                "createOrEditLabel": "Criar ou editar Grupo de Categoria"
             },
-            "created": "Um novo Group Category foi criado com o identificador {{ param }}",
-            "updated": "Um Group Category foi atualizado com o identificador {{ param }}",
-            "deleted": "Um Group Category foi deletado com o identificador {{ param }}",
+            "created": "Um novo Grupo de Categorias foi criado com o identificador {{ param }}",
+            "updated": "Foi atualizado o Grupo de Categorias com o id {{ param }}",
+            "deleted": "Foi excluído o Grupo de Categorias com o id {{ param }}",
             "delete": {
-                "question": "Tem certeza de que deseja excluir Group Category {{ id }}?"
+                "question": "Tem certeza de que deseja excluir o Grupo de Categorias {{ id }}?"
             },
             "detail": {
-                "title": "Group Category"
+                "title": "Grupo de Categorias"
             },
-            "iconPresentation": "Icon Presentation",
-            "iconContentType": "Icon Content Type",
-            "about": "About",
-            "permission": "Permission",
-            "owner": "Owner",
-            "categories": "Categories",
-            "shareds": "Shareds"
+            "iconPresentation": "Caminho Logo",
+            "iconContentType": "Logo Content Type",
+            "about": "Sobre",
+            "permission": "Permissão",
+            "owner": "Dono",
+            "categories": "Categorias",
+            "shareds": "Compartilhado"
         }
     }
 }
