@@ -1,5 +1,6 @@
 package br.com.ibict.visao.domain;
 
+import br.com.ibict.visao.domain.enumeration.TypePermission;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -33,6 +34,10 @@ public class GroupCategory implements Serializable {
 
     @Column(name = "about")
     private String about;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "permission")
+    private TypePermission permission;
 
     @ManyToOne
     @JsonIgnoreProperties("")
@@ -98,6 +103,19 @@ public class GroupCategory implements Serializable {
 
     public void setAbout(String about) {
         this.about = about;
+    }
+
+    public TypePermission getPermission() {
+        return permission;
+    }
+
+    public GroupCategory permission(TypePermission permission) {
+        this.permission = permission;
+        return this;
+    }
+
+    public void setPermission(TypePermission permission) {
+        this.permission = permission;
     }
 
     public User getOwner() {
@@ -191,6 +209,7 @@ public class GroupCategory implements Serializable {
             ", iconPresentation='" + getIconPresentation() + "'" +
             ", iconContentType='" + getIconContentType() + "'" +
             ", about='" + getAbout() + "'" +
+            ", permission='" + getPermission() + "'" +
             "}";
     }
 }

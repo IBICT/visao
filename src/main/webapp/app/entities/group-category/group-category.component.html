@@ -18,6 +18,7 @@
             <th jhiSortBy="iconPresentation"><span jhiTranslate="visaoApp.groupCategory.iconPresentation">Icon Presentation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="iconContentType"><span jhiTranslate="visaoApp.groupCategory.iconContentType">Icon Content Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="about"><span jhiTranslate="visaoApp.groupCategory.about">About</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="permission"><span jhiTranslate="visaoApp.groupCategory.permission">Permission</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="owner.login"><span jhiTranslate="visaoApp.groupCategory.owner">Owner</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -28,6 +29,7 @@
                 <td>{{groupCategory.iconPresentation}}</td>
                 <td>{{groupCategory.iconContentType}}</td>
                 <td>{{groupCategory.about}}</td>
+                <td jhiTranslate="{{'visaoApp.TypePermission.' + groupCategory.permission}}">{{groupCategory.permission}}</td>
                 <td>
                     {{groupCategory.owner?.login}}
                 </td>

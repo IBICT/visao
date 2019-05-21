@@ -20,6 +20,7 @@ export class GroupCategoryUpdatePage {
     iconPresentationInput = element(by.id('field_iconPresentation'));
     iconContentTypeInput = element(by.id('field_iconContentType'));
     aboutInput = element(by.id('field_about'));
+    permissionSelect = element(by.id('field_permission'));
     ownerSelect = element(by.id('field_owner'));
     categoriesSelect = element(by.id('field_categories'));
     sharedsSelect = element(by.id('field_shareds'));
@@ -52,6 +53,20 @@ export class GroupCategoryUpdatePage {
         return this.aboutInput.getAttribute('value');
     }
 
+    setPermissionSelect(permission): promise.Promise<void> {
+        return this.permissionSelect.sendKeys(permission);
+    }
+
+    getPermissionSelect() {
+        return this.permissionSelect.element(by.css('option:checked')).getText();
+    }
+
+    permissionSelectLastOption(): promise.Promise<void> {
+        return this.permissionSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
     ownerSelectLastOption(): promise.Promise<void> {
         return this.ownerSelect
             .all(by.tagName('option'))

@@ -39,6 +39,11 @@
         {
             "fieldName": "about",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "permission",
+            "fieldType": "TypePermission",
+            "fieldValues": "PUBLIC,PRIVATE,SHARED"
         }
     ],
     "changelogDate": "20190521115323",

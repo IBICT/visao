@@ -19,6 +19,7 @@
             "iconPresentation": "Icon Presentation",
             "iconContentType": "Icon Content Type",
             "about": "About",
+            "permission": "Permission",
             "owner": "Owner",
             "categories": "Categories",
             "shareds": "Shareds"

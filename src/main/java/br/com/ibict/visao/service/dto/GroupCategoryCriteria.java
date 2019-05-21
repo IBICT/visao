@@ -1,6 +1,7 @@
 package br.com.ibict.visao.service.dto;
 
 import java.io.Serializable;
+import br.com.ibict.visao.domain.enumeration.TypePermission;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -23,6 +24,12 @@ import io.github.jhipster.service.filter.StringFilter;
  * fix type specific filters.
  */
 public class GroupCategoryCriteria implements Serializable {
+    /**
+     * Class for filtering TypePermission
+     */
+    public static class TypePermissionFilter extends Filter<TypePermission> {
+    }
+
     private static final long serialVersionUID = 1L;
 
 
@@ -33,6 +40,8 @@ public class GroupCategoryCriteria implements Serializable {
     private StringFilter iconContentType;
 
     private StringFilter about;
+
+    private TypePermissionFilter permission;
 
     private LongFilter ownerId;
 
@@ -75,6 +84,14 @@ public class GroupCategoryCriteria implements Serializable {
         this.about = about;
     }
 
+    public TypePermissionFilter getPermission() {
+        return permission;
+    }
+
+    public void setPermission(TypePermissionFilter permission) {
+        this.permission = permission;
+    }
+
     public LongFilter getOwnerId() {
         return ownerId;
     }
@@ -106,6 +123,7 @@ public class GroupCategoryCriteria implements Serializable {
                 (iconPresentation != null ? "iconPresentation=" + iconPresentation + ", " : "") +
                 (iconContentType != null ? "iconContentType=" + iconContentType + ", " : "") +
                 (about != null ? "about=" + about + ", " : "") +
+                (permission != null ? "permission=" + permission + ", " : "") +
                 (ownerId != null ? "ownerId=" + ownerId + ", " : "") +
                 (categoriesId != null ? "categoriesId=" + categoriesId + ", " : "") +
                 (sharedsId != null ? "sharedsId=" + sharedsId + ", " : "") +
