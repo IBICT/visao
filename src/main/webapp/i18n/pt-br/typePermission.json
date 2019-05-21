@@ -1,0 +1,10 @@
+{
+    "visaoApp": {
+        "TypePermission" : {
+            "null": "",
+            "PUBLIC": "Público",
+            "PRIVATE": "Privado",
+            "SHARED": "Compartilhado"
+        }
+    }
+}
