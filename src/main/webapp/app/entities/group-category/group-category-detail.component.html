@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="groupCategory">
+            <h2><span jhiTranslate="visaoApp.groupCategory.detail.title">Grupo de Categoria</span> {{groupCategory.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="visaoApp.groupCategory.iconPresentation">Logo</span></dt>
+                <dd>
+                    <span>{{groupCategory.iconPresentation}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.groupCategory.iconContentType">Tipo Logo</span></dt>
+                <dd>
+                    <span>{{groupCategory.iconContentType}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.groupCategory.about">Sobre</span></dt>
+                <dd>
+                    <span>{{groupCategory.about}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.groupCategory.permission">Permissão</span></dt>
+                <dd>
+                    <span>{{groupCategory.permission}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.groupCategory.owner">Dono</span></dt>
+                <dd>
+                    {{groupCategory.owner?.login}}
+                </dd>
+                <dt><span jhiTranslate="visaoApp.groupCategory.categories">Categorias</span></dt>
+                <dd>
+                    <span *ngFor="let categories of groupCategory.categories; let last = last">
+                        <a [routerLink]="['/category', categories?.id, 'view' ]">{{categories.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.groupCategory.shareds">Compartilhado</span></dt>
+                <dd>
+                    <span *ngFor="let shareds of groupCategory.shareds; let last = last">
+                        {{shareds.login}}{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Voltar</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/group-category', groupCategory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Editar</span>
+            </button>
+        </div>
+    </div>
+</div>

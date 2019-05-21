@@ -1,0 +1,28 @@
+
+{
+    "visaoApp": {
+        "groupCategory" : {
+            "home": {
+                "title": "Group Categories",
+                "createLabel": "Create a new Group Category",
+                "createOrEditLabel": "Create or edit a Group Category"
+            },
+            "created": "A new Group Category is created with identifier {{ param }}",
+            "updated": "A Group Category is updated with identifier {{ param }}",
+            "deleted": "A Group Category is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Group Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Group Category"
+            },
+            "iconPresentation": "Icon Presentation",
+            "iconContentType": "Icon Content Type",
+            "about": "About",
+            "permission": "Permission",
+            "owner": "Owner",
+            "categories": "Categories",
+            "shareds": "Compartilhado"
+        }
+    }
+}

@@ -6,7 +6,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import br.com.ibict.visao.domain.enumeration.TypeCategory;
 
@@ -30,6 +32,10 @@ public class Category implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "jhi_type")
     private TypeCategory type;
+
+    @ManyToMany(mappedBy = "categories")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<GroupCategory> groupCategories = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -65,6 +71,15 @@ public class Category implements Serializable {
     public void setType(TypeCategory type) {
         this.type = type;
     }
+
+    public Set<GroupCategory> getGroupCategories() {
+        return groupCategories;
+    }
+
+    public void setGroupCategories(Set<GroupCategory> groupCategories) {
+        this.groupCategories = groupCategories;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

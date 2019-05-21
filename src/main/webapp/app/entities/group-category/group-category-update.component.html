@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-group-category-heading" jhiTranslate="visaoApp.groupCategory.home.createOrEditLabel">Create or edit a Group Category</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!groupCategory.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="groupCategory.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.groupCategory.iconPresentation" for="field_iconPresentation">Icon Presentation</label>
+                    <input type="text" class="form-control" name="iconPresentation" id="field_iconPresentation"
+                        [(ngModel)]="groupCategory.iconPresentation" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.groupCategory.iconContentType" for="field_iconContentType">Icon Content Type</label>
+                    <input type="text" class="form-control" name="iconContentType" id="field_iconContentType"
+                        [(ngModel)]="groupCategory.iconContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.groupCategory.about" for="field_about">About</label>
+                    <input type="text" class="form-control" name="about" id="field_about"
+                        [(ngModel)]="groupCategory.about" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.groupCategory.permission" for="field_permission">Permission</label>
+                    <input type="text" class="form-control" name="permission" id="field_permission"
+                        [(ngModel)]="groupCategory.permission" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.groupCategory.owner" for="field_owner">Owner</label>
+                    <select class="form-control" id="field_owner" name="owner" [(ngModel)]="groupCategory.owner" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === groupCategory.owner?.id ? groupCategory.owner : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="visaoApp.groupCategory.categories" for="field_categories">Categories</label>
+                    <select class="form-control" id="field_categories" multiple name="categories" [(ngModel)]="groupCategory.categories">
+                        <option [ngValue]="getSelected(groupCategory.categories, categoryOption)" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="visaoApp.groupCategory.shareds" for="field_shareds">Compartilhado</label>
+                    <select class="form-control" id="field_shareds" multiple name="shareds" [(ngModel)]="groupCategory.shareds">
+                        <option [ngValue]="getSelected(groupCategory.shareds, userOption)" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

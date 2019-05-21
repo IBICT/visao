@@ -1,0 +1,55 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "owner",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "groupCategory"
+        },
+        {
+            "relationshipName": "categories",
+            "otherEntityName": "category",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "categories"
+        },
+        {
+            "relationshipName": "shareds",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "groupCategory"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "iconPresentation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "iconContentType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "about",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "permission",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20190521115323",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "serviceClass",
+    "entityTableName": "group_category",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}
