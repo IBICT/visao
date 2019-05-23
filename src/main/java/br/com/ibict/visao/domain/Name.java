@@ -9,6 +9,8 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -55,15 +57,14 @@ public class Name implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("")
-    private Category category;
-
-    @ManyToOne
-    @JsonIgnoreProperties("")
-    private TypePresentation typePresentation;
-
-    @ManyToOne
-    @JsonIgnoreProperties("")
     private User user;
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "name_category",
+               joinColumns = @JoinColumn(name = "names_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "categories_id", referencedColumnName = "id"))
+    private Set<Category> categories = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -178,32 +179,6 @@ public class Name implements Serializable {
         this.note = note;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public Name category(Category category) {
-        this.category = category;
-        return this;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public TypePresentation getTypePresentation() {
-        return typePresentation;
-    }
-
-    public Name typePresentation(TypePresentation typePresentation) {
-        this.typePresentation = typePresentation;
-        return this;
-    }
-
-    public void setTypePresentation(TypePresentation typePresentation) {
-        this.typePresentation = typePresentation;
-    }
-
     public User getUser() {
         return user;
     }
@@ -215,6 +190,29 @@ public class Name implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public Name categories(Set<Category> categories) {
+        this.categories = categories;
+        return this;
+    }
+
+    public Name addCategory(Category category) {
+        this.categories.add(category);
+        return this;
+    }
+
+    public Name removeCategory(Category category) {
+        this.categories.remove(category);
+        return this;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

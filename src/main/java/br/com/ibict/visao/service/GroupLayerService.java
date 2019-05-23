@@ -49,6 +49,15 @@ public class GroupLayerService {
         return groupLayerRepository.findAll(pageable);
     }
 
+    /**
+     * Get all the GroupLayer with eager load of many-to-many relationships.
+     *
+     * @return the list of entities
+     */
+    public Page<GroupLayer> findAllWithEagerRelationships(Pageable pageable) {
+        return groupLayerRepository.findAllWithEagerRelationships(pageable);
+    }
+    
 
     /**
      * Get one groupLayer by id.
@@ -59,7 +68,7 @@ public class GroupLayerService {
     @Transactional(readOnly = true)
     public Optional<GroupLayer> findOne(Long id) {
         log.debug("Request to get GroupLayer : {}", id);
-        return groupLayerRepository.findById(id);
+        return groupLayerRepository.findOneWithEagerRelationships(id);
     }
 
     /**

@@ -24,9 +24,8 @@
             "source": "Source",
             "dateChange": "Date Change",
             "note": "Note",
-            "category": "Category",
-            "typePresentation": "Type Presentation",
-            "user": "User"
+            "user": "User",
+            "category": "Category"
         }
     }
 }

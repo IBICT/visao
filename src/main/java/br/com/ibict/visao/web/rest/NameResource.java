@@ -2,14 +2,12 @@ package br.com.ibict.visao.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import br.com.ibict.visao.domain.Name;
-import br.com.ibict.visao.security.AuthoritiesConstants;
 import br.com.ibict.visao.service.NameService;
 import br.com.ibict.visao.web.rest.errors.BadRequestAlertException;
 import br.com.ibict.visao.web.rest.util.HeaderUtil;
 import br.com.ibict.visao.web.rest.util.PaginationUtil;
 import br.com.ibict.visao.service.dto.NameCriteria;
 import br.com.ibict.visao.service.NameQueryService;
-import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -79,7 +76,6 @@ public class NameResource {
      */
     @PutMapping("/names")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Name> updateName(@Valid @RequestBody Name name) throws URISyntaxException {
         log.debug("REST request to update Name : {}", name);
         if (name.getId() == null) {
@@ -108,43 +104,6 @@ public class NameResource {
     }
 
     /**
-     * GET  /names : get all the names.
-     *
-     * @param pageable the pagination information
-     * @param criteria the criterias which the requested entities should match
-     * @return the ResponseEntity with status 200 (OK) and the list of names in body
-     */
-    @GetMapping("/namesPublic")
-    @Timed
-    public ResponseEntity<List<Name>> getAllNamesPublic(NameCriteria criteria, Pageable pageable) {
-        criteria.setActive(getBooleanFilterTrue());
-        log.debug("REST request to get Names by criteria: {}", criteria);
-        Page<Name> page = nameQueryService.findByCriteria(criteria, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/names");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }
-
-    /**
-     * GET  /names/:id : get the "id" name.
-     *
-     * @param id the id of the name to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the name, or with status 404 (Not Found)
-     */
-    @GetMapping("/namesPublic/{id}")
-    @Timed
-    public ResponseEntity<Name> getNamePubic(@PathVariable Long id) {
-        log.debug("REST request to get Name : {}", id);
-        Optional<Name> name = nameService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(name);
-    }
-
-    private BooleanFilter getBooleanFilterTrue(){
-        BooleanFilter booleanFilter = new BooleanFilter();
-        booleanFilter.setEquals(Boolean.TRUE);
-        return booleanFilter;
-    }
-
-    /**
      * GET  /names/:id : get the "id" name.
      *
      * @param id the id of the name to retrieve
@@ -166,7 +125,6 @@ public class NameResource {
      */
     @DeleteMapping("/names/{id}")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteName(@PathVariable Long id) {
         log.debug("REST request to delete Name : {}", id);
         nameService.delete(id);

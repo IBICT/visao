@@ -40,11 +40,9 @@ public class NameCriteria implements Serializable {
 
     private InstantFilter dateChange;
 
-    private LongFilter categoryId;
-
-    private LongFilter typePresentationId;
-
     private LongFilter userId;
+
+    private LongFilter categoryId;
 
     public NameCriteria() {
     }
@@ -105,28 +103,20 @@ public class NameCriteria implements Serializable {
         this.dateChange = dateChange;
     }
 
-    public LongFilter getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(LongFilter categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public LongFilter getTypePresentationId() {
-        return typePresentationId;
-    }
-
-    public void setTypePresentationId(LongFilter typePresentationId) {
-        this.typePresentationId = typePresentationId;
-    }
-
     public LongFilter getUserId() {
         return userId;
     }
 
     public void setUserId(LongFilter userId) {
         this.userId = userId;
+    }
+
+    public LongFilter getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(LongFilter categoryId) {
+        this.categoryId = categoryId;
     }
 
     @Override
@@ -139,9 +129,8 @@ public class NameCriteria implements Serializable {
                 (date != null ? "date=" + date + ", " : "") +
                 (source != null ? "source=" + source + ", " : "") +
                 (dateChange != null ? "dateChange=" + dateChange + ", " : "") +
-                (categoryId != null ? "categoryId=" + categoryId + ", " : "") +
-                (typePresentationId != null ? "typePresentationId=" + typePresentationId + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
+                (categoryId != null ? "categoryId=" + categoryId + ", " : "") +
             "}";
     }
 

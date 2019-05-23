@@ -14,12 +14,6 @@
                                  referencedColumnNames="id"
                                  referencedTableName="region"/>
 
-        <addForeignKeyConstraint baseColumnNames="category_id"
-                                 baseTableName="filter"
-                                 constraintName="fk_filter_category_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="category"/>
-
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="filter"
                                  constraintName="fk_filter_user_id"
@@ -36,6 +30,17 @@
                                  constraintName="fk_filter_region_regions_id"
                                  referencedColumnNames="id"
                                  referencedTableName="region"/>
+        
+        <addForeignKeyConstraint baseColumnNames="filters_id"
+                                 baseTableName="filter_category"
+                                 constraintName="fk_filter_category_filters_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="filter"/>
+        <addForeignKeyConstraint baseColumnNames="categories_id"
+                                 baseTableName="filter_category"
+                                 constraintName="fk_filter_category_categories_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category"/>
         
     </changeSet>
 </databaseChangeLog>

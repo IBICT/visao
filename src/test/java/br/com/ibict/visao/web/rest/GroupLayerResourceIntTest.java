@@ -4,6 +4,7 @@ import br.com.ibict.visao.VisaoApp;
 
 import br.com.ibict.visao.domain.GroupLayer;
 import br.com.ibict.visao.domain.User;
+import br.com.ibict.visao.domain.Category;
 import br.com.ibict.visao.repository.GroupLayerRepository;
 import br.com.ibict.visao.service.GroupLayerService;
 import br.com.ibict.visao.web.rest.errors.ExceptionTranslator;
@@ -13,9 +14,12 @@ import br.com.ibict.visao.service.GroupLayerQueryService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -25,12 +29,14 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 
 
 import static br.com.ibict.visao.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -54,8 +60,11 @@ public class GroupLayerResourceIntTest {
 
     @Autowired
     private GroupLayerRepository groupLayerRepository;
-
+    @Mock
+    private GroupLayerRepository groupLayerRepositoryMock;
     
+    @Mock
+    private GroupLayerService groupLayerServiceMock;
 
     @Autowired
     private GroupLayerService groupLayerService;
@@ -200,6 +209,36 @@ public class GroupLayerResourceIntTest {
             .andExpect(jsonPath("$.[*].keyWord").value(hasItem(DEFAULT_KEY_WORD.toString())));
     }
     
+    public void getAllGroupLayersWithEagerRelationshipsIsEnabled() throws Exception {
+        GroupLayerResource groupLayerResource = new GroupLayerResource(groupLayerServiceMock, groupLayerQueryService);
+        when(groupLayerServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        MockMvc restGroupLayerMockMvc = MockMvcBuilders.standaloneSetup(groupLayerResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restGroupLayerMockMvc.perform(get("/api/group-layers?eagerload=true"))
+        .andExpect(status().isOk());
+
+        verify(groupLayerServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    public void getAllGroupLayersWithEagerRelationshipsIsNotEnabled() throws Exception {
+        GroupLayerResource groupLayerResource = new GroupLayerResource(groupLayerServiceMock, groupLayerQueryService);
+            when(groupLayerServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+            MockMvc restGroupLayerMockMvc = MockMvcBuilders.standaloneSetup(groupLayerResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restGroupLayerMockMvc.perform(get("/api/group-layers?eagerload=true"))
+        .andExpect(status().isOk());
+
+            verify(groupLayerServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
 
     @Test
     @Transactional
@@ -350,6 +389,25 @@ public class GroupLayerResourceIntTest {
 
         // Get all the groupLayerList where user equals to userId + 1
         defaultGroupLayerShouldNotBeFound("userId.equals=" + (userId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllGroupLayersByCategoryIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Category category = CategoryResourceIntTest.createEntity(em);
+        em.persist(category);
+        em.flush();
+        groupLayer.addCategory(category);
+        groupLayerRepository.saveAndFlush(groupLayer);
+        Long categoryId = category.getId();
+
+        // Get all the groupLayerList where category equals to categoryId
+        defaultGroupLayerShouldBeFound("categoryId.equals=" + categoryId);
+
+        // Get all the groupLayerList where category equals to categoryId + 1
+        defaultGroupLayerShouldNotBeFound("categoryId.equals=" + (categoryId + 1));
     }
 
     /**

@@ -56,9 +56,8 @@ describe('Name e2e test', () => {
         expect(nameUpdatePage.getDateChangeInput()).toContain('2001-01-01T02:30');
         nameUpdatePage.setNoteInput('note');
         expect(nameUpdatePage.getNoteInput()).toMatch('note');
-        nameUpdatePage.categorySelectLastOption();
-        nameUpdatePage.typePresentationSelectLastOption();
         nameUpdatePage.userSelectLastOption();
+        // nameUpdatePage.categorySelectLastOption();
         nameUpdatePage.save();
         expect(nameUpdatePage.getSaveButton().isPresent()).toBeFalsy();
     });

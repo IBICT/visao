@@ -26,9 +26,9 @@ export class FilterUpdatePage {
     dateChangeInput = element(by.id('field_dateChange'));
     noteInput = element(by.id('field_note'));
     cidadePoloSelect = element(by.id('field_cidadePolo'));
-    categorySelect = element(by.id('field_category'));
     userSelect = element(by.id('field_user'));
     regionSelect = element(by.id('field_region'));
+    categorySelect = element(by.id('field_category'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -112,25 +112,6 @@ export class FilterUpdatePage {
         return this.cidadePoloSelect.element(by.css('option:checked')).getText();
     }
 
-    categorySelectLastOption(): promise.Promise<void> {
-        return this.categorySelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    categorySelectOption(option): promise.Promise<void> {
-        return this.categorySelect.sendKeys(option);
-    }
-
-    getCategorySelect(): ElementFinder {
-        return this.categorySelect;
-    }
-
-    getCategorySelectedOption() {
-        return this.categorySelect.element(by.css('option:checked')).getText();
-    }
-
     userSelectLastOption(): promise.Promise<void> {
         return this.userSelect
             .all(by.tagName('option'))
@@ -167,6 +148,25 @@ export class FilterUpdatePage {
 
     getRegionSelectedOption() {
         return this.regionSelect.element(by.css('option:checked')).getText();
+    }
+
+    categorySelectLastOption(): promise.Promise<void> {
+        return this.categorySelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    categorySelectOption(option): promise.Promise<void> {
+        return this.categorySelect.sendKeys(option);
+    }
+
+    getCategorySelect(): ElementFinder {
+        return this.categorySelect;
+    }
+
+    getCategorySelectedOption() {
+        return this.categorySelect.element(by.css('option:checked')).getText();
     }
 
     save(): promise.Promise<void> {

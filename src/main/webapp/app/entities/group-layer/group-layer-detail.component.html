@@ -21,6 +21,12 @@
                 <dd>
                     {{groupLayer.user?.login}}
                 </dd>
+                <dt><span jhiTranslate="visaoApp.groupLayer.category">Category</span></dt>
+                <dd>
+                    <span *ngFor="let category of groupLayer.categories; let last = last">
+                        <a [routerLink]="['/category', category?.id, 'view' ]">{{category.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
             </dl>
 
             <button type="submit"

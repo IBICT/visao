@@ -40,13 +40,7 @@
                 <dt><span jhiTranslate="visaoApp.filter.cidadePolo">Cidade Polo</span></dt>
                 <dd>
                     <div *ngIf="filter.cidadePolo">
-                        <a [routerLink]="['/region', filter.cidadePolo?.id, 'view']">{{filter.cidadePolo?.name}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="visaoApp.filter.category">Category</span></dt>
-                <dd>
-                    <div *ngIf="filter.category">
-                        <a [routerLink]="['/category', filter.category?.id, 'view']">{{filter.category?.name}}</a>
+                        <a [routerLink]="['/region', filter.cidadePolo?.id, 'view']">{{filter.cidadePolo?.id}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="visaoApp.filter.user">User</span></dt>
@@ -56,7 +50,13 @@
                 <dt><span jhiTranslate="visaoApp.filter.region">Region</span></dt>
                 <dd>
                     <span *ngFor="let region of filter.regions; let last = last">
-                        <a [routerLink]="['/region', region?.id, 'view' ]">{{region.name}}</a>{{last ? '' : ', '}}
+                        <a [routerLink]="['/region', region?.id, 'view' ]">{{region.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.filter.category">Category</span></dt>
+                <dd>
+                    <span *ngFor="let category of filter.categories; let last = last">
+                        <a [routerLink]="['/category', category?.id, 'view' ]">{{category.id}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
             </dl>

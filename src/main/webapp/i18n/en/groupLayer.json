@@ -19,7 +19,8 @@
             "name": "Name",
             "active": "Active",
             "keyWord": "Key Word",
-            "user": "User"
+            "user": "User",
+            "category": "Category"
         }
     }
 }

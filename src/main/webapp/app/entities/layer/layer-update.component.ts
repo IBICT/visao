@@ -8,8 +8,6 @@ import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { ILayer } from 'app/shared/model/layer.model';
 import { LayerService } from './layer.service';
-import { ICategory } from 'app/shared/model/category.model';
-import { CategoryService } from 'app/entities/category';
 import { IMarkerIcon } from 'app/shared/model/marker-icon.model';
 import { MarkerIconService } from 'app/entities/marker-icon';
 import { IGroupLayer } from 'app/shared/model/group-layer.model';
@@ -23,8 +21,6 @@ export class LayerUpdateComponent implements OnInit {
     private _layer: ILayer;
     isSaving: boolean;
 
-    categories: ICategory[];
-
     markericons: IMarkerIcon[];
 
     grouplayers: IGroupLayer[];
@@ -35,7 +31,6 @@ export class LayerUpdateComponent implements OnInit {
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private layerService: LayerService,
-        private categoryService: CategoryService,
         private markerIconService: MarkerIconService,
         private groupLayerService: GroupLayerService,
         private activatedRoute: ActivatedRoute
@@ -46,12 +41,6 @@ export class LayerUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ layer }) => {
             this.layer = layer;
         });
-        this.categoryService.query().subscribe(
-            (res: HttpResponse<ICategory[]>) => {
-                this.categories = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
         this.markerIconService.query().subscribe(
             (res: HttpResponse<IMarkerIcon[]>) => {
                 this.markericons = res.body;
@@ -108,10 +97,6 @@ export class LayerUpdateComponent implements OnInit {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackCategoryById(index: number, item: ICategory) {
-        return item.id;
     }
 
     trackMarkerIconById(index: number, item: IMarkerIcon) {

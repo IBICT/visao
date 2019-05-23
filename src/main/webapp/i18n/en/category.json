@@ -17,7 +17,9 @@
                 "title": "Category"
             },
             "name": "Name",
-            "type": "Type"
+            "type": "Type",
+            "level": "Level",
+            "owner": "Owner"
         }
     }
 }

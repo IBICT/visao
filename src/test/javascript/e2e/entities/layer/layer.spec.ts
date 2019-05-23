@@ -45,7 +45,6 @@ describe('Layer e2e test', () => {
         expect(layerUpdatePage.getDateChangeInput()).toContain('2001-01-01T02:30');
         layerUpdatePage.setNoteInput('note');
         expect(layerUpdatePage.getNoteInput()).toMatch('note');
-        layerUpdatePage.categorySelectLastOption();
         layerUpdatePage.iconSelectLastOption();
         layerUpdatePage.groupSelectLastOption();
         layerUpdatePage.save();

@@ -33,6 +33,9 @@ describe('Category e2e test', () => {
         categoryUpdatePage.setNameInput('name');
         expect(categoryUpdatePage.getNameInput()).toMatch('name');
         categoryUpdatePage.typeSelectLastOption();
+        categoryUpdatePage.setLevelInput('5');
+        expect(categoryUpdatePage.getLevelInput()).toMatch('5');
+        categoryUpdatePage.ownerSelectLastOption();
         categoryUpdatePage.save();
         expect(categoryUpdatePage.getSaveButton().isPresent()).toBeFalsy();
     });

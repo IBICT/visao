@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { VisaoSharedModule } from 'app/shared';
+import { VisaoAdminModule } from 'app/admin/admin.module';
 import {
     CategoryComponent,
     CategoryDetailComponent,
@@ -15,7 +16,7 @@ import {
 const ENTITY_STATES = [...categoryRoute, ...categoryPopupRoute];
 
 @NgModule({
-    imports: [VisaoSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [VisaoSharedModule, VisaoAdminModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         CategoryComponent,
         CategoryDetailComponent,

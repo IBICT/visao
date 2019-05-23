@@ -1,0 +1,10 @@
+{
+    "visaoApp": {
+        "Permission" : {
+            "null": "",
+            "PUBLIC": "PUBLIC",
+            "PRIVATE": "PRIVATE",
+            "SHARED": "SHARED"
+        }
+    }
+}

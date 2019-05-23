@@ -24,7 +24,6 @@
             <th jhiSortBy="dateChange"><span jhiTranslate="visaoApp.filter.dateChange">Date Change</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="note"><span jhiTranslate="visaoApp.filter.note">Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="cidadePolo.id"><span jhiTranslate="visaoApp.filter.cidadePolo">Cidade Polo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="category.id"><span jhiTranslate="visaoApp.filter.category">Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="user.login"><span jhiTranslate="visaoApp.filter.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -42,12 +41,7 @@
                 <td>{{filter.note}}</td>
                 <td>
                     <div *ngIf="filter.cidadePolo">
-                        <a [routerLink]="['../region', filter.cidadePolo?.id, 'view' ]" >{{filter.cidadePolo?.name}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="filter.category">
-                        <a [routerLink]="['../category', filter.category?.id, 'view' ]" >{{filter.category?.name}}</a>
+                        <a [routerLink]="['../region', filter.cidadePolo?.id, 'view' ]" >{{filter.cidadePolo?.id}}</a>
                     </div>
                 </td>
                 <td>

@@ -1,0 +1,73 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-grup-category-heading" jhiTranslate="visaoApp.grupCategory.home.createOrEditLabel">Create or edit a Grup Category</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!grupCategory.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="grupCategory.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.grupCategory.logo" for="field_logo">Logo</label>
+                    <div>
+                        <img [src]="'data:' + grupCategory.logoContentType + ';base64,' + grupCategory.logo" style="max-height: 100px;" *ngIf="grupCategory.logo" alt="grupCategory image"/>
+                        <div *ngIf="grupCategory.logo" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{grupCategory.logoContentType}}, {{byteSize(grupCategory.logo)}}</span>
+                            <button type="button" (click)="clearInputImage('logo', 'logoContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_logo" (change)="setFileData($event, grupCategory, 'logo', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="logo" id="field_logo"
+                        [(ngModel)]="grupCategory.logo" />
+                    <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType"
+                        [(ngModel)]="grupCategory.logoContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.grupCategory.sobre" for="field_sobre">Sobre</label>
+                    <textarea class="form-control" name="sobre" id="field_sobre"
+                        [(ngModel)]="grupCategory.sobre" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.grupCategory.permission" for="field_permission">Permission</label>
+                    <select class="form-control" name="permission" [(ngModel)]="grupCategory.permission" id="field_permission" >
+                        <option value="PUBLIC">{{'visaoApp.Permission.PUBLIC' | translate}}</option>
+                        <option value="PRIVATE">{{'visaoApp.Permission.PRIVATE' | translate}}</option>
+                        <option value="SHARED">{{'visaoApp.Permission.SHARED' | translate}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.grupCategory.owner" for="field_owner">Owner</label>
+                    <select class="form-control" id="field_owner" name="owner" [(ngModel)]="grupCategory.owner" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === grupCategory.owner?.id ? grupCategory.owner : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="visaoApp.grupCategory.category" for="field_category">Category</label>
+                    <select class="form-control" id="field_category" multiple name="category" [(ngModel)]="grupCategory.categories">
+                        <option [ngValue]="getSelected(grupCategory.categories, categoryOption)" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="visaoApp.grupCategory.shared" for="field_shared">Shared</label>
+                    <select class="form-control" id="field_shared" multiple name="shared" [(ngModel)]="grupCategory.shareds">
+                        <option [ngValue]="getSelected(grupCategory.shareds, userOption)" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

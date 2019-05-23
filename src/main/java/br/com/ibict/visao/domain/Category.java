@@ -1,5 +1,6 @@
 package br.com.ibict.visao.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -30,6 +31,13 @@ public class Category implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "jhi_type")
     private TypeCategory type;
+
+    @Column(name = "jhi_level")
+    private Integer level;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private User owner;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -65,6 +73,32 @@ public class Category implements Serializable {
     public void setType(TypeCategory type) {
         this.type = type;
     }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public Category level(Integer level) {
+        this.level = level;
+        return this;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public Category owner(User user) {
+        this.owner = user;
+        return this;
+    }
+
+    public void setOwner(User user) {
+        this.owner = user;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -93,6 +127,7 @@ public class Category implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", type='" + getType() + "'" +
+            ", level=" + getLevel() +
             "}";
     }
 }

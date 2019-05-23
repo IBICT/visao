@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="chart">
+            <h2><span jhiTranslate="visaoApp.chart.detail.title">Chart</span> {{chart.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="visaoApp.chart.name">Name</span></dt>
+                <dd>
+                    <span>{{chart.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.chart.html">Html</span></dt>
+                <dd>
+                    <span>{{chart.html}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.chart.permission">Permission</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'visaoApp.Permission.' + chart.permission}}">{{chart.permission}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.chart.owner">Owner</span></dt>
+                <dd>
+                    {{chart.owner?.id}}
+                </dd>
+                <dt><span jhiTranslate="visaoApp.chart.shared">Shared</span></dt>
+                <dd>
+                    <span *ngFor="let shared of chart.shareds; let last = last">
+                        {{shared.id}}{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/chart', chart.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

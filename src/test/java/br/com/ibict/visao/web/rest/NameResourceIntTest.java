@@ -3,9 +3,8 @@ package br.com.ibict.visao.web.rest;
 import br.com.ibict.visao.VisaoApp;
 
 import br.com.ibict.visao.domain.Name;
-import br.com.ibict.visao.domain.Category;
-import br.com.ibict.visao.domain.TypePresentation;
 import br.com.ibict.visao.domain.User;
+import br.com.ibict.visao.domain.Category;
 import br.com.ibict.visao.repository.NameRepository;
 import br.com.ibict.visao.service.NameService;
 import br.com.ibict.visao.web.rest.errors.ExceptionTranslator;
@@ -15,9 +14,12 @@ import br.com.ibict.visao.service.NameQueryService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -30,12 +32,14 @@ import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 
 import static br.com.ibict.visao.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -74,8 +78,11 @@ public class NameResourceIntTest {
 
     @Autowired
     private NameRepository nameRepository;
-
+    @Mock
+    private NameRepository nameRepositoryMock;
     
+    @Mock
+    private NameService nameServiceMock;
 
     @Autowired
     private NameService nameService;
@@ -235,6 +242,36 @@ public class NameResourceIntTest {
             .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())));
     }
     
+    public void getAllNamesWithEagerRelationshipsIsEnabled() throws Exception {
+        NameResource nameResource = new NameResource(nameServiceMock, nameQueryService);
+        when(nameServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        MockMvc restNameMockMvc = MockMvcBuilders.standaloneSetup(nameResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restNameMockMvc.perform(get("/api/names?eagerload=true"))
+        .andExpect(status().isOk());
+
+        verify(nameServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    public void getAllNamesWithEagerRelationshipsIsNotEnabled() throws Exception {
+        NameResource nameResource = new NameResource(nameServiceMock, nameQueryService);
+            when(nameServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+            MockMvc restNameMockMvc = MockMvcBuilders.standaloneSetup(nameResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restNameMockMvc.perform(get("/api/names?eagerload=true"))
+        .andExpect(status().isOk());
+
+            verify(nameServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
 
     @Test
     @Transactional
@@ -493,44 +530,6 @@ public class NameResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllNamesByCategoryIsEqualToSomething() throws Exception {
-        // Initialize the database
-        Category category = CategoryResourceIntTest.createEntity(em);
-        em.persist(category);
-        em.flush();
-        name.setCategory(category);
-        nameRepository.saveAndFlush(name);
-        Long categoryId = category.getId();
-
-        // Get all the nameList where category equals to categoryId
-        defaultNameShouldBeFound("categoryId.equals=" + categoryId);
-
-        // Get all the nameList where category equals to categoryId + 1
-        defaultNameShouldNotBeFound("categoryId.equals=" + (categoryId + 1));
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllNamesByTypePresentationIsEqualToSomething() throws Exception {
-        // Initialize the database
-        TypePresentation typePresentation = TypePresentationResourceIntTest.createEntity(em);
-        em.persist(typePresentation);
-        em.flush();
-        name.setTypePresentation(typePresentation);
-        nameRepository.saveAndFlush(name);
-        Long typePresentationId = typePresentation.getId();
-
-        // Get all the nameList where typePresentation equals to typePresentationId
-        defaultNameShouldBeFound("typePresentationId.equals=" + typePresentationId);
-
-        // Get all the nameList where typePresentation equals to typePresentationId + 1
-        defaultNameShouldNotBeFound("typePresentationId.equals=" + (typePresentationId + 1));
-    }
-
-
-    @Test
-    @Transactional
     public void getAllNamesByUserIsEqualToSomething() throws Exception {
         // Initialize the database
         User user = UserResourceIntTest.createEntity(em);
@@ -545,6 +544,25 @@ public class NameResourceIntTest {
 
         // Get all the nameList where user equals to userId + 1
         defaultNameShouldNotBeFound("userId.equals=" + (userId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllNamesByCategoryIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Category category = CategoryResourceIntTest.createEntity(em);
+        em.persist(category);
+        em.flush();
+        name.addCategory(category);
+        nameRepository.saveAndFlush(name);
+        Long categoryId = category.getId();
+
+        // Get all the nameList where category equals to categoryId
+        defaultNameShouldBeFound("categoryId.equals=" + categoryId);
+
+        // Get all the nameList where category equals to categoryId + 1
+        defaultNameShouldNotBeFound("categoryId.equals=" + (categoryId + 1));
     }
 
     /**

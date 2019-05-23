@@ -76,9 +76,6 @@ public class LayerQueryService extends QueryService<Layer> {
             if (criteria.getType() != null) {
                 specification = specification.and(buildSpecification(criteria.getType(), Layer_.type));
             }
-            if (criteria.getDescription() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getDescription(), Layer_.description));
-            }
             if (criteria.getDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDate(), Layer_.date));
             }
@@ -87,9 +84,6 @@ public class LayerQueryService extends QueryService<Layer> {
             }
             if (criteria.getDateChange() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDateChange(), Layer_.dateChange));
-            }
-            if (criteria.getNote() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getNote(), Layer_.note));
             }
             if (criteria.getIconId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getIconId(), Layer_.icon, MarkerIcon_.id));

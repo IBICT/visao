@@ -1,0 +1,27 @@
+
+{
+    "visaoApp": {
+        "grupCategory" : {
+            "home": {
+                "title": "Grup Categories",
+                "createLabel": "Criar novo Grup Category",
+                "createOrEditLabel": "Criar ou editar Grup Category"
+            },
+            "created": "Um novo Grup Category foi criado com o identificador {{ param }}",
+            "updated": "Um Grup Category foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Grup Category foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Grup Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Grup Category"
+            },
+            "logo": "Logo",
+            "sobre": "Sobre",
+            "permission": "Permission",
+            "owner": "Owner",
+            "category": "Category",
+            "shared": "Shared"
+        }
+    }
+}

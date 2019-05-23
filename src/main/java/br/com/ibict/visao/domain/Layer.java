@@ -41,6 +41,7 @@ public class Layer implements Serializable {
     @Column(name = "jhi_type", nullable = false)
     private TypeLayer type;
 
+    @Lob
     @Column(name = "description")
     private String description;
 
@@ -53,6 +54,7 @@ public class Layer implements Serializable {
     @Column(name = "date_change")
     private Instant dateChange;
 
+    @Lob
     @Column(name = "note")
     private String note;
 

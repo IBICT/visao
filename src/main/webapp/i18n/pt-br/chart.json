@@ -1,0 +1,26 @@
+
+{
+    "visaoApp": {
+        "chart" : {
+            "home": {
+                "title": "Charts",
+                "createLabel": "Criar novo Chart",
+                "createOrEditLabel": "Criar ou editar Chart"
+            },
+            "created": "Um novo Chart foi criado com o identificador {{ param }}",
+            "updated": "Um Chart foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Chart foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Chart {{ id }}?"
+            },
+            "detail": {
+                "title": "Chart"
+            },
+            "name": "Name",
+            "html": "Html",
+            "permission": "Permission",
+            "owner": "Owner",
+            "shared": "Shared"
+        }
+    }
+}

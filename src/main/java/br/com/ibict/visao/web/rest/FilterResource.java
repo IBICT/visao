@@ -1,8 +1,5 @@
 package br.com.ibict.visao.web.rest;
 
-import br.com.ibict.visao.dto.FilterInfoProjection;
-import br.com.ibict.visao.security.AuthoritiesConstants;
-
 import com.codahale.metrics.annotation.Timed;
 import br.com.ibict.visao.domain.Filter;
 import br.com.ibict.visao.service.FilterService;
@@ -19,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -80,7 +76,6 @@ public class FilterResource {
      */
     @PutMapping("/filters")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Filter> updateFilter(@Valid @RequestBody Filter filter) throws URISyntaxException {
         log.debug("REST request to update Filter : {}", filter);
         if (filter.getId() == null) {
@@ -109,22 +104,6 @@ public class FilterResource {
     }
 
     /**
-     * GET  /filters : get all the filters.
-     *
-     * @param pageable the pagination information
-     * @param criteria the criterias which the requested entities should match
-     * @return the ResponseEntity with status 200 (OK) and the list of filters in body
-     */
-    @GetMapping("/filtersDTO")
-    @Timed
-    public ResponseEntity<List<FilterInfoProjection>>  findFiltersDTOWithId(FilterCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get Filters by criteria: {}", criteria);
-        Page<FilterInfoProjection> page = filterQueryService.findFiltersDTOWithId(criteria.getId().getIn(), pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/filtersDTO");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }
-
-    /**
      * GET  /filters/:id : get the "id" filter.
      *
      * @param id the id of the filter to retrieve
@@ -146,7 +125,6 @@ public class FilterResource {
      */
     @DeleteMapping("/filters/{id}")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteFilter(@PathVariable Long id) {
         log.debug("REST request to delete Filter : {}", id);
         filterService.delete(id);

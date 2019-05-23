@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="grupCategory">
+            <h2><span jhiTranslate="visaoApp.grupCategory.detail.title">Grup Category</span> {{grupCategory.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="visaoApp.grupCategory.logo">Logo</span></dt>
+                <dd>
+                    <div *ngIf="grupCategory.logo">
+                        <a (click)="openFile(grupCategory.logoContentType, grupCategory.logo)">
+                            <img [src]="'data:' + grupCategory.logoContentType + ';base64,' + grupCategory.logo" style="max-width: 100%;" alt="grupCategory image"/>
+                        </a>
+                        {{grupCategory.logoContentType}}, {{byteSize(grupCategory.logo)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.grupCategory.sobre">Sobre</span></dt>
+                <dd>
+                    <span>{{grupCategory.sobre}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.grupCategory.permission">Permission</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'visaoApp.Permission.' + grupCategory.permission}}">{{grupCategory.permission}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.grupCategory.owner">Owner</span></dt>
+                <dd>
+                    {{grupCategory.owner?.id}}
+                </dd>
+                <dt><span jhiTranslate="visaoApp.grupCategory.category">Category</span></dt>
+                <dd>
+                    <span *ngFor="let category of grupCategory.categories; let last = last">
+                        <a [routerLink]="['/category', category?.id, 'view' ]">{{category.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.grupCategory.shared">Shared</span></dt>
+                <dd>
+                    <span *ngFor="let shared of grupCategory.shareds; let last = last">
+                        {{shared.id}}{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/grup-category', grupCategory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -37,21 +37,15 @@
                 <dd>
                     <span>{{name.note}}</span>
                 </dd>
-                <dt><span jhiTranslate="visaoApp.name.category">Category</span></dt>
-                <dd>
-                    <div *ngIf="name.category">
-                        <a [routerLink]="['/category', name.category?.id, 'view']">{{name.category?.name}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="visaoApp.name.typePresentation">Type Presentation</span></dt>
-                <dd>
-                    <div *ngIf="name.typePresentation">
-                        <a [routerLink]="['/type-presentation', name.typePresentation?.id, 'view']">{{name.typePresentation?.display}}</a>
-                    </div>
-                </dd>
                 <dt><span jhiTranslate="visaoApp.name.user">User</span></dt>
                 <dd>
                     {{name.user?.login}}
+                </dd>
+                <dt><span jhiTranslate="visaoApp.name.category">Category</span></dt>
+                <dd>
+                    <span *ngFor="let category of name.categories; let last = last">
+                        <a [routerLink]="['/category', category?.id, 'view' ]">{{category.id}}</a>{{last ? '' : ', '}}
+                    </span>
                 </dd>
             </dl>
 

@@ -1,26 +1,5 @@
 {
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "relationships": [
-        {
-            "relationshipType": "many-to-one",
-            "relationshipName": "category",
-            "otherEntityName": "category",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "relationshipName": "typePresentation",
-            "otherEntityName": "typePresentation",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "relationshipName": "user",
-            "otherEntityName": "user",
-            "otherEntityField": "login"
-        }
-    ],
+    "name": "Name",
     "fields": [
         {
             "fieldName": "value",
@@ -63,11 +42,29 @@
             "fieldTypeBlobContent": "text"
         }
     ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
     "changelogDate": "20190213123337",
-    "dto": "no",
-    "searchEngine": false,
-    "service": "serviceClass",
     "entityTableName": "name",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceClass",
     "jpaMetamodelFiltering": true,
-    "pagination": "pager"
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
 }

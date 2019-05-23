@@ -3,30 +3,29 @@
     "visaoApp": {
         "name" : {
             "home": {
-                "title": "Nomes",
-                "createLabel": "Criar novo Nome",
-                "createOrEditLabel": "Criar ou editar Nome"
+                "title": "Names",
+                "createLabel": "Criar novo Name",
+                "createOrEditLabel": "Criar ou editar Name"
             },
-            "created": "Um novo Nome foi criado com o identificador {{ param }}",
-            "updated": "Um Nome foi atualizado com o identificador {{ param }}",
-            "deleted": "Um Nome foi deletado com o identificador {{ param }}",
+            "created": "Um novo Name foi criado com o identificador {{ param }}",
+            "updated": "Um Name foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Name foi deletado com o identificador {{ param }}",
             "delete": {
-                "question": "Tem certeza de que deseja excluir Nome {{ id }}?"
+                "question": "Tem certeza de que deseja excluir Name {{ id }}?"
             },
             "detail": {
-                "title": "Nome"
+                "title": "Name"
             },
-            "value": "Valor",
-            "active": "Ativo",
-            "description": "Descrição",
-            "keyWord": "Palavra Chave",
-            "date": "Data",
-            "source": "Origem",
-            "dateChange": "Data de Modificação",
-            "note": "Nota",
-            "category": "Categoria",
-            "typePresentation": "Apresentação dos dados",
-            "user": "Usuário"
+            "value": "Value",
+            "active": "Active",
+            "description": "Description",
+            "keyWord": "Key Word",
+            "date": "Date",
+            "source": "Source",
+            "dateChange": "Date Change",
+            "note": "Note",
+            "user": "User",
+            "category": "Category"
         }
     }
 }

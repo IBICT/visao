@@ -49,6 +49,15 @@ public class NameService {
         return nameRepository.findAll(pageable);
     }
 
+    /**
+     * Get all the Name with eager load of many-to-many relationships.
+     *
+     * @return the list of entities
+     */
+    public Page<Name> findAllWithEagerRelationships(Pageable pageable) {
+        return nameRepository.findAllWithEagerRelationships(pageable);
+    }
+    
 
     /**
      * Get one name by id.
@@ -59,7 +68,7 @@ public class NameService {
     @Transactional(readOnly = true)
     public Optional<Name> findOne(Long id) {
         log.debug("Request to get Name : {}", id);
-        return nameRepository.findById(id);
+        return nameRepository.findOneWithEagerRelationships(id);
     }
 
     /**

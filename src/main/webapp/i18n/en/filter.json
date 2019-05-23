@@ -25,9 +25,9 @@
             "dateChange": "Date Change",
             "note": "Note",
             "cidadePolo": "Cidade Polo",
-            "category": "Category",
             "user": "User",
-            "region": "Region"
+            "region": "Region",
+            "category": "Category"
         }
     }
 }

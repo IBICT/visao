@@ -54,6 +54,14 @@ public class CacheConfiguration {
             cm.createCache(br.com.ibict.visao.domain.MarkerIcon.class.getName(), jcacheConfiguration);
             cm.createCache(br.com.ibict.visao.domain.GroupLayer.class.getName(), jcacheConfiguration);
             cm.createCache(br.com.ibict.visao.domain.TypePresentation.class.getName(), jcacheConfiguration);
+            cm.createCache(br.com.ibict.visao.domain.Name.class.getName() + ".categories", jcacheConfiguration);
+            cm.createCache(br.com.ibict.visao.domain.Filter.class.getName() + ".categories", jcacheConfiguration);
+            cm.createCache(br.com.ibict.visao.domain.GroupLayer.class.getName() + ".categories", jcacheConfiguration);
+            cm.createCache(br.com.ibict.visao.domain.Chart.class.getName(), jcacheConfiguration);
+            cm.createCache(br.com.ibict.visao.domain.Chart.class.getName() + ".shareds", jcacheConfiguration);
+            cm.createCache(br.com.ibict.visao.domain.GrupCategory.class.getName(), jcacheConfiguration);
+            cm.createCache(br.com.ibict.visao.domain.GrupCategory.class.getName() + ".categories", jcacheConfiguration);
+            cm.createCache(br.com.ibict.visao.domain.GrupCategory.class.getName() + ".shareds", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

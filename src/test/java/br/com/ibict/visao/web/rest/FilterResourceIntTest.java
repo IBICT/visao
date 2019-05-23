@@ -4,9 +4,9 @@ import br.com.ibict.visao.VisaoApp;
 
 import br.com.ibict.visao.domain.Filter;
 import br.com.ibict.visao.domain.Region;
-import br.com.ibict.visao.domain.Category;
 import br.com.ibict.visao.domain.User;
 import br.com.ibict.visao.domain.Region;
+import br.com.ibict.visao.domain.Category;
 import br.com.ibict.visao.repository.FilterRepository;
 import br.com.ibict.visao.service.FilterService;
 import br.com.ibict.visao.web.rest.errors.ExceptionTranslator;
@@ -551,25 +551,6 @@ public class FilterResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllFiltersByCategoryIsEqualToSomething() throws Exception {
-        // Initialize the database
-        Category category = CategoryResourceIntTest.createEntity(em);
-        em.persist(category);
-        em.flush();
-        filter.setCategory(category);
-        filterRepository.saveAndFlush(filter);
-        Long categoryId = category.getId();
-
-        // Get all the filterList where category equals to categoryId
-        defaultFilterShouldBeFound("categoryId.equals=" + categoryId);
-
-        // Get all the filterList where category equals to categoryId + 1
-        defaultFilterShouldNotBeFound("categoryId.equals=" + (categoryId + 1));
-    }
-
-
-    @Test
-    @Transactional
     public void getAllFiltersByUserIsEqualToSomething() throws Exception {
         // Initialize the database
         User user = UserResourceIntTest.createEntity(em);
@@ -603,6 +584,25 @@ public class FilterResourceIntTest {
 
         // Get all the filterList where region equals to regionId + 1
         defaultFilterShouldNotBeFound("regionId.equals=" + (regionId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllFiltersByCategoryIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Category category = CategoryResourceIntTest.createEntity(em);
+        em.persist(category);
+        em.flush();
+        filter.addCategory(category);
+        filterRepository.saveAndFlush(filter);
+        Long categoryId = category.getId();
+
+        // Get all the filterList where category equals to categoryId
+        defaultFilterShouldBeFound("categoryId.equals=" + categoryId);
+
+        // Get all the filterList where category equals to categoryId + 1
+        defaultFilterShouldNotBeFound("categoryId.equals=" + (categoryId + 1));
     }
 
     /**
