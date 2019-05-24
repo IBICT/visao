@@ -1,7 +1,10 @@
 package br.com.ibict.visao.service;
 
 import br.com.ibict.visao.domain.GroupCategory;
+import br.com.ibict.visao.domain.User;
 import br.com.ibict.visao.repository.GroupCategoryRepository;
+import br.com.ibict.visao.repository.UserRepository;
+import br.com.ibict.visao.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,8 +26,11 @@ public class GroupCategoryService {
 
     private final GroupCategoryRepository groupCategoryRepository;
 
-    public GroupCategoryService(GroupCategoryRepository groupCategoryRepository) {
+    private final UserRepository userRepository;
+
+    public GroupCategoryService(GroupCategoryRepository groupCategoryRepository, UserRepository userRepository) {
         this.groupCategoryRepository = groupCategoryRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -69,6 +75,21 @@ public class GroupCategoryService {
     public Optional<GroupCategory> findOne(Long id) {
         log.debug("Request to get GroupCategory : {}", id);
         return groupCategoryRepository.findOneWithEagerRelationships(id);
+    }
+
+    @Transactional(readOnly = true)
+    public boolean isGroupCategoryEnabledByCurrentUser(Long id) {
+        Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
+        Long codUser = null;
+        if(currentUserLogin.isPresent()){
+            Optional<User> findedUser = userRepository.findOneByLogin(currentUserLogin.get());
+            if(findedUser.isPresent()){
+                codUser = findedUser.get().getId();
+            }
+        }
+
+        Long retrievedGroupCatId = groupCategoryRepository.isGroupCategoryEnabledByCurrentUser(id, codUser);
+        return retrievedGroupCatId != null && retrievedGroupCatId.equals(id);
     }
 
     /**

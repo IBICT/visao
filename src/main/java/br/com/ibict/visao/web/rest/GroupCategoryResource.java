@@ -1,5 +1,6 @@
 package br.com.ibict.visao.web.rest;
 
+import br.com.ibict.visao.security.SecurityUtils;
 import com.codahale.metrics.annotation.Timed;
 import br.com.ibict.visao.domain.GroupCategory;
 import br.com.ibict.visao.service.GroupCategoryService;
@@ -115,6 +116,21 @@ public class GroupCategoryResource {
         log.debug("REST request to get GroupCategory : {}", id);
         Optional<GroupCategory> groupCategory = groupCategoryService.findOne(id);
         return ResponseUtil.wrapOrNotFound(groupCategory);
+    }
+
+    /**
+     * GET  /group-categories/:id : get the "id" groupCategory.
+     *
+     * @param id the id of the groupCategory to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the groupCategory, or with status 404 (Not Found)
+     */
+    @GetMapping("/group-categories-enabled/{id}")
+    @Timed
+    public boolean isGroupCategoryEnabledByCurrentUser(@PathVariable Long id) {
+        if(id == null){
+            return false;
+        }
+        return groupCategoryService.isGroupCategoryEnabledByCurrentUser(id);
     }
 
     /**

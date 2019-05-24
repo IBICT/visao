@@ -1,3 +1,4 @@
+isUserAllowedGroupCategory();
 // Iniciar mapa objeto sem zoom, latitude, longitude, zoom inicial
 var map = L.map('map', {
         zoomControl:false,
@@ -1050,4 +1051,38 @@ function loadFiltrosSelecionados(){
     $("#footer-sidebar-filtros .filtro").html(filtrosSelecionados);
 
     return filtrosSelecionados;
+}
+
+
+/*
+    Metodos para verificar os dados do usuario logado
+*/
+function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+
+function isUserAllowedGroupCategory(){
+    var grpCatId = getUrlParameter('grpCat');
+
+    // GETCURRENT USER
+    // VERIFY IF USER
+    $.ajax({
+        url: '/api/group-categories-enabled/'+grpCatId,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+//            TODO redirect to blocked page do nothing
+        }
+    });
 }
