@@ -20,6 +20,7 @@
             "iconContentType": "Icon Content Type",
             "about": "About",
             "permission": "Permission",
+            "name": "Name",
             "owner": "Owner",
             "categories": "Categories",
             "shareds": "Shareds"

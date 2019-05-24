@@ -44,6 +44,13 @@
             "fieldName": "permission",
             "fieldType": "TypePermission",
             "fieldValues": "PUBLIC,PRIVATE,SHARED"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20190521115323",

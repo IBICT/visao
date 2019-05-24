@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -53,7 +54,7 @@ public class GroupCategoryResource {
      */
     @PostMapping("/group-categories")
     @Timed
-    public ResponseEntity<GroupCategory> createGroupCategory(@RequestBody GroupCategory groupCategory) throws URISyntaxException {
+    public ResponseEntity<GroupCategory> createGroupCategory(@Valid @RequestBody GroupCategory groupCategory) throws URISyntaxException {
         log.debug("REST request to save GroupCategory : {}", groupCategory);
         if (groupCategory.getId() != null) {
             throw new BadRequestAlertException("A new groupCategory cannot already have an ID", ENTITY_NAME, "idexists");
@@ -75,7 +76,7 @@ public class GroupCategoryResource {
      */
     @PutMapping("/group-categories")
     @Timed
-    public ResponseEntity<GroupCategory> updateGroupCategory(@RequestBody GroupCategory groupCategory) throws URISyntaxException {
+    public ResponseEntity<GroupCategory> updateGroupCategory(@Valid @RequestBody GroupCategory groupCategory) throws URISyntaxException {
         log.debug("REST request to update GroupCategory : {}", groupCategory);
         if (groupCategory.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

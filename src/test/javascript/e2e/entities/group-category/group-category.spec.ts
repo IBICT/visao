@@ -37,6 +37,8 @@ describe('GroupCategory e2e test', () => {
         groupCategoryUpdatePage.setAboutInput('about');
         expect(groupCategoryUpdatePage.getAboutInput()).toMatch('about');
         groupCategoryUpdatePage.permissionSelectLastOption();
+        groupCategoryUpdatePage.setNameInput('name');
+        expect(groupCategoryUpdatePage.getNameInput()).toMatch('name');
         groupCategoryUpdatePage.ownerSelectLastOption();
         // groupCategoryUpdatePage.categoriesSelectLastOption();
         // groupCategoryUpdatePage.sharedsSelectLastOption();

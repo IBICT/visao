@@ -21,6 +21,7 @@ export class GroupCategoryUpdatePage {
     iconContentTypeInput = element(by.id('field_iconContentType'));
     aboutInput = element(by.id('field_about'));
     permissionSelect = element(by.id('field_permission'));
+    nameInput = element(by.id('field_name'));
     ownerSelect = element(by.id('field_owner'));
     categoriesSelect = element(by.id('field_categories'));
     sharedsSelect = element(by.id('field_shareds'));
@@ -67,6 +68,14 @@ export class GroupCategoryUpdatePage {
             .last()
             .click();
     }
+    setNameInput(name): promise.Promise<void> {
+        return this.nameInput.sendKeys(name);
+    }
+
+    getNameInput() {
+        return this.nameInput.getAttribute('value');
+    }
+
     ownerSelectLastOption(): promise.Promise<void> {
         return this.ownerSelect
             .all(by.tagName('option'))

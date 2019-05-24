@@ -63,6 +63,9 @@ public class GroupCategoryResourceIntTest {
     private static final TypePermission DEFAULT_PERMISSION = TypePermission.PUBLIC;
     private static final TypePermission UPDATED_PERMISSION = TypePermission.PRIVATE;
 
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
     @Autowired
     private GroupCategoryRepository groupCategoryRepository;
     @Mock
@@ -115,7 +118,8 @@ public class GroupCategoryResourceIntTest {
             .iconPresentation(DEFAULT_ICON_PRESENTATION)
             .iconContentType(DEFAULT_ICON_CONTENT_TYPE)
             .about(DEFAULT_ABOUT)
-            .permission(DEFAULT_PERMISSION);
+            .permission(DEFAULT_PERMISSION)
+            .name(DEFAULT_NAME);
         return groupCategory;
     }
 
@@ -143,6 +147,7 @@ public class GroupCategoryResourceIntTest {
         assertThat(testGroupCategory.getIconContentType()).isEqualTo(DEFAULT_ICON_CONTENT_TYPE);
         assertThat(testGroupCategory.getAbout()).isEqualTo(DEFAULT_ABOUT);
         assertThat(testGroupCategory.getPermission()).isEqualTo(DEFAULT_PERMISSION);
+        assertThat(testGroupCategory.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -166,6 +171,24 @@ public class GroupCategoryResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = groupCategoryRepository.findAll().size();
+        // set the field null
+        groupCategory.setName(null);
+
+        // Create the GroupCategory, which fails.
+
+        restGroupCategoryMockMvc.perform(post("/api/group-categories")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(groupCategory)))
+            .andExpect(status().isBadRequest());
+
+        List<GroupCategory> groupCategoryList = groupCategoryRepository.findAll();
+        assertThat(groupCategoryList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllGroupCategories() throws Exception {
         // Initialize the database
         groupCategoryRepository.saveAndFlush(groupCategory);
@@ -178,7 +201,8 @@ public class GroupCategoryResourceIntTest {
             .andExpect(jsonPath("$.[*].iconPresentation").value(hasItem(DEFAULT_ICON_PRESENTATION.toString())))
             .andExpect(jsonPath("$.[*].iconContentType").value(hasItem(DEFAULT_ICON_CONTENT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].about").value(hasItem(DEFAULT_ABOUT.toString())))
-            .andExpect(jsonPath("$.[*].permission").value(hasItem(DEFAULT_PERMISSION.toString())));
+            .andExpect(jsonPath("$.[*].permission").value(hasItem(DEFAULT_PERMISSION.toString())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
     
     public void getAllGroupCategoriesWithEagerRelationshipsIsEnabled() throws Exception {
@@ -226,7 +250,8 @@ public class GroupCategoryResourceIntTest {
             .andExpect(jsonPath("$.iconPresentation").value(DEFAULT_ICON_PRESENTATION.toString()))
             .andExpect(jsonPath("$.iconContentType").value(DEFAULT_ICON_CONTENT_TYPE.toString()))
             .andExpect(jsonPath("$.about").value(DEFAULT_ABOUT.toString()))
-            .andExpect(jsonPath("$.permission").value(DEFAULT_PERMISSION.toString()));
+            .andExpect(jsonPath("$.permission").value(DEFAULT_PERMISSION.toString()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
     }
 
     @Test
@@ -387,6 +412,45 @@ public class GroupCategoryResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllGroupCategoriesByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        groupCategoryRepository.saveAndFlush(groupCategory);
+
+        // Get all the groupCategoryList where name equals to DEFAULT_NAME
+        defaultGroupCategoryShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the groupCategoryList where name equals to UPDATED_NAME
+        defaultGroupCategoryShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllGroupCategoriesByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        groupCategoryRepository.saveAndFlush(groupCategory);
+
+        // Get all the groupCategoryList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultGroupCategoryShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the groupCategoryList where name equals to UPDATED_NAME
+        defaultGroupCategoryShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllGroupCategoriesByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        groupCategoryRepository.saveAndFlush(groupCategory);
+
+        // Get all the groupCategoryList where name is not null
+        defaultGroupCategoryShouldBeFound("name.specified=true");
+
+        // Get all the groupCategoryList where name is null
+        defaultGroupCategoryShouldNotBeFound("name.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllGroupCategoriesByOwnerIsEqualToSomething() throws Exception {
         // Initialize the database
         User owner = UserResourceIntTest.createEntity(em);
@@ -452,7 +516,8 @@ public class GroupCategoryResourceIntTest {
             .andExpect(jsonPath("$.[*].iconPresentation").value(hasItem(DEFAULT_ICON_PRESENTATION.toString())))
             .andExpect(jsonPath("$.[*].iconContentType").value(hasItem(DEFAULT_ICON_CONTENT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].about").value(hasItem(DEFAULT_ABOUT.toString())))
-            .andExpect(jsonPath("$.[*].permission").value(hasItem(DEFAULT_PERMISSION.toString())));
+            .andExpect(jsonPath("$.[*].permission").value(hasItem(DEFAULT_PERMISSION.toString())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
 
     /**
@@ -490,7 +555,8 @@ public class GroupCategoryResourceIntTest {
             .iconPresentation(UPDATED_ICON_PRESENTATION)
             .iconContentType(UPDATED_ICON_CONTENT_TYPE)
             .about(UPDATED_ABOUT)
-            .permission(UPDATED_PERMISSION);
+            .permission(UPDATED_PERMISSION)
+            .name(UPDATED_NAME);
 
         restGroupCategoryMockMvc.perform(put("/api/group-categories")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -505,6 +571,7 @@ public class GroupCategoryResourceIntTest {
         assertThat(testGroupCategory.getIconContentType()).isEqualTo(UPDATED_ICON_CONTENT_TYPE);
         assertThat(testGroupCategory.getAbout()).isEqualTo(UPDATED_ABOUT);
         assertThat(testGroupCategory.getPermission()).isEqualTo(UPDATED_PERMISSION);
+        assertThat(testGroupCategory.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

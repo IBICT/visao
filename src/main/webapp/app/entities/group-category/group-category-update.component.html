@@ -10,6 +10,18 @@
                         [(ngModel)]="groupCategory.id" readonly />
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.groupCategory.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           [(ngModel)]="groupCategory.name" required/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="visaoApp.groupCategory.iconPresentation" for="field_iconPresentation">Icon Presentation</label>
                     <input type="text" class="form-control" name="iconPresentation" id="field_iconPresentation"
                         [(ngModel)]="groupCategory.iconPresentation" />

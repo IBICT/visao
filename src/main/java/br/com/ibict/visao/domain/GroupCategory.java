@@ -1,16 +1,18 @@
 package br.com.ibict.visao.domain;
 
-import br.com.ibict.visao.domain.enumeration.TypePermission;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+
+import br.com.ibict.visao.domain.enumeration.TypePermission;
 
 /**
  * A GroupCategory.
@@ -38,6 +40,10 @@ public class GroupCategory implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "permission")
     private TypePermission permission;
+
+    @NotNull
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @ManyToOne
     @JsonIgnoreProperties("")
@@ -116,6 +122,19 @@ public class GroupCategory implements Serializable {
 
     public void setPermission(TypePermission permission) {
         this.permission = permission;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public GroupCategory name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public User getOwner() {
@@ -210,6 +229,7 @@ public class GroupCategory implements Serializable {
             ", iconContentType='" + getIconContentType() + "'" +
             ", about='" + getAbout() + "'" +
             ", permission='" + getPermission() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

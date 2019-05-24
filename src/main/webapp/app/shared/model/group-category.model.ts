@@ -13,6 +13,7 @@ export interface IGroupCategory {
     iconContentType?: string;
     about?: string;
     permission?: TypePermission;
+    name?: string;
     owner?: IUser;
     categories?: ICategory[];
     shareds?: IUser[];
@@ -25,6 +26,7 @@ export class GroupCategory implements IGroupCategory {
         public iconContentType?: string,
         public about?: string,
         public permission?: TypePermission,
+        public name?: string,
         public owner?: IUser,
         public categories?: ICategory[],
         public shareds?: IUser[]

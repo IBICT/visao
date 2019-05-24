@@ -16,6 +16,7 @@
             "detail": {
                 "title": "Grupo de Categorias"
             },
+            "name": "Nome",
             "iconPresentation": "Caminho Logo",
             "iconContentType": "Logo Content Type",
             "about": "Sobre",
