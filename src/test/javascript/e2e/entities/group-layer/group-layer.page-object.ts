@@ -21,7 +21,6 @@ export class GroupLayerUpdatePage {
     activeInput = element(by.id('field_active'));
     keyWordInput = element(by.id('field_keyWord'));
     userSelect = element(by.id('field_user'));
-    categorySelect = element(by.id('field_category'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -63,25 +62,6 @@ export class GroupLayerUpdatePage {
 
     getUserSelectedOption() {
         return this.userSelect.element(by.css('option:checked')).getText();
-    }
-
-    categorySelectLastOption(): promise.Promise<void> {
-        return this.categorySelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    categorySelectOption(option): promise.Promise<void> {
-        return this.categorySelect.sendKeys(option);
-    }
-
-    getCategorySelect(): ElementFinder {
-        return this.categorySelect;
-    }
-
-    getCategorySelectedOption() {
-        return this.categorySelect.element(by.css('option:checked')).getText();
     }
 
     save(): promise.Promise<void> {

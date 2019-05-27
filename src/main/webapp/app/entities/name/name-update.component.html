@@ -67,16 +67,24 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.name.category" for="field_category">Category</label>
+                    <select class="form-control" id="field_category" name="category" [(ngModel)]="name.category" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="categoryOption.id === name.category?.id ? name.category : categoryOption" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.name.typePresentation" for="field_typePresentation">Type Presentation</label>
+                    <select class="form-control" id="field_typePresentation" name="typePresentation" [(ngModel)]="name.typePresentation" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="typePresentationOption.id === name.typePresentation?.id ? name.typePresentation : typePresentationOption" *ngFor="let typePresentationOption of typepresentations; trackBy: trackTypePresentationById">{{typePresentationOption.display}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="visaoApp.name.user" for="field_user">User</label>
                     <select class="form-control" id="field_user" name="user" [(ngModel)]="name.user" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="userOption.id === name.user?.id ? name.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label jhiTranslate="visaoApp.name.category" for="field_category">Category</label>
-                    <select class="form-control" id="field_category" multiple name="category" [(ngModel)]="name.categories">
-                        <option [ngValue]="getSelected(name.categories, categoryOption)" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.id}}</option>
                     </select>
                 </div>
             </div>

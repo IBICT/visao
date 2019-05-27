@@ -10,9 +10,9 @@ import { IFilter } from 'app/shared/model/filter.model';
 import { FilterService } from './filter.service';
 import { IRegion } from 'app/shared/model/region.model';
 import { RegionService } from 'app/entities/region';
-import { IUser, UserService } from 'app/core';
 import { ICategory } from 'app/shared/model/category.model';
 import { CategoryService } from 'app/entities/category';
+import { IUser, UserService } from 'app/core';
 
 @Component({
     selector: 'jhi-filter-update',
@@ -24,11 +24,11 @@ export class FilterUpdateComponent implements OnInit {
 
     cidadepolos: IRegion[];
 
+    categories: ICategory[];
+
     users: IUser[];
 
     regions: IRegion[];
-
-    categories: ICategory[];
     date: string;
     dateChange: string;
 
@@ -37,8 +37,8 @@ export class FilterUpdateComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private filterService: FilterService,
         private regionService: RegionService,
-        private userService: UserService,
         private categoryService: CategoryService,
+        private userService: UserService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -62,6 +62,12 @@ export class FilterUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        this.categoryService.query().subscribe(
+            (res: HttpResponse<ICategory[]>) => {
+                this.categories = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         this.userService.query().subscribe(
             (res: HttpResponse<IUser[]>) => {
                 this.users = res.body;
@@ -71,12 +77,6 @@ export class FilterUpdateComponent implements OnInit {
         this.regionService.query().subscribe(
             (res: HttpResponse<IRegion[]>) => {
                 this.regions = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.categoryService.query().subscribe(
-            (res: HttpResponse<ICategory[]>) => {
-                this.categories = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -130,11 +130,11 @@ export class FilterUpdateComponent implements OnInit {
         return item.id;
     }
 
-    trackUserById(index: number, item: IUser) {
+    trackCategoryById(index: number, item: ICategory) {
         return item.id;
     }
 
-    trackCategoryById(index: number, item: ICategory) {
+    trackUserById(index: number, item: IUser) {
         return item.id;
     }
 

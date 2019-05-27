@@ -33,6 +33,10 @@
             <column name="key_word" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+			
+			<column name="category_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
 
             <column name="user_id" type="bigint">
                 <constraints nullable="true" />
@@ -40,17 +44,6 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
-        <createTable tableName="group_layer_category">
-            <column name="categories_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="group_layers_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="group_layers_id, categories_id" tableName="group_layer_category"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

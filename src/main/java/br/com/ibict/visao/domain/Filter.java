@@ -56,26 +56,23 @@ public class Filter implements Serializable {
     private String note;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn
     private Region cidadePolo;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Category category;
 
     @ManyToOne
     @JsonIgnoreProperties("")
     private User user;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "filter_region",
                joinColumns = @JoinColumn(name = "filters_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "regions_id", referencedColumnName = "id"))
     private Set<Region> regions = new HashSet<>();
-
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "filter_category",
-               joinColumns = @JoinColumn(name = "filters_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "categories_id", referencedColumnName = "id"))
-    private Set<Category> categories = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -203,6 +200,19 @@ public class Filter implements Serializable {
         this.cidadePolo = region;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public Filter category(Category category) {
+        this.category = category;
+        return this;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public User getUser() {
         return user;
     }
@@ -237,29 +247,6 @@ public class Filter implements Serializable {
 
     public void setRegions(Set<Region> regions) {
         this.regions = regions;
-    }
-
-    public Set<Category> getCategories() {
-        return categories;
-    }
-
-    public Filter categories(Set<Category> categories) {
-        this.categories = categories;
-        return this;
-    }
-
-    public Filter addCategory(Category category) {
-        this.categories.add(category);
-        return this;
-    }
-
-    public Filter removeCategory(Category category) {
-        this.categories.remove(category);
-        return this;
-    }
-
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

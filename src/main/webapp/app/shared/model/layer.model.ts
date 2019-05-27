@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { ICategory } from 'app/shared/model//category.model';
 import { IMarkerIcon } from 'app/shared/model//marker-icon.model';
 import { IGroupLayer } from 'app/shared/model//group-layer.model';
 
@@ -14,11 +15,12 @@ export interface ILayer {
     name?: string;
     geoJson?: any;
     type?: TypeLayer;
-    description?: any;
+    description?: string;
     date?: Moment;
     source?: string;
     dateChange?: Moment;
-    note?: any;
+    note?: string;
+    category?: ICategory;
     icon?: IMarkerIcon;
     group?: IGroupLayer;
 }
@@ -29,11 +31,12 @@ export class Layer implements ILayer {
         public name?: string,
         public geoJson?: any,
         public type?: TypeLayer,
-        public description?: any,
+        public description?: string,
         public date?: Moment,
         public source?: string,
         public dateChange?: Moment,
-        public note?: any,
+        public note?: string,
+        public category?: ICategory,
         public icon?: IMarkerIcon,
         public group?: IGroupLayer
     ) {}

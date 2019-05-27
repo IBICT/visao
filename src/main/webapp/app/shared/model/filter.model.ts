@@ -1,7 +1,7 @@
 import { Moment } from 'moment';
 import { IRegion } from 'app/shared/model//region.model';
-import { IUser } from 'app/core/user/user.model';
 import { ICategory } from 'app/shared/model//category.model';
+import { IUser } from 'app/core/user/user.model';
 
 export interface IFilter {
     id?: number;
@@ -14,9 +14,9 @@ export interface IFilter {
     dateChange?: Moment;
     note?: any;
     cidadePolo?: IRegion;
+    category?: ICategory;
     user?: IUser;
     regions?: IRegion[];
-    categories?: ICategory[];
 }
 
 export class Filter implements IFilter {
@@ -31,9 +31,9 @@ export class Filter implements IFilter {
         public dateChange?: Moment,
         public note?: any,
         public cidadePolo?: IRegion,
+        public category?: ICategory,
         public user?: IUser,
-        public regions?: IRegion[],
-        public categories?: ICategory[]
+        public regions?: IRegion[]
     ) {
         this.active = false;
     }

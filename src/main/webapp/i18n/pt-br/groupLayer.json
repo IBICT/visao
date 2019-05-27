@@ -3,24 +3,23 @@
     "visaoApp": {
         "groupLayer" : {
             "home": {
-                "title": "Group Layers",
-                "createLabel": "Criar novo Group Layer",
-                "createOrEditLabel": "Criar ou editar Group Layer"
+                "title": "Grupos de Camadas",
+                "createLabel": "Criar novo Grupo de Camadas",
+                "createOrEditLabel": "Criar ou editar Grupo de Camadas"
             },
-            "created": "Um novo Group Layer foi criado com o identificador {{ param }}",
-            "updated": "Um Group Layer foi atualizado com o identificador {{ param }}",
-            "deleted": "Um Group Layer foi deletado com o identificador {{ param }}",
+            "created": "Um novo Grupo de Camadas foi criado com o identificador {{ param }}",
+            "updated": "Um Grupo de Camadas foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Grupo de Camadas foi deletado com o identificador {{ param }}",
             "delete": {
-                "question": "Tem certeza de que deseja excluir Group Layer {{ id }}?"
+                "question": "Tem certeza de que deseja excluir Grupo de Camadas {{ id }}?"
             },
             "detail": {
-                "title": "Group Layer"
+                "title": "Grupo de Camadas"
             },
-            "name": "Name",
-            "active": "Active",
-            "keyWord": "Key Word",
-            "user": "User",
-            "category": "Category"
+            "name": "Nome",
+            "active": "Ativo",
+            "keyWord": "Palavra Chave",
+            "user": "Usuário"
         }
     }
 }

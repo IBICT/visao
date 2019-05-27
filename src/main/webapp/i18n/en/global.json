@@ -18,8 +18,6 @@
                 "markerIcon": "Marker Icon",
                 "groupLayer": "Group Layer",
                 "typePresentation": "Type Presentation",
-                "chart": "Chart",
-                "grupCategory": "Grup Category",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

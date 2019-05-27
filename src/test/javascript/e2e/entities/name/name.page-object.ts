@@ -25,8 +25,9 @@ export class NameUpdatePage {
     sourceInput = element(by.id('field_source'));
     dateChangeInput = element(by.id('field_dateChange'));
     noteInput = element(by.id('field_note'));
-    userSelect = element(by.id('field_user'));
     categorySelect = element(by.id('field_category'));
+    typePresentationSelect = element(by.id('field_typePresentation'));
+    userSelect = element(by.id('field_user'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -91,25 +92,6 @@ export class NameUpdatePage {
         return this.noteInput.getAttribute('value');
     }
 
-    userSelectLastOption(): promise.Promise<void> {
-        return this.userSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    userSelectOption(option): promise.Promise<void> {
-        return this.userSelect.sendKeys(option);
-    }
-
-    getUserSelect(): ElementFinder {
-        return this.userSelect;
-    }
-
-    getUserSelectedOption() {
-        return this.userSelect.element(by.css('option:checked')).getText();
-    }
-
     categorySelectLastOption(): promise.Promise<void> {
         return this.categorySelect
             .all(by.tagName('option'))
@@ -127,6 +109,44 @@ export class NameUpdatePage {
 
     getCategorySelectedOption() {
         return this.categorySelect.element(by.css('option:checked')).getText();
+    }
+
+    typePresentationSelectLastOption(): promise.Promise<void> {
+        return this.typePresentationSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    typePresentationSelectOption(option): promise.Promise<void> {
+        return this.typePresentationSelect.sendKeys(option);
+    }
+
+    getTypePresentationSelect(): ElementFinder {
+        return this.typePresentationSelect;
+    }
+
+    getTypePresentationSelectedOption() {
+        return this.typePresentationSelect.element(by.css('option:checked')).getText();
+    }
+
+    userSelectLastOption(): promise.Promise<void> {
+        return this.userSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    userSelectOption(option): promise.Promise<void> {
+        return this.userSelect.sendKeys(option);
+    }
+
+    getUserSelect(): ElementFinder {
+        return this.userSelect;
+    }
+
+    getUserSelectedOption() {
+        return this.userSelect.element(by.css('option:checked')).getText();
     }
 
     save(): promise.Promise<void> {

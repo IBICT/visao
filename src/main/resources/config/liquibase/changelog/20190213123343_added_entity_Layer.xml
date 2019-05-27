@@ -34,7 +34,7 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="description" type="clob">
+            <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -50,7 +50,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="note" type="clob">
+            <column name="note" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

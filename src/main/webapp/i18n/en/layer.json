@@ -24,6 +24,7 @@
             "source": "Source",
             "dateChange": "Date Change",
             "note": "Note",
+            "category": "Category",
             "icon": "Icon",
             "group": "Group"
         }

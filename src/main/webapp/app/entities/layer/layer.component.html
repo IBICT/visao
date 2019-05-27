@@ -23,6 +23,7 @@
             <th jhiSortBy="source"><span jhiTranslate="visaoApp.layer.source">Source</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dateChange"><span jhiTranslate="visaoApp.layer.dateChange">Date Change</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="note"><span jhiTranslate="visaoApp.layer.note">Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="category.id"><span jhiTranslate="visaoApp.layer.category">Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="icon.id"><span jhiTranslate="visaoApp.layer.icon">Icon</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="group.id"><span jhiTranslate="visaoApp.layer.group">Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
@@ -39,6 +40,11 @@
                 <td>{{layer.source}}</td>
                 <td>{{layer.dateChange | date:'medium'}}</td>
                 <td>{{layer.note}}</td>
+                <td>
+                    <div *ngIf="layer.category">
+                        <a [routerLink]="['../category', layer.category?.id, 'view' ]" >{{layer.category?.id}}</a>
+                    </div>
+                </td>
                 <td>
                     <div *ngIf="layer.icon">
                         <a [routerLink]="['../marker-icon', layer.icon?.id, 'view' ]" >{{layer.icon?.id}}</a>

@@ -3,6 +3,7 @@ package br.com.ibict.visao.web.rest;
 import br.com.ibict.visao.VisaoApp;
 
 import br.com.ibict.visao.domain.Layer;
+import br.com.ibict.visao.domain.Category;
 import br.com.ibict.visao.domain.MarkerIcon;
 import br.com.ibict.visao.domain.GroupLayer;
 import br.com.ibict.visao.repository.LayerRepository;
@@ -337,6 +338,45 @@ public class LayerResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllLayersByDescriptionIsEqualToSomething() throws Exception {
+        // Initialize the database
+        layerRepository.saveAndFlush(layer);
+
+        // Get all the layerList where description equals to DEFAULT_DESCRIPTION
+        defaultLayerShouldBeFound("description.equals=" + DEFAULT_DESCRIPTION);
+
+        // Get all the layerList where description equals to UPDATED_DESCRIPTION
+        defaultLayerShouldNotBeFound("description.equals=" + UPDATED_DESCRIPTION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllLayersByDescriptionIsInShouldWork() throws Exception {
+        // Initialize the database
+        layerRepository.saveAndFlush(layer);
+
+        // Get all the layerList where description in DEFAULT_DESCRIPTION or UPDATED_DESCRIPTION
+        defaultLayerShouldBeFound("description.in=" + DEFAULT_DESCRIPTION + "," + UPDATED_DESCRIPTION);
+
+        // Get all the layerList where description equals to UPDATED_DESCRIPTION
+        defaultLayerShouldNotBeFound("description.in=" + UPDATED_DESCRIPTION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllLayersByDescriptionIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        layerRepository.saveAndFlush(layer);
+
+        // Get all the layerList where description is not null
+        defaultLayerShouldBeFound("description.specified=true");
+
+        // Get all the layerList where description is null
+        defaultLayerShouldNotBeFound("description.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllLayersByDateIsEqualToSomething() throws Exception {
         // Initialize the database
         layerRepository.saveAndFlush(layer);
@@ -451,6 +491,64 @@ public class LayerResourceIntTest {
         // Get all the layerList where dateChange is null
         defaultLayerShouldNotBeFound("dateChange.specified=false");
     }
+
+    @Test
+    @Transactional
+    public void getAllLayersByNoteIsEqualToSomething() throws Exception {
+        // Initialize the database
+        layerRepository.saveAndFlush(layer);
+
+        // Get all the layerList where note equals to DEFAULT_NOTE
+        defaultLayerShouldBeFound("note.equals=" + DEFAULT_NOTE);
+
+        // Get all the layerList where note equals to UPDATED_NOTE
+        defaultLayerShouldNotBeFound("note.equals=" + UPDATED_NOTE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllLayersByNoteIsInShouldWork() throws Exception {
+        // Initialize the database
+        layerRepository.saveAndFlush(layer);
+
+        // Get all the layerList where note in DEFAULT_NOTE or UPDATED_NOTE
+        defaultLayerShouldBeFound("note.in=" + DEFAULT_NOTE + "," + UPDATED_NOTE);
+
+        // Get all the layerList where note equals to UPDATED_NOTE
+        defaultLayerShouldNotBeFound("note.in=" + UPDATED_NOTE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllLayersByNoteIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        layerRepository.saveAndFlush(layer);
+
+        // Get all the layerList where note is not null
+        defaultLayerShouldBeFound("note.specified=true");
+
+        // Get all the layerList where note is null
+        defaultLayerShouldNotBeFound("note.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllLayersByCategoryIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Category category = CategoryResourceIntTest.createEntity(em);
+        em.persist(category);
+        em.flush();
+        layer.setCategory(category);
+        layerRepository.saveAndFlush(layer);
+        Long categoryId = category.getId();
+
+        // Get all the layerList where category equals to categoryId
+        defaultLayerShouldBeFound("categoryId.equals=" + categoryId);
+
+        // Get all the layerList where category equals to categoryId + 1
+        defaultLayerShouldNotBeFound("categoryId.equals=" + (categoryId + 1));
+    }
+
 
     @Test
     @Transactional

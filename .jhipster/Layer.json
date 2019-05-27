@@ -26,8 +26,7 @@
         },
         {
             "fieldName": "description",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "text"
+            "fieldType": "String"
         },
         {
             "fieldName": "date",
@@ -43,11 +42,16 @@
         },
         {
             "fieldName": "note",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "text"
+            "fieldType": "String"
         }
     ],
     "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "otherEntityField": "id"
+        },
         {
             "relationshipType": "many-to-one",
             "relationshipName": "icon",

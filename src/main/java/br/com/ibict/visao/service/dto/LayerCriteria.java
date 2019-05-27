@@ -39,11 +39,15 @@ public class LayerCriteria implements Serializable {
 
     private TypeLayerFilter type;
 
+    private StringFilter description;
+
     private InstantFilter date;
 
     private StringFilter source;
 
     private InstantFilter dateChange;
+
+    private StringFilter note;
 
     private LongFilter iconId;
 
@@ -76,6 +80,14 @@ public class LayerCriteria implements Serializable {
         this.type = type;
     }
 
+    public StringFilter getDescription() {
+        return description;
+    }
+
+    public void setDescription(StringFilter description) {
+        this.description = description;
+    }
+
     public InstantFilter getDate() {
         return date;
     }
@@ -100,6 +112,14 @@ public class LayerCriteria implements Serializable {
         this.dateChange = dateChange;
     }
 
+    public StringFilter getNote() {
+        return note;
+    }
+
+    public void setNote(StringFilter note) {
+        this.note = note;
+    }
+
     public LongFilter getIconId() {
         return iconId;
     }
@@ -122,9 +142,11 @@ public class LayerCriteria implements Serializable {
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
                 (type != null ? "type=" + type + ", " : "") +
+                (description != null ? "description=" + description + ", " : "") +
                 (date != null ? "date=" + date + ", " : "") +
                 (source != null ? "source=" + source + ", " : "") +
                 (dateChange != null ? "dateChange=" + dateChange + ", " : "") +
+                (note != null ? "note=" + note + ", " : "") +
                 (iconId != null ? "iconId=" + iconId + ", " : "") +
                 (groupId != null ? "groupId=" + groupId + ", " : "") +
             "}";

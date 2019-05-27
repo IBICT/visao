@@ -3,31 +3,31 @@
     "visaoApp": {
         "filter" : {
             "home": {
-                "title": "Filters",
-                "createLabel": "Criar novo Filter",
-                "createOrEditLabel": "Criar ou editar Filter"
+                "title": "Filtros",
+                "createLabel": "Criar novo Filtro",
+                "createOrEditLabel": "Criar ou editar Filtro"
             },
-            "created": "Um novo Filter foi criado com o identificador {{ param }}",
-            "updated": "Um Filter foi atualizado com o identificador {{ param }}",
-            "deleted": "Um Filter foi deletado com o identificador {{ param }}",
+            "created": "Um novo Filtro foi criado com o identificador {{ param }}",
+            "updated": "Um Filtro foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Filtro foi deletado com o identificador {{ param }}",
             "delete": {
-                "question": "Tem certeza de que deseja excluir Filter {{ id }}?"
+                "question": "Tem certeza de que deseja excluir Filtro {{ id }}?"
             },
             "detail": {
-                "title": "Filter"
+                "title": "Filtro"
             },
-            "name": "Name",
-            "active": "Active",
-            "description": "Description",
-            "keyWord": "Key Word",
-            "date": "Date",
-            "source": "Source",
-            "dateChange": "Date Change",
-            "note": "Note",
+            "name": "Nome",
+            "active": "Ativo",
+            "description": "Descrição",
+            "keyWord": "Palavra Chave",
+            "date": "Data",
+            "source": "Origem",
+            "dateChange": "Data de Modificação",
+            "note": "Nota",
             "cidadePolo": "Cidade Polo",
-            "user": "User",
-            "region": "Region",
-            "category": "Category"
+            "category": "Categoria",
+            "user": "Usuário",
+            "region": "Região"
         }
     }
 }

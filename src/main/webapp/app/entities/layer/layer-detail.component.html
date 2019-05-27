@@ -37,6 +37,12 @@
                 <dd>
                     <span>{{layer.note}}</span>
                 </dd>
+                <dt><span jhiTranslate="visaoApp.layer.category">Category</span></dt>
+                <dd>
+                    <div *ngIf="layer.category">
+                        <a [routerLink]="['/category', layer.category?.id, 'view']">{{layer.category?.name}}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="visaoApp.layer.icon">Icon</span></dt>
                 <dd>
                     <div *ngIf="layer.icon">
@@ -46,7 +52,7 @@
                 <dt><span jhiTranslate="visaoApp.layer.group">Group</span></dt>
                 <dd>
                     <div *ngIf="layer.group">
-                        <a [routerLink]="['/group-layer', layer.group?.id, 'view']">{{layer.group?.id}}</a>
+                        <a [routerLink]="['/group-layer', layer.group?.id, 'view']">{{layer.group?.name}}</a>
                     </div>
                 </dd>
             </dl>

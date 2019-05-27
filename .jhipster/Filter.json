@@ -53,6 +53,12 @@
         },
         {
             "relationshipType": "many-to-one",
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
             "relationshipName": "user",
             "otherEntityName": "user",
             "otherEntityField": "login"
@@ -62,14 +68,6 @@
             "otherEntityRelationshipName": "",
             "relationshipName": "region",
             "otherEntityName": "region",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "",
-            "relationshipName": "category",
-            "otherEntityName": "category",
             "otherEntityField": "id",
             "ownerSide": true
         }

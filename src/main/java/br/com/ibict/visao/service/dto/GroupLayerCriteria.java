@@ -33,10 +33,10 @@ public class GroupLayerCriteria implements Serializable {
     private BooleanFilter active;
 
     private StringFilter keyWord;
+	
+	private LongFilter categoryId;
 
     private LongFilter userId;
-
-    private LongFilter categoryId;
 
     public GroupLayerCriteria() {
     }
@@ -73,20 +73,20 @@ public class GroupLayerCriteria implements Serializable {
         this.keyWord = keyWord;
     }
 
-    public LongFilter getUserId() {
-        return userId;
-    }
-
-    public void setUserId(LongFilter userId) {
-        this.userId = userId;
-    }
-
     public LongFilter getCategoryId() {
         return categoryId;
     }
 
     public void setCategoryId(LongFilter categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public LongFilter getUserId() {
+        return userId;
+    }
+
+    public void setUserId(LongFilter userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -96,8 +96,8 @@ public class GroupLayerCriteria implements Serializable {
                 (name != null ? "name=" + name + ", " : "") +
                 (active != null ? "active=" + active + ", " : "") +
                 (keyWord != null ? "keyWord=" + keyWord + ", " : "") +
+				(categoryId != null ? "categoryId=" + categoryId + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
-                (categoryId != null ? "categoryId=" + categoryId + ", " : "") +
             "}";
     }
 

@@ -54,8 +54,12 @@
                 <constraints nullable="true" />
             </column>
             <column name="cidade_polo_id" type="bigint">
-                <constraints unique="true" nullable="true" />
+                <constraints nullable="true" />
             </column>
+            <column name="category_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -75,17 +79,6 @@
         </createTable>
 
         <addPrimaryKey columnNames="filters_id, regions_id" tableName="filter_region"/>
-        
-        <createTable tableName="filter_category">
-            <column name="categories_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="filters_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="filters_id, categories_id" tableName="filter_category"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

@@ -8,9 +8,11 @@ import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IName } from 'app/shared/model/name.model';
 import { NameService } from './name.service';
-import { IUser, UserService } from 'app/core';
 import { ICategory } from 'app/shared/model/category.model';
 import { CategoryService } from 'app/entities/category';
+import { ITypePresentation } from 'app/shared/model/type-presentation.model';
+import { TypePresentationService } from 'app/entities/type-presentation';
+import { IUser, UserService } from 'app/core';
 
 @Component({
     selector: 'jhi-name-update',
@@ -20,9 +22,11 @@ export class NameUpdateComponent implements OnInit {
     private _name: IName;
     isSaving: boolean;
 
-    users: IUser[];
-
     categories: ICategory[];
+
+    typepresentations: ITypePresentation[];
+
+    users: IUser[];
     date: string;
     dateChange: string;
 
@@ -30,8 +34,9 @@ export class NameUpdateComponent implements OnInit {
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private nameService: NameService,
-        private userService: UserService,
         private categoryService: CategoryService,
+        private typePresentationService: TypePresentationService,
+        private userService: UserService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -40,15 +45,21 @@ export class NameUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ name }) => {
             this.name = name;
         });
-        this.userService.query().subscribe(
-            (res: HttpResponse<IUser[]>) => {
-                this.users = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
         this.categoryService.query().subscribe(
             (res: HttpResponse<ICategory[]>) => {
                 this.categories = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.typePresentationService.query().subscribe(
+            (res: HttpResponse<ITypePresentation[]>) => {
+                this.typepresentations = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.userService.query().subscribe(
+            (res: HttpResponse<IUser[]>) => {
+                this.users = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -98,23 +109,16 @@ export class NameUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackUserById(index: number, item: IUser) {
-        return item.id;
-    }
-
     trackCategoryById(index: number, item: ICategory) {
         return item.id;
     }
 
-    getSelected(selectedVals: Array<any>, option: any) {
-        if (selectedVals) {
-            for (let i = 0; i < selectedVals.length; i++) {
-                if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
-                }
-            }
-        }
-        return option;
+    trackTypePresentationById(index: number, item: ITypePresentation) {
+        return item.id;
+    }
+
+    trackUserById(index: number, item: IUser) {
+        return item.id;
     }
     get name() {
         return this._name;

@@ -39,10 +39,6 @@ public class CategoryCriteria implements Serializable {
 
     private TypeCategoryFilter type;
 
-    private IntegerFilter level;
-
-    private LongFilter ownerId;
-
     public CategoryCriteria() {
     }
 
@@ -70,30 +66,12 @@ public class CategoryCriteria implements Serializable {
         this.type = type;
     }
 
-    public IntegerFilter getLevel() {
-        return level;
-    }
-
-    public void setLevel(IntegerFilter level) {
-        this.level = level;
-    }
-
-    public LongFilter getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(LongFilter ownerId) {
-        this.ownerId = ownerId;
-    }
-
     @Override
     public String toString() {
         return "CategoryCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
                 (type != null ? "type=" + type + ", " : "") +
-                (level != null ? "level=" + level + ", " : "") +
-                (ownerId != null ? "ownerId=" + ownerId + ", " : "") +
             "}";
     }
 

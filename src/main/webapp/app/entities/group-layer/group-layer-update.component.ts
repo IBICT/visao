@@ -7,8 +7,6 @@ import { JhiAlertService } from 'ng-jhipster';
 import { IGroupLayer } from 'app/shared/model/group-layer.model';
 import { GroupLayerService } from './group-layer.service';
 import { IUser, UserService } from 'app/core';
-import { ICategory } from 'app/shared/model/category.model';
-import { CategoryService } from 'app/entities/category';
 
 @Component({
     selector: 'jhi-group-layer-update',
@@ -20,13 +18,10 @@ export class GroupLayerUpdateComponent implements OnInit {
 
     users: IUser[];
 
-    categories: ICategory[];
-
     constructor(
         private jhiAlertService: JhiAlertService,
         private groupLayerService: GroupLayerService,
         private userService: UserService,
-        private categoryService: CategoryService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -38,12 +33,6 @@ export class GroupLayerUpdateComponent implements OnInit {
         this.userService.query().subscribe(
             (res: HttpResponse<IUser[]>) => {
                 this.users = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.categoryService.query().subscribe(
-            (res: HttpResponse<ICategory[]>) => {
-                this.categories = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -81,21 +70,6 @@ export class GroupLayerUpdateComponent implements OnInit {
 
     trackUserById(index: number, item: IUser) {
         return item.id;
-    }
-
-    trackCategoryById(index: number, item: ICategory) {
-        return item.id;
-    }
-
-    getSelected(selectedVals: Array<any>, option: any) {
-        if (selectedVals) {
-            for (let i = 0; i < selectedVals.length; i++) {
-                if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
-                }
-            }
-        }
-        return option;
     }
     get groupLayer() {
         return this._groupLayer;

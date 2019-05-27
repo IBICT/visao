@@ -19,8 +19,6 @@ export class CategoryUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
     typeSelect = element(by.id('field_type'));
-    levelInput = element(by.id('field_level'));
-    ownerSelect = element(by.id('field_owner'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -48,33 +46,6 @@ export class CategoryUpdatePage {
             .last()
             .click();
     }
-    setLevelInput(level): promise.Promise<void> {
-        return this.levelInput.sendKeys(level);
-    }
-
-    getLevelInput() {
-        return this.levelInput.getAttribute('value');
-    }
-
-    ownerSelectLastOption(): promise.Promise<void> {
-        return this.ownerSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    ownerSelectOption(option): promise.Promise<void> {
-        return this.ownerSelect.sendKeys(option);
-    }
-
-    getOwnerSelect(): ElementFinder {
-        return this.ownerSelect;
-    }
-
-    getOwnerSelectedOption() {
-        return this.ownerSelect.element(by.css('option:checked')).getText();
-    }
-
     save(): promise.Promise<void> {
         return this.saveButton.click();
     }

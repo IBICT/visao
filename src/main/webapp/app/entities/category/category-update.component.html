@@ -22,19 +22,7 @@
                         <option value="LAYER">{{'visaoApp.TypeCategory.LAYER' | translate}}</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="visaoApp.category.level" for="field_level">Level</label>
-                    <input type="number" class="form-control" name="level" id="field_level"
-                        [(ngModel)]="category.level" />
-                </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="visaoApp.category.owner" for="field_owner">Owner</label>
-                    <select class="form-control" id="field_owner" name="owner" [(ngModel)]="category.owner" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="userOption.id === category.owner?.id ? category.owner : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
-                    </select>
-                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

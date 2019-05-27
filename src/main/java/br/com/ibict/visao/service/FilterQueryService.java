@@ -2,6 +2,7 @@ package br.com.ibict.visao.service;
 
 import java.util.List;
 
+import br.com.ibict.visao.dto.FilterInfoProjection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -61,6 +62,10 @@ public class FilterQueryService extends QueryService<Filter> {
         return filterRepository.findAll(specification, page);
     }
 
+    public Page<FilterInfoProjection> findFiltersDTOWithId(List<Long> ids, Pageable pageable){
+        return filterRepository.findFiltersDTOWithId(ids, pageable);
+    }
+
     /**
      * Function to convert FilterCriteria to a {@link Specification}
      */
@@ -91,14 +96,14 @@ public class FilterQueryService extends QueryService<Filter> {
             if (criteria.getCidadePoloId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCidadePoloId(), Filter_.cidadePolo, Region_.id));
             }
+            if (criteria.getCategoryId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getCategoryId(), Filter_.category, Category_.id));
+            }
             if (criteria.getUserId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getUserId(), Filter_.user, User_.id));
             }
             if (criteria.getRegionId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getRegionId(), Filter_.regions, Region_.id));
-            }
-            if (criteria.getCategoryId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getCategoryId(), Filter_.categories, Category_.id));
             }
         }
         return specification;

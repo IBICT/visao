@@ -42,11 +42,11 @@ public class FilterCriteria implements Serializable {
 
     private LongFilter cidadePoloId;
 
+    private LongFilter categoryId;
+
     private LongFilter userId;
 
     private LongFilter regionId;
-
-    private LongFilter categoryId;
 
     public FilterCriteria() {
     }
@@ -115,6 +115,14 @@ public class FilterCriteria implements Serializable {
         this.cidadePoloId = cidadePoloId;
     }
 
+    public LongFilter getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(LongFilter categoryId) {
+        this.categoryId = categoryId;
+    }
+
     public LongFilter getUserId() {
         return userId;
     }
@@ -131,14 +139,6 @@ public class FilterCriteria implements Serializable {
         this.regionId = regionId;
     }
 
-    public LongFilter getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(LongFilter categoryId) {
-        this.categoryId = categoryId;
-    }
-
     @Override
     public String toString() {
         return "FilterCriteria{" +
@@ -150,9 +150,9 @@ public class FilterCriteria implements Serializable {
                 (source != null ? "source=" + source + ", " : "") +
                 (dateChange != null ? "dateChange=" + dateChange + ", " : "") +
                 (cidadePoloId != null ? "cidadePoloId=" + cidadePoloId + ", " : "") +
+                (categoryId != null ? "categoryId=" + categoryId + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
                 (regionId != null ? "regionId=" + regionId + ", " : "") +
-                (categoryId != null ? "categoryId=" + categoryId + ", " : "") +
             "}";
     }
 

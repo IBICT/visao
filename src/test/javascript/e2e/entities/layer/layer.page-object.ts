@@ -25,6 +25,7 @@ export class LayerUpdatePage {
     sourceInput = element(by.id('field_source'));
     dateChangeInput = element(by.id('field_dateChange'));
     noteInput = element(by.id('field_note'));
+    categorySelect = element(by.id('field_category'));
     iconSelect = element(by.id('field_icon'));
     groupSelect = element(by.id('field_group'));
 
@@ -100,6 +101,25 @@ export class LayerUpdatePage {
 
     getNoteInput() {
         return this.noteInput.getAttribute('value');
+    }
+
+    categorySelectLastOption(): promise.Promise<void> {
+        return this.categorySelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    categorySelectOption(option): promise.Promise<void> {
+        return this.categorySelect.sendKeys(option);
+    }
+
+    getCategorySelect(): ElementFinder {
+        return this.categorySelect;
+    }
+
+    getCategorySelectedOption() {
+        return this.categorySelect.element(by.css('option:checked')).getText();
     }
 
     iconSelectLastOption(): promise.Promise<void> {

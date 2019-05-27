@@ -47,7 +47,6 @@ describe('GroupLayer e2e test', () => {
         groupLayerUpdatePage.setKeyWordInput('keyWord');
         expect(groupLayerUpdatePage.getKeyWordInput()).toMatch('keyWord');
         groupLayerUpdatePage.userSelectLastOption();
-        // groupLayerUpdatePage.categorySelectLastOption();
         groupLayerUpdatePage.save();
         expect(groupLayerUpdatePage.getSaveButton().isPresent()).toBeFalsy();
     });

@@ -57,9 +57,9 @@ describe('Filter e2e test', () => {
         filterUpdatePage.setNoteInput('note');
         expect(filterUpdatePage.getNoteInput()).toMatch('note');
         filterUpdatePage.cidadePoloSelectLastOption();
+        filterUpdatePage.categorySelectLastOption();
         filterUpdatePage.userSelectLastOption();
         // filterUpdatePage.regionSelectLastOption();
-        // filterUpdatePage.categorySelectLastOption();
         filterUpdatePage.save();
         expect(filterUpdatePage.getSaveButton().isPresent()).toBeFalsy();
     });

@@ -11,8 +11,6 @@ import { VisaoLayerModule } from './layer/layer.module';
 import { VisaoMarkerIconModule } from './marker-icon/marker-icon.module';
 import { VisaoGroupLayerModule } from './group-layer/group-layer.module';
 import { VisaoTypePresentationModule } from './type-presentation/type-presentation.module';
-import { VisaoChartModule } from './chart/chart.module';
-import { VisaoGrupCategoryModule } from './grup-category/grup-category.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -29,8 +27,6 @@ import { VisaoGrupCategoryModule } from './grup-category/grup-category.module';
         VisaoMarkerIconModule,
         VisaoGroupLayerModule,
         VisaoTypePresentationModule,
-        VisaoChartModule,
-        VisaoGrupCategoryModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
