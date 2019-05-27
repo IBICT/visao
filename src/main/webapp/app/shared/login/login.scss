@@ -1,0 +1,74 @@
+.jhi-login-modal {
+  background: black
+}
+.modal-body {
+    width: 680px;
+    height: 450px;
+    background: #F2F2F2;
+    box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    // top: 190px;
+    left: -100px;
+}
+.caixa {
+    width: 530px;
+    height: 400px;
+    // background: blue;
+    position: relative;
+    top: 9px;
+    left: -50px;
+}
+.input-user {
+    font-family: 'Roboto';
+    border-radius: 15px;
+    position: relative;
+    left: -2%;
+}
+.modal-title {
+    font-family: 'Roboto Condensed';
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 24px;
+    margin-bottom: 22px;
+    color: #146678
+}
+.form-group {
+    font-family: 'Roboto Condensed';
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 25px;
+}
+.esqueci-senha {
+    position: relative;
+    font-family: 'Roboto';
+    font-size: 14.5px;
+    font-weight: normal;
+    line-height: 16px;
+    color: #BDBDBD;
+    left: 69.5%;
+}
+.check-box {  
+    font-family: 'Roboto Condensed';
+    font-size: 15px;
+    font-weight: normal;
+    color: #BDBDBD
+}
+.btn-botao {
+    width: 160px;
+    color: white;
+    font-weight: bold
+}
+.btn-secondary {
+    width: 160px;
+    margin-left: 190px;
+    color: white;
+    font-weight: bold
+}
+.fechar {
+    position: absolute;
+    top: 2px;
+    font-size: 27px;
+    color: #856404;
+    right: 12px;
+    font-family: 'Roboto Condensed';
+}

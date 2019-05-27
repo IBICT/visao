@@ -54,6 +54,13 @@ Navbar
     height: 56px;
     padding: 8px 16px;
 }
+.nav-link:focus {
+    font-family: 'Roboto Condensed' !important;
+    font-style: normal;
+    font-weight: bold !important;
+    font-size: 20px !important;
+    line-height: 23px !important;
+}
 .dropdown-menu.show {
     font-family: 'Roboto';
     font-size: 16px;

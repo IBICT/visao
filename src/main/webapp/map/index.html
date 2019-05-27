@@ -68,7 +68,7 @@
 						<a class="nav-link margem" href data-toggle="dropdown"><i class="fa fa-user-o" aria-hidden="true"></i></a>
 						<ul style="width: 100px" class="dropdown-menu" id="hoverMouse">
                             <!--Mostrar quando deslogado-->
-                            <li class="menu-icon show-deslogado"><a href data-toggle="modal" data-target="#siteModal" ><span>Entrar</span></a></li>
+                            <li class="menu-icon show-deslogado"><a href data-toggle="modal" data-target="#siteModal" data-backdrop="static"><span>Entrar</span></a></li>
                             <li class="menu-icon show-deslogado"><a href="./../#/register"><span>Registrar</span></a></li>
 
                             <!--Mostrar quando logado-->
@@ -82,50 +82,96 @@
 			</nav>
 		</div>
 	</nav>
-	<!-------- ====================================> modal login <================================---------->
+	<!-------- ====================================>Inicio modal login <================================---------->
 	<div class="modal fade" id="siteModal" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content" id="altura">
-				<div class="modal-header color">
-					<h4 class="modal-title">
-						<span>Autenticação</span>
-					</h4>
-					<button type="button" class="close" data-dismiss="modal">
-						<span class="linkmodal">x</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="row justify-content-center">
-						<form>
-							<div class="form-group">
-								<label for="usuario">Usuário</label>
-								<input type="text" class="form-control" id="usuario" aria-describedby="usuario" placeholder="Seu Usuário">
+		<div class="ajustes">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content" id="altura">
+					<!--<div class="modal-header color">
+						<h4 class="modal-title">
+							<span>Entrar</span>
+						</h4>
+						<button type="button" class="close" data-dismiss="modal">
+							<span class="linkmodal">x</span>
+						</button>
+					</div>-->
+					<div class="modal-body" id="corback">
+						<div class="teste">
+							<h4 class="titulo-login">Entrar</h4>
+							<button type="button" class="close" data-dismiss="modal">
+								<span class="linkmodal fechar">x</span>
+							</button>
+							<div class="justify-content-center">
+								<form>
+									<div class="form-group">
+										<label for="usuario">Usuário</label>
+										<input type="text" class="form-control input-user" id="usuario" aria-describedby="usuario" placeholder="Seu Usuário">
+									</div>
+									<div class="form-group">
+										<label for="senha">Senha</label>
+										<input type="password" class="form-control input-user" id="senha" placeholder="Sua Senha">
+										<div class="" >
+												<a class="esqueci-senha" data-toggle="modal" data-target="#exampleModal" href>Esqueci minha senha</a>
+											</div>
+									</div>
+							
+								<!--<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="exampleCheck1">
+									<label class="form-check-label" for="manterlogado">manter-me logado</label>
+								</div>
+								<p>
+									<button type="submit" class="btn btn-primary">Entrar</button>
+								</p>
+								<div class="alert alert-warning" role="alert">
+									<a class="linkmodal" href="">Esqueceu Senha?</a>
+								</div>
+								<div class="alert alert-warning" role="alert">
+									Não tem uma conta ainda? <a class="linkmodal" href="./../#/register">Crie uma nova conta</a>
+								</div>-->
+								<div class="conjunto">
+									<div class="form-check">
+										<input type="checkbox" class="form-check-input" id="exampleCheck1">
+										<label class="form-check-label cor" for="manterlogado">Manter-me logado</label>
+									</div>
+									<p>
+										<button type="submit" class="btn btn-warning btn-botao">Entrar</button> <a class="btn btn-secondary btn-margem" href="./../#/register">Cadastrar-se</a>
+									</p>
+								</div>
+								</form>
 							</div>
-							<div class="form-group">
-								<label for="senha">Senha</label>
-								<input type="password" class="form-control" id="senha" placeholder="Sua Senha">
-							</div>
-							<div class="form-check">
-								<input type="checkbox" class="form-check-input" id="exampleCheck1">
-								<label class="form-check-label" for="manterlogado">manter-me logado</label>
-							</div>
-							<p>
-								<button type="submit" class="btn btn-primary">Entrar</button>
-							</p>
-							<div class="alert alert-warning" role="alert">
-								<a class="linkmodal" href="">Esqueceu Senha?</a>
-							</div>
-							<div class="alert alert-warning" role="alert">
-								Não tem uma conta ainda? <a class="linkmodal" href="./../#/register">Crie uma nova conta</a>
-							</div>
-						</form>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-------- ====================================> modal login <===============================---------->
+	<!-------- ====================================>Fim modal login <===============================---------->
+	<!-------- ====================================>Inicio modal esqqueci minha senha <==================---------->
+
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body popup">
+					<h4>CRIAR NOVA SENHA</h4>
+					<span><p>Informe endereço de e-mail utilizado no cadastro.</p></span>
+					<div class="form-group">
+						<label for="email">E-mail</label>
+						<input type="text" class="form-control input-user" id="email" aria-describedby="email" placeholder="Seu email">
+					</div>
+					<p>
+						<button type="submit" class="btn btn-warning btn-botao">Criar nova senha</button>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<!-------- ====================================>Fim modal esqqueci minha senha <==================---------->
 
     <div id="map">
         <div id ="loading" class="loader"></div>

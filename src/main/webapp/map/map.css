@@ -188,9 +188,17 @@ h5.mb-0 button.btn.btn-link {
     display: none
 }
 .botao-tam:focus {
-    color: red;
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: bold;
     font-size: 20px;
     line-height: 23px;
+}
+.ajustes {
+    position: absolute;
+    right: 43%;
+    bottom: 35%;
+    font-family: 'Roboto Condensed'; 
 }
     
 /* map buttons */
@@ -235,7 +243,80 @@ h5.mb-0 button.btn.btn-link {
     color: black;
 }
 #altura {
-    width: 450px;
+    width: 500px;
+}
+.titulo-login {
+    font-family: 'Roboto Condensed';
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 21px;
+    color: #146678;
+    margin-bottom: 37px;
+    margin-top: 11px;
+}
+.modal-body {
+    width: 680px;
+    height: 450px;
+    background: #F2F2F2;
+    box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+}
+.teste {
+    width: 75%;
+    height: 86%;
+    position: absolute;
+    top: 8%;
+    left: 12.8%;
+}
+.input-user {
+    border-radius: 15px;
+    position: relative;
+    left: -2%;
+}
+.esqueci-senha {
+    font-family: 'Roboto';
+    position: relative;
+    left: 69%;
+    font-size: 14.5px;
+    color: #BDBDBD !important;
+
+}
+.conjunto {
+    position: relative;
+    top: 20px;
+}
+.cor {
+    font-family: 'Roboto Condensed';
+    color: #BDBDBD;
+    font-size: 15px;
+    font-weight: normal;
+
+}
+.btn-margem {
+    width: 165px;
+    margin-left: 160px;
+}
+.btn-botao {
+    color: white;
+    width: 165px
+}
+.btn-botao:hover {
+    color: white
+}
+.fechar {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 27px;
+    width: 20px;
+}
+.popup {
+    width: 600px;
+    position: relative;
+
+}
+.form-group {
+    margin-bottom: 25px
 }
 .linkmodal {
     font-weight: bold;
