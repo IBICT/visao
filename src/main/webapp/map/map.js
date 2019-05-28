@@ -114,8 +114,9 @@ function getGeoJson(){
 						dataType: 'json',
 						success: function(data) {
 							categories = data;
+                            var categoriesIds = categories.map(function(element){return element.id}).join(',');
 							$.ajax({
-								url: '/api/namesPublic',
+								url: '/api/namesPublic?&categoryId.in='+categoriesIds,
 								dataType: 'json',
 								success: function(data) {
 									indicatorNames = data;
