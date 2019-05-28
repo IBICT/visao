@@ -62,6 +62,17 @@ public class CategoryQueryService extends QueryService<Category> {
     }
 
     /**
+     * Return a {@link Page} of {@link Category} which matches the criteria from the database
+     * @param groupCategoryId The id from GroupCategory with holds the reference.
+     * @param page The page, which should be returned.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<Category> listByGroupCategory(Long groupCategoryId, Pageable page) {
+        return categoryRepository.findAllFromGroupCategory(groupCategoryId, page);
+    }
+
+    /**
      * Function to convert CategoryCriteria to a {@link Specification}
      */
     private Specification<Category> createSpecification(CategoryCriteria criteria) {

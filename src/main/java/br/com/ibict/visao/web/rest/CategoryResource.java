@@ -106,6 +106,21 @@ public class CategoryResource {
     }
 
     /**
+     * GET  /categories : get all the categories.
+     *
+     * @param pageable the pagination information
+     * @param groupCategoryId the id from the GroupCategory
+     * @return the ResponseEntity with status 200 (OK) and the list of categories in body
+     */
+    @GetMapping("/categoriesByGroupCategory/{groupCategoryId}")
+    @Timed
+    public ResponseEntity<List<Category>> getCategoriesByGroupCategory(@PathVariable Long groupCategoryId, Pageable pageable) {
+        Page<Category> page = categoryQueryService.listByGroupCategory(groupCategoryId, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/categoriesByGroupCategory");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
      * GET  /categories/:id : get the "id" category.
      *
      * @param id the id of the category to retrieve

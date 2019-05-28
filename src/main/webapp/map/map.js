@@ -1,4 +1,3 @@
-isUserAllowedGroupCategory();
 // Iniciar mapa objeto sem zoom, latitude, longitude, zoom inicial
 var map = L.map('map', {
         zoomControl:false,
@@ -63,13 +62,39 @@ var indicadorSelecionado;
 var filtrosPesquisados = new Map();
 var indicadorAtual;
 
-getGeoJson();
+var currentGroupCategory;
+isUserAllowedGroupCategory();
 $(".leaflet-right.leaflet-bottom").css('right', '340px');
 
 function modalDetail(data){
 	$('#modalEstadoSigla').html(data);
 	$('#modalHabitantesValor').html("3.873.743");
 	$('#exampleModal').modal('show');
+}
+
+
+function isUserAllowedGroupCategory(){
+    var grpCatId = getUrlParameter('grpCat');
+
+    if(grpCatId === 'null' || grpCatId === ''){
+//        TODO redirect to blocked page and do nothing
+    }
+    currentGroupCategory = grpCatId;
+
+    // GETCURRENT USER
+    // VERIFY IF USER
+    $.ajax({
+        url: '/api/group-categories-enabled/'+grpCatId,
+        dataType: 'json',
+        success: function (data) {
+            if(!data){
+                console.log("O usuario nao possui permissao de acesso.");
+                console.log(data);
+//                TODO redirect to blocked page do nothing
+            }
+            getGeoJson();
+        }
+    });
 }
 
 function getGeoJson(){
@@ -85,7 +110,7 @@ function getGeoJson(){
 				success: function(data) {
 					municipio = data;
 					$.ajax({
-						url: '/api/categories',
+						url: '/api/categoriesByGroupCategory/'+currentGroupCategory,
 						dataType: 'json',
 						success: function(data) {
 							categories = data;
@@ -1071,18 +1096,3 @@ function getUrlParameter(sParam) {
         }
     }
 };
-
-function isUserAllowedGroupCategory(){
-    var grpCatId = getUrlParameter('grpCat');
-
-    // GETCURRENT USER
-    // VERIFY IF USER
-    $.ajax({
-        url: '/api/group-categories-enabled/'+grpCatId,
-        dataType: 'json',
-        success: function (data) {
-            console.log(data);
-//            TODO redirect to blocked page do nothing
-        }
-    });
-}

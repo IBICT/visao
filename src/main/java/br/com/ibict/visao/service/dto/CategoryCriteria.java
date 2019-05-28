@@ -1,14 +1,11 @@
 package br.com.ibict.visao.service.dto;
 
-import java.io.Serializable;
 import br.com.ibict.visao.domain.enumeration.TypeCategory;
-import io.github.jhipster.service.filter.BooleanFilter;
-import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
-import io.github.jhipster.service.filter.FloatFilter;
-import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
+
+import java.io.Serializable;
 
 
 
