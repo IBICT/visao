@@ -49,6 +49,9 @@ public class CategoryResourceIntTest {
     private static final TypeCategory DEFAULT_TYPE = TypeCategory.INDICATOR;
     private static final TypeCategory UPDATED_TYPE = TypeCategory.FILTER;
 
+    private static final Integer DEFAULT_LEVEL = 1;
+    private static final Integer UPDATED_LEVEL = 2;
+
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -96,7 +99,8 @@ public class CategoryResourceIntTest {
     public static Category createEntity(EntityManager em) {
         Category category = new Category()
             .name(DEFAULT_NAME)
-            .type(DEFAULT_TYPE);
+            .type(DEFAULT_TYPE)
+            .level(DEFAULT_LEVEL);
         return category;
     }
 
@@ -122,6 +126,7 @@ public class CategoryResourceIntTest {
         Category testCategory = categoryList.get(categoryList.size() - 1);
         assertThat(testCategory.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCategory.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testCategory.getLevel()).isEqualTo(DEFAULT_LEVEL);
     }
 
     @Test
@@ -155,7 +160,8 @@ public class CategoryResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(category.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].level").value(hasItem(DEFAULT_LEVEL)));
     }
     
 
@@ -171,7 +177,8 @@ public class CategoryResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(category.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
+            .andExpect(jsonPath("$.level").value(DEFAULT_LEVEL));
     }
 
     @Test
@@ -251,6 +258,72 @@ public class CategoryResourceIntTest {
         // Get all the categoryList where type is null
         defaultCategoryShouldNotBeFound("type.specified=false");
     }
+
+    @Test
+    @Transactional
+    public void getAllCategoriesByLevelIsEqualToSomething() throws Exception {
+        // Initialize the database
+        categoryRepository.saveAndFlush(category);
+
+        // Get all the categoryList where level equals to DEFAULT_LEVEL
+        defaultCategoryShouldBeFound("level.equals=" + DEFAULT_LEVEL);
+
+        // Get all the categoryList where level equals to UPDATED_LEVEL
+        defaultCategoryShouldNotBeFound("level.equals=" + UPDATED_LEVEL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCategoriesByLevelIsInShouldWork() throws Exception {
+        // Initialize the database
+        categoryRepository.saveAndFlush(category);
+
+        // Get all the categoryList where level in DEFAULT_LEVEL or UPDATED_LEVEL
+        defaultCategoryShouldBeFound("level.in=" + DEFAULT_LEVEL + "," + UPDATED_LEVEL);
+
+        // Get all the categoryList where level equals to UPDATED_LEVEL
+        defaultCategoryShouldNotBeFound("level.in=" + UPDATED_LEVEL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCategoriesByLevelIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        categoryRepository.saveAndFlush(category);
+
+        // Get all the categoryList where level is not null
+        defaultCategoryShouldBeFound("level.specified=true");
+
+        // Get all the categoryList where level is null
+        defaultCategoryShouldNotBeFound("level.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCategoriesByLevelIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        categoryRepository.saveAndFlush(category);
+
+        // Get all the categoryList where level greater than or equals to DEFAULT_LEVEL
+        defaultCategoryShouldBeFound("level.greaterOrEqualThan=" + DEFAULT_LEVEL);
+
+        // Get all the categoryList where level greater than or equals to UPDATED_LEVEL
+        defaultCategoryShouldNotBeFound("level.greaterOrEqualThan=" + UPDATED_LEVEL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCategoriesByLevelIsLessThanSomething() throws Exception {
+        // Initialize the database
+        categoryRepository.saveAndFlush(category);
+
+        // Get all the categoryList where level less than or equals to DEFAULT_LEVEL
+        defaultCategoryShouldNotBeFound("level.lessThan=" + DEFAULT_LEVEL);
+
+        // Get all the categoryList where level less than or equals to UPDATED_LEVEL
+        defaultCategoryShouldBeFound("level.lessThan=" + UPDATED_LEVEL);
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -260,7 +333,8 @@ public class CategoryResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(category.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].level").value(hasItem(DEFAULT_LEVEL)));
     }
 
     /**
@@ -296,7 +370,8 @@ public class CategoryResourceIntTest {
         em.detach(updatedCategory);
         updatedCategory
             .name(UPDATED_NAME)
-            .type(UPDATED_TYPE);
+            .type(UPDATED_TYPE)
+            .level(UPDATED_LEVEL);
 
         restCategoryMockMvc.perform(put("/api/categories")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -309,6 +384,7 @@ public class CategoryResourceIntTest {
         Category testCategory = categoryList.get(categoryList.size() - 1);
         assertThat(testCategory.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCategory.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testCategory.getLevel()).isEqualTo(UPDATED_LEVEL);
     }
 
     @Test

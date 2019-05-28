@@ -31,6 +31,9 @@ public class Category implements Serializable {
     @Column(name = "jhi_type")
     private TypeCategory type;
 
+    @Column(name = "level")
+    private Integer level;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -65,6 +68,19 @@ public class Category implements Serializable {
     public void setType(TypeCategory type) {
         this.type = type;
     }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public Category level(Integer level) {
+        this.level = level;
+        return this;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -93,6 +109,7 @@ public class Category implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", type='" + getType() + "'" +
+            ", level=" + getLevel() +
             "}";
     }
 }

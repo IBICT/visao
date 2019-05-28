@@ -1,0 +1,391 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Victor (generated)" id="1559052210536-1">
+        <createTable tableName="category">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="categoryPK"/>
+            </column>
+            <column name="jhi_level" type="INT"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="jhi_type" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-2">
+        <createTable tableName="filter">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="filterPK"/>
+            </column>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jhi_date" type="TIMESTAMP"/>
+            <column name="date_change" type="TIMESTAMP"/>
+            <column name="description" type="CLOB"/>
+            <column name="key_word" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="note" type="CLOB"/>
+            <column name="source" type="VARCHAR(255)"/>
+            <column name="category_id" type="BIGINT"/>
+            <column name="cidade_polo_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-3">
+        <createTable tableName="filter_region">
+            <column name="filters_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="regions_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-4">
+        <createTable tableName="group_layer">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="group_layerPK"/>
+            </column>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="key_word" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-5">
+        <createTable tableName="indicator">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="indicatorPK"/>
+            </column>
+            <column name="jhi_value" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name_id" type="BIGINT"/>
+            <column name="region_id" type="BIGINT"/>
+            <column name="year_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-6">
+        <createTable tableName="jhi_authority">
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-7">
+        <createTable tableName="jhi_persistent_audit_event">
+            <column autoIncrement="true" name="event_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="jhi_persistent_audit_eventPK"/>
+            </column>
+            <column name="event_date" type="TIMESTAMP"/>
+            <column name="event_type" type="VARCHAR(255)"/>
+            <column name="principal" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-8">
+        <createTable tableName="jhi_persistent_audit_evt_data">
+            <column name="event_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-9">
+        <createTable tableName="jhi_persistent_token">
+            <column name="series" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ip_address" type="VARCHAR(39)"/>
+            <column name="token_date" type="date"/>
+            <column name="token_value" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_agent" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-10">
+        <createTable tableName="jhi_user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="jhi_userPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP"/>
+            <column name="activated" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="activation_key" type="VARCHAR(20)"/>
+            <column name="email" type="VARCHAR(254)"/>
+            <column name="first_name" type="VARCHAR(50)"/>
+            <column name="image_url" type="VARCHAR(256)"/>
+            <column name="lang_key" type="VARCHAR(6)"/>
+            <column name="last_name" type="VARCHAR(50)"/>
+            <column name="login" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password_hash" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reset_date" type="TIMESTAMP"/>
+            <column name="reset_key" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-11">
+        <createTable tableName="jhi_user_authority">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-12">
+        <createTable tableName="layer">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="layerPK"/>
+            </column>
+            <column name="jhi_date" type="TIMESTAMP"/>
+            <column name="date_change" type="TIMESTAMP"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="geo_json" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="note" type="VARCHAR(255)"/>
+            <column name="source" type="VARCHAR(255)"/>
+            <column name="jhi_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="group_id" type="BIGINT"/>
+            <column name="icon_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-13">
+        <createTable tableName="marker_icon">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="marker_iconPK"/>
+            </column>
+            <column name="icon" type="BLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="icon_anchor" type="VARCHAR(255)"/>
+            <column name="icon_content_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="icon_size" type="VARCHAR(255)"/>
+            <column name="popup_anchor" type="VARCHAR(255)"/>
+            <column name="shadow" type="BLOB"/>
+            <column name="shadow_anchor" type="VARCHAR(255)"/>
+            <column name="shadow_content_type" type="VARCHAR(255)"/>
+            <column name="shadow_size" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-14">
+        <createTable tableName="meta_dado">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="meta_dadoPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jhi_value" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-15">
+        <createTable tableName="meta_dado_nome">
+            <column name="meta_dados_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nomes_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-16">
+        <createTable tableName="name">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="namePK"/>
+            </column>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jhi_date" type="TIMESTAMP"/>
+            <column name="date_change" type="TIMESTAMP"/>
+            <column name="description" type="CLOB"/>
+            <column name="key_word" type="VARCHAR(255)"/>
+            <column name="note" type="CLOB"/>
+            <column name="source" type="VARCHAR(255)"/>
+            <column name="jhi_value" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="BIGINT"/>
+            <column name="type_presentation_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-17">
+        <createTable tableName="region">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="regionPK"/>
+            </column>
+            <column name="geo_code" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type_region" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uf" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-18">
+        <createTable tableName="region_relacao">
+            <column name="regions_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="relacaos_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-19">
+        <createTable tableName="type_presentation">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="type_presentationPK"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="display" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-20">
+        <createTable tableName="year">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="yearPK"/>
+            </column>
+            <column name="jhi_date" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-21">
+        <addPrimaryKey columnNames="filters_id, regions_id" tableName="filter_region"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-22">
+        <addPrimaryKey columnNames="event_id, name" tableName="jhi_persistent_audit_evt_data"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-23">
+        <addPrimaryKey columnNames="user_id, authority_name" tableName="jhi_user_authority"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-24">
+        <addPrimaryKey columnNames="meta_dados_id, nomes_id" tableName="meta_dado_nome"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-25">
+        <addPrimaryKey columnNames="regions_id, relacaos_id" tableName="region_relacao"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-26">
+        <addPrimaryKey columnNames="name" constraintName="jhi_authorityPK" tableName="jhi_authority"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-27">
+        <addPrimaryKey columnNames="series" constraintName="jhi_persistent_tokenPK" tableName="jhi_persistent_token"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-28">
+        <addUniqueConstraint columnNames="email" constraintName="UC_JHI_USEREMAIL_COL" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-29">
+        <addUniqueConstraint columnNames="login" constraintName="UC_JHI_USERLOGIN_COL" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-30">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="name" constraintName="FK1hqrrdtv02l505b2nntkmn8vl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-31">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="jhi_user_authority" constraintName="FK290okww5jujghp4el5i7mgwu0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-32">
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="jhi_persistent_audit_evt_data" constraintName="FK2ehnyx2si4tjd2nt4q7y40v8m" deferrable="false" initiallyDeferred="false" referencedColumnNames="event_id" referencedTableName="jhi_persistent_audit_event"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-33">
+        <addForeignKeyConstraint baseColumnNames="meta_dados_id" baseTableName="meta_dado_nome" constraintName="FK3nyeqm93wd5vbecdlva4ne6tk" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="meta_dado"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-34">
+        <addForeignKeyConstraint baseColumnNames="year_id" baseTableName="indicator" constraintName="FK4jrbrmhanpmkci57gdymjt4lq" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="year"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-35">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="layer" constraintName="FK4kqy0q1mprm0akj145y8uh2b0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="group_layer"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-36">
+        <addForeignKeyConstraint baseColumnNames="authority_name" baseTableName="jhi_user_authority" constraintName="FK4psxl0jtx6nr7rhqbynr6itoc" deferrable="false" initiallyDeferred="false" referencedColumnNames="name" referencedTableName="jhi_authority"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-37">
+        <addForeignKeyConstraint baseColumnNames="icon_id" baseTableName="layer" constraintName="FK5y6o1sehn9tggttdkbdb7pwws" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="marker_icon"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-38">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="group_layer" constraintName="FKa2m0x3h7imayxq7t2jbkdb4di" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="category"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-39">
+        <addForeignKeyConstraint baseColumnNames="cidade_polo_id" baseTableName="filter" constraintName="FKb05b1tjgeou26qrcu2wk35jxb" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="region"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-40">
+        <addForeignKeyConstraint baseColumnNames="regions_id" baseTableName="filter_region" constraintName="FKb98t6m9e872ruqelw8dpf7t1g" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="region"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-41">
+        <addForeignKeyConstraint baseColumnNames="regions_id" baseTableName="region_relacao" constraintName="FKbd7uj0mjnh1xs2hw3im34drgf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="region"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-42">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="filter" constraintName="FKbg1lnl94hv5oge64u3daj96iu" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-43">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="name" constraintName="FKbp439qvmbekfxtqeopm77q3w1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="category"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-44">
+        <addForeignKeyConstraint baseColumnNames="region_id" baseTableName="indicator" constraintName="FKe5eyfhmjxxudpeyr8ioj3jqa0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="region"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-45">
+        <addForeignKeyConstraint baseColumnNames="name_id" baseTableName="indicator" constraintName="FKg56g4wky8cly6977b0h8jwlji" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="name"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-46">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="group_layer" constraintName="FKibw6wu6wgv8txpxco9t0f9ptt" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-47">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="jhi_persistent_token" constraintName="FKmogh0vmv89yg5kofe6n3t77ud" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-48">
+        <addForeignKeyConstraint baseColumnNames="relacaos_id" baseTableName="region_relacao" constraintName="FKn9k5vn6rvroum93keuabd4a5f" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="region"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-49">
+        <addForeignKeyConstraint baseColumnNames="filters_id" baseTableName="filter_region" constraintName="FKnqtyotw7h0nlwamg7ttlwg4up" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="filter"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-50">
+        <addForeignKeyConstraint baseColumnNames="nomes_id" baseTableName="meta_dado_nome" constraintName="FKqq8iyakx0cfj7262bfldurrhv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="name"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-51">
+        <addForeignKeyConstraint baseColumnNames="type_presentation_id" baseTableName="name" constraintName="FKqs4argvaa3tdeosja7h0qmcx" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="type_presentation"/>
+    </changeSet>
+    <changeSet author="Victor (generated)" id="1559052210536-52">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="filter" constraintName="FKrpdwnrgm46utymfokjkfqoie7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="category"/>
+    </changeSet>
+</databaseChangeLog>

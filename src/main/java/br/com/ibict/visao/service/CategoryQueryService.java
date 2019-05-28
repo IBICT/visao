@@ -76,6 +76,9 @@ public class CategoryQueryService extends QueryService<Category> {
             if (criteria.getType() != null) {
                 specification = specification.and(buildSpecification(criteria.getType(), Category_.type));
             }
+            if (criteria.getLevel() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLevel(), Category_.level));
+            }
         }
         return specification;
     }

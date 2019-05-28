@@ -2,7 +2,6 @@ package br.com.ibict.visao.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import br.com.ibict.visao.domain.Category;
-import br.com.ibict.visao.security.AuthoritiesConstants;
 import br.com.ibict.visao.service.CategoryService;
 import br.com.ibict.visao.web.rest.errors.BadRequestAlertException;
 import br.com.ibict.visao.web.rest.util.HeaderUtil;
@@ -17,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -77,7 +75,6 @@ public class CategoryResource {
      */
     @PutMapping("/categories")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Category> updateCategory(@RequestBody Category category) throws URISyntaxException {
         log.debug("REST request to update Category : {}", category);
         if (category.getId() == null) {
@@ -127,7 +124,6 @@ public class CategoryResource {
      */
     @DeleteMapping("/categories/{id}")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         log.debug("REST request to delete Category : {}", id);
         categoryService.delete(id);

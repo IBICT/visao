@@ -18,6 +18,7 @@
                 "markerIcon": "Marcador",
                 "groupLayer": "Grupo de Camadas",
                 "typePresentation": "Apresentação dos dados",
+                "category": "Category",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

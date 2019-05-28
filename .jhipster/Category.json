@@ -1,5 +1,7 @@
 {
-    "name": "Category",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
     "fields": [
         {
             "fieldName": "name",
@@ -9,16 +11,17 @@
             "fieldName": "type",
             "fieldType": "TypeCategory",
             "fieldValues": "INDICATOR,FILTER,LAYER"
+        },
+        {
+            "fieldName": "level",
+            "fieldType": "Integer"
         }
     ],
-    "relationships": [],
     "changelogDate": "20190213123338",
-    "entityTableName": "category",
     "dto": "no",
-    "pagination": "pager",
+    "searchEngine": false,
     "service": "serviceClass",
+    "entityTableName": "category",
     "jpaMetamodelFiltering": true,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "pager"
 }

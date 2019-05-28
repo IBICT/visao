@@ -19,6 +19,7 @@ export class CategoryUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
     typeSelect = element(by.id('field_type'));
+    levelInput = element(by.id('field_level'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -46,6 +47,14 @@ export class CategoryUpdatePage {
             .last()
             .click();
     }
+    setLevelInput(level): promise.Promise<void> {
+        return this.levelInput.sendKeys(level);
+    }
+
+    getLevelInput() {
+        return this.levelInput.getAttribute('value');
+    }
+
     save(): promise.Promise<void> {
         return this.saveButton.click();
     }
