@@ -117,12 +117,12 @@ function getGeoJson(){
 								success: function(data) {
 									indicatorNames = data;
                                     $.ajax({
-                                        url: '/api/filters',
+                                        url: '/api/filters?&categoryId.in='+categoriesIds,
                                         dataType: 'json',
                                         success: function (data) {
                                             filterArray = data;
                                             $.ajax({
-                                                url: '/api/group-layers',
+                                                url: '/api/group-layers?&categoryId.in='+categoriesIds,
                                                 dataType: 'json',
                                                 success: function (data) {
                                                     groupLayer = data;
