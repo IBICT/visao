@@ -76,21 +76,17 @@ function modalDetail(data){
 function isUserAllowedGroupCategory(){
     var grpCatId = getUrlParameter('grpCat');
 
-    if(grpCatId === 'null' || grpCatId === ''){
-//        TODO redirect to blocked page and do nothing
+    if(grpCatId === undefined || grpCatId === 'null' || grpCatId === ''){
+        window.location.replace("/#/accessdenied");
     }
     currentGroupCategory = grpCatId;
 
-    // GETCURRENT USER
-    // VERIFY IF USER
     $.ajax({
         url: '/api/group-categories-enabled/'+grpCatId,
         dataType: 'json',
         success: function (data) {
             if(!data){
-                console.log("O usuario nao possui permissao de acesso.");
-                console.log(data);
-//                TODO redirect to blocked page do nothing
+                window.location.replace("/#/accessdenied");
             }
             getGeoJson();
         }
