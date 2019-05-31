@@ -1,34 +1,33 @@
-.jhi-login-modal {
-  background: black
-}
 .modal-body {
-    width: 680px;
-    height: 450px;
+    width: 512px;
+    height: 401px;
     background: #F2F2F2;
     box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.15);
-    border-radius: 5px;
+    border-radius: 5px !important;
     // top: 190px;
-    left: -100px;
+    left: -3px;
 }
 .caixa {
-    width: 530px;
-    height: 400px;
-    // background: blue;
+    width: 380px;
+    height: 321px;
     position: relative;
     top: 9px;
-    left: -50px;
+    left: -30px;
 }
 .input-user {
     font-family: 'Roboto';
-    border-radius: 15px;
+    width: 371px;
+    height: 32px;
+    border-radius: 16px;
     position: relative;
-    left: -2%;
+    left: -12px;
+    border-radius: 16px
 }
 .modal-title {
     font-family: 'Roboto Condensed';
     font-weight: bold;
     margin-top: 15px;
-    font-size: 24px;
+    font-size: 18px;
     margin-bottom: 22px;
     color: #146678
 }
@@ -39,29 +38,52 @@
     margin-bottom: 25px;
 }
 .esqueci-senha {
-    position: relative;
-    font-family: 'Roboto';
-    font-size: 14.5px;
+    left: 60%;
     font-weight: normal;
-    line-height: 16px;
+    position: relative;
+    width: 114px;
+    height: 15px;
+
+    font-family: 'Roboto';
+    font-size: 12px;
+    line-height: 14px;
     color: #BDBDBD;
-    left: 69.5%;
 }
 .check-box {  
     font-family: 'Roboto Condensed';
     font-size: 15px;
     font-weight: normal;
-    color: #BDBDBD
+    color: #BDBDBD;
+}
+.form-check {
+    font-family: 'Roboto Condensed';
+    font-size: 14px;
 }
 .btn-botao {
-    width: 160px;
+    font-family: 'Roboto Condensed';
     color: white;
-    font-weight: bold
+    border-radius: 10px;
+    box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.15);
+    width: 120px;
+    background: #D9B42E;
 }
 .btn-secondary {
-    width: 160px;
-    margin-left: 190px;
-    color: white;
+    font-family: 'Roboto Condensed';
+    color: white !important;
+    border-radius: 10px;
+    width: 120px;
+    margin-left: 100px;
+    background: #BDBDBD;
+    border: 1px solid #BDBDBD;
+}
+.btn-secondary:hover {
+    border: 1px solid #848484
+}
+.btn-warning {
+    font-family: 'Roboto Condensed';
+    border-radius: 10px !important
+}
+.btn-warning:hover {
     font-weight: bold
 }
 .fechar {
@@ -72,3 +94,19 @@
     right: 12px;
     font-family: 'Roboto Condensed';
 }
+.seta {
+    background: black;
+    width: 10px;
+    height: 10px;
+    position: relative;
+}
+.alert-danger {
+    font-size: 16px;
+    font-family: 'Roboto';
+    position: relative;
+    left: -12px;
+
+}
+
+
+

@@ -323,7 +323,7 @@ function setJsonVars(json) {
 
 // MenuMapControl
 function menuMapControl(){
-    let pos = ($(".menu--popup").css('right') == '0px') ? '-340px' : '0';
+    let pos = ($(".menu--popup").css('right') == '0px') ? '-327px' : '0';
     $(".menu--popup").animate({right: pos}, 800);
     let pos2 = ($(".leaflet-right.leaflet-bottom").css('right') == '0px') ? '340px' : '0';
     $(".leaflet-right.leaflet-bottom").animate({right: pos2}, 800);

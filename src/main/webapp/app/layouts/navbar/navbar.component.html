@@ -29,7 +29,7 @@
                         </span> <i class="fa fa-angle-down"></i>
                     </span>
                 </a>
-                <ul class="dropdown-menu" ngbDropdownMenu>
+                <ul class="dropdown-menu" ngbDropdownMenu><span class="dropdown-menu-arrow"></span>
                     <li>
                         <a class="dropdown-item" routerLink="name" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <!--<fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>-->
@@ -108,7 +108,7 @@
                         <span >administração</span> <i class="fa fa-angle-down"></i>
                     </span>
                 </a>
-                <ul class="dropdown-menu" ngbDropdownMenu>
+                <ul class="dropdown-menu" ngbDropdownMenu><span class="dropdown-menu-arrow"></span>
                     <li>
                         <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
                             <!--<fa-icon [icon]="'user'" [fixedWidth]="true"></fa-icon>-->
@@ -182,7 +182,7 @@
                     <span *ngIf="!getImageUrl()">                   
                    </span>                  
                 </a>
-                <ul class="dropdown-menu" ngbDropdownMenu>
+                <ul class="dropdown-menu" ngbDropdownMenu><span class="dropdown-menu-arrow"></span>
                     <li *ngSwitchCase="true">
                         <a class="dropdown-item" routerLink="settings" routerLinkActive="active" (click)="collapseNavbar()">
                             <!--<fa-icon [icon]="'wrench'" [fixedWidth]="true"></fa-icon>-->

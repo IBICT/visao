@@ -181,8 +181,15 @@ h5.mb-0 button.btn.btn-link {
     width: 100%;
 }
 .dropdown-menu.show {
-    top: 70px;
-    left: -115px
+    font-family: 'Roboto';
+    font-size: 16px;
+    box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 5px 5px 5px 5px;
+    top: 55.5px;
+    left: -115px;
+    position: absolute;
+    width: 240px;
+
 }
 .nav-link::after {
     display: none
@@ -200,6 +207,66 @@ h5.mb-0 button.btn.btn-link {
     bottom: 35%;
     font-family: 'Roboto Condensed'; 
 }
+.dropdown-menu-arrow {
+    top: -25px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    position: relative;
+  }
+.dropdown-menu-arrow:before,
+.dropdown-menu-arrow:after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-width: 7px 8px;
+    border-style: solid;
+    border-color: transparent;
+    z-index: 1001;
+}
+.dropdown-menu-arrow:after {
+    bottom: -18px;
+    right: -65px;
+    border-bottom-color: #fff;
+}
+.dropdown-menu-arrow:before {
+    bottom: -17px;
+    right: -65px;
+    border-bottom-color: rgba(0,0,0,.15);
+}   
+.dropdown-item a {
+    text-decoration: none
+}
+.dropdown-item:hover {
+    font-weight: bold;
+}
+.corpo-modal {
+    width: 680px;
+    height: 570px;
+}
+.interio {
+    width: 520px;
+    height: 500px;
+    /* background: blue; */
+    position: absolute;
+    left: 91px;
+    margin-top: 7px;
+}
+.form-control-label {
+    margin-bottom: 0px
+}
+.botao-cadastrar {
+    width: 200px;
+    position: absolute;
+    left: 150px;
+    border-radius: 10px;
+    color: white;
+    background: #D9B42E;
+    top: 450px;
+
+}
     
 /* map buttons */
 
@@ -210,12 +277,12 @@ h5.mb-0 button.btn.btn-link {
 .indicadorMapControl div {
     white-space: nowrap;
 }
-#menuNav {
+ #menuNav {
     padding: 8px 16px;
     height: 56px;
-}
+} 
 
-#hoverMouse li {
+ #hoverMouse li {
     height: 30px;
     color: #132d38;
     text-align: left;
@@ -231,9 +298,9 @@ h5.mb-0 button.btn.btn-link {
     text-decoration: none;
     font-weight: bold;
     background-color: #eee9e9;
-}
+} 
 .fa1 {
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; */
 }
 .margem {
     margin-right: -12px;
@@ -248,22 +315,22 @@ h5.mb-0 button.btn.btn-link {
 .titulo-login {
     font-family: 'Roboto Condensed';
     font-weight: bold;
-    font-size: 25px;
+    font-size: 18px;
     line-height: 21px;
     color: #146678;
-    margin-bottom: 37px;
-    margin-top: 11px;
+    margin-bottom: 22px;
+    margin-top: 15px;
 }
 .modal-body {
-    width: 680px;
-    height: 450px;
+    width: 512px;
+    height: 401px;
     background: #F2F2F2;
     box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
 }
-.teste {
-    width: 75%;
-    height: 86%;
+.caixa {
+    width: 380px;
+    height: 321px;
     position: absolute;
     top: 8%;
     left: 12.8%;
@@ -271,34 +338,37 @@ h5.mb-0 button.btn.btn-link {
 .input-user {
     border-radius: 15px;
     position: relative;
-    left: -2%;
+    left: -12px;
+    width: 371px;
+    height: 32px;
 }
 .esqueci-senha {
     font-family: 'Roboto';
     position: relative;
-    left: 69%;
-    font-size: 14.5px;
+    left: 60%;
+    font-size: 12px;
+    line-height: 14px;
     color: #BDBDBD !important;
+}
 
-}
-.conjunto {
-    position: relative;
-    top: 20px;
-}
 .cor {
     font-family: 'Roboto Condensed';
     color: #BDBDBD;
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 16px;
     font-weight: normal;
-
 }
 .btn-margem {
-    width: 165px;
-    margin-left: 160px;
+    width: 120px;
+    margin-left: 100px;
+    border-radius: 10px;
+    background: #BDBDBD;
+    border: 1px solid#BDBDBD;
 }
 .btn-botao {
     color: white;
-    width: 165px
+    width: 120px;
+    border-radius: 10px;
 }
 .btn-botao:hover {
     color: white
@@ -309,6 +379,14 @@ h5.mb-0 button.btn.btn-link {
     right: 10px;
     font-size: 27px;
     width: 20px;
+    display: none;
+}
+.formulario {
+    font-family: 'Roboto Condensed';
+    font-size: 16px
+}
+#oculto {
+    display: none
 }
 .popup {
     width: 600px;
@@ -374,7 +452,17 @@ h5.mb-0 button.btn.btn-link {
 
 /* Icones do menu */
 .menu-icon {
-    padding: 5px;
+    margin: 4px 24px;
+    clear: both;
+    font-weight: 400;
+    color: #212529;    
+}
+
+.menu-icon a:hover {
+    color: black !important;
+    text-decoration: none;
+    background-color:blue;
+    font-weight: bold
 }
 .robotFamily {
     font-family: 'Roboto';
