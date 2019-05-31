@@ -38,19 +38,31 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="visaoApp.groupCategory.permission" for="field_permission">Permission</label>
-                    <select class="form-control" name="permission" [(ngModel)]="groupCategory.permission" id="field_permission" >
+                    <select class="form-control" name="permission" [(ngModel)]="groupCategory.permission" id="field_permission" required >
                         <option value="PUBLIC">{{'visaoApp.TypePermission.PUBLIC' | translate}}</option>
                         <option value="PRIVATE">{{'visaoApp.TypePermission.PRIVATE' | translate}}</option>
                         <option value="SHARED">{{'visaoApp.TypePermission.SHARED' | translate}}</option>
                     </select>
+                    <div [hidden]="!(editForm.controls.permission?.dirty && editForm.controls.permission?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.permission?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="visaoApp.groupCategory.owner" for="field_owner">Owner</label>
-                    <select class="form-control" id="field_owner" name="owner" [(ngModel)]="groupCategory.owner" >
+                    <select class="form-control" id="field_owner" name="owner" [(ngModel)]="groupCategory.owner" required >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="userOption.id === groupCategory.owner?.id ? groupCategory.owner : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
                     </select>
+                    <div [hidden]="!(editForm.controls.owner?.dirty && editForm.controls.owner?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.owner?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label jhiTranslate="visaoApp.groupCategory.categories" for="field_categories">Categories</label>
