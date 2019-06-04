@@ -19,10 +19,14 @@
                         </p>    
                     </div>
 
-                    <div >
-                        <a  class="btn btn-warning" href="../../../map/index.html">Explore o mapa!</a>
+                    <div class="containerInstancias" *ngFor="let instancia of instancias">
+                        <div class="instanciaBlock">
+                            <a href="../../../map/index.html?grpCat={{instancia.id}}">
+                                <img class="iconInstancia" src="../../content/images/hipster.png">
+                                <label>{{instancia.name}}</label>
+                            </a>
+                        </div>
                     </div>
-                
             </div>
         </div>
     </div>

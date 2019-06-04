@@ -99,4 +99,13 @@ export class Principal {
     getImageUrl(): string {
         return this.isIdentityResolved() ? this.userIdentity.imageUrl : null;
     }
+
+    // TODO
+    //    getUserId(): string {
+    //        if(this.isAuthenticated()){
+    //            return this.userIdentity.getId();
+    //        } else {
+    //           return null;
+    //        }
+    //    }
 }

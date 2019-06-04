@@ -81,3 +81,21 @@ Main page styles
         background-size: contain;
     }
 }
+
+.containerInstancias {
+    text-align: center;
+}
+
+.instanciaBlock {
+    margin: 5px;
+    float: left;
+    border: 1px solid black;
+}
+
+.iconInstancia {
+    display: block;
+    max-width: 100px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+}
