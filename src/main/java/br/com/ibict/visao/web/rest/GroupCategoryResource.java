@@ -108,14 +108,14 @@ public class GroupCategoryResource {
      * GET  /group-categories : get all the groupCategories enabled for the current user.
      *
      * @param pageable the pagination information
-     * @param criteria the criterias which the requested entities should match
+     * @param userLogin the userLogin which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of groupCategories in body
      */
-    @GetMapping("/group-categories-by-user/{userId}")
+    @GetMapping("/group-categories-by-user/{userLogin}")
     @Timed
-    public ResponseEntity<List<GroupCategory>> getGroupCategoriesByUser(GroupCategoryCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get GroupCategories by criteria: {}", criteria);
-        Page<GroupCategory> page = groupCategoryQueryService.findByCriteria(criteria, pageable); // TODO fazer a query
+    public ResponseEntity<List<GroupCategory>> getGroupCategoriesByUser(@PathVariable String userLogin, Pageable pageable) {
+        log.debug("REST request to get GroupCategories by user with login: {}", userLogin);
+        Page<GroupCategory> page = groupCategoryService.listGroupsCategoryByCurrentUser(userLogin, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/group-categories-by-user");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

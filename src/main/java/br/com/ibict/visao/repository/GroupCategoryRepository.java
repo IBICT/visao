@@ -39,4 +39,16 @@ public interface GroupCategoryRepository extends JpaRepository<GroupCategory, Lo
         "         OR (COALESCE(:currentUserId, null) IS NOT NULL AND  GC.OWNER_ID = :currentUserId)" +
         "         OR (COALESCE(:currentUserId, null) IS NOT NULL AND GCS.SHAREDS_ID = :currentUserId AND GC.PERMISSION = 'SHARED'))", nativeQuery = true)
     Long isGroupCategoryEnabledByCurrentUser(@Param("groupCategoryCod") Long id,@Param("currentUserId") Long userLogin);
+
+    @Query(value = "SELECT * FROM GROUP_CATEGORY where PERMISSION = 'PUBLIC'", nativeQuery = true)
+    Page<GroupCategory> listOfPublicsGroupCategories(Pageable pageable);
+
+    @Query(value = "SELECT DISTINCT GC.* " +
+        "FROM GROUP_CATEGORY GC " +
+        "LEFT JOIN GROUP_CATEGORY_SHAREDS GCS on GC.ID = GCS.GROUP_CATEGORIES_ID " +
+        "WHERE " +
+        "    GC.PERMISSION = 'PUBLIC'" +
+        "         OR (GC.OWNER_ID = :currentUserId)" +
+        "         OR (GCS.SHAREDS_ID = :currentUserId AND GC.PERMISSION = 'SHARED')", nativeQuery = true)
+    Page<GroupCategory> listOfGroupCategoriesByUser(@Param("currentUserId")Long currentUserId, Pageable pageable);
 }

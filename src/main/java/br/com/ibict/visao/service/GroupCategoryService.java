@@ -40,7 +40,8 @@ public class GroupCategoryService {
      * @return the persisted entity
      */
     public GroupCategory save(GroupCategory groupCategory) {
-        log.debug("Request to save GroupCategory : {}", groupCategory);        return groupCategoryRepository.save(groupCategory);
+        log.debug("Request to save GroupCategory : {}", groupCategory);
+        return groupCategoryRepository.save(groupCategory);
     }
 
     /**
@@ -63,7 +64,6 @@ public class GroupCategoryService {
     public Page<GroupCategory> findAllWithEagerRelationships(Pageable pageable) {
         return groupCategoryRepository.findAllWithEagerRelationships(pageable);
     }
-    
 
     /**
      * Get one groupCategory by id.
@@ -81,15 +81,24 @@ public class GroupCategoryService {
     public boolean isGroupCategoryEnabledByCurrentUser(Long id) {
         Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
         Long codUser = null;
-        if(currentUserLogin.isPresent()){
+        if (currentUserLogin.isPresent()) {
             Optional<User> findedUser = userRepository.findOneByLogin(currentUserLogin.get());
-            if(findedUser.isPresent()){
+            if (findedUser.isPresent()) {
                 codUser = findedUser.get().getId();
             }
         }
 
         Long retrievedGroupCatId = groupCategoryRepository.isGroupCategoryEnabledByCurrentUser(id, codUser);
         return retrievedGroupCatId != null && retrievedGroupCatId.equals(id);
+    }
+
+    public Page<GroupCategory> listGroupsCategoryByCurrentUser(String login, Pageable pageable) {
+        if (login == null || "null".equalsIgnoreCase(login)) {
+            return groupCategoryRepository.listOfPublicsGroupCategories(pageable);
+        } else {
+            User user = userRepository.findOneByLogin(login).orElseThrow(() -> new RuntimeException("Não foi possivel recuperar o id do usuario atual"));
+            return groupCategoryRepository.listOfGroupCategoriesByUser(user.getId(), pageable);
+        }
     }
 
     /**

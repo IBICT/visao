@@ -10,7 +10,7 @@ import { GroupCategory } from '../shared/model/group-category.model';
 export class HomeService {
     constructor(private http: HttpClient) {}
 
-    get(userId: String): Observable<HttpResponse<GroupCategory>> {
-        return this.http.get<GroupCategory>(SERVER_API_URL + 'api/group-categories-by-user/' + userId, { observe: 'response' });
+    get(userId: String): Observable<HttpResponse<GroupCategory[]>> {
+        return this.http.get<GroupCategory[]>(SERVER_API_URL + 'api/group-categories-by-user/' + userId, { observe: 'response' });
     }
 }

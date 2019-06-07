@@ -6,6 +6,7 @@ import { HomeService } from './home.service';
 import { GroupCategory } from '../shared/model/group-category.model';
 
 import { LoginModalService, Principal, Account } from 'app/core';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
     selector: 'jhi-home',
@@ -28,9 +29,9 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.principal.identity().then(account => {
             this.account = account;
+            this.carregaInstancias();
         });
         this.registerAuthenticationSuccess();
-        this.carregaInstancias();
     }
 
     registerAuthenticationSuccess() {
@@ -50,44 +51,13 @@ export class HomeComponent implements OnInit {
     }
 
     carregaInstancias(): void {
-        console.log(this.principal);
-        console.log(this.principal.userIdentity);
-        console.log(this.account);
+        let userLogin;
+        if (this.account == null) {
+            userLogin = null;
+        } else {
+            userLogin = this.account.login;
+        }
 
-        this.instancias = [
-            {
-                id: 1,
-                iconPresentation: null,
-                iconContentType: null,
-                about: null,
-                permission: null,
-                name: 'IBICT',
-                owner: null,
-                categories: null,
-                shareds: null
-            },
-            {
-                id: 1,
-                iconPresentation: null,
-                iconContentType: null,
-                about: null,
-                permission: null,
-                name: 'MDICT',
-                owner: null,
-                categories: null,
-                shareds: null
-            },
-            {
-                id: 1,
-                iconPresentation: null,
-                iconContentType: null,
-                about: null,
-                permission: null,
-                name: 'SUS',
-                owner: null,
-                categories: null,
-                shareds: null
-            }
-        ];
+        this.homeService.get(userLogin).subscribe((res: HttpResponse<GroupCategory[]>) => (this.instancias = res.body));
     }
 }
