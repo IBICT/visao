@@ -613,7 +613,7 @@ function makeMap() {
 	menuMapControl.onAdd = function(map) {
 				this._div = L.DomUtil.create('div', 'leaflet-bar easy-button-container menuMapControl');
 				this._div.innerHTML = '<div>' +
-									  '<div style="border-radius:4px; background-color: rgba(255,255,255,0.9); color: #59C9A8; font-size: 28px; padding: 1px 10px;" onclick="menuMapControl()"><i class="fa fa-sliders"></i></div>' +
+									  '<div style="border-radius:4px; background-color: rgba(255,255,255,0.9); color: #59C9A8; width: 40px;height: 40px; font-size: 28px; padding: 1px 10px;" onclick="menuMapControl()"><div class="fa fa-align-right"></div></div>' +
 									  '	<div class="menu--popup">' +
 									  '		<ul class="nav nav-tabs" id="myTab" role="tablist">' +
 									  '			<li class="nav-item">' +
@@ -650,7 +650,7 @@ function makeMap() {
                                       '		    </div>' +
                                       '		    <div class="pull-left" style="width:40%;padding-right:20px">' +
 									  '    		    <button id="submitFormIndicator" disabled style="margin: 15px 15px 0; background-color: #146678; color: #fff;" class="btn pull-right robotoFamily">Aplicar</button><br>' +
-                                      '       		<button id="clearFormIndicator" style="margin: 0 5px; background-color: #f5f6f6; color: #146678;" class="btn pull-right robotoFamily">Limpar&nbsp;<span class="fa fa-trash-o"></span></button>' +
+                                      '       		<button id="clearFormIndicator" style="margin: 0 5px;font-size: 14px; line-height: 16px; background-color: #f5f6f6; color: #146678;" class="btn pull-right robotoFamily">Limpar&nbsp;<span class="fa fa-trash-o"></span></button>' +
                                       '		    </div>' +
                                       '		</div>' +
 									  '	</div>' +
@@ -762,11 +762,17 @@ function makeMap() {
                     }
 
                     // html do SELECT
-                    var selectRangeMapHtml = '<div class="input-group input-group-sm mb-3">' +
-                        '<div class="input-group-prepend">' +
-                        '<span style="margin-right:5px;" class="input-group-text fa fa-map input-leaflet" id="basic-addon1"></span>' +
-                        '</div>' +
-                        '<select onchange="rangeMap(this)" style="border-radius: 0 5px 5px 0; border-left:0;">';
+                    var selectRangeMapHtml = '<div class="input-group input-group-sm mb-3">'+
+                                             '<div class="form-inline input-group-prepend pesquisa">'+
+                                             '<span class="input-group-text icon-pesq fa fa-search" id="inputGroup-sizing-sm"></span>'+
+                                             '</div>'+
+                                             '<input type="text" class="form-control icon-pesq" aria-label="Small" aria-describedby="inputGroup-sizing-sm"  placeholder="Busque um estado">'+
+                                             '</div>'+
+                                             '<div class="input-group input-group-sm mb-3">' +
+                                             '<div class="input-group-prepend">' +
+                                             '<span style="margin-right:5px;" class="input-group-text fa fa-map input-leaflet" id="basic-addon1"></span>' +
+                                             '</div>' +
+                                             '<select onchange="rangeMap(this)" style="border-radius: 0 5px 5px 0; border-left:0;">';
 
                     itensSelect.forEach(function (iten) {
                         selectRangeMapHtml += iten;
@@ -781,8 +787,8 @@ function makeMap() {
                     indicadorMapControl.onAdd = function (map) {
                         this._div = L.DomUtil.create('div', 'indicadorMapControl');
                         this._div.innerHTML = '<div style="cursor: pointer;color:#59C9A8; font-size:16px;" onclick="infoAboutIndicator()" class="" id="indicadorMapControl" title="Menu">' +
-                            '<span class="robotoFamily">' +
-                            dataJson[0].name.value + ' <span style="background-color: #59C9A8; padding:3.5px 6.5px; color: white; border-radius: 4px; font-size:12px; position:relative; top:-2.5px;" class="fa fa-info"></span>' +
+                            '<span class="robotoFamily filtro-selecionado">' +
+                            dataJson[0].name.value + ' <span style="background-color: #59C9A8; padding:3.5px 6.5px; color: white; border-radius: 4px; font-size:8px; position:relative; top:-2.5px;" class="fa fa-info"></span>' +
                             '</span></div>';
 
                         $("#footer-sidebar-filtros .indicador").html(this._div.innerHTML);
@@ -1047,7 +1053,7 @@ function loadFiltrosSelecionados(){
     var filtrosSelecionados =
         '<div class="iconFilter float-right" onclick="infoAboutIndicator()" id="filtroMapControl" title="filtro">' +
             '<span class="button-state state-get-center get-center-active robotoFamily">'+
-                '<span class="fa fa-info"></span> Filtros selecionados' +
+                'Filtros selecionados <span class="fa fa-info"></span>' +
             '</span>'+
         '</div>';
 

@@ -33,6 +33,7 @@ body {
     width: 200px;
     border-radius: 50px;
     background-image: linear-gradient(to right, #e5c75a, #eeb248, #f69b3f, #fc833e, #ff6745);
+    margin-right: 22px
 }
 .range-bar-mark {
     position: relative;
@@ -64,6 +65,31 @@ body {
     z-index: 2;
     top: 0;
     /* display: none; */
+}
+
+.icon-pesq {
+    position: relative;
+    top: 10px;
+    border-radius: 5px !important;
+    background: #ffffff;
+    color: #59C9A8;
+}
+.leaflet-top .leaflet-control-layers.leaflet-control {
+    position: relative;
+    top: 760px;
+    width: 30px;
+    height: 30px;
+}
+
+.leaflet-control-layers-toggle {
+    background-image: url('../content/images/mapas.png') !important;
+    width: 30px !important;
+    height: 30px !important;
+    color: #59C9A8;
+}
+.icon-slide {
+    background-image: url('../content/images/slide-icon.png') !important;
+
 }
 .navbar nav a {
     color: white;
@@ -172,11 +198,28 @@ h5.mb-0 button.btn.btn-link {
     color: #4f4f4f;
     font-weight: bold;
 }
+.filtro-selecionado {
+    margin-right: 5px;
+    padding: 2px 12px;
+    background: #59C9A8;
+    border-radius: 10px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #FFFFFF;
+}
+#limparMapControl {
+    margin-right: 5px;
+    line-height: 16px;
+    margin-top: -10px;
+}
 .menu {
     font-family: 'Roboto Condensed';
     font-style: normal;
     font-weight: normal;
-    font-size: 20px;
+    font-size: 18px;
     line-height: normal;
     width: 100%;
 }
@@ -243,12 +286,12 @@ h5.mb-0 button.btn.btn-link {
     font-weight: bold;
 }
 .corpo-modal {
-    width: 680px;
-    height: 570px;
+    height: 541px;
+    width: 512px;
 }
 .interio {
-    width: 520px;
-    height: 500px;
+    width: 380px;
+    height: 490px;
     /* background: blue; */
     position: absolute;
     left: 91px;
@@ -258,14 +301,13 @@ h5.mb-0 button.btn.btn-link {
     margin-bottom: 0px
 }
 .botao-cadastrar {
-    width: 200px;
+    width: 150px;
     position: absolute;
-    left: 150px;
+    left: 105px;
     border-radius: 10px;
     color: white;
     background: #D9B42E;
-    top: 450px;
-
+    top: 400px;
 }
     
 /* map buttons */
@@ -299,9 +341,7 @@ h5.mb-0 button.btn.btn-link {
     font-weight: bold;
     background-color: #eee9e9;
 } 
-.fa1 {
-    /* font-size: 1.2rem; */
-}
+
 .margem {
     margin-right: -12px;
 }
@@ -419,15 +459,16 @@ h5.mb-0 button.btn.btn-link {
     line-height: inherit;
 }
 .iconFilter {
+    margin-right: 5px;
     cursor: pointer;
     padding: 2.5px 10px;
     color: #00697c;
     background-color: #ffffff;
-
     border-radius: 15px;
     font-size: 10px;
     margin-left: 10px;
     margin-bottom: 10px;
+    margin-top: -7px;
 }
 .filtroMapControl {
     width: 300px;
@@ -619,4 +660,11 @@ h5.mb-0 button.btn.btn-link {
 .leaflet-touch .leaflet-control-layers,
 .leaflet-touch .leaflet-bar {
     border: none !important;
+}
+.leaflet-control-layers-expanded:first-child {
+    position: absolute !important; 
+    top: 640px !important;  
+    width: 180px !important;
+    height: 150px !important;
+
 }
