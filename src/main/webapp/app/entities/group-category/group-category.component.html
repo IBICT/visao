@@ -15,19 +15,16 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="about"><span jhiTranslate="visaoApp.groupCategory.about">About</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="permission"><span jhiTranslate="visaoApp.groupCategory.permission">Permission</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span jhiTranslate="visaoApp.groupCategory.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="iconPresentation"><span jhiTranslate="visaoApp.groupCategory.iconPresentation">Icon Presentation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="owner.login"><span jhiTranslate="visaoApp.groupCategory.owner">Owner</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="permission"><span jhiTranslate="visaoApp.groupCategory.permission">Permission</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let groupCategory of groupCategories ;trackBy: trackId">
                 <td><a [routerLink]="['/group-category', groupCategory.id, 'view' ]">{{groupCategory.id}}</a></td>
-                <td>{{groupCategory.about}}</td>
-                <td jhiTranslate="{{'visaoApp.TypePermission.' + groupCategory.permission}}">{{groupCategory.permission}}</td>
                 <td>{{groupCategory.name}}</td>
                 <td>
                     <a *ngIf="groupCategory.iconPresentation" (click)="openFile(groupCategory.iconPresentationContentType, groupCategory.iconPresentation)">
@@ -38,6 +35,7 @@
                 <td>
                     {{groupCategory.owner?.login}}
                 </td>
+                <td jhiTranslate="{{'visaoApp.TypePermission.' + groupCategory.permission}}">{{groupCategory.permission}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -10,9 +10,20 @@
                         [(ngModel)]="groupCategory.id" readonly />
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="visaoApp.groupCategory.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           [(ngModel)]="groupCategory.name" required/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="visaoApp.groupCategory.about" for="field_about">About</label>
                     <input type="text" class="form-control" name="about" id="field_about"
-                        [(ngModel)]="groupCategory.about" />
+                           [(ngModel)]="groupCategory.about" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="visaoApp.groupCategory.permission" for="field_permission">Permission</label>
@@ -21,15 +32,10 @@
                         <option value="PRIVATE">{{'visaoApp.TypePermission.PRIVATE' | translate}}</option>
                         <option value="SHARED">{{'visaoApp.TypePermission.SHARED' | translate}}</option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="visaoApp.groupCategory.name" for="field_name">Name</label>
-                    <input type="text" class="form-control" name="name" id="field_name"
-                        [(ngModel)]="groupCategory.name" required/>
-                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                    <div [hidden]="!(editForm.controls.permission?.dirty && editForm.controls.permission?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
+                               [hidden]="!editForm.controls.owner?.permission?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
                         </small>
                     </div>
                 </div>
@@ -50,7 +56,6 @@
                     <input type="hidden" class="form-control" name="iconPresentationContentType" id="field_iconPresentationContentType"
                         [(ngModel)]="groupCategory.iconPresentationContentType" />
                 </div>
-
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="visaoApp.groupCategory.owner" for="field_owner">Owner</label>
                     <select class="form-control" id="field_owner" name="owner" [(ngModel)]="groupCategory.owner" required>
@@ -65,15 +70,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label jhiTranslate="visaoApp.groupCategory.categories" for="field_categories">Categories</label>
-                    <select class="form-control" id="field_categories" multiple name="categories" [(ngModel)]="groupCategory.categories">
-                        <option [ngValue]="getSelected(groupCategory.categories, categoryOption)" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.name}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label jhiTranslate="visaoApp.groupCategory.shareds" for="field_shareds">Shareds</label>
                     <select class="form-control" id="field_shareds" multiple name="shareds" [(ngModel)]="groupCategory.shareds">
                         <option [ngValue]="getSelected(groupCategory.shareds, userOption)" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="visaoApp.groupCategory.categories" for="field_categories">Categories</label>
+                    <select class="form-control" id="field_categories" multiple name="categories" [(ngModel)]="groupCategory.categories">
+                        <option [ngValue]="getSelected(groupCategory.categories, categoryOption)" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.name}}</option>
                     </select>
                 </div>
             </div>

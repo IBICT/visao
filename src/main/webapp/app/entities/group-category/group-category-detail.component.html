@@ -5,6 +5,10 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="visaoApp.groupCategory.name">Name</span></dt>
+                <dd>
+                    <span>{{groupCategory.name}}</span>
+                </dd>
                 <dt><span jhiTranslate="visaoApp.groupCategory.about">About</span></dt>
                 <dd>
                     <span>{{groupCategory.about}}</span>
@@ -12,10 +16,6 @@
                 <dt><span jhiTranslate="visaoApp.groupCategory.permission">Permission</span></dt>
                 <dd>
                     <span jhiTranslate="{{'visaoApp.TypePermission.' + groupCategory.permission}}">{{groupCategory.permission}}</span>
-                </dd>
-                <dt><span jhiTranslate="visaoApp.groupCategory.name">Name</span></dt>
-                <dd>
-                    <span>{{groupCategory.name}}</span>
                 </dd>
                 <dt><span jhiTranslate="visaoApp.groupCategory.iconPresentation">Icon Presentation</span></dt>
                 <dd>
@@ -30,16 +30,16 @@
                 <dd>
                     {{groupCategory.owner?.login}}
                 </dd>
-                <dt><span jhiTranslate="visaoApp.groupCategory.categories">Categories</span></dt>
-                <dd>
-                    <span *ngFor="let categories of groupCategory.categories; let last = last">
-                        <a [routerLink]="['/category', categories?.id, 'view' ]">{{categories.name}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
                 <dt><span jhiTranslate="visaoApp.groupCategory.shareds">Shareds</span></dt>
                 <dd>
                     <span *ngFor="let shareds of groupCategory.shareds; let last = last">
                         {{shareds.login}}{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.groupCategory.categories">Categories</span></dt>
+                <dd>
+                    <span *ngFor="let categories of groupCategory.categories; let last = last">
+                        <a [routerLink]="['/category', categories?.id, 'view' ]">{{categories.name}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
             </dl>
