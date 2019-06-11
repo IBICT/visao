@@ -1,11 +1,14 @@
 import { browser } from 'protractor';
 import { NavBarPage } from './../../page-objects/jhi-page-objects';
 import { GroupCategoryComponentsPage, GroupCategoryUpdatePage } from './group-category.page-object';
+import * as path from 'path';
 
 describe('GroupCategory e2e test', () => {
     let navBarPage: NavBarPage;
     let groupCategoryUpdatePage: GroupCategoryUpdatePage;
     let groupCategoryComponentsPage: GroupCategoryComponentsPage;
+    const fileToUpload = '../../../../../main/webapp/content/images/logo-jhipster.png';
+    const absolutePath = path.resolve(__dirname, fileToUpload);
 
     beforeAll(() => {
         browser.get('/');
@@ -30,15 +33,12 @@ describe('GroupCategory e2e test', () => {
 
     it('should create and save GroupCategories', () => {
         groupCategoryComponentsPage.clickOnCreateButton();
-        groupCategoryUpdatePage.setIconPresentationInput('iconPresentation');
-        expect(groupCategoryUpdatePage.getIconPresentationInput()).toMatch('iconPresentation');
-        groupCategoryUpdatePage.setIconContentTypeInput('iconContentType');
-        expect(groupCategoryUpdatePage.getIconContentTypeInput()).toMatch('iconContentType');
         groupCategoryUpdatePage.setAboutInput('about');
         expect(groupCategoryUpdatePage.getAboutInput()).toMatch('about');
         groupCategoryUpdatePage.permissionSelectLastOption();
         groupCategoryUpdatePage.setNameInput('name');
         expect(groupCategoryUpdatePage.getNameInput()).toMatch('name');
+        groupCategoryUpdatePage.setIconPresentationInput(absolutePath);
         groupCategoryUpdatePage.ownerSelectLastOption();
         // groupCategoryUpdatePage.categoriesSelectLastOption();
         // groupCategoryUpdatePage.sharedsSelectLastOption();

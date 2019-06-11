@@ -28,12 +28,6 @@ public class GroupCategory implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "icon_presentation")
-    private String iconPresentation;
-
-    @Column(name = "icon_content_type")
-    private String iconContentType;
-
     @Column(name = "about")
     private String about;
 
@@ -44,6 +38,13 @@ public class GroupCategory implements Serializable {
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Lob
+    @Column(name = "icon_presentation")
+    private byte[] iconPresentation;
+
+    @Column(name = "icon_presentation_content_type")
+    private String iconPresentationContentType;
 
     @ManyToOne
     @JsonIgnoreProperties("")
@@ -70,32 +71,6 @@ public class GroupCategory implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getIconPresentation() {
-        return iconPresentation;
-    }
-
-    public GroupCategory iconPresentation(String iconPresentation) {
-        this.iconPresentation = iconPresentation;
-        return this;
-    }
-
-    public void setIconPresentation(String iconPresentation) {
-        this.iconPresentation = iconPresentation;
-    }
-
-    public String getIconContentType() {
-        return iconContentType;
-    }
-
-    public GroupCategory iconContentType(String iconContentType) {
-        this.iconContentType = iconContentType;
-        return this;
-    }
-
-    public void setIconContentType(String iconContentType) {
-        this.iconContentType = iconContentType;
     }
 
     public String getAbout() {
@@ -135,6 +110,32 @@ public class GroupCategory implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public byte[] getIconPresentation() {
+        return iconPresentation;
+    }
+
+    public GroupCategory iconPresentation(byte[] iconPresentation) {
+        this.iconPresentation = iconPresentation;
+        return this;
+    }
+
+    public void setIconPresentation(byte[] iconPresentation) {
+        this.iconPresentation = iconPresentation;
+    }
+
+    public String getIconPresentationContentType() {
+        return iconPresentationContentType;
+    }
+
+    public GroupCategory iconPresentationContentType(String iconPresentationContentType) {
+        this.iconPresentationContentType = iconPresentationContentType;
+        return this;
+    }
+
+    public void setIconPresentationContentType(String iconPresentationContentType) {
+        this.iconPresentationContentType = iconPresentationContentType;
     }
 
     public User getOwner() {
@@ -225,11 +226,11 @@ public class GroupCategory implements Serializable {
     public String toString() {
         return "GroupCategory{" +
             "id=" + getId() +
-            ", iconPresentation='" + getIconPresentation() + "'" +
-            ", iconContentType='" + getIconContentType() + "'" +
             ", about='" + getAbout() + "'" +
             ", permission='" + getPermission() + "'" +
             ", name='" + getName() + "'" +
+            ", iconPresentation='" + getIconPresentation() + "'" +
+            ", iconPresentationContentType='" + getIconPresentationContentType() + "'" +
             "}";
     }
 }

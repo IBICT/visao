@@ -28,6 +28,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
@@ -51,9 +52,6 @@ import br.com.ibict.visao.domain.enumeration.TypePermission;
 @SpringBootTest(classes = VisaoApp.class)
 public class GroupCategoryResourceIntTest {
 
-    private static final String DEFAULT_ICON_PRESENTATION = "AAAAAAAAAA";
-    private static final String UPDATED_ICON_PRESENTATION = "BBBBBBBBBB";
-
     private static final String DEFAULT_ICON_CONTENT_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_ICON_CONTENT_TYPE = "BBBBBBBBBB";
 
@@ -65,6 +63,11 @@ public class GroupCategoryResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
+
+    private static final byte[] DEFAULT_ICON_PRESENTATION = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_ICON_PRESENTATION = TestUtil.createByteArray(2, "1");
+    private static final String DEFAULT_ICON_PRESENTATION_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_ICON_PRESENTATION_CONTENT_TYPE = "image/png";
 
     @Autowired
     private GroupCategoryRepository groupCategoryRepository;
@@ -115,11 +118,11 @@ public class GroupCategoryResourceIntTest {
      */
     public static GroupCategory createEntity(EntityManager em) {
         GroupCategory groupCategory = new GroupCategory()
-            .iconPresentation(DEFAULT_ICON_PRESENTATION)
-            .iconContentType(DEFAULT_ICON_CONTENT_TYPE)
             .about(DEFAULT_ABOUT)
             .permission(DEFAULT_PERMISSION)
-            .name(DEFAULT_NAME);
+            .name(DEFAULT_NAME)
+            .iconPresentation(DEFAULT_ICON_PRESENTATION)
+            .iconPresentationContentType(DEFAULT_ICON_PRESENTATION_CONTENT_TYPE);
         return groupCategory;
     }
 
@@ -143,11 +146,11 @@ public class GroupCategoryResourceIntTest {
         List<GroupCategory> groupCategoryList = groupCategoryRepository.findAll();
         assertThat(groupCategoryList).hasSize(databaseSizeBeforeCreate + 1);
         GroupCategory testGroupCategory = groupCategoryList.get(groupCategoryList.size() - 1);
-        assertThat(testGroupCategory.getIconPresentation()).isEqualTo(DEFAULT_ICON_PRESENTATION);
-        assertThat(testGroupCategory.getIconContentType()).isEqualTo(DEFAULT_ICON_CONTENT_TYPE);
         assertThat(testGroupCategory.getAbout()).isEqualTo(DEFAULT_ABOUT);
         assertThat(testGroupCategory.getPermission()).isEqualTo(DEFAULT_PERMISSION);
         assertThat(testGroupCategory.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testGroupCategory.getIconPresentation()).isEqualTo(DEFAULT_ICON_PRESENTATION);
+        assertThat(testGroupCategory.getIconPresentationContentType()).isEqualTo(DEFAULT_ICON_PRESENTATION_CONTENT_TYPE);
     }
 
     @Test
@@ -198,11 +201,12 @@ public class GroupCategoryResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(groupCategory.getId().intValue())))
-            .andExpect(jsonPath("$.[*].iconPresentation").value(hasItem(DEFAULT_ICON_PRESENTATION.toString())))
             .andExpect(jsonPath("$.[*].iconContentType").value(hasItem(DEFAULT_ICON_CONTENT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].about").value(hasItem(DEFAULT_ABOUT.toString())))
             .andExpect(jsonPath("$.[*].permission").value(hasItem(DEFAULT_PERMISSION.toString())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].iconPresentationContentType").value(hasItem(DEFAULT_ICON_PRESENTATION_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].iconPresentation").value(hasItem(Base64Utils.encodeToString(DEFAULT_ICON_PRESENTATION))));
     }
     
     public void getAllGroupCategoriesWithEagerRelationshipsIsEnabled() throws Exception {
@@ -247,50 +251,12 @@ public class GroupCategoryResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(groupCategory.getId().intValue()))
-            .andExpect(jsonPath("$.iconPresentation").value(DEFAULT_ICON_PRESENTATION.toString()))
             .andExpect(jsonPath("$.iconContentType").value(DEFAULT_ICON_CONTENT_TYPE.toString()))
             .andExpect(jsonPath("$.about").value(DEFAULT_ABOUT.toString()))
             .andExpect(jsonPath("$.permission").value(DEFAULT_PERMISSION.toString()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
-    }
-
-    @Test
-    @Transactional
-    public void getAllGroupCategoriesByIconPresentationIsEqualToSomething() throws Exception {
-        // Initialize the database
-        groupCategoryRepository.saveAndFlush(groupCategory);
-
-        // Get all the groupCategoryList where iconPresentation equals to DEFAULT_ICON_PRESENTATION
-        defaultGroupCategoryShouldBeFound("iconPresentation.equals=" + DEFAULT_ICON_PRESENTATION);
-
-        // Get all the groupCategoryList where iconPresentation equals to UPDATED_ICON_PRESENTATION
-        defaultGroupCategoryShouldNotBeFound("iconPresentation.equals=" + UPDATED_ICON_PRESENTATION);
-    }
-
-    @Test
-    @Transactional
-    public void getAllGroupCategoriesByIconPresentationIsInShouldWork() throws Exception {
-        // Initialize the database
-        groupCategoryRepository.saveAndFlush(groupCategory);
-
-        // Get all the groupCategoryList where iconPresentation in DEFAULT_ICON_PRESENTATION or UPDATED_ICON_PRESENTATION
-        defaultGroupCategoryShouldBeFound("iconPresentation.in=" + DEFAULT_ICON_PRESENTATION + "," + UPDATED_ICON_PRESENTATION);
-
-        // Get all the groupCategoryList where iconPresentation equals to UPDATED_ICON_PRESENTATION
-        defaultGroupCategoryShouldNotBeFound("iconPresentation.in=" + UPDATED_ICON_PRESENTATION);
-    }
-
-    @Test
-    @Transactional
-    public void getAllGroupCategoriesByIconPresentationIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        groupCategoryRepository.saveAndFlush(groupCategory);
-
-        // Get all the groupCategoryList where iconPresentation is not null
-        defaultGroupCategoryShouldBeFound("iconPresentation.specified=true");
-
-        // Get all the groupCategoryList where iconPresentation is null
-        defaultGroupCategoryShouldNotBeFound("iconPresentation.specified=false");
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.iconPresentationContentType").value(DEFAULT_ICON_PRESENTATION_CONTENT_TYPE))
+            .andExpect(jsonPath("$.iconPresentation").value(Base64Utils.encodeToString(DEFAULT_ICON_PRESENTATION)));
     }
 
     @Test
@@ -513,11 +479,12 @@ public class GroupCategoryResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(groupCategory.getId().intValue())))
-            .andExpect(jsonPath("$.[*].iconPresentation").value(hasItem(DEFAULT_ICON_PRESENTATION.toString())))
             .andExpect(jsonPath("$.[*].iconContentType").value(hasItem(DEFAULT_ICON_CONTENT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].about").value(hasItem(DEFAULT_ABOUT.toString())))
             .andExpect(jsonPath("$.[*].permission").value(hasItem(DEFAULT_PERMISSION.toString())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].iconPresentationContentType").value(hasItem(DEFAULT_ICON_PRESENTATION_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].iconPresentation").value(hasItem(Base64Utils.encodeToString(DEFAULT_ICON_PRESENTATION))));
     }
 
     /**
@@ -552,11 +519,11 @@ public class GroupCategoryResourceIntTest {
         // Disconnect from session so that the updates on updatedGroupCategory are not directly saved in db
         em.detach(updatedGroupCategory);
         updatedGroupCategory
-            .iconPresentation(UPDATED_ICON_PRESENTATION)
-            .iconContentType(UPDATED_ICON_CONTENT_TYPE)
             .about(UPDATED_ABOUT)
             .permission(UPDATED_PERMISSION)
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .iconPresentation(UPDATED_ICON_PRESENTATION)
+            .iconPresentationContentType(UPDATED_ICON_PRESENTATION_CONTENT_TYPE);
 
         restGroupCategoryMockMvc.perform(put("/api/group-categories")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -567,11 +534,11 @@ public class GroupCategoryResourceIntTest {
         List<GroupCategory> groupCategoryList = groupCategoryRepository.findAll();
         assertThat(groupCategoryList).hasSize(databaseSizeBeforeUpdate);
         GroupCategory testGroupCategory = groupCategoryList.get(groupCategoryList.size() - 1);
-        assertThat(testGroupCategory.getIconPresentation()).isEqualTo(UPDATED_ICON_PRESENTATION);
-        assertThat(testGroupCategory.getIconContentType()).isEqualTo(UPDATED_ICON_CONTENT_TYPE);
         assertThat(testGroupCategory.getAbout()).isEqualTo(UPDATED_ABOUT);
         assertThat(testGroupCategory.getPermission()).isEqualTo(UPDATED_PERMISSION);
         assertThat(testGroupCategory.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testGroupCategory.getIconPresentation()).isEqualTo(UPDATED_ICON_PRESENTATION);
+        assertThat(testGroupCategory.getIconPresentationContentType()).isEqualTo(UPDATED_ICON_PRESENTATION_CONTENT_TYPE);
     }
 
     @Test

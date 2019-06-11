@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { JhiDataUtils } from 'ng-jhipster';
 
 import { IGroupCategory } from 'app/shared/model/group-category.model';
 
@@ -10,7 +11,7 @@ import { IGroupCategory } from 'app/shared/model/group-category.model';
 export class GroupCategoryDetailComponent implements OnInit {
     groupCategory: IGroupCategory;
 
-    constructor(private activatedRoute: ActivatedRoute) {}
+    constructor(private dataUtils: JhiDataUtils, private activatedRoute: ActivatedRoute) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ groupCategory }) => {
@@ -18,6 +19,13 @@ export class GroupCategoryDetailComponent implements OnInit {
         });
     }
 
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
     previousState() {
         window.history.back();
     }

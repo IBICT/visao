@@ -15,11 +15,10 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="name"><span jhiTranslate="visaoApp.groupCategory.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="iconPresentation"><span jhiTranslate="visaoApp.groupCategory.iconPresentation">Icon Presentation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="iconContentType"><span jhiTranslate="visaoApp.groupCategory.iconContentType">Icon Content Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="about"><span jhiTranslate="visaoApp.groupCategory.about">About</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="permission"><span jhiTranslate="visaoApp.groupCategory.permission">Permission</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span jhiTranslate="visaoApp.groupCategory.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="iconPresentation"><span jhiTranslate="visaoApp.groupCategory.iconPresentation">Icon Presentation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="owner.login"><span jhiTranslate="visaoApp.groupCategory.owner">Owner</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -27,11 +26,15 @@
             <tbody>
             <tr *ngFor="let groupCategory of groupCategories ;trackBy: trackId">
                 <td><a [routerLink]="['/group-category', groupCategory.id, 'view' ]">{{groupCategory.id}}</a></td>
-                <td>{{groupCategory.name}}</td>
-                <td>{{groupCategory.iconPresentation}}</td>
-                <td>{{groupCategory.iconContentType}}</td>
                 <td>{{groupCategory.about}}</td>
                 <td jhiTranslate="{{'visaoApp.TypePermission.' + groupCategory.permission}}">{{groupCategory.permission}}</td>
+                <td>{{groupCategory.name}}</td>
+                <td>
+                    <a *ngIf="groupCategory.iconPresentation" (click)="openFile(groupCategory.iconPresentationContentType, groupCategory.iconPresentation)">
+                        <img [src]="'data:' + groupCategory.iconPresentationContentType + ';base64,' + groupCategory.iconPresentation" style="max-height: 30px;" alt="groupCategory image"/>
+                    </a>
+                    <span *ngIf="groupCategory.iconPresentation">{{groupCategory.iconPresentationContentType}}, {{byteSize(groupCategory.iconPresentation)}}</span>
+                </td>
                 <td>
                     {{groupCategory.owner?.login}}
                 </td>

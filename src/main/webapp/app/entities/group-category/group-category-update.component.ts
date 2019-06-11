@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { JhiAlertService } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IGroupCategory } from 'app/shared/model/group-category.model';
 import { GroupCategoryService } from './group-category.service';
@@ -23,10 +23,12 @@ export class GroupCategoryUpdateComponent implements OnInit {
     categories: ICategory[];
 
     constructor(
+        private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private groupCategoryService: GroupCategoryService,
         private userService: UserService,
         private categoryService: CategoryService,
+        private elementRef: ElementRef,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -47,6 +49,22 @@ export class GroupCategoryUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.dataUtils.setFileData(event, entity, field, isImage);
+    }
+
+    clearInputImage(field: string, fieldContentType: string, idInput: string) {
+        this.dataUtils.clearInputImage(this.groupCategory, this.elementRef, field, fieldContentType, idInput);
     }
 
     previousState() {

@@ -3,9 +3,9 @@
     "visaoApp": {
         "groupCategory" : {
             "home": {
-                "title": "Grupo Categoria",
-                "createLabel": "Criar novo Grupo de Categoria",
-                "createOrEditLabel": "Criar ou editar Grupo de Categoria"
+                "title": "Instância",
+                "createLabel": "Criar nova Instância",
+                "createOrEditLabel": "Criar ou editar Instância"
             },
             "created": "Um novo Grupo de Categorias foi criado com o identificador {{ param }}",
             "updated": "Foi atualizado o Grupo de Categorias com o id {{ param }}",
@@ -17,10 +17,9 @@
                 "title": "Grupo de Categorias"
             },
             "name": "Nome",
-            "iconPresentation": "Caminho Logo",
-            "iconContentType": "Logo Content Type",
             "about": "Sobre",
             "permission": "Permissão",
+            "iconPresentation": "Logo",
             "owner": "Dono",
             "categories": "Categorias",
             "shareds": "Compartilhado"

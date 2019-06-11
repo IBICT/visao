@@ -17,33 +17,16 @@ export class GroupCategoryUpdatePage {
     pageTitle = element(by.id('jhi-group-category-heading'));
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
-    iconPresentationInput = element(by.id('field_iconPresentation'));
-    iconContentTypeInput = element(by.id('field_iconContentType'));
     aboutInput = element(by.id('field_about'));
     permissionSelect = element(by.id('field_permission'));
     nameInput = element(by.id('field_name'));
+    iconPresentationInput = element(by.id('file_iconPresentation'));
     ownerSelect = element(by.id('field_owner'));
     categoriesSelect = element(by.id('field_categories'));
     sharedsSelect = element(by.id('field_shareds'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
-    }
-
-    setIconPresentationInput(iconPresentation): promise.Promise<void> {
-        return this.iconPresentationInput.sendKeys(iconPresentation);
-    }
-
-    getIconPresentationInput() {
-        return this.iconPresentationInput.getAttribute('value');
-    }
-
-    setIconContentTypeInput(iconContentType): promise.Promise<void> {
-        return this.iconContentTypeInput.sendKeys(iconContentType);
-    }
-
-    getIconContentTypeInput() {
-        return this.iconContentTypeInput.getAttribute('value');
     }
 
     setAboutInput(about): promise.Promise<void> {
@@ -74,6 +57,14 @@ export class GroupCategoryUpdatePage {
 
     getNameInput() {
         return this.nameInput.getAttribute('value');
+    }
+
+    setIconPresentationInput(iconPresentation): promise.Promise<void> {
+        return this.iconPresentationInput.sendKeys(iconPresentation);
+    }
+
+    getIconPresentationInput() {
+        return this.iconPresentationInput.getAttribute('value');
     }
 
     ownerSelectLastOption(): promise.Promise<void> {

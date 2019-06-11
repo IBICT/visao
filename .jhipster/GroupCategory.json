@@ -29,14 +29,6 @@
     ],
     "fields": [
         {
-            "fieldName": "iconPresentation",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "iconContentType",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "about",
             "fieldType": "String"
         },
@@ -51,6 +43,11 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "iconPresentation",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
         }
     ],
     "changelogDate": "20190521115323",

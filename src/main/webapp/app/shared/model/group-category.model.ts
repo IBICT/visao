@@ -9,11 +9,11 @@ export const enum TypePermission {
 
 export interface IGroupCategory {
     id?: number;
-    iconPresentation?: string;
-    iconContentType?: string;
     about?: string;
     permission?: TypePermission;
     name?: string;
+    iconPresentationContentType?: string;
+    iconPresentation?: any;
     owner?: IUser;
     categories?: ICategory[];
     shareds?: IUser[];
@@ -22,11 +22,11 @@ export interface IGroupCategory {
 export class GroupCategory implements IGroupCategory {
     constructor(
         public id?: number,
-        public iconPresentation?: string,
-        public iconContentType?: string,
         public about?: string,
         public permission?: TypePermission,
         public name?: string,
+        public iconPresentationContentType?: string,
+        public iconPresentation?: any,
         public owner?: IUser,
         public categories?: ICategory[],
         public shareds?: IUser[]

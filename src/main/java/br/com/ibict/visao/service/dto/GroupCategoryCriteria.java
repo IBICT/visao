@@ -35,10 +35,6 @@ public class GroupCategoryCriteria implements Serializable {
 
     private LongFilter id;
 
-    private StringFilter iconPresentation;
-
-    private StringFilter iconContentType;
-
     private StringFilter about;
 
     private TypePermissionFilter permission;
@@ -60,22 +56,6 @@ public class GroupCategoryCriteria implements Serializable {
 
     public void setId(LongFilter id) {
         this.id = id;
-    }
-
-    public StringFilter getIconPresentation() {
-        return iconPresentation;
-    }
-
-    public void setIconPresentation(StringFilter iconPresentation) {
-        this.iconPresentation = iconPresentation;
-    }
-
-    public StringFilter getIconContentType() {
-        return iconContentType;
-    }
-
-    public void setIconContentType(StringFilter iconContentType) {
-        this.iconContentType = iconContentType;
     }
 
     public StringFilter getAbout() {
@@ -130,8 +110,6 @@ public class GroupCategoryCriteria implements Serializable {
     public String toString() {
         return "GroupCategoryCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (iconPresentation != null ? "iconPresentation=" + iconPresentation + ", " : "") +
-                (iconContentType != null ? "iconContentType=" + iconContentType + ", " : "") +
                 (about != null ? "about=" + about + ", " : "") +
                 (permission != null ? "permission=" + permission + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +

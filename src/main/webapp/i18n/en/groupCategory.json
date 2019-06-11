@@ -16,11 +16,10 @@
             "detail": {
                 "title": "Group Category"
             },
-            "iconPresentation": "Icon Presentation",
-            "iconContentType": "Icon Content Type",
             "about": "About",
             "permission": "Permission",
             "name": "Name",
+            "iconPresentation": "Icon Presentation",
             "owner": "Owner",
             "categories": "Categories",
             "shareds": "Shareds"

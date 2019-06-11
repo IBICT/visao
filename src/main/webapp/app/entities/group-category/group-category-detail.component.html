@@ -5,18 +5,6 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="visaoApp.groupCategory.name">Name</span></dt>
-                <dd>
-                    <span>{{groupCategory.name}}</span>
-                </dd>
-                <dt><span jhiTranslate="visaoApp.groupCategory.iconPresentation">Icon Presentation</span></dt>
-                <dd>
-                    <span>{{groupCategory.iconPresentation}}</span>
-                </dd>
-                <dt><span jhiTranslate="visaoApp.groupCategory.iconContentType">Icon Content Type</span></dt>
-                <dd>
-                    <span>{{groupCategory.iconContentType}}</span>
-                </dd>
                 <dt><span jhiTranslate="visaoApp.groupCategory.about">About</span></dt>
                 <dd>
                     <span>{{groupCategory.about}}</span>
@@ -24,6 +12,19 @@
                 <dt><span jhiTranslate="visaoApp.groupCategory.permission">Permission</span></dt>
                 <dd>
                     <span jhiTranslate="{{'visaoApp.TypePermission.' + groupCategory.permission}}">{{groupCategory.permission}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.groupCategory.name">Name</span></dt>
+                <dd>
+                    <span>{{groupCategory.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="visaoApp.groupCategory.iconPresentation">Icon Presentation</span></dt>
+                <dd>
+                    <div *ngIf="groupCategory.iconPresentation">
+                        <a (click)="openFile(groupCategory.iconPresentationContentType, groupCategory.iconPresentation)">
+                            <img [src]="'data:' + groupCategory.iconPresentationContentType + ';base64,' + groupCategory.iconPresentation" style="max-width: 100%;" alt="groupCategory image"/>
+                        </a>
+                        {{groupCategory.iconPresentationContentType}}, {{byteSize(groupCategory.iconPresentation)}}
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="visaoApp.groupCategory.owner">Owner</span></dt>
                 <dd>

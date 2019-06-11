@@ -70,12 +70,6 @@ public class GroupCategoryQueryService extends QueryService<GroupCategory> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), GroupCategory_.id));
             }
-            if (criteria.getIconPresentation() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getIconPresentation(), GroupCategory_.iconPresentation));
-            }
-            if (criteria.getIconContentType() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getIconContentType(), GroupCategory_.iconContentType));
-            }
             if (criteria.getAbout() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getAbout(), GroupCategory_.about));
             }
