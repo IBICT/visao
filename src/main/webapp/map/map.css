@@ -76,7 +76,7 @@ body {
 }
 .leaflet-top .leaflet-control-layers.leaflet-control {
     position: relative;
-    top: 760px;
+    top: 77.5vh;
     width: 30px;
     height: 30px;
 }
