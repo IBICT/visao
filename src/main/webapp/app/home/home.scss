@@ -4,7 +4,6 @@ Main page styles
 
 .bg-home {
     background: linear-gradient(0deg, #146678, #1d737f, #59c9a8 127.78%);
-    min-height: 100vh;
 }
 .layout {
     position: relative;
@@ -32,7 +31,7 @@ Main page styles
 .logoBackground {
     background: url('../../content/images/logoBack.png') no-repeat center bottom;
     background-size: contain;
-    min-height: 100vh;
+    min-height: 94.2vh;
 }
 
 .hipster {
@@ -68,7 +67,9 @@ Main page styles
     color: #fff;
     font-weight: bold;
 }
-
+.row {
+    width: 100% !important
+}
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
     only screen and (min--moz-device-pixel-ratio: 2),
