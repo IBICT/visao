@@ -28,104 +28,246 @@
 		<div class="nav menu justify-content-end">
 			<nav class="my-2 my-md-0 mr-md-3">
 				<ul class="navbar-nav ">
-					<li class="p-2 nav-item"><a class="nav-link" href="./../">home</a></li>
-					<li class="p-2 nav-item"><a class="nav-link" href="index.html">mapa</a></li>
+					<li class="p-2 nav-item"><a class="nav-link botao-tam" href="./../">home</a></li>
+					<li class="p-2 nav-item"><a class="nav-link botao-tam" href="index.html">mapa</a></li>
                     <!--SOMENTE QUANDO LOGADO-->
                     <li class="p-2 nav-item dropdown show-logado" style="display: none;">
-                        <a class="dropdown-toggle nav-link" href data-toggle="dropdown"><i class="fa fa-flag"></i> Entidades <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <!--<li class="menu-icon"><a class="i-icon fa fa-asterisk" href="./../#/name" style="color:#132D38">Grupo de Indicadores</a></li>-->
-                            <li class="menu-icon"><a href="./../#/name" style="color:#132D38"><i class="i-icon fa fa-asterisk"></i>Grupo de Indicadores</a></li>
-                            <li class="menu-icon"><a href="./../#/Indicator" style="color:#132D38"><i class="i-icon fa fa-asterisk"></i> Indicadores</a></li>
-                            <li class="menu-icon"><a href="./../#/year" style="color:#132D38"><i class="i-icon fa fa-asterisk"></i> Ano</a></li>
-                            <li class="menu-icon"><a href="./../#/meta-dado" style="color:#132D38"><i class="i-icon fa fa-asterisk"></i>Meta Dado </a></li>
-                            <li class="menu-icon"><a href="./../#/filter" style="color:#132D38"><i class="i-icon fa fa-asterisk"></i>Filtro</a></li>
-                            <li class="menu-icon"><a href="./../#/group-layer" style="color:#132D38"><i class="i-icon fa fa-asterisk"></i>Grupo de Camadas</a></li>
-                            <li class="menu-icon"><a href="./../#/layer" style="color:#132D38"><i class="i-icon fa fa-asterisk"></i>Camadas</a></li>
-                            <li class="menu-icon"><a href="./../#/marker-icon" style="color:#132D38"><i class="i-icon fa fa-asterisk"></i>Ícones</a></li>
-                            <li class="menu-icon"><a href="./../#/category" style="color:#132D38"><i class="i-icon fa fa-asterisk"></i>Categorias</a></li>
-                            <li class="menu-icon"><a href="./../#/region" style="color:#132D38"><i class="i-icon fa fa-asterisk"></i>Regiões</a></li>
-                            <li class="menu-icon"><a href="./../#/type-presentation" style="color:#132D38"><i class="i-icon fa fa-asterisk"></i> Apresentação dos dados</a></li>
+                        <a class="dropdown-toggle nav-link" href data-toggle="dropdown">entidades <span class="caret"></span><i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu"><span class="dropdown-menu-arrow"></span>
+                            <!--<li class="dropdown-item"><a class="i-icon fa fa-asterisk" href="./../#/name" style="color:#132D38">Grupo de Indicadores</a></li>-->
+                            <li class="dropdown-item "><a href="./../#/name" style="color:#132D38">Grupo de Indicadores</a></li>
+                            <li class="dropdown-item"><a href="./../#/Indicator" style="color:#132D38">Indicadores</a></li>
+                            <li class="dropdown-item"><a href="./../#/year" style="color:#132D38">Ano</a></li>
+                            <li class="dropdown-item"><a href="./../#/meta-dado" style="color:#132D38">Meta Dado</a></li>
+                            <li class="dropdown-item"><a href="./../#/filter" style="color:#132D38">Filtro</a></li>
+                            <li class="dropdown-item"><a href="./../#/group-layer" style="color:#132D38">Grupo de Camadas</a></li>
+                            <li class="dropdown-item"><a href="./../#/layer" style="color:#132D38">Camadas</a></li>
+                            <li class="dropdown-item"><a href="./../#/marker-icon" style="color:#132D38">Ícones</a></li>
+                            <li class="dropdown-item"><a href="./../#/category" style="color:#132D38">Categorias</a></li>
+                            <li class="dropdown-item"><a href="./../#/region" style="color:#132D38">Regiões</a></li>
+                            <li class="dropdown-item"><a href="./../#/type-presentation" style="color:#132D38">Apresentação dos dados</a></li>
                         </ul>
                     </li>
                     <li class="p-2 nav-item dropdown  show-logado" style="display: none;">
-                        <a class="dropdown-toggle nav-link" href data-toggle="dropdown"><i class="fa fa-user-plus"></i> Administração <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-														<li class="menu-icon"><a href="./../#/admin/user-management" style="color:#132D38"><i class="i-icon fa fa-user"></i><span>Gerenciamento de usuário</span></a></li>
-														<li class="menu-icon"><a href="./../#/admin/jhi-metrics" style="color:#132D38"><i class="i-icon fa fa-tachometer"></i><span>Métricas</span></a></li>
-														<li class="menu-icon"><a href="./../#/admin/jhi-health" style="color:#132D38"><i class="i-icon fa fa-heart"></i><span>Estado do Sistema</span></a></li>
-														<li class="menu-icon"><a href="./../#/admin/jhi-configuration" style="color:#132D38"><i class="i-icon fa fa-list"></i><span>Configuração</span></a></li>
-														<li class="menu-icon"><a href="./../#/admin/audits" style="color:#132D38"><i class="i-icon fa fa-bell"></i><span>Auditorias</span></a></li>
-														<li class="menu-icon"><a href="./../#/admin/logs" style="color:#132D38"><i class="i-icon fa fa-tasks"></i><span>Logs</span></a></li>
-														<li class="menu-icon"><a href="./../#/admin/docs" style="color:#132D38"><i class="i-icon fa fa-book"></i><span>API</span></a></li>
-														<li class="menu-icon"><a href="./../h2-console" style="color:#132D38"><i class="i-icon fa fa-hdd-o"></i><span>Banco de dados</span></a></li>
+                        <a class="dropdown-toggle nav-link" href data-toggle="dropdown">administração <span class="caret"></span><i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu"><span class="dropdown-menu-arrow"></span>
+														<li class="dropdown-item"><a href="./../#/admin/user-management" style="color:#132D38"><span>Gerenciamento de usuário</span></a></li>
+														<li class="dropdown-item"><a href="./../#/admin/jhi-metrics" style="color:#132D38"><span>Métricas</span></a></li>
+														<li class="dropdown-item"><a href="./../#/admin/jhi-health" style="color:#132D38"><span>Estado do Sistema</span></a></li>
+														<li class="dropdown-item"><a href="./../#/admin/jhi-configuration" style="color:#132D38"><span>Configuração</span></a></li>
+														<li class="dropdown-item"><a href="./../#/admin/audits" style="color:#132D38"><span>Auditorias</span></a></li>
+														<li class="dropdown-item"><a href="./../#/admin/logs" style="color:#132D38"><span>Logs</span></a></li>
+														<li class="dropdown-item"><a href="./../#/admin/docs" style="color:#132D38"><span>API</span></a></li>
+														<li class="dropdown-item"><a href="./../h2-console" style="color:#132D38"><span>Banco de dados</span></a></li>
                         </ul>
                     </li>
 					<li class="p-2 nav-item dropdown">
-						<a class="nav-link" href >|</a>
+						<a class="nav-link" href >|</a> 
 					</li>
 					<li class="p-2 nav-item dropdown">
 						<a class="nav-link margem" href data-toggle="dropdown"><i class="fa fa-user-o" aria-hidden="true"></i></a>
-						<ul style="width: 100px" class="dropdown-menu" id="hoverMouse">
-                            <!--Mostrar quando deslogado-->
-                            <li class="menu-icon show-deslogado"><a href data-toggle="modal" data-target="#siteModal" ><i class="i-icon fa fa-sign-in"></i><span>Entrar</span></a></li>
-                            <li class="menu-icon show-deslogado"><a href="./../#/register"><i class="i-icon fa fa-user-plus"></i><span>Registrar</span></a></li>
+						<ul style="width: 100px" class="dropdown-menu" id="hoverMouse"><span class="dropdown-menu-arrow"></span>
 
+                            <!--Mostrar quando deslogado-->
+                            <li class="dropdown-item show-deslogado"><a href data-toggle="modal" data-target="#siteModal" ><span>Entrar</span></a></li>
+							<!-- <li class="dropdown-item show-deslogado"><a href="./../#/register">Registrar</a></li> -->
+							<li class="dropdown-item show-deslogado"><a href data-toggle="modal" data-target="#cadastrar">Registrar</a></li>
                             <!--Mostrar quando logado-->
-                            <li class="menu-icon show-logado"><a href="./../#/settings"><i class="i-icon fa fa-wrench"></i><span>Configuração</span></a></li>
-                            <li class="menu-icon show-logado"><a href="./../#/password"><i class="i-icon fa fa-clock-o"></i><span>Senha</span></a></li>
-                            <li class="menu-icon show-logado"><a href="./../#/sessions"><i class="i-icon fa fa-cloud"></i><span>Sessões</span></a></li>
-                            <li class="menu-icon show-logado"><a (click)="logout"><i class="i-icon fa fa-sign-out"></i><span>Sair</span></a></li>
+                            <li class="dropdown-item show-logado"><a href="./../#/settings"><span>Configuração</span></a></li>
+                            <li class="dropdown-item show-logado"><a href="./../#/password"><span>Senha</span></a></li>
+                            <li class="dropdown-item show-logado"><a href="./../#/sessions"><span>Sessões</span></a></li>
+                            <li class="dropdown-item show-logado"><a href (click)="logout"><span>Sair </span> <i class="i-icon fa fa-sign-out"></i></a></li>
 						</ul>
 					</li>
 				</ul>
 			</nav>
 		</div>
 	</nav>
-	<!-------- ====================================> modal login <================================---------->
-	<div class="modal fade" id="siteModal" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content" id="altura">
-				<div class="modal-header color">
-					<h4 class="modal-title">
-						<span>Autenticação</span>
-					</h4>
-					<button type="button" class="close" data-dismiss="modal">
-						<span class="linkmodal">x</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="row justify-content-center">
-						<form>
-							<div class="form-group">
-								<label for="usuario">Usuário</label>
-								<input type="text" class="form-control" id="usuario" aria-describedby="usuario" placeholder="Seu Usuário">
+	<!-------- ====================================>Inicio modal login <================================---------->
+	<div class="modal" id="siteModal" tabindex="-1" role="dialog">
+		<div class="ajustes">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content" id="altura">
+					<!--<div class="modal-header color">
+						<h4 class="modal-title">
+							<span>Entrar</span>
+						</h4>
+						<button type="button" class="close" data-dismiss="modal">
+							<span class="linkmodal">x</span>
+						</button>
+					</div>-->
+					<div class="modal-body" id="corback">
+						<div class="caixa">
+							<h4 class="titulo-login">ENTRAR</h4>
+							<div class="justify-content-center">
+								<form>
+									<div class="form-group">
+										<label for="usuario">Usuário</label>
+										<input type="text" class="form-control input-user" id="usuario" aria-describedby="usuario" placeholder="Seu usuário">
+									</div>
+									<div class="form-group">
+										<label for="senha">Senha</label>
+										<input type="password" class="form-control input-user" id="senha" placeholder="Sua senha">
+										<div class="" >
+												<a class="esqueci-senha" data-toggle="modal" data-target="#idEsqueciSenha" href>Esqueci minha senha</a>
+											</div>
+									</div>
+							
+									<div class="conjunto">
+										<div class="form-check">
+											<input type="checkbox" class="form-check-input" id="manterLogado">
+											<label class="form-check-label cor" for="manterlogado">Manter-me logado</label>
+										</div>
+										<p>
+											<button type="submit" class="btn btn-warning btn-botao">Entrar</button> <a class="btn btn-secondary btn-margem" href="./../#/register">Cadastrar-se</a>
+										</p>
+									</div>
+								</form>
 							</div>
-							<div class="form-group">
-								<label for="senha">Senha</label>
-								<input type="password" class="form-control" id="senha" placeholder="Sua Senha">
-							</div>
-							<div class="form-check">
-								<input type="checkbox" class="form-check-input" id="exampleCheck1">
-								<label class="form-check-label" for="manterlogado">manter-me logado</label>
-							</div>
-							<p>
-								<button type="submit" class="btn btn-primary">Entrar</button>
-							</p>
-							<div class="alert alert-warning" role="alert">
-								<a class="linkmodal" href="">Esqueceu Senha?</a>
-							</div>
-							<div class="alert alert-warning" role="alert">
-								Não tem uma conta ainda? <a class="linkmodal" href="./../#/register">Crie uma nova conta</a>
-							</div>
-						</form>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-------- ====================================> modal login <===============================---------->
+	<!-------- ====================================>Fim modal login <===============================---------->
+	<!-------- ====================================>Inicio modal esqueci minha senha <==================---------->
+
+	<div class="modal fade" id="idEsqueciSenha" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body popup">
+					<h4>CRIAR NOVA SENHA</h4>
+					<span><p>Informe endereço de e-mail utilizado no cadastro.</p></span>
+					<div class="form-group">
+						<label for="email">E-mail</label>
+						<input type="text" class="form-control input-user" id="email" aria-describedby="email" placeholder="Seu email">
+					</div>
+					<p>
+						<button type="submit" class="btn btn-warning btn-botao">Criar nova senha</button>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-------- ====================================>Fim modal esqqueci minha senha <==================---------->
+
+
+<!-------- ====================================>Inicio modal cadastrar-se<==================---------->
+<div class="modal fade" id="cadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content corpo-modal">
+			<div class="modal-body">
+				<div class="interio">
+					<h4 class="titulo-login">CADASTRO</h4>
+					<button type="button" class="close" data-dismiss="modal">
+						<span class="linkmodal fechar">x</span>
+					</button>
+					<form name="form" role="form" (ngSubmit)="register()" #registerForm="ngForm" *ngIf="!success">
+							<div class="form-group formulario">
+									<label class="form-control-label" for="login" >Usuário</label>
+									<input type="text" class="form-control input-user" [(ngModel)]="registerAccount.login" id="login" name="login" #login="ngModel" placeholder="Seu usuário"
+													required minlength="1" maxlength="50" pattern="^[_.@A-Za-z0-9-]*$">
+									<!-- <div *ngIf="login.dirty && login.invalid">
+											<small class="form-text text-danger" *ngIf="login.errors.required" jhiTranslate="register.messages.validate.login.required">
+													Your username is required.
+											</small>
+											<small class="form-text text-danger" *ngIf="login.errors.minlength"
+															jhiTranslate="register.messages.validate.login.minlength">
+													Your username is required to be at least 1 character.
+											</small>
+											<small class="form-text text-danger" *ngIf="login.errors.maxlength"
+															jhiTranslate="register.messages.validate.login.maxlength">
+													Your username cannot be longer than 50 characters.
+											</small>
+											<small class="form-text text-danger" *ngIf="login.errors.pattern"
+														 jhiTranslate="register.messages.validate.login.pattern">
+													Your username can only contain letters and digits.
+											</small>
+									</div> -->
+							</div>
+							<div class="form-group formulario">
+									<label class="form-control-label" for="email">E-mail</label>
+									<input type="email" class="form-control input-user" id="email" name="email" #email="ngModel" placeholder="Seu email"
+													[(ngModel)]="registerAccount.email" minlength=5 maxlength=254 email required>
+									<!-- <div *ngIf="email.dirty && email.invalid">
+											<small class="form-text text-danger" *ngIf="email.errors.required"
+															jhiTranslate="global.messages.validate.email.required">
+													Your email is required.
+											</small>
+											<small class="form-text text-danger" *ngIf="email.errors.invalid"
+														 jhiTranslate="global.messages.validate.email.invalid">
+													Your email is invalid.
+											</small>
+											<small class="form-text text-danger" *ngIf="email.errors.minlength"
+														 jhiTranslate="global.messages.validate.email.minlength">
+													Your email is required to be at least 5 characters.
+											</small>
+											<small class="form-text text-danger" *ngIf="email.errors.maxlength"
+														 jhiTranslate="global.messages.validate.email.maxlength">
+													Your email cannot be longer than 100 characters.
+											</small>
+									</div> -->
+							</div>
+							<div class="form-group formulario">
+									<label class="form-control-label" for="password" >Senha</label>
+									<input type="password" class="form-control input-user" id="password" name="password" #password="ngModel" placeholder="Sua senha"
+													[(ngModel)]="registerAccount.password" minlength=4 maxlength=50 required>
+									<!-- <div *ngIf="password.dirty && password.invalid"> -->
+											<!-- <small class="form-text text-danger" *ngIf="password.errors.required"
+															jhiTranslate="global.messages.validate.newpassword.required">
+													Your password is required. -->
+											<!-- </small>
+											<small class="form-text text-danger" *ngIf="password.errors.minlength"
+															jhiTranslate="global.messages.validate.newpassword.minlength">
+													Your password is required to be at least 4 characters.
+											</small>
+											<small class="form-text text-danger" *ngIf="password.errors.maxlength"
+															jhiTranslate="global.messages.validate.newpassword.maxlength">
+													Your password cannot be longer than 50 characters.
+											</small>
+									</div>
+									<jhi-password-strength-bar [passwordToCheck]="registerAccount.password"></jhi-password-strength-bar> --> 
+							</div>
+							<div class="form-group formulario">
+									<label class="form-control-label" for="confirmPassword">Confirmação de senha</label>
+									<input type="password" class="form-control input-user" id="confirmPassword" name="confirmPassword" #confirmPasswordInput="ngModel" placeholder="Confirme sua senha"
+													[(ngModel)]="confirmPassword" minlength=4 maxlength=50 required>
+									<!-- <div *ngIf="confirmPasswordInput.dirty && confirmPasswordInput.invalid">
+											<small class="form-text text-danger" *ngIf="confirmPasswordInput.errors.required"
+														 jhiTranslate="global.messages.validate.confirmpassword.required">
+													Your confirmation password is required.
+											</small>
+											<small class="form-text text-danger" *ngIf="confirmPasswordInput.errors.minlength"
+														jhiTranslate="global.messages.validate.confirmpassword.minlength">
+													Your confirmation password is required to be at least 4 characters.
+											</small>
+											<small class="form-text text-danger" *ngIf="confirmPasswordInput.errors.maxlength"
+														 jhiTranslate="global.messages.validate.confirmpassword.maxlength">
+													Your confirmation password cannot be longer than 50 characters.
+											</small>
+									</div> -->
+							</div>
+
+							<button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-warning botao-cadastrar" >Cadastre</button>
+					</form>
+					<p></p>
+					<!-- <div class="alert alert-warning">
+							<span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
+							<a class="alert-link" (click)="openLogin()" jhiTranslate="global.messages.info.authenticated.link">sign in</a><span jhiTranslate="global.messages.info.authenticated.suffix">, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
+					</div> -->
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-------- ====================================>Fim modal cadastrar-se<==================---------->
+
 
     <div id="map">
         <div id ="loading" class="loader"></div>
