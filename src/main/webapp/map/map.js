@@ -777,7 +777,7 @@ function makeMap() {
                     itensSelect.forEach(function (iten) {
                         selectRangeMapHtml += iten;
                     });
-
+ 
                     selectRangeMapHtml += '</select>' +
                         '</div>';
                     // html do SELECT
