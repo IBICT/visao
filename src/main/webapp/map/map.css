@@ -76,7 +76,7 @@ body {
 }
 .leaflet-top .leaflet-control-layers.leaflet-control {
     position: relative;
-    top: 77.5vh;
+    top: 77.8vh;
     width: 30px;
     height: 30px;
 }
@@ -113,6 +113,20 @@ body {
     padding: 0 10px;
     margin-bottom: 2px;
 }
+.modal-content {
+    width: 514px;
+}
+#map div div div div div p {
+    font-family: 'Roboto Condensed';
+    color: #146678;
+}
+#map div div div div div p#both {
+    font-family: 'Roboto';
+    font-size: 14px;
+    font-weight: 300;
+    color: black;
+    margin-bottom: 10px !important;
+}
 .modal-header {
     background-color: #e5c75a;
     color: white;
@@ -123,6 +137,7 @@ body {
 .modal-header .close:hover {
     color: white;
 }
+/* Inicio da responsividade */
 @media (min-width: 576px) {
     .modal-dialog {
         max-width: 800px;
@@ -663,7 +678,7 @@ h5.mb-0 button.btn.btn-link {
 }
 .leaflet-control-layers-expanded:first-child {
     position: absolute !important; 
-    top: 640px !important;  
+    top: 65.5vh !important;  
     width: 180px !important;
     height: 150px !important;
 

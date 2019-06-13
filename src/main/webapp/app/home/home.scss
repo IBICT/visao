@@ -82,3 +82,27 @@ Main page styles
         background-size: contain;
     }
 }
+@media screen and (max-width: 576px) {
+    .offset-3 {
+        width: 100%;
+    }
+    .layout {
+        width: 100%;
+        position: relative;
+        top: 25px;
+        right: 50px;
+    }
+    .bg-home .text-light {
+        width: 100%;
+    }
+    h1.home-yellow {
+        width: 100%;
+        font-size: 24px !important;
+    }
+    p {
+        width: 100%
+    }
+    .btn-warning {
+        left: 11%;
+    }
+}
