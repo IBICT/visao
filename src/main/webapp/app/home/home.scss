@@ -89,20 +89,26 @@ Main page styles
     .layout {
         width: 100%;
         position: relative;
-        top: 25px;
-        right: 50px;
+        top: -10%;
+        right: 26%;
     }
     .bg-home .text-light {
-        width: 100%;
+        width: 120%;
     }
     h1.home-yellow {
-        width: 100%;
+        width: 120%;
         font-size: 24px !important;
     }
     p {
-        width: 100%
+        width: 105%;
     }
     .btn-warning {
         left: 11%;
+        width: 130px;
+        height: 40px;
+        font-size: 12px;
+        padding-bottom: 30px;
+        margin-left: 50px;
+        top: 160%;
     }
 }

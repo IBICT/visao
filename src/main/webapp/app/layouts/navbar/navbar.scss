@@ -111,10 +111,13 @@ Navbar
 }
 @media screen and (max-width: 576px) {
     .jh-navbar ul.navbar-nav {
-        width: 30%;
-        background: #ccc;
+        width: 104.3%;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.9);
     }
-    
+    .nav-link {
+        color: #146678 !important;
+    }
     
     .modal-content {
         width: 100%
