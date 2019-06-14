@@ -52,9 +52,16 @@
                         <input type="file" id="file_iconPresentation" (change)="setFileData($event, groupCategory, 'iconPresentation', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
                     </div>
                     <input type="hidden" class="form-control" name="iconPresentation" id="field_iconPresentation"
-                        [(ngModel)]="groupCategory.iconPresentation" />
+                        [(ngModel)]="groupCategory.iconPresentation" required />
                     <input type="hidden" class="form-control" name="iconPresentationContentType" id="field_iconPresentationContentType"
                         [(ngModel)]="groupCategory.iconPresentationContentType" />
+                    <div [hidden]="!(editForm.controls.iconPresentation?.dirty && editForm.controls.iconPresentation?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.iconPresentation?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="visaoApp.groupCategory.owner" for="field_owner">Owner</label>

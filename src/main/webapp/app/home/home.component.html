@@ -22,11 +22,12 @@
                     <div class="containerInstancias" *ngFor="let instancia of instancias">
                         <div class="instanciaBlock">
                             <a href="../../../map/index.html?grpCat={{instancia.id}}">
-                                <img class="iconInstancia" src="../../content/images/hipster.png">
+                                <img class="iconInstancia" [src]="'data:' + instancia.iconPresentationContentType + ';base64,' + instancia.iconPresentation" alt="groupCategory image"/>
                                 <label>{{instancia.name}}</label>
                             </a>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
