@@ -75,11 +75,34 @@ function modalDetail(data){
 
 function isUserAllowedGroupCategory(){
     var grpCatId = getUrlParameter('grpCat');
+    var filterAplicado = getUrlParameter('filter');
+    var indicator = getUrlParameter('indicator');
+    var layer = getUrlParameter('layer');
 
-    if(grpCatId === undefined || grpCatId === 'null' || grpCatId === ''){
+    var existeGroupCategory = !(grpCatId === undefined || grpCatId === 'null' || grpCatId === '');
+    var existeFiltro = !(filterAplicado === undefined || filterAplicado === 'null' || filterAplicado === '');
+    var existeIndicador = !(indicator === undefined || indicator === 'null' || indicator === '');
+    var existeLayer = !(layer === undefined || layer === 'null' || layer === '');
+
+    if(!existeGroupCategory || (existeFiltro && !existeIndicador)){
         window.location.replace("/#/accessdenied");
+        return;
     }
     currentGroupCategory = grpCatId;
+
+    if(existeFiltro){
+        filtrosId = new Set();
+        filtrosId.add(parseInt(filterAplicado));
+    }
+
+    if(existeIndicador){
+        indicadorAtual = indicator;
+    }
+
+    if(existeLayer){
+        layersId = new Set();
+        layersId.add(parseInt(layer));
+    }
 
     $.ajax({
         url: '/api/group-categories-enabled/'+grpCatId,
@@ -87,6 +110,7 @@ function isUserAllowedGroupCategory(){
         success: function (data) {
             if(!data){
                 window.location.replace("/#/accessdenied");
+                return;
             }
             getGeoJson();
         }
@@ -127,6 +151,7 @@ function getGeoJson(){
                                                 success: function (data) {
                                                     groupLayer = data;
                                                     makeMap();
+                                                    applyMapWithParameters();
                                                 }
                                             });
                                         }
@@ -139,6 +164,32 @@ function getGeoJson(){
 			});
 		}
 	});
+}
+
+function applyMapWithParameters(){
+    var submitForm = false;
+
+    if(indicadorAtual !== undefined){
+        $('#indicador'+indicadorAtual).prop('checked', true);
+        submitForm = true;
+    }
+
+    if(filtrosId !== undefined){
+        filtrosId.forEach(function (filtro) {
+            $('#checkbox-'+filtro).prop('checked', true);
+        });
+    }
+
+    if(layersId !== undefined){
+        layersId.forEach(function (layer) {
+            $('#layer'+layer).prop('checked', true);
+        });
+        submitForm = true;
+    }
+
+    if(submitForm){
+        $('#submitFormIndicator').click();
+    }
 }
 
 function genereteListIndicators(){
@@ -967,12 +1018,30 @@ function makeMap() {
             }
             
 			limparMapControl.addTo(map);
-		});
 
+		});
+        updateUrlWithoutRefresh();
 
 	});
 
 };
+
+function updateUrlWithoutRefresh(){
+    var parameters = 'index.html?grpCat'+currentGroupCategory;
+
+    if(indicadorAtual !== undefined){
+        parameters += '&indicator='+indicadorAtual;
+    }
+
+    if(filtrosId !==undefined && filtrosId.size > 0){
+        parameters += '&filters='+Array.from(filtrosId).join(',');
+    }
+
+    if(layersId !==undefined && layersId.size > 0){
+        parameters += '&layers='+Array.from(layersId).join(',');
+    }
+    window.history.replaceState('mapaInteiro', 'mapa aplicado', parameters);
+}
 
 function infoAboutIndicator() {
 
