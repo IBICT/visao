@@ -25,6 +25,7 @@
 			<!-- <img src="../../content/images/logo2.png"  height="30" class="d-inline-block align-top" alt=""> -->
 			<img src="logo.png"  height="30" class="d-inline-block align-top" alt="">
 		</a>
+		
 		<div class="nav menu justify-content-end">
 			<nav class="my-2 my-md-0 mr-md-3">
 				<ul class="navbar-nav ">
@@ -35,7 +36,7 @@
                         <a class="dropdown-toggle nav-link" href data-toggle="dropdown">entidades <span class="caret"></span><i class="fa fa-angle-down"></i></a>
                         <ul class="dropdown-menu"><span class="dropdown-menu-arrow"></span>
                             <!--<li class="dropdown-item"><a class="i-icon fa fa-asterisk" href="./../#/name" style="color:#132D38">Grupo de Indicadores</a></li>-->
-                            <li class="dropdown-item "><a href="./../#/name" style="color:#132D38">Grupo de Indicadores</a></li>
+                            <li class="dropdown-item "><a href="./../#/name" style="color:#132D38"> Grupo de Indicadores</a></li>
                             <li class="dropdown-item"><a href="./../#/Indicator" style="color:#132D38">Indicadores</a></li>
                             <li class="dropdown-item"><a href="./../#/year" style="color:#132D38">Ano</a></li>
                             <li class="dropdown-item"><a href="./../#/meta-dado" style="color:#132D38">Meta Dado</a></li>
@@ -69,9 +70,9 @@
 						<ul style="width: 100px" class="dropdown-menu" id="hoverMouse"><span class="dropdown-menu-arrow"></span>
 
                             <!--Mostrar quando deslogado-->
-                            <li class="dropdown-item show-deslogado"><a href data-toggle="modal" data-target="#siteModal" ><span>Entrar</span></a></li>
-							<!-- <li class="dropdown-item show-deslogado"><a href="./../#/register">Registrar</a></li> -->
-							<li class="dropdown-item show-deslogado"><a href data-toggle="modal" data-target="#cadastrar">Registrar</a></li>
+                            <li class="dropdown-item show-deslogado"><a href data-toggle="modal" data-target="#siteModal" ><span><span class="fa fa-dot-circle"></span>Entrar</span></a></li>
+							<li class="dropdown-item show-deslogado"><a href="./../#/register">Registrar</a></li>
+							<!-- <li class="dropdown-item show-deslogado"><a href data-toggle="modal" data-target="#cadastrar">Registrar</a></li> -->
                             <!--Mostrar quando logado-->
                             <li class="dropdown-item show-logado"><a href="./../#/settings"><span>Configuração</span></a></li>
                             <li class="dropdown-item show-logado"><a href="./../#/password"><span>Senha</span></a></li>
@@ -109,8 +110,8 @@
 										<label for="senha">Senha</label>
 										<input type="password" class="form-control input-user" id="senha" placeholder="Sua senha">
 										<div class="" >
-												<a class="esqueci-senha" data-toggle="modal" data-target="#idEsqueciSenha" href>Esqueci minha senha</a>
-											</div>
+											<a class="esqueci-senha" data-toggle="modal" data-target="#idEsqueciSenha" href>Esqueci minha senha</a>
+										</div>
 									</div>
 							
 									<div class="conjunto">
@@ -156,7 +157,7 @@
 
 
 <!-------- ====================================>Inicio modal cadastrar-se<==================---------->
-<div class="modal fade" id="cadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="cadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content corpo-modal">
 			<div class="modal-body">
@@ -170,85 +171,25 @@
 									<label class="form-control-label" for="login" >Usuário</label>
 									<input type="text" class="form-control input-user" [(ngModel)]="registerAccount.login" id="login" name="login" #login="ngModel" placeholder="Seu usuário"
 													required minlength="1" maxlength="50" pattern="^[_.@A-Za-z0-9-]*$">
-									<!-- <div *ngIf="login.dirty && login.invalid">
-											<small class="form-text text-danger" *ngIf="login.errors.required" jhiTranslate="register.messages.validate.login.required">
-													Your username is required.
-											</small>
-											<small class="form-text text-danger" *ngIf="login.errors.minlength"
-															jhiTranslate="register.messages.validate.login.minlength">
-													Your username is required to be at least 1 character.
-											</small>
-											<small class="form-text text-danger" *ngIf="login.errors.maxlength"
-															jhiTranslate="register.messages.validate.login.maxlength">
-													Your username cannot be longer than 50 characters.
-											</small>
-											<small class="form-text text-danger" *ngIf="login.errors.pattern"
-														 jhiTranslate="register.messages.validate.login.pattern">
-													Your username can only contain letters and digits.
-											</small>
-									</div> -->
+
 							</div>
 							<div class="form-group formulario">
 									<label class="form-control-label" for="email">E-mail</label>
 									<input type="email" class="form-control input-user" id="email" name="email" #email="ngModel" placeholder="Seu email"
 													[(ngModel)]="registerAccount.email" minlength=5 maxlength=254 email required>
-									<!-- <div *ngIf="email.dirty && email.invalid">
-											<small class="form-text text-danger" *ngIf="email.errors.required"
-															jhiTranslate="global.messages.validate.email.required">
-													Your email is required.
-											</small>
-											<small class="form-text text-danger" *ngIf="email.errors.invalid"
-														 jhiTranslate="global.messages.validate.email.invalid">
-													Your email is invalid.
-											</small>
-											<small class="form-text text-danger" *ngIf="email.errors.minlength"
-														 jhiTranslate="global.messages.validate.email.minlength">
-													Your email is required to be at least 5 characters.
-											</small>
-											<small class="form-text text-danger" *ngIf="email.errors.maxlength"
-														 jhiTranslate="global.messages.validate.email.maxlength">
-													Your email cannot be longer than 100 characters.
-											</small>
-									</div> -->
+
+									</div>
 							</div>
 							<div class="form-group formulario">
 									<label class="form-control-label" for="password" >Senha</label>
 									<input type="password" class="form-control input-user" id="password" name="password" #password="ngModel" placeholder="Sua senha"
 													[(ngModel)]="registerAccount.password" minlength=4 maxlength=50 required>
-									<!-- <div *ngIf="password.dirty && password.invalid"> -->
-											<!-- <small class="form-text text-danger" *ngIf="password.errors.required"
-															jhiTranslate="global.messages.validate.newpassword.required">
-													Your password is required. -->
-											<!-- </small>
-											<small class="form-text text-danger" *ngIf="password.errors.minlength"
-															jhiTranslate="global.messages.validate.newpassword.minlength">
-													Your password is required to be at least 4 characters.
-											</small>
-											<small class="form-text text-danger" *ngIf="password.errors.maxlength"
-															jhiTranslate="global.messages.validate.newpassword.maxlength">
-													Your password cannot be longer than 50 characters.
-											</small>
-									</div>
-									<jhi-password-strength-bar [passwordToCheck]="registerAccount.password"></jhi-password-strength-bar> --> 
+
 							</div>
 							<div class="form-group formulario">
 									<label class="form-control-label" for="confirmPassword">Confirmação de senha</label>
 									<input type="password" class="form-control input-user" id="confirmPassword" name="confirmPassword" #confirmPasswordInput="ngModel" placeholder="Confirme sua senha"
 													[(ngModel)]="confirmPassword" minlength=4 maxlength=50 required>
-									<!-- <div *ngIf="confirmPasswordInput.dirty && confirmPasswordInput.invalid">
-											<small class="form-text text-danger" *ngIf="confirmPasswordInput.errors.required"
-														 jhiTranslate="global.messages.validate.confirmpassword.required">
-													Your confirmation password is required.
-											</small>
-											<small class="form-text text-danger" *ngIf="confirmPasswordInput.errors.minlength"
-														jhiTranslate="global.messages.validate.confirmpassword.minlength">
-													Your confirmation password is required to be at least 4 characters.
-											</small>
-											<small class="form-text text-danger" *ngIf="confirmPasswordInput.errors.maxlength"
-														 jhiTranslate="global.messages.validate.confirmpassword.maxlength">
-													Your confirmation password cannot be longer than 50 characters.
-											</small>
-									</div> -->
 							</div>
 
 							<button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-warning botao-cadastrar" >Cadastre</button>
@@ -276,7 +217,7 @@
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="tituloModal" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
-		<div class="modal-content">
+		<div class="modal-content"> 
 		  <div class="modal-header">
             <input id="idInfoIndicador" type="number" style="display: none;">
 			<h5 class="modal-title" id="tituloModal">DETALHAMENTO DE DADOS</h5>

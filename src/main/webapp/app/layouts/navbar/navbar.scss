@@ -9,10 +9,9 @@ Navbar
     font-family: 'Roboto Condensed';
     font-style: normal;
     font-weight: normal;
-    font-size: 20px;
+    font-size: 18px;
     line-height: normal;
 }
-
 .jh-navbar {
     z-index: 1;
     padding: 0.2em 1em;
@@ -58,8 +57,6 @@ Navbar
     font-family: 'Roboto Condensed' !important;
     font-style: normal;
     font-weight: bold !important;
-    font-size: 20px !important;
-    line-height: 23px !important;
 }
 .dropdown-menu.show {
     font-family: 'Roboto';
@@ -100,9 +97,32 @@ Navbar
     right: -65px;
     border-bottom-color: rgba(0, 0, 0, 0.15);
 }
+.pausinho {
+    display: block;
+}
 
 @media screen and (min-width: 768px) {
     .jh-navbar-toggler {
+        display: none;
+    }
+}
+@media screen and (max-width: 576px) {
+    .jh-navbar ul.navbar-nav {
+        width: 104.3%;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.9);
+    }
+    .nav-link {
+        color: #146678 !important;
+    }
+
+    .modal-content {
+        width: 100%;
+    }
+    .modal-body {
+        width: 100%;
+    }
+    .pausinho {
         display: none;
     }
 }
@@ -116,6 +136,10 @@ Navbar
 .navbar-title {
     display: inline-block;
     vertical-align: middle;
+}
+.servico {
+    font-weight: bold;
+    font-size: 10px;
 }
 
 /* ==========================================================================
