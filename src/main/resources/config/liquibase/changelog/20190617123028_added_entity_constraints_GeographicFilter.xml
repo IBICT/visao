@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity GeographicFilter.
+    -->
+    <changeSet id="20190617123028-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="cidade_polo_id"
+                                 baseTableName="geographic_filter"
+                                 constraintName="fk_geographic_filter_cidade_polo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="region"/>
+
+        <addForeignKeyConstraint baseColumnNames="owner_id"
+                                 baseTableName="geographic_filter"
+                                 constraintName="fk_geographic_filter_owner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="geographic_filters_id"
+                                 baseTableName="geographic_filter_region"
+                                 constraintName="fk_geographic_filter_region_geographic_filters_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="geographic_filter"/>
+        <addForeignKeyConstraint baseColumnNames="regions_id"
+                                 baseTableName="geographic_filter_region"
+                                 constraintName="fk_geographic_filter_region_regions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="region"/>
+        
+        <addForeignKeyConstraint baseColumnNames="geographic_filters_id"
+                                 baseTableName="geographic_filter_category"
+                                 constraintName="fk_geographic_filter_category_geographic_filters_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="geographic_filter"/>
+        <addForeignKeyConstraint baseColumnNames="categories_id"
+                                 baseTableName="geographic_filter_category"
+                                 constraintName="fk_geographic_filter_category_categories_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category"/>
+        
+    </changeSet>
+</databaseChangeLog>

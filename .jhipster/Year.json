@@ -10,7 +10,7 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190213123340",
+    "changelogDate": "20190617123026",
     "entityTableName": "year",
     "dto": "no",
     "pagination": "pager",

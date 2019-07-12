@@ -26,7 +26,8 @@
         },
         {
             "fieldName": "description",
-            "fieldType": "String"
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
         },
         {
             "fieldName": "date",
@@ -42,15 +43,16 @@
         },
         {
             "fieldName": "note",
-            "fieldType": "String"
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
         }
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-one",
-            "relationshipName": "category",
-            "otherEntityName": "category",
-            "otherEntityField": "id"
+            "relationshipType": "one-to-many",
+            "relationshipName": "metaDado",
+            "otherEntityName": "metaDado",
+            "otherEntityRelationshipName": "layer"
         },
         {
             "relationshipType": "many-to-one",
@@ -65,7 +67,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20190213123343",
+    "changelogDate": "20190617123029",
     "entityTableName": "layer",
     "dto": "no",
     "pagination": "pager",

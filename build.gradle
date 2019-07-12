@@ -10,7 +10,6 @@ buildscript {
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${spring_boot_version}"
         classpath "io.spring.gradle:propdeps-plugin:0.0.10.RELEASE"
-        classpath "org.openapitools:openapi-generator-gradle-plugin:3.0.1"
         classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.5.1"
         //jhipster-needle-gradle-buildscript-dependency - JHipster will add additional gradle build script plugins here
     }
@@ -49,13 +48,13 @@ dependencyManagement {
 
 defaultTasks 'bootRun'
 
-group = 'br.com.ibict.visao'
+group = 'br.com.ibict'
 version = '0.0.1-SNAPSHOT'
 
 description = ''
 
 bootWar {
-   mainClassName = 'br.com.ibict.visao.VisaoApp'
+   mainClassName = 'br.com.ibict.VisaoApp'
 }
 
 war {
@@ -63,7 +62,7 @@ war {
 }
 
 springBoot {
-    mainClassName = 'br.com.ibict.visao.VisaoApp'
+    mainClassName = 'br.com.ibict.VisaoApp'
     buildInfo()
 }
 
@@ -108,7 +107,6 @@ task testReport(type: TestReport) {
 apply from: 'gradle/docker.gradle'
 apply from: 'gradle/sonar.gradle'
 apply from: 'gradle/liquibase.gradle'
-apply from: 'gradle/swagger.gradle'
 //jhipster-needle-gradle-apply-from - JHipster will add additional gradle scripts to be applied here
 
 if (project.hasProperty('prod')) {
@@ -186,6 +184,7 @@ dependencies {
     compile "org.springframework.security:spring-security-config"
     compile "org.springframework.security:spring-security-data"
     compile "org.springframework.security:spring-security-web"
+    compile "io.jsonwebtoken:jjwt"
     compile ("io.springfox:springfox-swagger2") {
         exclude module: 'mapstruct'
     }
@@ -208,6 +207,7 @@ dependencies {
     testCompile "org.mockito:mockito-core"
     testCompile "com.mattbertolini:liquibase-slf4j"
     testCompile "org.hamcrest:hamcrest-library"
+    testCompile "com.h2database:h2"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
 }
 

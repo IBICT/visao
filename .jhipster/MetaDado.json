@@ -18,15 +18,37 @@
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "",
-            "relationshipName": "nome",
-            "otherEntityName": "name",
-            "otherEntityField": "id",
-            "ownerSide": true
+            "relationshipName": "indicator",
+            "otherEntityName": "indicator",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "grupIndicator",
+            "otherEntityName": "grupIndicator",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "geographicFilter",
+            "otherEntityName": "geographicFilter",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "layer",
+            "otherEntityName": "layer",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "groupLayer",
+            "otherEntityName": "groupLayer",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20190213123341",
+    "changelogDate": "20190617123027",
     "entityTableName": "meta_dado",
     "dto": "no",
     "pagination": "pager",

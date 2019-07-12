@@ -1,0 +1,104 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-layer-heading">Create or edit a Layer</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!layer.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="layer.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="layer.name" required/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_geoJson">Geo Json</label>
+                    <textarea class="form-control" name="geoJson" id="field_geoJson"
+                        [(ngModel)]="layer.geoJson" required></textarea>
+                    <div [hidden]="!(editForm.controls.geoJson?.dirty && editForm.controls.geoJson?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.geoJson?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_type">Type</label>
+                    <select class="form-control" name="type" [(ngModel)]="layer.type" id="field_type"  required>
+                        <option value="MARKER">MARKER</option>
+                        <option value="CIRCLE">CIRCLE</option>
+                        <option value="POLYGON">POLYGON</option>
+                        <option value="ICON">ICON</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.type?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_description">Description</label>
+                    <textarea class="form-control" name="description" id="field_description"
+                        [(ngModel)]="layer.description" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_date">Date</label>
+                    <div class="d-flex">
+                        <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="date"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_source">Source</label>
+                    <input type="text" class="form-control" name="source" id="field_source"
+                        [(ngModel)]="layer.source" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateChange">Date Change</label>
+                    <div class="d-flex">
+                        <input id="field_dateChange" type="datetime-local" class="form-control" name="dateChange" [(ngModel)]="dateChange"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_note">Note</label>
+                    <textarea class="form-control" name="note" id="field_note"
+                        [(ngModel)]="layer.note" ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_icon">Icon</label>
+                    <select class="form-control" id="field_icon" name="icon" [(ngModel)]="layer.icon" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="markerIconOption.id === layer.icon?.id ? layer.icon : markerIconOption" *ngFor="let markerIconOption of markericons; trackBy: trackMarkerIconById">{{markerIconOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_group">Group</label>
+                    <select class="form-control" id="field_group" name="group" [(ngModel)]="layer.group" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="groupLayerOption.id === layer.group?.id ? layer.group : groupLayerOption" *ngFor="let groupLayerOption of grouplayers; trackBy: trackGroupLayerById">{{groupLayerOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -36,7 +36,7 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190213123344",
+    "changelogDate": "20190617123030",
     "entityTableName": "marker_icon",
     "dto": "no",
     "pagination": "pager",

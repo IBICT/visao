@@ -1,7 +1,8 @@
+
 {
   "name": "visao",
   "version": "0.0.0",
-  "description": "Description for Visao",
+  "description": "Description for visao",
   "private": true,
   "license": "UNLICENSED",
   "cacheDirectories": [
@@ -25,7 +26,6 @@
     "moment": "2.21.0",
     "ng-jhipster": "0.5.4",
     "ngx-cookie": "2.0.1",
-    "ngx-cookie-service": "^2.1.0",
     "ngx-infinite-scroll": "0.5.1",
     "ngx-webstorage": "2.0.1",
     "reflect-metadata": "0.1.12",
@@ -41,8 +41,8 @@
     "@ngtools/webpack": "6.0.0",
     "@types/jest": "22.2.3",
     "@types/node": "9.4.7",
-    "@types/selenium-webdriver": "3.0.8",
     "angular-router-loader": "0.8.2",
+    "@types/selenium-webdriver": "3.0.8",
     "angular2-template-loader": "0.6.2",
     "browser-sync": "2.24.4",
     "browser-sync-webpack-plugin": "2.2.2",
@@ -59,30 +59,26 @@
     "html-loader": "0.5.5",
     "html-webpack-plugin": "3.2.0",
     "husky": "0.14.3",
-    "jasmine-reporters": "2.2.1",
     "jest": "22.4.3",
     "jest-junit": "5.1.0",
     "jest-preset-angular": "5.2.2",
     "jest-sonar-reporter": "2.0.0",
+    "jasmine-reporters": "2.2.1",
     "lint-staged": "7.0.0",
-    "merge-jsons-webpack-plugin": "1.0.14",
     "moment-locales-webpack-plugin": "1.0.5",
-    "node-sass": "^4.12.0",
-    "postcss-loader": "2.1.1",
     "prettier": "1.11.1",
     "protractor": "5.1.2",
     "protractor-jasmine2-screenshot-reporter": "0.4.0",
     "proxy-middleware": "0.15.0",
     "raw-loader": "0.5.1",
     "rimraf": "2.6.1",
-    "sass-loader": "7.0.1",
     "simple-progress-webpack-plugin": "1.1.2",
     "style-loader": "0.20.3",
     "tapable": "1.0.0",
     "thread-loader": "1.1.5",
     "to-string-loader": "1.1.5",
-    "ts-loader": "4.0.1",
     "ts-node": "5.0.1",
+    "ts-loader": "4.0.1",
     "tslint": "5.9.1",
     "tslint-config-prettier": "1.9.0",
     "tslint-loader": "3.6.0",
@@ -102,10 +98,7 @@
     "yarn": ">=1.3.2"
   },
   "lint-staged": {
-    "src/**/*.{ts,css,scss}": [
-      "prettier --write",
-      "git add"
-    ]
+    "src/**/*.{ts,css,scss}": ["prettier --write", "git add"]
   },
   "scripts": {
     "precommit": "lint-staged",

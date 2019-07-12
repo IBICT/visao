@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="region">
+            <h2><span>Region</span> {{region.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{region.name}}</span>
+                </dd>
+                <dt><span>Uf</span></dt>
+                <dd>
+                    <span>{{region.uf}}</span>
+                </dd>
+                <dt><span>Geo Code</span></dt>
+                <dd>
+                    <span>{{region.geoCode}}</span>
+                </dd>
+                <dt><span>Type Region</span></dt>
+                <dd>
+                    <span>{{region.typeRegion}}</span>
+                </dd>
+                <dt><span>Relacao</span></dt>
+                <dd>
+                    <span *ngFor="let relacao of region.relacaos; let last = last">
+                        <a [routerLink]="['/region', relacao?.id, 'view' ]">{{relacao.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/region', region.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

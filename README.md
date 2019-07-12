@@ -1,4 +1,4 @@
-# Visao
+# visao
 This application was generated using JHipster 5.1.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v5.1.0](https://www.jhipster.tech/documentation-archive/v5.1.0).
 
 ## Development
@@ -85,21 +85,10 @@ will generate few files:
     create src/main/webapp/app/my-component/my-component.component.ts
     update src/main/webapp/app/app.module.ts
 
-### Doing API-First development using openapi-generator
-
-[OpenAPI-Generator]() is configured for this application. You can generate API code from the `src/main/resources/swagger/api.yml` definition file by running:
-```bash
-./gradlew openApiGenerate
-```
-Then implements the generated delegate classes with `@Service` classes.
-
-To edit the `api.yml` definition file, you can use a tool such as [Swagger-Editor](). Start a local instance of the swagger-editor using docker by running: `docker-compose -f src/main/docker/swagger-editor.yml up -d`. The editor will then be reachable at [http://localhost:7742](http://localhost:7742).
-
-Refer to [Doing API-First development][] for more details.
 
 ## Building for production
 
-To optimize the Visao application for production, run:
+To optimize the visao application for production, run:
 
     ./gradlew -Pprod clean bootWar
 
@@ -176,6 +165,3 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [Protractor]: https://angular.github.io/protractor/
 [Leaflet]: http://leafletjs.com/
 [DefinitelyTyped]: http://definitelytyped.org/
-[OpenAPI-Generator]: https://openapi-generator.tech
-[Swagger-Editor]: http://editor.swagger.io
-[Doing API-First development]: https://www.jhipster.tech/documentation-archive/v5.1.0/doing-api-first-development/

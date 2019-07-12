@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="grupCategory">
+            <h2><span>Grup Category</span> {{grupCategory.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Logo</span></dt>
+                <dd>
+                    <div *ngIf="grupCategory.logo">
+                        <a (click)="openFile(grupCategory.logoContentType, grupCategory.logo)">
+                            <img [src]="'data:' + grupCategory.logoContentType + ';base64,' + grupCategory.logo" style="max-width: 100%;" alt="grupCategory image"/>
+                        </a>
+                        {{grupCategory.logoContentType}}, {{byteSize(grupCategory.logo)}}
+                    </div>
+                </dd>
+                <dt><span>About</span></dt>
+                <dd>
+                    <span>{{grupCategory.about}}</span>
+                </dd>
+                <dt><span>Permission</span></dt>
+                <dd>
+                    <span>{{grupCategory.permission}}</span>
+                </dd>
+                <dt><span>Owner</span></dt>
+                <dd>
+                    {{grupCategory.owner?.id}}
+                </dd>
+                <dt><span>Category</span></dt>
+                <dd>
+                    <span *ngFor="let category of grupCategory.categories; let last = last">
+                        <a [routerLink]="['/category', category?.id, 'view' ]">{{category.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span>Shared</span></dt>
+                <dd>
+                    <span *ngFor="let shared of grupCategory.shareds; let last = last">
+                        {{shared.id}}{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/grup-category', grupCategory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

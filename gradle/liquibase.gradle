@@ -43,11 +43,11 @@ def liquibaseCommand(command) {
         main = "liquibase.integration.commandline.Main"
 
         args "--changeLogFile=src/main/resources/config/liquibase/changelog/" + buildTimestamp() +"_changelog.xml"
-        args "--referenceUrl=hibernate:spring:br.com.ibict.visao.domain?dialect=org.hibernate.dialect.H2Dialect&hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy"
-        args "--username=Visao"
+        args "--referenceUrl=hibernate:spring:br.com.ibict.domain?dialect=org.hibernate.dialect.MySQL5InnoDBDialect&hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy"
+        args "--username=root"
         args "--password="
-        args "--url=jdbc:h2:file:./build/h2db/db/visao"
-        args "--driver=org.h2.Driver"
+        args "--url=jdbc:mariadb://localhost:3306/visao"
+        args "--driver=org.mariadb.jdbc.Driver"
         args command
     }
 }

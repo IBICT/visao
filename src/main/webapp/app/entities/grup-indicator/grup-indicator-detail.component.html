@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="grupIndicator">
+            <h2><span>Grup Indicator</span> {{grupIndicator.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{grupIndicator.name}}</span>
+                </dd>
+                <dt><span>Active</span></dt>
+                <dd>
+                    <span>{{grupIndicator.active}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{grupIndicator.description}}</span>
+                </dd>
+                <dt><span>Key Word</span></dt>
+                <dd>
+                    <span>{{grupIndicator.keyWord}}</span>
+                </dd>
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{grupIndicator.date}}</span>
+                </dd>
+                <dt><span>Source</span></dt>
+                <dd>
+                    <span>{{grupIndicator.source}}</span>
+                </dd>
+                <dt><span>Date Change</span></dt>
+                <dd>
+                    <span>{{grupIndicator.dateChange}}</span>
+                </dd>
+                <dt><span>Note</span></dt>
+                <dd>
+                    <span>{{grupIndicator.note}}</span>
+                </dd>
+                <dt><span>Owner</span></dt>
+                <dd>
+                    {{grupIndicator.owner?.id}}
+                </dd>
+                <dt><span>Type Presentation</span></dt>
+                <dd>
+                    <div *ngIf="grupIndicator.typePresentation">
+                        <a [routerLink]="['/type-presentation', grupIndicator.typePresentation?.id, 'view']">{{grupIndicator.typePresentation?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Category</span></dt>
+                <dd>
+                    <span *ngFor="let category of grupIndicator.categories; let last = last">
+                        <a [routerLink]="['/category', category?.id, 'view' ]">{{category.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/grup-indicator', grupIndicator.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

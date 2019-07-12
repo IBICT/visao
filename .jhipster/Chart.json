@@ -1,0 +1,48 @@
+{
+    "name": "Chart",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "external",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "html",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "permission",
+            "fieldType": "Permission",
+            "fieldValues": "PUBLIC,PRIVATE,SHARED"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "owner",
+            "otherEntityName": "user",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "shared",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20190617123032",
+    "entityTableName": "chart",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

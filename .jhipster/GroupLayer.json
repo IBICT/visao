@@ -22,13 +22,27 @@
     ],
     "relationships": [
         {
+            "relationshipType": "one-to-many",
+            "relationshipName": "metaDado",
+            "otherEntityName": "metaDado",
+            "otherEntityRelationshipName": "groupLayer"
+        },
+        {
             "relationshipType": "many-to-one",
-            "relationshipName": "user",
+            "relationshipName": "owner",
             "otherEntityName": "user",
-            "otherEntityField": "login"
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "otherEntityField": "id",
+            "ownerSide": true
         }
     ],
-    "changelogDate": "20190213123345",
+    "changelogDate": "20190617123031",
     "entityTableName": "group_layer",
     "dto": "no",
     "pagination": "pager",

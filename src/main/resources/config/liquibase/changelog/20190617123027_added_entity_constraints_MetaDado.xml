@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity MetaDado.
+    -->
+    <changeSet id="20190617123027-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="indicator_id"
+                                 baseTableName="meta_dado"
+                                 constraintName="fk_meta_dado_indicator_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="indicator"/>
+
+        <addForeignKeyConstraint baseColumnNames="grup_indicator_id"
+                                 baseTableName="meta_dado"
+                                 constraintName="fk_meta_dado_grup_indicator_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="grup_indicator"/>
+
+        <addForeignKeyConstraint baseColumnNames="geographic_filter_id"
+                                 baseTableName="meta_dado"
+                                 constraintName="fk_meta_dado_geographic_filter_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="geographic_filter"/>
+
+        <addForeignKeyConstraint baseColumnNames="layer_id"
+                                 baseTableName="meta_dado"
+                                 constraintName="fk_meta_dado_layer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="layer"/>
+
+        <addForeignKeyConstraint baseColumnNames="group_layer_id"
+                                 baseTableName="meta_dado"
+                                 constraintName="fk_meta_dado_group_layer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="group_layer"/>
+
+    </changeSet>
+</databaseChangeLog>

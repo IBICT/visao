@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity GrupCategory.
+    -->
+    <changeSet id="20190617123033-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="owner_id"
+                                 baseTableName="grup_category"
+                                 constraintName="fk_grup_category_owner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="grup_categories_id"
+                                 baseTableName="grup_category_category"
+                                 constraintName="fk_grup_category_category_grup_categories_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="grup_category"/>
+        <addForeignKeyConstraint baseColumnNames="categories_id"
+                                 baseTableName="grup_category_category"
+                                 constraintName="fk_grup_category_category_categories_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category"/>
+        
+        <addForeignKeyConstraint baseColumnNames="grup_categories_id"
+                                 baseTableName="grup_category_shared"
+                                 constraintName="fk_grup_category_shared_grup_categories_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="grup_category"/>
+        <addForeignKeyConstraint baseColumnNames="shareds_id"
+                                 baseTableName="grup_category_shared"
+                                 constraintName="fk_grup_category_shared_shareds_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+        
+    </changeSet>
+</databaseChangeLog>

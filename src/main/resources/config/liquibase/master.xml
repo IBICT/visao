@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123021_added_entity_Indicator.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123022_added_entity_GrupIndicator.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123023_added_entity_TypePresentation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123024_added_entity_Category.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123025_added_entity_Region.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123026_added_entity_Year.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123027_added_entity_MetaDado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123028_added_entity_GeographicFilter.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123029_added_entity_Layer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123030_added_entity_MarkerIcon.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123031_added_entity_GroupLayer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123032_added_entity_Chart.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123033_added_entity_GrupCategory.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20190617123021_added_entity_constraints_Indicator.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123022_added_entity_constraints_GrupIndicator.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123024_added_entity_constraints_Category.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123025_added_entity_constraints_Region.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123027_added_entity_constraints_MetaDado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123028_added_entity_constraints_GeographicFilter.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123029_added_entity_constraints_Layer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123031_added_entity_constraints_GroupLayer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123032_added_entity_constraints_Chart.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190617123033_added_entity_constraints_GrupCategory.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+</databaseChangeLog>

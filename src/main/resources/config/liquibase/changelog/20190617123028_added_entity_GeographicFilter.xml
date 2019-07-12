@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity GeographicFilter.
+    -->
+    <changeSet id="20190617123028-1" author="jhipster">
+        <createTable tableName="geographic_filter">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="active" type="bit">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="description" type="clob">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="key_word" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="jhi_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="source" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="date_change" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="note" type="clob">
+                <constraints nullable="true" />
+            </column>
+            <column name="cidade_polo_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>
+            <column name="owner_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="geographic_filter" columnName="jhi_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="geographic_filter" columnName="date_change" columnDataType="datetime"/>
+        
+        <createTable tableName="geographic_filter_region">
+            <column name="regions_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="geographic_filters_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="geographic_filters_id, regions_id" tableName="geographic_filter_region"/>
+        
+        <createTable tableName="geographic_filter_category">
+            <column name="categories_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="geographic_filters_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="geographic_filters_id, categories_id" tableName="geographic_filter_category"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

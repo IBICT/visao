@@ -1,0 +1,77 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="geographicFilter">
+            <h2><span>Geographic Filter</span> {{geographicFilter.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{geographicFilter.name}}</span>
+                </dd>
+                <dt><span>Active</span></dt>
+                <dd>
+                    <span>{{geographicFilter.active}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{geographicFilter.description}}</span>
+                </dd>
+                <dt><span>Key Word</span></dt>
+                <dd>
+                    <span>{{geographicFilter.keyWord}}</span>
+                </dd>
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{geographicFilter.date}}</span>
+                </dd>
+                <dt><span>Source</span></dt>
+                <dd>
+                    <span>{{geographicFilter.source}}</span>
+                </dd>
+                <dt><span>Date Change</span></dt>
+                <dd>
+                    <span>{{geographicFilter.dateChange}}</span>
+                </dd>
+                <dt><span>Note</span></dt>
+                <dd>
+                    <span>{{geographicFilter.note}}</span>
+                </dd>
+                <dt><span>Cidade Polo</span></dt>
+                <dd>
+                    <div *ngIf="geographicFilter.cidadePolo">
+                        <a [routerLink]="['/region', geographicFilter.cidadePolo?.id, 'view']">{{geographicFilter.cidadePolo?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Owner</span></dt>
+                <dd>
+                    {{geographicFilter.owner?.id}}
+                </dd>
+                <dt><span>Region</span></dt>
+                <dd>
+                    <span *ngFor="let region of geographicFilter.regions; let last = last">
+                        <a [routerLink]="['/region', region?.id, 'view' ]">{{region.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span>Category</span></dt>
+                <dd>
+                    <span *ngFor="let category of geographicFilter.categories; let last = last">
+                        <a [routerLink]="['/category', category?.id, 'view' ]">{{category.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/geographic-filter', geographicFilter.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

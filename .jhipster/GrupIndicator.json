@@ -1,0 +1,82 @@
+{
+    "name": "GrupIndicator",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "active",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "keyWord",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "source",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateChange",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "note",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "metaDado",
+            "otherEntityName": "metaDado",
+            "otherEntityRelationshipName": "grupIndicator"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "owner",
+            "otherEntityName": "user",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "typePresentation",
+            "otherEntityName": "typePresentation",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20190617123022",
+    "entityTableName": "grup_indicator",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -9,10 +9,21 @@
             "fieldName": "type",
             "fieldType": "TypeCategory",
             "fieldValues": "INDICATOR,FILTER,LAYER"
+        },
+        {
+            "fieldName": "level",
+            "fieldType": "Integer"
         }
     ],
-    "relationships": [],
-    "changelogDate": "20190213123338",
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "owner",
+            "otherEntityName": "user",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190617123024",
     "entityTableName": "category",
     "dto": "no",
     "pagination": "pager",

@@ -1,7 +1,5 @@
 {
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "relationships": [],
+    "name": "TypePresentation",
     "fields": [
         {
             "fieldName": "name",
@@ -13,14 +11,18 @@
         },
         {
             "fieldName": "description",
-            "fieldType": "String"
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
         }
     ],
-    "changelogDate": "20190320193055",
-    "dto": "no",
-    "searchEngine": false,
-    "service": "serviceImpl",
+    "relationships": [],
+    "changelogDate": "20190617123023",
     "entityTableName": "type_presentation",
-    "jpaMetamodelFiltering": true,
-    "pagination": "infinite-scroll"
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
 }

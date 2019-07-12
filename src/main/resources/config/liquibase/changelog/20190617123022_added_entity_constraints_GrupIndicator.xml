@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity GrupIndicator.
+    -->
+    <changeSet id="20190617123022-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="owner_id"
+                                 baseTableName="grup_indicator"
+                                 constraintName="fk_grup_indicator_owner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="type_presentation_id"
+                                 baseTableName="grup_indicator"
+                                 constraintName="fk_grup_indicator_type_presentation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="type_presentation"/>
+
+        <addForeignKeyConstraint baseColumnNames="grup_indicators_id"
+                                 baseTableName="grup_indicator_category"
+                                 constraintName="fk_grup_indicator_category_grup_indicators_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="grup_indicator"/>
+        <addForeignKeyConstraint baseColumnNames="categories_id"
+                                 baseTableName="grup_indicator_category"
+                                 constraintName="fk_grup_indicator_category_categories_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category"/>
+        
+    </changeSet>
+</databaseChangeLog>
